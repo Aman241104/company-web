@@ -20,7 +20,7 @@ export default function TechStack() {
 
       <div style={{ textAlign: 'center', marginBottom: 28 }}>
         <span style={{ fontFamily: 'var(--font-outfit)', fontSize: 12, color: 'rgba(255,255,255,0.28)', letterSpacing: '0.12em', textTransform: 'uppercase' }}>
-          Brands that have trusted us to build and grow
+          Trusted by 80+ clients worldwide
         </span>
       </div>
 

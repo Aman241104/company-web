@@ -1,12 +1,29 @@
 'use client'
 import { motion } from 'framer-motion'
 import { Search, Lightbulb, Code2, Rocket } from 'lucide-react'
+import RadialOrbitalTimeline from '@/components/ui/radial-orbital-timeline'
 
-const steps = [
-  { num: '01', icon: Search, title: 'Discover', desc: "A deep-dive into your business goals, users, and constraints. We leave with a written product brief — so everyone agrees on what we're building before a line of code is written." },
-  { num: '02', icon: Lightbulb, title: 'Design', desc: 'Wireframes and interactive prototypes first, pixels second. You click through the product before we build it — catching expensive assumptions early.' },
-  { num: '03', icon: Code2, title: 'Develop', desc: "Weekly sprint reviews, a shared staging environment, and CI/CD from day one. You always know what's done, what's next, and what's blocking." },
-  { num: '04', icon: Rocket, title: 'Deploy & Scale', desc: 'We handle launch, monitoring, and the first 90 days of iteration. Most clients stay on retainer because shipping is where the real work begins.' },
+const processSteps = [
+  {
+    id: 1, title: 'Discover', date: 'Week 1–2',
+    content: "Deep-dive into your business goals, users, and constraints. We leave with a written product brief — so everyone agrees on what we're building before a line of code is written.",
+    category: 'Discovery', icon: Search, relatedIds: [2], status: 'completed', energy: 100,
+  },
+  {
+    id: 2, title: 'Design', date: 'Week 2–4',
+    content: 'Wireframes and interactive prototypes first, pixels second. You click through the product before we build it — catching expensive assumptions early.',
+    category: 'Design', icon: Lightbulb, relatedIds: [1, 3], status: 'completed', energy: 88,
+  },
+  {
+    id: 3, title: 'Develop', date: 'Week 3–16',
+    content: "Weekly sprint reviews, shared staging environment, and CI/CD from day one. You always know what's done, what's next, and what's blocking.",
+    category: 'Development', icon: Code2, relatedIds: [2, 4], status: 'in-progress', energy: 72,
+  },
+  {
+    id: 4, title: 'Deploy', date: 'Week 8+',
+    content: 'We handle launch, monitoring, and the first 90 days of iteration. Most clients stay on retainer because shipping is where the real work begins.',
+    category: 'Deployment', icon: Rocket, relatedIds: [3], status: 'pending', energy: 55,
+  },
 ]
 
 export default function Process() {
@@ -26,25 +43,7 @@ export default function Process() {
         </p>
       </motion.div>
 
-      <div className="grid grid-cols-2 md:grid-cols-4" style={{ gap: 2, position: 'relative' }}>
-        {/* Connecting line */}
-        <div style={{ position: 'absolute', top: 36, left: '12.5%', right: '12.5%', height: 1, background: 'linear-gradient(90deg, rgba(91,138,247,0.15), rgba(139,92,246,0.15))' }} className="hidden md:block" />
-        {steps.map((step, i) => {
-          const Icon = step.icon
-          return (
-            <motion.div key={step.num} initial={{ opacity: 0, y: 32 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.55, delay: i * 0.1 }} style={{ padding: '0 12px', textAlign: 'center' }}>
-              <div style={{ width: 72, height: 72, borderRadius: '50%', margin: '0 auto 20px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(91,138,247,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
-                <div style={{ position: 'absolute', top: -8, right: -8, width: 22, height: 22, borderRadius: '50%', background: 'linear-gradient(135deg, #5B8AF7, #8B5CF6)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--font-syne)', fontWeight: 700, fontSize: 9.5, color: '#fff' }}>
-                  {step.num}
-                </div>
-                <Icon size={24} color="#5B8AF7" />
-              </div>
-              <h3 style={{ fontFamily: 'var(--font-syne)', fontWeight: 700, fontSize: 17, color: '#fff', margin: '0 0 10px', letterSpacing: '-0.02em' }}>{step.title}</h3>
-              <p style={{ fontFamily: 'var(--font-outfit)', fontSize: 13.5, color: 'rgba(255,255,255,0.4)', lineHeight: 1.6 }}>{step.desc}</p>
-            </motion.div>
-          )
-        })}
-      </div>
+      <RadialOrbitalTimeline timelineData={processSteps} />
 
       {/* CTA strip */}
       <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.4 }} style={{ marginTop: 56, padding: '28px 32px', background: 'rgba(91,138,247,0.05)', border: '1px solid rgba(91,138,247,0.12)', borderRadius: 16, display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 16 }}>

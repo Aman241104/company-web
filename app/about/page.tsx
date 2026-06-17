@@ -29,7 +29,7 @@ export default function About() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
-      <main className="bg-[#060614]">
+      <main className="bg-transparent">
         <Navbar />
         <AboutPage />
         <Footer />

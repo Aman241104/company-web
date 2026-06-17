@@ -64,7 +64,7 @@ export default function Home() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
-      <main className="bg-[#060614]">
+      <main className="bg-transparent">
         <Navbar />
         <Hero />
         <TechStack />

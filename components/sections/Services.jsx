@@ -1,10 +1,11 @@
 'use client'
 import { motion } from 'framer-motion'
 import { Monitor, Code2, Smartphone, TrendingUp, Search, Cloud } from 'lucide-react'
+import { HighlightGroup, HighlighterItem } from '@/components/ui/highlighter'
 
 const Pill = ({ children }) => (
   <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '5px 14px', borderRadius: 99, marginBottom: 20, border: '1px solid rgba(91,138,247,0.25)', background: 'rgba(91,138,247,0.07)', fontFamily: 'var(--font-outfit)', fontSize: 12, color: 'rgba(91,138,247,0.85)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
-    <span style={{ width: 5, height: 5, borderRadius: '50%', background: '#5B8AF7', display: 'inline-block', animation: 'opacity-glow 2s ease-in-out infinite alternate' }} />
+    <span style={{ width: 5, height: 5, borderRadius: '50%', background: '#5B8AF7', display: 'inline-block' }} />
     {children}
   </span>
 )
@@ -86,28 +87,29 @@ const services = [
 function ServiceCard({ service, index }) {
   const { icon: Icon, title, desc, tags, mock } = service
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 32 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.55, delay: index * 0.07 }}
-      style={{ background: 'rgba(255,255,255,0.025)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 16, padding: 28, position: 'relative', overflow: 'hidden', transition: 'border-color 0.3s' }}
-      onMouseEnter={e => e.currentTarget.style.borderColor = 'rgba(91,138,247,0.22)'}
-      onMouseLeave={e => e.currentTarget.style.borderColor = 'rgba(255,255,255,0.07)'}
-    >
-      <div style={{ position: 'absolute', top: 0, left: '50%', transform: 'translateX(-50%)', width: '60%', height: 1, background: 'linear-gradient(90deg, transparent, rgba(91,138,247,0.4), transparent)', opacity: 0.6 }} />
-      <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: mock ? 16 : 12 }}>
-        <div style={{ width: 38, height: 38, borderRadius: 10, background: 'rgba(91,138,247,0.1)', border: '1px solid rgba(91,138,247,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-          <Icon size={17} color="#5B8AF7" />
+    <HighlighterItem className="rounded-2xl">
+      <motion.div
+        initial={{ opacity: 0, y: 32 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.55, delay: index * 0.07 }}
+        style={{ background: 'rgba(255,255,255,0.025)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 16, padding: 28, position: 'relative', transition: 'border-color 0.3s' }}
+        onMouseEnter={e => e.currentTarget.style.borderColor = 'rgba(91,138,247,0.25)'}
+        onMouseLeave={e => e.currentTarget.style.borderColor = 'rgba(255,255,255,0.07)'}
+      >
+        <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: mock ? 16 : 12 }}>
+          <div style={{ width: 38, height: 38, borderRadius: 10, background: 'rgba(91,138,247,0.1)', border: '1px solid rgba(91,138,247,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+            <Icon size={17} color="#5B8AF7" />
+          </div>
+          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', justifyContent: 'flex-end' }}>
+            {tags.map(t => <span key={t} style={{ fontFamily: 'var(--font-outfit)', fontSize: 10.5, color: 'rgba(255,255,255,0.3)', background: 'rgba(255,255,255,0.05)', padding: '3px 8px', borderRadius: 99, border: '1px solid rgba(255,255,255,0.07)' }}>{t}</span>)}
+          </div>
         </div>
-        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', justifyContent: 'flex-end' }}>
-          {tags.map(t => <span key={t} style={{ fontFamily: 'var(--font-outfit)', fontSize: 10.5, color: 'rgba(255,255,255,0.3)', background: 'rgba(255,255,255,0.05)', padding: '3px 8px', borderRadius: 99, border: '1px solid rgba(255,255,255,0.07)' }}>{t}</span>)}
-        </div>
-      </div>
-      <h3 style={{ fontFamily: 'var(--font-syne)', fontWeight: 700, fontSize: 17, color: '#fff', margin: '0 0 8px', letterSpacing: '-0.02em' }}>{title}</h3>
-      <p style={{ fontFamily: 'var(--font-outfit)', fontSize: 13.5, color: 'rgba(255,255,255,0.42)', lineHeight: 1.6, margin: '0 0 16px' }}>{desc}</p>
-      {mock && <div>{mock}</div>}
-    </motion.div>
+        <h3 style={{ fontFamily: 'var(--font-syne)', fontWeight: 700, fontSize: 17, color: '#fff', margin: '0 0 8px', letterSpacing: '-0.02em' }}>{title}</h3>
+        <p style={{ fontFamily: 'var(--font-outfit)', fontSize: 13.5, color: 'rgba(255,255,255,0.52)', lineHeight: 1.65, margin: '0 0 16px' }}>{desc}</p>
+        {mock && <div>{mock}</div>}
+      </motion.div>
+    </HighlighterItem>
   )
 }
 
@@ -125,12 +127,12 @@ export default function Services() {
         </p>
       </motion.div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2" style={{ gap: 14, marginBottom: 14 }}>
+      <HighlightGroup className="grid grid-cols-1 md:grid-cols-2" style={{ gap: 14, marginBottom: 14 }}>
         {services.slice(0, 4).map((s, i) => <ServiceCard key={s.title} service={s} index={i} />)}
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2" style={{ gap: 14 }}>
+      </HighlightGroup>
+      <HighlightGroup className="grid grid-cols-1 md:grid-cols-2" style={{ gap: 14 }}>
         {services.slice(4).map((s, i) => <ServiceCard key={s.title} service={s} index={i + 4} />)}
-      </div>
+      </HighlightGroup>
     </section>
   )
 }

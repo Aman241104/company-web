@@ -10,7 +10,7 @@ const cells = [
     icon: Zap,
     name: 'Next.js',
     desc: 'Server-first React with blazing-fast SSR and App Router',
-    accent: '#3b82f6',
+    accent: '#5B8AF7',
     wide: true,
     bg: 'linear-gradient(135deg, #07080f 0%, #0a0c17 100%)',
   },
@@ -18,7 +18,7 @@ const cells = [
     icon: Smartphone,
     name: 'React Native',
     desc: 'Cross-platform iOS & Android from one codebase',
-    accent: '#3b82f6',
+    accent: '#5B8AF7',
     wide: false,
     bg: 'linear-gradient(135deg, #07080f 0%, #0a0c17 100%)',
   },
@@ -26,7 +26,7 @@ const cells = [
     icon: Settings,
     name: 'Node.js',
     desc: 'High-throughput backend APIs and microservices',
-    accent: '#3b82f6',
+    accent: '#5B8AF7',
     wide: false,
     bg: 'linear-gradient(135deg, #07080f 0%, #0a0c17 100%)',
   },
@@ -34,7 +34,7 @@ const cells = [
     icon: Database,
     name: 'PostgreSQL',
     desc: 'Reliable relational data with advanced query power',
-    accent: '#3b82f6',
+    accent: '#5B8AF7',
     wide: false,
     bg: 'linear-gradient(135deg, #07080f 0%, #0a0c17 100%)',
   },
@@ -42,7 +42,7 @@ const cells = [
     icon: Cloud,
     name: 'AWS / GCloud',
     desc: 'Cloud-native infrastructure that scales on demand',
-    accent: '#3b82f6',
+    accent: '#5B8AF7',
     wide: true,
     bg: 'linear-gradient(135deg, #07080f 0%, #0a0c17 100%)',
   },
@@ -50,7 +50,7 @@ const cells = [
     icon: Sparkles,
     name: 'GSAP',
     desc: 'Professional-grade animations and scroll interactions',
-    accent: '#3b82f6',
+    accent: '#5B8AF7',
     wide: false,
     bg: 'linear-gradient(135deg, #07080f 0%, #0a0c17 100%)',
   },
@@ -130,7 +130,7 @@ export default function Capabilities() {
     <section
       id="capabilities"
       ref={sectionRef}
-      className="py-24 md:py-36 bg-[#05060f] border-t border-white/[0.04] overflow-hidden relative"
+      className="py-24 md:py-36 bg-[#060614] border-t border-white/[0.05] overflow-hidden relative"
     >
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 relative z-10">
         {/* Header */}
@@ -141,10 +141,11 @@ export default function Capabilities() {
               className="font-display font-black leading-none"
               style={{ fontSize: 'clamp(2.8rem, 7vw, 6rem)', letterSpacing: '-0.04em' }}
             >
-              {['Built With', 'The Best', 'Stack'].map((w, i) => (
+              {['The stack', 'behind 150+', 'products.'].map((w, i) => (
                 <span key={i} className="block overflow-hidden">
                   <span
-                    className={`cap-title-word inline-block opacity-0 will-change-transform ${i === 2 ? 'text-blue-400' : 'text-white'}`}
+                    className="cap-title-word inline-block opacity-0 will-change-transform text-white"
+                    style={i === 2 ? { color: '#5B8AF7' } : {}}
                   >
                     {w}
                   </span>
@@ -152,7 +153,7 @@ export default function Capabilities() {
               ))}
             </h2>
             <p className="text-white/30 text-sm leading-relaxed max-w-xs md:text-right md:pb-2">
-              We choose battle-tested technologies that scale — no trends, no shortcuts.
+              Battle-tested. Production-proven. No hype, no rewrites.
             </p>
           </div>
         </div>

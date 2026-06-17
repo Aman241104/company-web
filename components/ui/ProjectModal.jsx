@@ -80,7 +80,7 @@ export default function ProjectModal({ project, onClose }) {
 
           {/* Preview label */}
           <div className="flex items-center gap-2 px-5 pt-5 pb-3 shrink-0 relative z-10">
-            <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: project.accent }} />
+            <div className="w-1.5 h-1.5 rounded-full" style={{ background: project.accent }} />
             <span className="text-[10px] uppercase tracking-[0.2em]" style={{ color: `rgba(${project.accentRgb},0.6)` }}>
               Live Preview
             </span>

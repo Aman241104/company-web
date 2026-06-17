@@ -1,213 +1,72 @@
 'use client'
-import { useEffect, useRef } from 'react'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import GradientText from '@/components/ui/reactbits/GradientText'
-import CountUp from 'react-countup'
-import LogoLoop from '@/components/ui/reactbits/LogoLoop'
-
-gsap.registerPlugin(ScrollTrigger)
+import { motion } from 'framer-motion'
+import { Star } from 'lucide-react'
 
 const testimonials = [
-  {
-    name: 'Priya Sharma', role: 'CEO, TechVista Solutions', init: 'PS', color: '#60a5fa',
-    quote: 'Mehta Technologies transformed our outdated system into a product our customers love. Clean code, on-time delivery, zero excuses.',
-    metric: '+340% user engagement',
-  },
-  {
-    name: 'Arjun Kapoor', role: 'Founder, GrowthLabs', init: 'AK', color: '#34d399',
-    quote: 'Our website\'s lead generation tripled in 3 months. These guys understand both design and business — a rare combination.',
-    metric: '3× lead generation',
-  },
-  {
-    name: 'Neha Patel', role: 'COO, RetailMax', init: 'NP', color: '#c084fc',
-    quote: 'ViboERP completely changed how we operate. Real-time visibility across 12 branches. ROI was visible within the first month.',
-    metric: 'ROI in 30 days',
-  },
-  {
-    name: 'Rohit Mehta', role: 'Director, CloudStack India', init: 'RM', color: '#fbbf24',
-    quote: 'Ranked #1 for our core keywords in 4 months. Not magic — just proper technical SEO and a solid content strategy.',
-    metric: '#1 ranking in 4mo',
-  },
-  {
-    name: 'Sunita Joshi', role: 'MD, Precision Manufacturing', init: 'SJ', color: '#f87171',
-    quote: 'From mobile app to ERP integration — they handled everything seamlessly. A true technology partner, not just a vendor.',
-    metric: 'Full-stack delivery',
-  },
-  {
-    name: 'Vikram Agarwal', role: 'CTO, FinFlow', init: 'VA', color: '#a78bfa',
-    quote: '4× ROAS in the first month of performance marketing. Their approach is refreshingly data-driven and result-focused.',
-    metric: '4× ROAS month 1',
-  },
-  {
-    name: 'Deepak Nair', role: 'Founder, PropSpace', init: 'DN', color: '#60a5fa',
-    quote: 'Built our entire platform from scratch. Architecture is solid, code is clean, and they stay engaged long after launch.',
-    metric: '12k monthly buyers',
-  },
-  {
-    name: 'Meera Iyer', role: 'CMO, BrandForge', init: 'MI', color: '#34d399',
-    quote: 'The rebrand + website combo drove a 200% increase in qualified inbound enquiries. Worth every rupee invested.',
-    metric: '+200% inbound leads',
-  },
+  { name: 'Priya Sharma', role: 'CEO, TechVista Solutions', quote: 'We had an outdated internal tool that our team dreaded using. Mehta rebuilt it end-to-end in eight weeks — adoption went from 40% to 100% within a month of launch.', avatar: 'PS', color: '#5B8AF7' },
+  { name: 'Rahul Gupta', role: 'Founder, GreenLeaf Organics', quote: "The SEO work they did moved us from page 4 to position 2 for our core keyword. Organic revenue is now our biggest channel — it wasn't even on the map before.", avatar: 'RG', color: '#8B5CF6' },
+  { name: 'Ananya Patel', role: 'CTO, NovaMed Diagnostics', quote: 'They built our patient management system in 14 weeks. Fourteen months later, zero critical bugs, zero downtime. That kind of reliability in healthtech is rare and genuinely appreciated.', avatar: 'AP', color: '#34D399' },
+  { name: 'Vikram Singh', role: 'Director, PeakPerform Sports', quote: 'Checkout abandonment dropped by 34% after the redesign — measured, not estimated. The mobile experience is the best in our category. Our competitors have noticed.', avatar: 'VS', color: '#FBBF24' },
+  { name: 'Meena Joshi', role: 'CMO, UrbanNest Realty', quote: "Our Meta ROAS sits at 6.2x consistently. Before Mehta, we were burning budget with no attribution clarity. Now every rupee we spend has a clear line to pipeline.", avatar: 'MJ', color: '#F87171' },
+  { name: 'Arjun Malhotra', role: 'MD, ClearPath Finance', quote: 'In fintech you cannot afford partners who cut corners on security or communication. Mehta has never missed a deadline or a status update in two years of working together.', avatar: 'AM', color: '#60A5FA' },
+  { name: 'Sunita Reddy', role: 'Founder, ZingBliss', quote: 'Six weeks from brief to App Store. The app launched with a 4.8 rating and held it. When I told other founders the timeline, nobody believed me until I showed them the live link.', avatar: 'SR', color: '#A78BFA' },
+  { name: 'Dev Kapoor', role: 'CEO, BrightMind EdTech', quote: 'Our LMS went from 500 to 50,000 active learners during a campaign peak — not a single downtime incident. The infrastructure they designed handled 100× load without blinking.', avatar: 'DK', color: '#FB923C' },
 ]
 
-function StarIcon() {
-  return (
-    <svg width="13" height="13" viewBox="0 0 13 13" fill="#fbbf24">
-      <polygon points="6.5,1 8,5 12,5.5 9,8 9.8,12 6.5,10.2 3.2,12 4,8 1,5.5 5,5" />
-    </svg>
-  )
-}
+const doubled = [...testimonials, ...testimonials]
 
 function Card({ t }) {
   return (
-    <div
-      className="shrink-0 w-[300px] md:w-[340px] rounded-2xl border border-white/[0.06] overflow-hidden flex flex-col cursor-default group"
-      style={{
-        background: 'linear-gradient(135deg, #0a0a0f 0%, #0d0d16 100%)',
-        transition: 'border-color 0.3s ease, box-shadow 0.3s ease',
-      }}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.borderColor = `${t.color}25`
-        e.currentTarget.style.boxShadow = `0 0 50px ${t.color}0d`
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.borderColor = 'rgba(255,255,255,0.06)'
-        e.currentTarget.style.boxShadow = 'none'
-      }}
-    >
-      {/* Accent top bar */}
-      <div className="h-0.5 w-full" style={{ background: `linear-gradient(to right, ${t.color}60, transparent)` }} />
-
-      <div className="p-6 flex flex-col flex-1">
-        {/* Stars */}
-        <div className="flex gap-0.5 mb-4">
-          {Array(5).fill(0).map((_, i) => <StarIcon key={i} />)}
+    <div style={{ flexShrink: 0, width: 320, background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 14, padding: 24, marginRight: 14, position: 'relative' }}>
+      <div style={{ display: 'flex', gap: 3, marginBottom: 14 }}>
+        {Array.from({ length: 5 }).map((_, i) => <Star key={i} size={12} fill="#FBBF24" color="#FBBF24" />)}
+      </div>
+      <p style={{ fontFamily: 'var(--font-outfit)', fontSize: 14, color: 'rgba(255,255,255,0.62)', lineHeight: 1.65, margin: '0 0 20px' }}>"{t.quote}"</p>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+        <div style={{ width: 36, height: 36, borderRadius: '50%', background: `${t.color}22`, border: `1px solid ${t.color}30`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--font-syne)', fontWeight: 700, fontSize: 11, color: t.color, flexShrink: 0 }}>
+          {t.avatar}
         </div>
-
-        {/* Quote mark */}
-        <div className="font-display text-5xl leading-none mb-2 select-none" style={{ color: `${t.color}20` }}>"</div>
-
-        {/* Quote */}
-        <p className="text-white/50 text-sm leading-relaxed flex-1 mb-5">{t.quote}</p>
-
-        {/* Metric pill */}
-        <div
-          className="inline-flex items-center gap-2 self-start px-3 py-1 rounded-full text-[11px] font-medium mb-5"
-          style={{ background: `${t.color}10`, color: t.color, border: `1px solid ${t.color}20` }}
-        >
-          <div className="w-1.5 h-1.5 rounded-full" style={{ background: t.color }} />
-          {t.metric}
-        </div>
-
-        {/* Author */}
-        <div className="flex items-center gap-3 pt-4 border-t border-white/[0.05]">
-          <div
-            className="w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold text-white shrink-0"
-            style={{ background: `linear-gradient(135deg, ${t.color}50, ${t.color}80)` }}
-          >
-            {t.init}
-          </div>
-          <div>
-            <p className="text-white text-sm font-medium">{t.name}</p>
-            <p className="text-white/30 text-xs">{t.role}</p>
-          </div>
+        <div>
+          <div style={{ fontFamily: 'var(--font-syne)', fontWeight: 600, fontSize: 13.5, color: '#fff' }}>{t.name}</div>
+          <div style={{ fontFamily: 'var(--font-outfit)', fontSize: 12, color: 'rgba(255,255,255,0.35)' }}>{t.role}</div>
         </div>
       </div>
     </div>
   )
 }
 
-export default function Testimonials() {
-  const sectionRef = useRef(null)
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      const mm = gsap.matchMedia()
-      mm.add('(min-width: 768px)', () => {
-        gsap.fromTo('.test-word',
-          { y: '110%', opacity: 0 },
-          {
-            y: '0%', opacity: 1, stagger: 0.07, duration: 0.8, ease: 'power3.out',
-            scrollTrigger: { trigger: sectionRef.current, start: 'top 75%', once: true },
-          }
-        )
-      })
-      mm.add('(max-width: 767px)', () => {
-        gsap.fromTo('.test-word',
-          { opacity: 0, y: 20 },
-          {
-            opacity: 1, y: 0, stagger: 0.05, duration: 0.6,
-            scrollTrigger: { trigger: sectionRef.current, start: 'top 85%', once: true },
-          }
-        )
-      })
-    }, sectionRef)
-    return () => ctx.revert()
-  }, [])
-
-  const row1 = testimonials.slice(0, 4)
-  const row2 = testimonials.slice(4)
-
+function Row({ reverse }) {
   return (
-    <section ref={sectionRef} className="py-24 md:py-36 bg-[#04050e] overflow-hidden border-t border-white/[0.04]">
-      {/* Header */}
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 mb-14">
-        <p className="text-white/25 text-xs uppercase tracking-[0.3em] mb-6">Client Love</p>
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-          <h2
-            className="font-display font-black leading-none"
-            style={{ fontSize: 'clamp(2.8rem, 6vw, 5.5rem)', letterSpacing: '-0.04em' }}
-          >
-            {['Trusted By', 'Builders &', 'Founders'].map((w, i) => (
-              <span key={i} className="block overflow-hidden">
-                <span className={`test-word inline-block opacity-0 will-change-transform ${i !== 2 ? 'text-white' : ''}`}>
-                  {i === 2 ? (
-                    <GradientText colors={['#60a5fa', '#4f46e5', '#a78bfa', '#60a5fa']} animationSpeed={5}>
-                      {w}
-                    </GradientText>
-                  ) : w}
-                </span>
-              </span>
-            ))}
-          </h2>
-          <div className="flex flex-col gap-2 md:items-end md:pb-2">
-            <p className="text-white/35 text-sm">Real results from real partnerships.</p>
-            <div className="flex items-center gap-2">
-              <div className="flex gap-0.5">
-                {Array(5).fill(0).map((_, i) => <StarIcon key={i} />)}
-              </div>
-              <span className="text-white/30 text-xs">
-                5.0 avg · <CountUp end={80} suffix="+ clients" enableScrollSpy scrollSpyOnce duration={2} />
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div style={{ position: 'relative', marginBottom: 14 }}>
+      <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 80, zIndex: 2, background: 'linear-gradient(90deg, #060614, transparent)', pointerEvents: 'none' }} />
+      <div style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: 80, zIndex: 2, background: 'linear-gradient(-90deg, #060614, transparent)', pointerEvents: 'none' }} />
+      <motion.div
+        style={{ display: 'flex' }}
+        animate={{ x: reverse ? ['-50%', '0%'] : ['0%', '-50%'] }}
+        transition={{ duration: reverse ? 42 : 38, repeat: Infinity, ease: 'linear' }}
+      >
+        {(reverse ? [...doubled].reverse() : doubled).map((t, i) => <Card key={i} t={t} />)}
+      </motion.div>
+    </div>
+  )
+}
 
-      {/* Row 1 — forward */}
-      <div className="mb-4">
-        <LogoLoop
-          logos={row1.map(t => ({ t }))}
-          speed={48}
-          direction="left"
-          gap={24}
-          pauseOnHover
-          fadeOut
-          renderItem={(item) => <Card t={item.t} />}
-        />
-      </div>
-
-      {/* Row 2 — reverse */}
-      <LogoLoop
-        logos={row2.map(t => ({ t }))}
-        speed={40}
-        direction="right"
-        gap={24}
-        pauseOnHover
-        fadeOut
-        renderItem={(item) => <Card t={item.t} />}
-      />
+export default function Testimonials() {
+  return (
+    <section style={{ padding: '100px 0', overflow: 'hidden' }}>
+      <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} style={{ textAlign: 'center', marginBottom: 56, padding: '0 24px' }}>
+        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '5px 14px', borderRadius: 99, marginBottom: 20, border: '1px solid rgba(91,138,247,0.25)', background: 'rgba(91,138,247,0.07)', fontFamily: 'var(--font-outfit)', fontSize: 12, color: 'rgba(91,138,247,0.85)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
+          <span style={{ width: 5, height: 5, borderRadius: '50%', background: '#5B8AF7', display: 'inline-block' }} />
+          Testimonials
+        </span>
+        <h2 style={{ fontFamily: 'var(--font-syne)', fontWeight: 800, fontSize: 'clamp(32px, 5vw, 52px)', letterSpacing: '-0.03em', color: '#fff', margin: '0 0 14px', lineHeight: 1.1 }}>
+          Don't take our word<br />
+          <span style={{ WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', backgroundImage: 'linear-gradient(135deg, #5B8AF7, #8B5CF6)' }}>for it.</span>
+        </h2>
+        <p style={{ fontFamily: 'var(--font-outfit)', fontSize: 16, color: 'rgba(255,255,255,0.4)' }}>Real results from founders and teams who've shipped with us.</p>
+      </motion.div>
+      <Row reverse={false} />
+      <Row reverse={true} />
     </section>
   )
 }

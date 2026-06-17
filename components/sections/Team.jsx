@@ -3,50 +3,48 @@ import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Globe, Link2, X } from 'lucide-react'
-import GradientText from '@/components/ui/reactbits/GradientText'
-import TiltedCard from '@/components/ui/reactbits/TiltedCard'
 
 gsap.registerPlugin(ScrollTrigger)
 
 const team = [
   {
     name: 'Gaurav Mehta', role: 'Founder & CEO', init: 'GM',
-    color: '#2563EB', bg: 'linear-gradient(135deg, #060d1a, #0a1628)',
+    color: '#3b82f6', bg: 'linear-gradient(135deg, #07080f, #0a0c17)',
     bio: 'Full-stack engineer and product thinker. 8+ years building scalable systems for startups and enterprises.',
     skills: ['Next.js', 'System Design', 'Product Strategy'],
     socials: { linkedin: '#', github: '#', twitter: '#' },
   },
   {
     name: 'Riya Shah', role: 'Head of Design', init: 'RS',
-    color: '#c084fc', bg: 'linear-gradient(135deg, #0d0614, #150820)',
+    color: '#3b82f6', bg: 'linear-gradient(135deg, #07080f, #0a0c17)',
     bio: 'UI/UX designer who blends aesthetic precision with conversion-focused thinking. Former Razorpay.',
     skills: ['Figma', 'Interaction Design', 'Design Systems'],
     socials: { linkedin: '#', github: '#', twitter: '#' },
   },
   {
     name: 'Arjun Pillai', role: 'Lead Backend Engineer', init: 'AP',
-    color: '#34d399', bg: 'linear-gradient(135deg, #020e09, #051410)',
+    color: '#3b82f6', bg: 'linear-gradient(135deg, #07080f, #0a0c17)',
     bio: 'Distributed systems expert. Built backends that handle millions of requests per day without breaking a sweat.',
     skills: ['Node.js', 'PostgreSQL', 'Kubernetes'],
     socials: { linkedin: '#', github: '#', twitter: '#' },
   },
   {
     name: 'Priya Nambiar', role: 'Growth & Marketing Lead', init: 'PN',
-    color: '#fbbf24', bg: 'linear-gradient(135deg, #130e00, #1a1000)',
+    color: '#3b82f6', bg: 'linear-gradient(135deg, #07080f, #0a0c17)',
     bio: 'Performance marketer obsessed with ROAS and data. Managed ₹5Cr+ in ad spend across verticals.',
     skills: ['Google Ads', 'Meta', 'Attribution'],
     socials: { linkedin: '#', github: '#', twitter: '#' },
   },
   {
     name: 'Sameer Joshi', role: 'Mobile Lead', init: 'SJ',
-    color: '#f87171', bg: 'linear-gradient(135deg, #140505, #1a0808)',
+    color: '#3b82f6', bg: 'linear-gradient(135deg, #07080f, #0a0c17)',
     bio: 'React Native & Flutter specialist. Has shipped 20+ apps on both iOS and Android with 4.8+ App Store ratings.',
     skills: ['React Native', 'Flutter', 'iOS', 'Android'],
     socials: { linkedin: '#', github: '#', twitter: '#' },
   },
   {
     name: 'Kavya Reddy', role: 'SEO & Content Strategist', init: 'KR',
-    color: '#a78bfa', bg: 'linear-gradient(135deg, #080614, #0d091a)',
+    color: '#3b82f6', bg: 'linear-gradient(135deg, #07080f, #0a0c17)',
     bio: 'Technical SEO wizard and content architect. Ranked 40+ clients #1 on Google for competitive keywords.',
     skills: ['Technical SEO', 'Content Strategy', 'Schema'],
     socials: { linkedin: '#', github: '#', twitter: '#' },
@@ -55,20 +53,10 @@ const team = [
 
 function TeamCard({ member }) {
   return (
-    <TiltedCard
-      containerHeight="auto"
-      containerWidth="100%"
-      imageWidth="100%"
-      imageHeight="auto"
-      scaleOnHover={1.03}
-      rotateAmplitude={8}
-      showTooltip={false}
-      displayOverlayContent={false}
+    <div
+      className="team-card opacity-0 rounded-2xl border border-white/[0.06] overflow-hidden group transition-all duration-300 hover:border-white/[0.12] hover:scale-[1.02]"
+      style={{ background: member.bg }}
     >
-      <div
-        className="team-card opacity-0 rounded-2xl border border-white/[0.06] overflow-hidden group"
-        style={{ background: member.bg }}
-      >
         {/* Color bar */}
         <div style={{ height: 2, background: `linear-gradient(90deg, ${member.color}80, transparent)` }} />
 
@@ -134,8 +122,7 @@ function TeamCard({ member }) {
             </div>
           )}
         </div>
-      </div>
-    </TiltedCard>
+    </div>
   )
 }
 
@@ -177,7 +164,7 @@ export default function Team() {
               {['Meet The', 'Team Behind', 'The Work.'].map((w, i) => (
                 <span key={i} className="block overflow-hidden">
                   <span className={`team-word inline-block opacity-0 will-change-transform ${i !== 2 ? 'text-white' : ''}`}>
-                    {i === 2 ? <GradientText colors={['#60a5fa','#4f46e5','#a78bfa','#60a5fa']} animationSpeed={6}>{w}</GradientText> : w}
+                    {i === 2 ? <span className="text-blue-400">{w}</span> : w}
                   </span>
                 </span>
               ))}

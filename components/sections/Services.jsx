@@ -1,276 +1,135 @@
 'use client'
-import { useEffect, useRef, useState } from 'react'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { Globe, Code2, Smartphone, Package, TrendingUp, Search } from 'lucide-react'
-import BlurText from '@/components/ui/reactbits/BlurText'
-import GradientText from '@/components/ui/reactbits/GradientText'
+import { motion } from 'framer-motion'
+import { Monitor, Code2, Smartphone, TrendingUp, Search, Cloud } from 'lucide-react'
 
-gsap.registerPlugin(ScrollTrigger)
+const Pill = ({ children }) => (
+  <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '5px 14px', borderRadius: 99, marginBottom: 20, border: '1px solid rgba(91,138,247,0.25)', background: 'rgba(91,138,247,0.07)', fontFamily: 'var(--font-outfit)', fontSize: 12, color: 'rgba(91,138,247,0.85)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
+    <span style={{ width: 5, height: 5, borderRadius: '50%', background: '#5B8AF7', display: 'inline-block', animation: 'opacity-glow 2s ease-in-out infinite alternate' }} />
+    {children}
+  </span>
+)
 
-const services = [
-  {
-    number: '01', icon: Globe, title: 'Website Development',
-    short: 'High-performance websites built to convert.',
-    detail: 'Enterprise-grade Next.js websites with <2s LCP, conversion-optimised UX, and CMS integration. Every pixel is intentional.',
-    tags: ['Next.js', 'React', 'CMS', 'Core Web Vitals'],
-    accent: '#60a5fa', accentRgb: '96,165,250',
-    bg: 'linear-gradient(135deg, #060d1a 0%, #091428 100%)',
-    examples: ['/interior.png', '/jjfilms.png', '/chahana.png'],
-  },
-  {
-    number: '02', icon: Code2, title: 'Software Development',
-    short: 'Custom software engineered for scale.',
-    detail: 'Backend systems, microservices, APIs and automation built with clean architecture. Code your team can own 5 years later.',
-    tags: ['Node.js', 'Python', 'Microservices', 'GraphQL'],
-    accent: '#34d399', accentRgb: '52,211,153',
-    bg: 'linear-gradient(135deg, #020e09 0%, #051410 100%)',
-    examples: ['/inventory.png', '/hvac.png', '/form-web.png'],
-  },
-  {
-    number: '03', icon: Smartphone, title: 'Mobile App Development',
-    short: 'Cross-platform apps users love.',
-    detail: 'Native-quality iOS & Android with React Native or Flutter. Performance, offline-first, and App Store optimisation built in.',
-    tags: ['React Native', 'Flutter', 'iOS', 'Android'],
-    accent: '#c084fc', accentRgb: '192,132,252',
-    bg: 'linear-gradient(135deg, #0d0614 0%, #150820 100%)',
-    examples: ['/destination.png', '/zingbliss.png', '/aangan.png'],
-  },
-  {
-    number: '04', icon: Package, title: 'SaaS Product Development',
-    short: 'From 0 to launch, end-to-end.',
-    detail: 'Full-lifecycle SaaS: architecture, MVP, payments, multi-tenant infra, and scale beyond 10,000 users. ViboERP is our proof.',
-    tags: ['Multi-Tenant', 'Stripe', 'Auth', 'Infrastructure'],
-    accent: '#fbbf24', accentRgb: '251,191,36',
-    bg: 'linear-gradient(135deg, #130e00 0%, #1a1000 100%)',
-    examples: ['/nextsphere.png', '/form-web.png', '/testimonial.png'],
-  },
-  {
-    number: '05', icon: TrendingUp, title: 'Performance Marketing',
-    short: 'Ads that scale revenue, not just spend.',
-    detail: 'Google, Meta and LinkedIn campaigns engineered around ROAS, CAC and LTV — not vanity metrics. 4.2x avg ROAS across clients.',
-    tags: ['Google Ads', 'Meta Ads', 'LinkedIn', 'Attribution'],
-    accent: '#f87171', accentRgb: '248,113,113',
-    bg: 'linear-gradient(135deg, #140505 0%, #1a0808 100%)',
-    examples: ['/silverspoon-screenshot.png', '/luxeliving.png', '/sweet.png'],
-  },
-  {
-    number: '06', icon: Search, title: 'Search Engine Optimisation',
-    short: 'Rank #1 for keywords that bring revenue.',
-    detail: 'Technical audits, content strategy, Core Web Vitals, and link building that compounds. We chase rankings that matter.',
-    tags: ['Technical SEO', 'Content', 'Link Building', 'Schema'],
-    accent: '#a78bfa', accentRgb: '167,139,250',
-    bg: 'linear-gradient(135deg, #080614 0%, #0d091a 100%)',
-    examples: ['/chemical.png', '/eyehospital.png', '/destination.png'],
-  },
-]
-
-function ServiceCard({ svc }) {
-  const [hovered, setHovered] = useState(false)
-  const Icon = svc.icon
-
+function WebMock() {
   return (
-    <div
-      className="svc-card opacity-0 relative overflow-hidden rounded-2xl border p-5 md:p-7 cursor-default flex flex-col"
-      style={{
-        background: svc.bg,
-        minHeight: 270,
-        borderColor: hovered ? `rgba(${svc.accentRgb},0.25)` : 'rgba(255,255,255,0.06)',
-        transition: 'transform 0.45s cubic-bezier(0.22,1,0.36,1), box-shadow 0.45s ease, border-color 0.45s ease',
-        transform: hovered ? 'translateY(-5px) scale(1.01)' : 'none',
-        boxShadow: hovered
-          ? `0 32px 80px rgba(0,0,0,0.55), 0 0 0 1px rgba(${svc.accentRgb},0.2), 0 0 60px rgba(${svc.accentRgb},0.07)`
-          : '0 4px 20px rgba(0,0,0,0.3)',
-      }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-    >
-      {/* Radial hover glow */}
-      <div
-        className="absolute inset-0 pointer-events-none transition-opacity duration-500"
-        style={{
-          opacity: hovered ? 1 : 0,
-          background: `radial-gradient(ellipse at 30% 0%, rgba(${svc.accentRgb},0.1) 0%, transparent 65%)`,
-        }}
-      />
-
-      {/* Ghost number watermark */}
-      <span
-        className="absolute -right-3 -top-3 font-display font-black leading-none select-none pointer-events-none"
-        style={{
-          fontSize: '7.5rem',
-          color: `rgba(${svc.accentRgb}, ${hovered ? 0.09 : 0.04})`,
-          transition: 'color 0.45s ease',
-          letterSpacing: '-0.04em',
-          lineHeight: 1,
-        }}
-      >
-        {svc.number}
-      </span>
-
-      {/* Icon */}
-      <div
-        className="relative z-10 w-11 h-11 rounded-xl flex items-center justify-center mb-5 shrink-0 transition-transform duration-300"
-        style={{
-          background: `rgba(${svc.accentRgb},0.12)`,
-          border: `1px solid rgba(${svc.accentRgb},0.25)`,
-          transform: hovered ? 'scale(1.1)' : 'scale(1)',
-        }}
-      >
-        <Icon size={20} style={{ color: svc.accent }} />
+    <div style={{ background: 'rgba(0,0,0,0.3)', borderRadius: 8, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.06)' }}>
+      <div style={{ padding: '7px 10px', borderBottom: '1px solid rgba(255,255,255,0.05)', display: 'flex', gap: 5 }}>
+        {['#FF5F57','#FEBC2E','#28C840'].map(c => <div key={c} style={{ width: 7, height: 7, borderRadius: '50%', background: c, opacity: 0.7 }} />)}
       </div>
-
-      {/* Text */}
-      <div className="relative z-10 flex-1">
-        <h3
-          className="font-display font-bold text-white mb-2 leading-tight"
-          style={{ fontSize: 'clamp(0.95rem, 1.8vw, 1.35rem)', letterSpacing: '-0.02em' }}
-        >
-          {svc.title}
-        </h3>
-        <p className="text-white/35 text-sm leading-relaxed mb-4">{svc.short}</p>
-        <p
-          className="text-white/20 text-xs leading-relaxed mb-5 transition-all duration-500"
-          style={{ maxHeight: hovered ? 80 : 0, overflow: 'hidden', opacity: hovered ? 1 : 0 }}
-        >
-          {svc.detail}
-        </p>
-      </div>
-
-      {/* Example project thumbnails */}
-      {svc.examples && (
-        <div className="relative z-10 flex gap-1.5 mb-4 transition-opacity duration-500" style={{ opacity: hovered ? 0.9 : 0.35 }}>
-          {svc.examples.map((src, i) => (
-            <div
-              key={i}
-              className="flex-1 overflow-hidden"
-              style={{
-                height: 44, borderRadius: 6,
-                border: `1px solid rgba(${svc.accentRgb},${hovered ? 0.3 : 0.12})`,
-                transition: 'border-color 0.4s ease',
-                transform: `rotate(${i === 0 ? -1 : i === 2 ? 1 : 0}deg)`,
-              }}
-            >
-              <img src={src} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top', display: 'block' }} />
-            </div>
-          ))}
+      <div style={{ padding: '10px' }}>
+        <div style={{ height: 8, width: '70%', background: 'rgba(91,138,247,0.25)', borderRadius: 3, marginBottom: 6 }} />
+        <div style={{ display: 'flex', gap: 6, marginBottom: 8 }}>
+          {['40%', '30%', '20%'].map(w => <div key={w} style={{ height: 5, width: w, background: 'rgba(255,255,255,0.08)', borderRadius: 2 }} />)}
         </div>
-      )}
-
-      {/* Tags */}
-      <div className="relative z-10 flex flex-wrap gap-1.5 pt-4 border-t border-white/[0.05]">
-        {svc.tags.map((t) => (
-          <span
-            key={t}
-            className="text-[10px] px-2.5 py-0.5 rounded-full"
-            style={{ background: `rgba(${svc.accentRgb},0.08)`, color: svc.accent }}
-          >
-            {t}
-          </span>
-        ))}
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6 }}>
+          {[0,1,2,3].map(i => <div key={i} style={{ height: 36, background: 'rgba(255,255,255,0.04)', borderRadius: 6, border: '1px solid rgba(255,255,255,0.06)' }} />)}
+        </div>
       </div>
     </div>
   )
 }
 
-export default function Services() {
-  const sectionRef = useRef(null)
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      const mm = gsap.matchMedia()
-
-      mm.add('(min-width: 768px)', () => {
-        gsap.fromTo('.svc-heading-word',
-          { y: '110%', opacity: 0 },
-          {
-            y: '0%', opacity: 1, stagger: 0.08, duration: 0.85, ease: 'power3.out',
-            scrollTrigger: { trigger: sectionRef.current, start: 'top 75%', once: true },
-          }
-        )
-        gsap.fromTo('.svc-card',
-          { opacity: 0, y: 40, scale: 0.97 },
-          {
-            opacity: 1, y: 0, scale: 1, stagger: 0.07, duration: 0.7, ease: 'power2.out',
-            scrollTrigger: { trigger: '.svc-grid', start: 'top 82%', once: true },
-          }
-        )
-      })
-
-      mm.add('(max-width: 767px)', () => {
-        gsap.fromTo(['.svc-heading-word', '.svc-card'],
-          { opacity: 0, y: 24 },
-          {
-            opacity: 1, y: 0, stagger: 0.05, duration: 0.6, ease: 'power2.out',
-            scrollTrigger: { trigger: sectionRef.current, start: 'top 85%', once: true },
-          }
-        )
-      })
-    }, sectionRef)
-    return () => ctx.revert()
-  }, [])
-
+function MobileMock() {
   return (
-    <section id="services" ref={sectionRef} className="py-24 md:py-36 bg-[#05060f] border-t border-white/[0.04]">
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16">
-
-        {/* Header */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-14 md:mb-20">
-          <div>
-            <p className="text-white/25 text-xs uppercase tracking-[0.3em] mb-5">What We Do</p>
-            <h2
-              className="font-display font-black leading-none"
-              style={{ fontSize: 'clamp(1.75rem, 6vw, 5.5rem)', letterSpacing: '-0.04em' }}
-            >
-              {['Full-Stack', 'Digital', 'Services'].map((w, i) => (
-                <span key={i} className="block overflow-hidden">
-                  <span className={`svc-heading-word inline-block opacity-0 will-change-transform ${i === 2 ? '' : 'text-white'}`}>
-                    {i === 2 ? (
-                      <GradientText
-                        colors={['#60a5fa', '#818cf8', '#a78bfa', '#818cf8', '#60a5fa']}
-                        animationSpeed={6}
-                      >
-                        {w}
-                      </GradientText>
-                    ) : w}
-                  </span>
-                </span>
-              ))}
-            </h2>
-          </div>
-          <div className="max-w-sm lg:pb-2 lg:text-right">
-            <BlurText
-              text="Everything engineered from scratch for your goals, industry, and scale — no templates, no shortcuts."
-              className="text-white/35 text-base leading-relaxed"
-              animateBy="words"
-              direction="top"
-              delay={60}
-              threshold={0.3}
-            />
-          </div>
+    <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <div style={{ width: 100, background: 'rgba(0,0,0,0.4)', borderRadius: 16, border: '1px solid rgba(255,255,255,0.1)', padding: '8px 6px' }}>
+        <div style={{ height: 6, width: 40, background: 'rgba(255,255,255,0.1)', borderRadius: 3, margin: '0 auto 8px' }} />
+        <div style={{ background: 'rgba(91,138,247,0.12)', borderRadius: 10, padding: '8px 6px' }}>
+          <div style={{ height: 5, width: '80%', background: 'rgba(91,138,247,0.4)', borderRadius: 2, marginBottom: 4 }} />
+          <div style={{ height: 4, width: '60%', background: 'rgba(255,255,255,0.1)', borderRadius: 2, marginBottom: 8 }} />
+          <div style={{ height: 24, background: 'rgba(91,138,247,0.2)', borderRadius: 6, marginBottom: 6 }} />
+          <div style={{ height: 18, background: 'rgba(255,255,255,0.04)', borderRadius: 6, marginBottom: 4 }} />
+          <div style={{ height: 18, background: 'rgba(255,255,255,0.04)', borderRadius: 6 }} />
         </div>
+      </div>
+    </div>
+  )
+}
 
-        {/* Card grid */}
-        <div className="svc-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
-          {services.map((svc) => (
-            <ServiceCard key={svc.number} svc={svc} />
-          ))}
-        </div>
+function ChartMock() {
+  const vals = [40, 65, 48, 80, 58, 95, 72]
+  return (
+    <div style={{ background: 'rgba(0,0,0,0.3)', borderRadius: 8, padding: 10, border: '1px solid rgba(255,255,255,0.06)' }}>
+      <div style={{ fontSize: 9, color: 'rgba(255,255,255,0.3)', fontFamily: 'var(--font-outfit)', marginBottom: 8 }}>Campaign ROAS</div>
+      <div style={{ display: 'flex', alignItems: 'flex-end', gap: 4, height: 50 }}>
+        {vals.map((h, i) => <div key={i} style={{ flex: 1, height: `${h}%`, borderRadius: '3px 3px 0 0', background: i === 6 ? 'linear-gradient(180deg, #5B8AF7, #8B5CF6)' : 'rgba(91,138,247,0.2)' }} />)}
+      </div>
+      <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 4 }}>
+        {['M','T','W','T','F','S','S'].map((d, i) => <span key={i} style={{ fontSize: 8, color: 'rgba(255,255,255,0.18)', fontFamily: 'var(--font-outfit)' }}>{d}</span>)}
+      </div>
+    </div>
+  )
+}
 
-        {/* Bottom CTA strip */}
-        <div
-          className="mt-10 flex flex-col sm:flex-row items-center justify-between gap-5 p-6 md:p-8 rounded-2xl border border-white/[0.06]"
-          style={{ background: 'rgba(255,255,255,0.015)' }}
-        >
-          <p className="text-white/40 text-sm">Not sure which service fits? <span className="text-white/70">Let's talk it through.</span></p>
-          <a
-            href="#contact"
-            className="shrink-0 inline-flex items-center gap-2 px-7 py-3 rounded-full text-white text-sm font-medium"
-            style={{ background: 'linear-gradient(135deg, #2563EB, #4f46e5)' }}
-          >
-            Get a Free Consultation
-          </a>
+function CodeMock() {
+  const lines = [
+    { t: 'async function deploy(app)', c: '#5B8AF7' },
+    { t: '  const build = await compile()', c: 'rgba(255,255,255,0.4)' },
+    { t: '  await run(tests)', c: 'rgba(255,255,255,0.3)' },
+    { t: '  return push(build) ✓', c: '#34D399' },
+  ]
+  return (
+    <div style={{ background: 'rgba(0,0,0,0.5)', borderRadius: 8, padding: '10px 12px', fontFamily: 'monospace', border: '1px solid rgba(255,255,255,0.06)' }}>
+      {lines.map((l, i) => <div key={i} style={{ fontSize: 10, color: l.c, lineHeight: 1.8 }}>{l.t}</div>)}
+    </div>
+  )
+}
+
+const services = [
+  { icon: Monitor, title: 'Website Development', desc: 'Fast, conversion-focused websites — from marketing pages to Shopify stores. Built to load in under 2 seconds, rank on Google, and turn visitors into paying customers.', tags: ['React', 'Next.js', 'Shopify'], mock: <WebMock /> },
+  { icon: Smartphone, title: 'Mobile Apps', desc: 'Cross-platform iOS & Android apps shipped faster than native — without the quality compromise. Built with React Native by a team with 20+ live apps and 4.8+ store ratings.', tags: ['React Native', 'iOS', 'Android'], mock: <MobileMock /> },
+  { icon: Code2, title: 'Software Development', desc: 'Robust APIs, microservices, and full-stack applications built for production. Clean code, automated tests, CI/CD from day one — systems that teams can actually maintain.', tags: ['Node.js', 'Python', 'PostgreSQL'], mock: <CodeMock /> },
+  { icon: TrendingUp, title: 'Performance Marketing', desc: 'Meta and Google campaigns built on rigorous A/B testing and smart audience segmentation. We manage ₹5Cr+ in ad spend and optimise relentlessly until the ROAS makes sense.', tags: ['Meta Ads', 'Google Ads', 'Analytics'], mock: <ChartMock /> },
+  { icon: Search, title: 'SEO Optimization', desc: 'Technical audits, content strategy, and link acquisition that move rankings — not vanity metrics. We focus exclusively on the keywords that drive qualified traffic and revenue.', tags: ['Technical SEO', 'Content', 'Link Building'], mock: null },
+  { icon: Cloud, title: 'SaaS Products', desc: 'From product strategy through multi-tenant architecture to billing and auth — we build SaaS platforms founders can pitch with confidence and scale without re-engineering.', tags: ['SaaS', 'Cloud', 'Multi-tenant'], mock: null },
+]
+
+function ServiceCard({ service, index }) {
+  const { icon: Icon, title, desc, tags, mock } = service
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 32 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.55, delay: index * 0.07 }}
+      style={{ background: 'rgba(255,255,255,0.025)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 16, padding: 28, position: 'relative', overflow: 'hidden', transition: 'border-color 0.3s' }}
+      onMouseEnter={e => e.currentTarget.style.borderColor = 'rgba(91,138,247,0.22)'}
+      onMouseLeave={e => e.currentTarget.style.borderColor = 'rgba(255,255,255,0.07)'}
+    >
+      <div style={{ position: 'absolute', top: 0, left: '50%', transform: 'translateX(-50%)', width: '60%', height: 1, background: 'linear-gradient(90deg, transparent, rgba(91,138,247,0.4), transparent)', opacity: 0.6 }} />
+      <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: mock ? 16 : 12 }}>
+        <div style={{ width: 38, height: 38, borderRadius: 10, background: 'rgba(91,138,247,0.1)', border: '1px solid rgba(91,138,247,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+          <Icon size={17} color="#5B8AF7" />
         </div>
+        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', justifyContent: 'flex-end' }}>
+          {tags.map(t => <span key={t} style={{ fontFamily: 'var(--font-outfit)', fontSize: 10.5, color: 'rgba(255,255,255,0.3)', background: 'rgba(255,255,255,0.05)', padding: '3px 8px', borderRadius: 99, border: '1px solid rgba(255,255,255,0.07)' }}>{t}</span>)}
+        </div>
+      </div>
+      <h3 style={{ fontFamily: 'var(--font-syne)', fontWeight: 700, fontSize: 17, color: '#fff', margin: '0 0 8px', letterSpacing: '-0.02em' }}>{title}</h3>
+      <p style={{ fontFamily: 'var(--font-outfit)', fontSize: 13.5, color: 'rgba(255,255,255,0.42)', lineHeight: 1.6, margin: '0 0 16px' }}>{desc}</p>
+      {mock && <div>{mock}</div>}
+    </motion.div>
+  )
+}
+
+export default function Services() {
+  return (
+    <section id="services" style={{ padding: '100px 24px', maxWidth: 1140, margin: '0 auto' }}>
+      <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} style={{ textAlign: 'center', marginBottom: 64 }}>
+        <Pill>What we do</Pill>
+        <h2 style={{ fontFamily: 'var(--font-syne)', fontWeight: 800, fontSize: 'clamp(32px, 5vw, 54px)', letterSpacing: '-0.03em', color: '#fff', margin: '0 0 16px', lineHeight: 1.1 }}>
+          One team, every layer.<br />
+          <span style={{ WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', backgroundImage: 'linear-gradient(135deg, #5B8AF7, #8B5CF6)' }}>From pixels to pipelines.</span>
+        </h2>
+        <p style={{ fontFamily: 'var(--font-outfit)', fontSize: 16, color: 'rgba(255,255,255,0.45)', maxWidth: 480, margin: '0 auto' }}>
+          Six disciplines, one accountable team. No handoffs to agencies you've never met — we own the outcome end to end.
+        </p>
+      </motion.div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2" style={{ gap: 14, marginBottom: 14 }}>
+        {services.slice(0, 4).map((s, i) => <ServiceCard key={s.title} service={s} index={i} />)}
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2" style={{ gap: 14 }}>
+        {services.slice(4).map((s, i) => <ServiceCard key={s.title} service={s} index={i + 4} />)}
       </div>
     </section>
   )

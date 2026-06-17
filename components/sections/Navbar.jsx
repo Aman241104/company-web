@@ -1,218 +1,107 @@
 'use client'
-import { useEffect, useRef, useState } from 'react'
-import { gsap } from 'gsap'
+import { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Menu, X, ArrowUpRight } from 'lucide-react'
 
-const MLogoSVG = () => (
-  <svg width="34" height="30" viewBox="0 0 100 85" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <polygon points="10,80 32,10 50,48 68,10 90,80 76,80 66,52 50,72 34,52 24,80" fill="white" />
-    <polygon points="50,48 44,60 50,72 56,60" fill="#030408" />
-  </svg>
-)
-
-const navLinks = [
-  { num: '01', label: 'Projects', href: '/work', sub: 'Selected projects' },
-  { num: '02', label: 'Services', href: '/services', sub: 'What we do' },
-  { num: '03', label: 'About', href: '/about', sub: 'Who we are' },
-  { num: '04', label: 'Process', href: '/#process', sub: 'How we work' },
-  { num: '05', label: 'Contact', href: '/contact', sub: 'Start a project' },
+const links = [
+  { label: 'Services', href: '/services' },
+  { label: 'Work', href: '/work' },
+  { label: 'Process', href: '/#process' },
+  { label: 'Pricing', href: '/#pricing' },
+  { label: 'About', href: '/about' },
 ]
 
+function NavLink({ href, children }) {
+  const [hovered, setHovered] = useState(false)
+  return (
+    <a href={href} style={{
+      fontFamily: 'var(--font-outfit)', fontSize: 13, textDecoration: 'none',
+      color: hovered ? '#fff' : 'rgba(255,255,255,0.52)',
+      padding: '6px 14px', borderRadius: 99,
+      background: hovered ? 'rgba(255,255,255,0.07)' : 'transparent',
+      transition: 'all 0.2s',
+    }}
+    onMouseEnter={() => setHovered(true)}
+    onMouseLeave={() => setHovered(false)}
+    >
+      {children}
+    </a>
+  )
+}
+
 export default function Navbar() {
-  const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-  const overlayRef = useRef(null)
-  const linkRefs = useRef([])
-  const metaRef = useRef(null)
-  const lineRef = useRef(null)
+  const [open, setOpen] = useState(false)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40)
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+    const fn = () => setScrolled(window.scrollY > 24)
+    window.addEventListener('scroll', fn, { passive: true })
+    return () => window.removeEventListener('scroll', fn)
   }, [])
 
-  useEffect(() => {
-    const overlay = overlayRef.current
-    if (!overlay) return
-
-    if (open) {
-      document.body.style.overflow = 'hidden'
-      gsap.set(overlay, { display: 'flex' })
-      gsap.fromTo(overlay,
-        { clipPath: 'polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)' },
-        { clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)', duration: 0.75, ease: 'power4.inOut' }
-      )
-      gsap.fromTo(linkRefs.current,
-        { x: 80, opacity: 0 },
-        { x: 0, opacity: 1, stagger: 0.06, duration: 0.7, ease: 'power3.out', delay: 0.4 }
-      )
-      gsap.fromTo(lineRef.current,
-        { scaleX: 0 },
-        { scaleX: 1, duration: 0.8, ease: 'power2.inOut', delay: 0.35 }
-      )
-      gsap.fromTo(metaRef.current,
-        { opacity: 0, y: 16 },
-        { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out', delay: 0.55 }
-      )
-    } else {
-      document.body.style.overflow = ''
-      gsap.to(overlay, {
-        clipPath: 'polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)',
-        duration: 0.65,
-        ease: 'power4.inOut',
-        onComplete: () => gsap.set(overlay, { display: 'none' }),
-      })
-    }
-  }, [open])
-
-  const close = () => {
-    setOpen(false)
-  }
-
   return (
-    <>
-      {/* Minimal header bar — Agex reference style */}
-      <header
-        className="fixed top-0 inset-x-0 z-50 flex items-center justify-between relative"
+    <header style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100, display: 'flex', justifyContent: 'center', padding: '16px 24px', pointerEvents: 'none' }}>
+      <motion.nav
+        initial={{ opacity: 0, y: -16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.55 }}
         style={{
-          padding: scrolled ? '12px max(16px, 4vw)' : '20px max(16px, 4vw)',
-          transition: 'padding 0.4s ease, background 0.4s ease, border-color 0.4s ease',
-          background: scrolled ? 'rgba(3,5,15,0.85)' : 'transparent',
-          borderBottom: scrolled ? '1px solid rgba(255,255,255,0.05)' : '1px solid transparent',
-          backdropFilter: scrolled ? 'blur(24px)' : 'none',
+          pointerEvents: 'all', width: '100%', maxWidth: 760,
+          display: 'flex', alignItems: 'center',
+          padding: '8px 8px 8px 20px', borderRadius: 99,
+          border: `1px solid ${scrolled ? 'rgba(255,255,255,0.1)' : 'rgba(255,255,255,0.07)'}`,
+          background: scrolled ? 'rgba(6,6,20,0.92)' : 'rgba(6,6,20,0.5)',
+          backdropFilter: 'blur(20px)',
+          boxShadow: scrolled ? '0 8px 48px rgba(0,0,0,0.5)' : 'none',
+          transition: 'all 0.35s ease',
         }}
       >
         {/* Logo */}
-        <a href="/" className="flex items-center gap-2.5 shrink-0">
-          <MLogoSVG />
-          <span className="font-display font-semibold text-white tracking-[0.12em] text-[13px] hidden sm:block">MEHTA</span>
+        <a href="/" style={{ display: 'flex', alignItems: 'center', gap: 9, textDecoration: 'none', flexShrink: 0 }}>
+          <div style={{ width: 30, height: 30, borderRadius: 8, background: 'linear-gradient(135deg, #5B8AF7 0%, #8B5CF6 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--font-syne)', fontWeight: 800, fontSize: 13, color: '#fff', flexShrink: 0 }}>M</div>
+          <span style={{ fontFamily: 'var(--font-syne)', fontWeight: 700, fontSize: 13.5, color: '#fff', letterSpacing: '-0.02em', whiteSpace: 'nowrap' }}>
+            Mehta <span style={{ color: 'rgba(255,255,255,0.35)' }}>Technologies</span>
+          </span>
         </a>
 
-        {/* Center pill nav — truly centered via absolute positioning */}
-        <nav
-          className="hidden lg:flex items-center gap-7 absolute left-1/2 -translate-x-1/2"
-          style={{
-            padding: '7px 24px',
-            border: '1px solid rgba(255,255,255,0.1)',
-            borderRadius: 9999,
-            background: 'rgba(255,255,255,0.03)',
-            backdropFilter: 'blur(12px)',
-          }}
-        >
-          {navLinks.slice(0, 4).map((l) => (
-            <a
-              key={l.label}
-              href={l.href}
-              className="text-[13px] text-white/40 hover:text-white transition-colors duration-200 tracking-wide"
-            >
-              {l.label}
-            </a>
-          ))}
-        </nav>
-
-        {/* Right: CTA + hamburger */}
-        <div className="flex items-center gap-3 shrink-0">
-          <a
-            href="/contact"
-            className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[13px] text-white font-semibold"
-            style={{
-              background: 'linear-gradient(135deg, #2563EB, #4f46e5)',
-              boxShadow: '0 0 20px rgba(37,99,235,0.3)',
-            }}
-          >
-            Get Started
-          </a>
-          <button
-            onClick={() => setOpen(true)}
-            className="flex items-center gap-2 group"
-            aria-label="Open menu"
-          >
-            <span className="text-[11px] text-white/35 tracking-[0.2em] uppercase group-hover:text-white/60 transition-colors hidden sm:block">Menu</span>
-            <div className="flex flex-col gap-1.5 p-2">
-              <span className="block w-5 h-px bg-white/50 group-hover:bg-white transition-colors duration-200" />
-              <span className="block w-3.5 h-px bg-white/30 group-hover:bg-white/60 transition-colors duration-200" />
-            </div>
-          </button>
-        </div>
-      </header>
-
-      {/* Full-screen overlay menu */}
-      <div
-        ref={overlayRef}
-        className="fixed inset-0 z-[200] flex-col"
-        style={{ display: 'none', background: '#040404' }}
-      >
-        {/* Top bar */}
-        <div className="flex items-center justify-between px-8 md:px-14 pt-6 md:pt-8 shrink-0">
-          <a href="/" onClick={() => close()} className="flex items-center gap-3">
-            <MLogoSVG />
-            <span className="font-display font-semibold text-white tracking-[0.12em] text-[13px]">MEHTA</span>
-          </a>
-          <button
-            onClick={() => setOpen(false)}
-            className="group flex items-center gap-3 text-white/40 hover:text-white transition-colors"
-            aria-label="Close menu"
-          >
-            <span className="text-[11px] tracking-[0.2em] uppercase hidden sm:block">Close</span>
-            <div className="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center group-hover:border-white/30 transition-all">
-              <span className="text-sm leading-none">✕</span>
-            </div>
-          </button>
+        {/* Desktop links */}
+        <div className="hidden md:flex" style={{ flex: 1, justifyContent: 'center', gap: 2, display: 'flex' }}>
+          {links.map(l => <NavLink key={l.label} href={l.href}>{l.label}</NavLink>)}
         </div>
 
-        {/* Divider line */}
-        <div ref={lineRef} className="mx-8 md:mx-14 mt-6 h-px origin-left"
-          style={{ background: 'rgba(255,255,255,0.06)' }} />
+        {/* CTA */}
+        <a href="/contact" className="hidden md:flex" style={{ textDecoration: 'none', flexShrink: 0 }}>
+          <span style={{ display: 'flex', alignItems: 'center', gap: 5, padding: '8px 18px', borderRadius: 99, background: 'linear-gradient(135deg, #5B8AF7, #8B5CF6)', fontFamily: 'var(--font-outfit)', fontWeight: 600, fontSize: 12.5, color: '#fff', cursor: 'pointer' }}>
+            Get in Touch <ArrowUpRight size={13} />
+          </span>
+        </a>
 
-        {/* Navigation links */}
-        <nav className="flex-1 flex flex-col justify-center px-8 md:px-14 py-8">
-          {navLinks.map((l, i) => (
-            <div
-              key={l.label}
-              ref={(el) => (linkRefs.current[i] = el)}
-              className="group border-b border-white/[0.05] first:border-t"
-            >
-              <a
-                href={l.href}
-                onClick={() => close()}
-                className="flex items-center justify-between py-5 md:py-6 cursor-pointer"
-              >
-                <div className="flex items-baseline gap-5 md:gap-8">
-                  <span className="text-white/35 font-display text-xs tabular-nums">{l.num}</span>
-                  <span
-                    className="font-display font-black text-white/80 group-hover:text-white transition-colors leading-none"
-                    style={{ fontSize: 'clamp(1.75rem, 7vw, 6.5rem)', letterSpacing: '-0.03em' }}
-                  >
-                    {l.label}
-                  </span>
-                </div>
-                <div className="flex items-center gap-4">
-                  <span className="text-white/40 text-sm hidden md:block">{l.sub}</span>
-                  <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center group-hover:border-blue-500/40 group-hover:bg-blue-500/10 transition-all">
-                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                      <path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-white/30 group-hover:text-blue-400 transition-colors" />
-                    </svg>
-                  </div>
-                </div>
+        {/* Mobile toggle */}
+        <button onClick={() => setOpen(!open)} className="flex md:hidden" style={{ marginLeft: 'auto', background: 'rgba(255,255,255,0.07)', border: 'none', borderRadius: 8, padding: 7, cursor: 'pointer', color: '#fff' }}>
+          {open ? <X size={17} /> : <Menu size={17} />}
+        </button>
+      </motion.nav>
+
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, y: -8, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -8, scale: 0.98 }}
+            transition={{ duration: 0.2 }}
+            style={{ position: 'fixed', top: 78, left: 16, right: 16, background: 'rgba(9,9,28,0.97)', backdropFilter: 'blur(24px)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 16, padding: '8px 8px 12px', pointerEvents: 'all' }}
+          >
+            {links.map(l => (
+              <a key={l.label} href={l.href} onClick={() => setOpen(false)} style={{ display: 'block', fontFamily: 'var(--font-outfit)', fontSize: 15, color: 'rgba(255,255,255,0.65)', textDecoration: 'none', padding: '12px 12px', borderRadius: 8 }}>
+                {l.label}
               </a>
-            </div>
-          ))}
-        </nav>
-
-        {/* Bottom meta */}
-        <div ref={metaRef} className="px-8 md:px-14 pb-10 md:pb-12 flex flex-col sm:flex-row items-start sm:items-end justify-between gap-6 shrink-0" style={{ paddingBottom: 'max(2.5rem, env(safe-area-inset-bottom, 0px) + 1.5rem)' }}>
-          <div>
-            <p className="text-white/20 text-xs uppercase tracking-[0.25em] mb-2">Get in Touch</p>
-            <a href="mailto:hello@mehtatechnologies.com" className="text-white/50 text-sm hover:text-white transition-colors">
-              hello@mehtatechnologies.com
+            ))}
+            <a href="/contact" onClick={() => setOpen(false)} style={{ display: 'block', marginTop: 8, textAlign: 'center', padding: 13, borderRadius: 99, textDecoration: 'none', background: 'linear-gradient(135deg, #5B8AF7, #8B5CF6)', fontFamily: 'var(--font-outfit)', fontWeight: 600, fontSize: 14, color: '#fff' }}>
+              Get in Touch
             </a>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="text-white/25 text-xs">Available for new projects</span>
-          </div>
-        </div>
-      </div>
-    </>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </header>
   )
 }

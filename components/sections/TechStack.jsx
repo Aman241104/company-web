@@ -1,61 +1,41 @@
 'use client'
-import LogoLoop from '@/components/ui/reactbits/LogoLoop'
+import { motion } from 'framer-motion'
 
-const makeItem = (label, color = 'rgba(255,255,255,0.35)') => ({
-  node: (
-    <span
-      className="text-[13px] font-medium tracking-wide shrink-0"
-      style={{ color }}
-    >
-      {label}
-    </span>
-  ),
-})
-
-const dot = (color) => ({
-  node: <span className="w-1 h-1 rounded-full shrink-0 inline-block" style={{ background: color, verticalAlign: 'middle' }} />,
-})
-
-const row1 = [
-  makeItem('Next.js'), makeItem('React'), makeItem('Node.js'), makeItem('TypeScript'),
-  makeItem('Python'), makeItem('GraphQL'), makeItem('Docker'), makeItem('Kubernetes'),
-  makeItem('Terraform'), makeItem('React Native'), dot('rgba(37,99,235,0.45)'),
+const clients = [
+  'Silver Spoon by ACJ', 'TechVista Solutions', 'GreenLeaf Organics',
+  'NovaMed Diagnostics', 'PeakPerform Sports', 'UrbanNest Realty',
+  'ClearPath Finance', 'Stellar Logistics', 'BrightMind EdTech',
+  'SwiftShip Commerce', 'Vertex Analytics', 'PureForm Wellness',
+  'JJ Films', 'ZingBliss', 'Stylux Interiors',
 ]
 
-const row2 = [
-  makeItem('PostgreSQL'), makeItem('MongoDB'), makeItem('Redis'), makeItem('AWS'),
-  makeItem('Google Cloud'), makeItem('Vercel'), makeItem('Stripe'),
-  makeItem('Tailwind CSS'), makeItem('GSAP'), makeItem('Framer Motion'),
-  dot('rgba(79,70,229,0.45)'),
-]
-
-const row3 = [
-  makeItem('Figma', 'rgba(255,255,255,0.25)'), makeItem('Supabase', 'rgba(255,255,255,0.25)'),
-  makeItem('Prisma', 'rgba(255,255,255,0.25)'), makeItem('tRPC', 'rgba(255,255,255,0.25)'),
-  makeItem('Zustand', 'rgba(255,255,255,0.25)'), makeItem('Turborepo', 'rgba(255,255,255,0.25)'),
-  makeItem('Cloudflare', 'rgba(255,255,255,0.25)'), makeItem('Resend', 'rgba(255,255,255,0.25)'),
-  makeItem('Playwright', 'rgba(255,255,255,0.25)'), makeItem('Vitest', 'rgba(255,255,255,0.25)'),
-  dot('rgba(96,165,250,0.3)'),
-]
+const doubled = [...clients, ...clients]
 
 export default function TechStack() {
   return (
-    <div className="border-b border-white/[0.04] overflow-hidden" style={{ background: '#04050e' }}>
+    <section style={{ padding: '56px 0', borderTop: '1px solid rgba(255,255,255,0.05)', borderBottom: '1px solid rgba(255,255,255,0.05)', overflow: 'hidden', position: 'relative' }}>
+      {/* Fade edges */}
+      <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 120, zIndex: 2, background: 'linear-gradient(90deg, #060614, transparent)', pointerEvents: 'none' }} />
+      <div style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: 120, zIndex: 2, background: 'linear-gradient(-90deg, #060614, transparent)', pointerEvents: 'none' }} />
 
-      {/* Label row */}
-      <div className="flex items-center gap-5 px-6 md:px-12 pt-7 pb-5">
-        <span className="text-white/15 text-[9px] uppercase tracking-[0.35em] shrink-0">Tech Stack</span>
-        <div className="h-px flex-1" style={{ background: 'linear-gradient(to right, rgba(255,255,255,0.06), transparent)' }} />
-        <span className="text-white/10 text-[9px] shrink-0">20+ technologies</span>
+      <div style={{ textAlign: 'center', marginBottom: 28 }}>
+        <span style={{ fontFamily: 'var(--font-outfit)', fontSize: 12, color: 'rgba(255,255,255,0.28)', letterSpacing: '0.12em', textTransform: 'uppercase' }}>
+          Brands that have trusted us to build and grow
+        </span>
       </div>
 
-      {/* Three rows at different speeds/opacities */}
-      <div className="flex flex-col gap-2.5 pb-6">
-        <LogoLoop logos={row1} speed={65} direction="left"  logoHeight={22} gap={36} pauseOnHover fadeOut />
-        <LogoLoop logos={row2} speed={50} direction="right" logoHeight={22} gap={36} pauseOnHover fadeOut />
-        <LogoLoop logos={row3} speed={40} direction="left"  logoHeight={22} gap={36} pauseOnHover fadeOut />
-      </div>
-
-    </div>
+      <motion.div
+        style={{ display: 'flex', width: 'max-content' }}
+        animate={{ x: ['0%', '-50%'] }}
+        transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}
+      >
+        {doubled.map((name, i) => (
+          <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '0 32px', whiteSpace: 'nowrap' }}>
+            <div style={{ width: 5, height: 5, borderRadius: '50%', background: 'rgba(91,138,247,0.4)', flexShrink: 0 }} />
+            <span style={{ fontFamily: 'var(--font-syne)', fontWeight: 600, fontSize: 13.5, color: 'rgba(255,255,255,0.28)', letterSpacing: '0.01em' }}>{name}</span>
+          </div>
+        ))}
+      </motion.div>
+    </section>
   )
 }

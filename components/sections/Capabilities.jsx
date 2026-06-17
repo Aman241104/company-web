@@ -3,8 +3,6 @@ import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Zap, Smartphone, Settings, Database, Cloud, Sparkles } from 'lucide-react'
-import GradientBlinds from '@/components/ui/reactbits/GradientBlinds'
-
 gsap.registerPlugin(ScrollTrigger)
 
 const cells = [
@@ -12,49 +10,49 @@ const cells = [
     icon: Zap,
     name: 'Next.js',
     desc: 'Server-first React with blazing-fast SSR and App Router',
-    accent: '#60a5fa',
+    accent: '#3b82f6',
     wide: true,
-    bg: 'linear-gradient(135deg, #0d1117 0%, #0a1628 100%)',
+    bg: 'linear-gradient(135deg, #07080f 0%, #0a0c17 100%)',
   },
   {
     icon: Smartphone,
     name: 'React Native',
     desc: 'Cross-platform iOS & Android from one codebase',
-    accent: '#34d399',
+    accent: '#3b82f6',
     wide: false,
-    bg: 'linear-gradient(135deg, #0a1a10 0%, #061010 100%)',
+    bg: 'linear-gradient(135deg, #07080f 0%, #0a0c17 100%)',
   },
   {
     icon: Settings,
     name: 'Node.js',
     desc: 'High-throughput backend APIs and microservices',
-    accent: '#a3e635',
+    accent: '#3b82f6',
     wide: false,
-    bg: 'linear-gradient(135deg, #0a1400 0%, #080d00 100%)',
+    bg: 'linear-gradient(135deg, #07080f 0%, #0a0c17 100%)',
   },
   {
     icon: Database,
     name: 'PostgreSQL',
     desc: 'Reliable relational data with advanced query power',
-    accent: '#fbbf24',
+    accent: '#3b82f6',
     wide: false,
-    bg: 'linear-gradient(135deg, #1a1000 0%, #0d0800 100%)',
+    bg: 'linear-gradient(135deg, #07080f 0%, #0a0c17 100%)',
   },
   {
     icon: Cloud,
     name: 'AWS / GCloud',
     desc: 'Cloud-native infrastructure that scales on demand',
-    accent: '#f472b6',
+    accent: '#3b82f6',
     wide: true,
-    bg: 'linear-gradient(135deg, #1a0a1a 0%, #0d0d0d 100%)',
+    bg: 'linear-gradient(135deg, #07080f 0%, #0a0c17 100%)',
   },
   {
     icon: Sparkles,
     name: 'GSAP',
     desc: 'Professional-grade animations and scroll interactions',
-    accent: '#c084fc',
+    accent: '#3b82f6',
     wide: false,
-    bg: 'linear-gradient(135deg, #100a1a 0%, #0a0a18 100%)',
+    bg: 'linear-gradient(135deg, #07080f 0%, #0a0c17 100%)',
   },
 ]
 
@@ -134,20 +132,6 @@ export default function Capabilities() {
       ref={sectionRef}
       className="py-24 md:py-36 bg-[#05060f] border-t border-white/[0.04] overflow-hidden relative"
     >
-      {/* GradientBlinds background — subtle venetian-blind effect */}
-      <div className="absolute inset-0 pointer-events-none" style={{ opacity: 0.12 }}>
-        <GradientBlinds
-          gradientColors={['#03050f', '#0a1628', '#1e3a8a', '#0a1628', '#03050f']}
-          angle={140}
-          noise={0.25}
-          blindCount={10}
-          spotlightRadius={0.55}
-          spotlightSoftness={0.6}
-          spotlightOpacity={0.4}
-          distortAmount={0.08}
-          mouseDampening={0.1}
-        />
-      </div>
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 relative z-10">
         {/* Header */}
         <div className="mb-14 md:mb-18">
@@ -160,7 +144,7 @@ export default function Capabilities() {
               {['Built With', 'The Best', 'Stack'].map((w, i) => (
                 <span key={i} className="block overflow-hidden">
                   <span
-                    className={`cap-title-word inline-block opacity-0 will-change-transform ${i === 2 ? 'bg-gradient-to-r from-blue-400 to-violet-500 bg-clip-text text-transparent' : 'text-white'}`}
+                    className={`cap-title-word inline-block opacity-0 will-change-transform ${i === 2 ? 'text-blue-400' : 'text-white'}`}
                   >
                     {w}
                   </span>

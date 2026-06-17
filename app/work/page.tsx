@@ -39,7 +39,7 @@ export default function Work() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(portfolioSchema) }} />
-      <main className="bg-[#03050f]">
+      <main className="bg-[#060614]">
         <Navbar />
         <WorkPage />
         <Footer />

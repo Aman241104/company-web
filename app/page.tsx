@@ -2,16 +2,14 @@ import type { Metadata } from 'next'
 import Navbar from '@/components/sections/Navbar'
 import Hero from '@/components/sections/Hero'
 import TechStack from '@/components/sections/TechStack'
-import Work from '@/components/sections/Work'
-import Featured from '@/components/sections/Featured'
 import Services from '@/components/sections/Services'
-import About from '@/components/sections/About'
-import Capabilities from '@/components/sections/Capabilities'
 import Process from '@/components/sections/Process'
-import Pricing from '@/components/sections/Pricing'
-import Team from '@/components/sections/Team'
-import FAQ from '@/components/sections/FAQ'
+import Featured from '@/components/sections/Featured'
+import About from '@/components/sections/About'
+import Work from '@/components/sections/Work'
 import Testimonials from '@/components/sections/Testimonials'
+import FAQ from '@/components/sections/FAQ'
+import Pricing from '@/components/sections/Pricing'
 import CTA from '@/components/sections/CTA'
 import Footer from '@/components/sections/Footer'
 
@@ -66,20 +64,18 @@ export default function Home() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
-      <main className="bg-[#060606]">
+      <main className="bg-[#060614]">
         <Navbar />
         <Hero />
         <TechStack />
-        <Work />
-        <Featured />
         <Services />
-        <About />
-        <Capabilities />
         <Process />
-        <Pricing />
-        <Team />
-        <FAQ />
+        <Featured />
+        <About />
+        <Work />
         <Testimonials />
+        <FAQ />
+        <Pricing />
         <CTA />
         <Footer />
       </main>

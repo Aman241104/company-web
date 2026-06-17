@@ -3,7 +3,6 @@ import { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ArrowUpRight } from 'lucide-react'
-import GradientText from '@/components/ui/reactbits/GradientText'
 import BrowserMockup from '@/components/ui/BrowserMockup'
 import PhoneMockup from '@/components/ui/PhoneMockup'
 import ViboERPDashboard from '@/components/ui/ViboERPDashboard'
@@ -30,77 +29,77 @@ const projects = [
     id: '02', name: 'Silver Spoon by ACJ', category: 'E-Commerce',
     tags: ['Shopify', 'UI/UX', 'Luxury Gifting'],
     result: 'Live · silverspoonbyacj.com', year: '2024', type: 'Web',
-    accent: '#c9a84c', accentRgb: '201,168,76',
+    accent: '#3b82f6', accentRgb: '59,130,246',
     mockupType: 'browser', mockupUrl: 'silverspoonbyacj.com',
     MockupContent: SS('/silverspoon-screenshot.png', 'Silver Spoon by ACJ'),
     link: 'https://silverspoonbyacj.com',
-    gradient: 'linear-gradient(135deg, #0e0c06 0%, #140f04 100%)',
+    gradient: 'linear-gradient(135deg, #07080f 0%, #0a0c17 100%)',
     desc: 'Premium silver gifting brand — bespoke Shopify storefront reflecting timeless elegance and craftsmanship.',
   },
   {
     id: '03', name: 'Stylux Interiors', category: 'Interior Design',
     tags: ['Next.js', 'GSAP', 'UI/UX'],
     result: 'Turnkey delivery in 90 days', year: '2024', type: 'Web',
-    accent: '#b5956a', accentRgb: '181,149,106',
+    accent: '#3b82f6', accentRgb: '59,130,246',
     mockupType: 'browser', mockupUrl: 'styluxinteriors.com',
     MockupContent: SS('/interior.png', 'Stylux Interiors'),
     link: 'https://interior-web-mu.vercel.app/',
-    gradient: 'linear-gradient(135deg, #0e0b07 0%, #130f09 100%)',
+    gradient: 'linear-gradient(135deg, #07080f 0%, #0a0c17 100%)',
     desc: 'Premium turnkey interior design studio delivering residential and commercial spaces in Ahmedabad.',
   },
   {
     id: '04', name: 'JJ Films', category: 'Wedding Films & Real Estate',
     tags: ['Next.js', 'GSAP', 'Cinematic UI'],
     result: 'Full-service creative studio', year: '2024', type: 'Web',
-    accent: '#e2d4b7', accentRgb: '226,212,183',
+    accent: '#3b82f6', accentRgb: '59,130,246',
     mockupType: 'browser', mockupUrl: 'jjfilms.in',
     MockupContent: SS('/jjfilms.png', 'JJ Films'),
     link: 'https://jjfilms.vercel.app/',
-    gradient: 'linear-gradient(135deg, #0a0907 0%, #12100c 100%)',
+    gradient: 'linear-gradient(135deg, #07080f 0%, #0a0c17 100%)',
     desc: 'Cinematic portfolio for a luxury wedding films and real estate photography studio.',
   },
   {
     id: '05', name: 'ZingBliss Events', category: 'Event Management',
     tags: ['Next.js', 'Framer Motion', 'Luxury'],
     result: 'Grand weddings & ceremonies', year: '2024', type: 'Web',
-    accent: '#d4a96a', accentRgb: '212,169,106',
+    accent: '#3b82f6', accentRgb: '59,130,246',
     mockupType: 'browser', mockupUrl: 'zingblissevents.com',
     MockupContent: SS('/zingbliss.png', 'ZingBliss Events'),
     link: 'https://www.zingblissevents.com/',
-    gradient: 'linear-gradient(135deg, #0e0906 0%, #150d08 100%)',
+    gradient: 'linear-gradient(135deg, #07080f 0%, #0a0c17 100%)',
     desc: 'Luxury event planning studio crafting extraordinary wedding moments and intimate ceremonies.',
   },
   {
     id: '06', name: 'EyeCare Hospital', category: 'Healthcare',
     tags: ['Next.js', 'Healthcare UI', 'SEO'],
     result: '99.9% clinical success rate', year: '2024', type: 'Web',
-    accent: '#22d3ee', accentRgb: '34,211,238',
+    accent: '#3b82f6', accentRgb: '59,130,246',
     mockupType: 'browser', mockupUrl: 'eyecarehospital.com',
     MockupContent: SS('/eyehospital.png', 'EyeCare Hospital'),
     link: 'https://eye-hospital-web.vercel.app/',
-    gradient: 'linear-gradient(135deg, #030d0f 0%, #041215 100%)',
+    gradient: 'linear-gradient(135deg, #07080f 0%, #0a0c17 100%)',
     desc: 'Digital presence for a world-class eye care hospital — clinical trust built into every pixel.',
   },
   {
     id: '07', name: 'Destination Anywhere', category: 'Travel & Hospitality',
     tags: ['Next.js', 'Booking UI', 'Travel'],
     result: 'Luxury travel planner', year: '2024', type: 'Web',
-    accent: '#f59e0b', accentRgb: '245,158,11',
+    accent: '#3b82f6', accentRgb: '59,130,246',
     mockupType: 'browser', mockupUrl: 'destinationanywhere.co.in',
     MockupContent: SS('/destination.png', 'Destination Anywhere'),
     link: 'https://www.destinationanywhere.co.in/',
-    gradient: 'linear-gradient(135deg, #0e0a03 0%, #150f04 100%)',
+    gradient: 'linear-gradient(135deg, #07080f 0%, #0a0c17 100%)',
     desc: 'Bespoke luxury travel planning platform with curated packages and personalized journey builder.',
   },
   {
     id: '08', name: 'Aangan Boutique', category: 'Fashion E-Commerce',
     tags: ['Shopify', 'Fashion UI', 'E-Commerce'],
     result: 'Ethnic & bridal wear brand', year: '2024', type: 'Web',
-    accent: '#f0abba', accentRgb: '240,171,186',
+    accent: '#3b82f6', accentRgb: '59,130,246',
     mockupType: 'browser', mockupUrl: 'aanganboutique.in',
     MockupContent: SS('/aangan.png', 'Aangan Boutique'),
     link: 'https://www.aanganboutique.in/',
-    gradient: 'linear-gradient(135deg, #0e0709 0%, #150b0d 100%)',
+    gradient: 'linear-gradient(135deg, #07080f 0%, #0a0c17 100%)',
     desc: 'Curated ethnic, indo-western and bridal wear for timeless elegance, in the heart of Ahmedabad.',
   },
 ]
@@ -384,11 +383,7 @@ export default function Work() {
           {['Projects', 'That', 'Deliver.'].map((w, i) => (
             <span key={i} className="block overflow-hidden">
               <span className={`work-h-word inline-block opacity-0 will-change-transform ${i !== 2 ? 'text-white' : ''}`}>
-                {i === 2 ? (
-                  <GradientText colors={['#60a5fa', '#818cf8', '#a78bfa', '#c084fc', '#60a5fa']} animationSpeed={6}>
-                    {w}
-                  </GradientText>
-                ) : w}
+                {i === 2 ? <span className="text-blue-400">{w}</span> : w}
               </span>
             </span>
           ))}

@@ -1,168 +1,61 @@
 'use client'
-import { useEffect, useRef, useState } from 'react'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { Plus, Minus } from 'lucide-react'
-import GradientText from '@/components/ui/reactbits/GradientText'
-
-gsap.registerPlugin(ScrollTrigger)
 
 const faqs = [
-  {
-    q: 'How long does a typical project take?',
-    a: 'It depends on scope. A marketing website takes 4–6 weeks. A full-stack SaaS product typically takes 3–6 months. We\'ll give you a clear timeline after discovery. We never pad timelines — if we say 8 weeks, we mean 8 weeks.',
-  },
-  {
-    q: 'Do you work with startups or only established companies?',
-    a: 'Both. We love working with early-stage startups who need to move fast, and we also serve enterprise clients who need reliability and scale. What matters is that you\'re serious about building something that lasts.',
-  },
-  {
-    q: 'What happens after launch?',
-    a: 'Every engagement includes post-launch support. For Growth and Enterprise tiers, we provide ongoing monitoring, bug fixes, and performance optimisation. We don\'t disappear after go-live — your success is our reputation.',
-  },
-  {
-    q: 'Can you work with our existing design team?',
-    a: 'Absolutely. We integrate seamlessly with in-house teams. We can take Figma files and build, collaborate with your designers, or lead the full design-to-dev process. Your call.',
-  },
-  {
-    q: 'What technologies do you specialise in?',
-    a: 'Our core stack is Next.js, React, Node.js, Python, PostgreSQL, and AWS/GCP. For mobile, we use React Native and Flutter. We pick the right tool for each job — we\'re not dogmatic about frameworks.',
-  },
-  {
-    q: 'How do you handle project communication?',
-    a: 'Weekly video calls, async updates via Slack/Notion, and a live project dashboard. You always know where things stand. We believe transparency is the foundation of good partnerships.',
-  },
-  {
-    q: 'Do you offer performance marketing and SEO as well?',
-    a: 'Yes. We\'re a full-service digital partner. Our performance marketing team manages Google Ads, Meta, and LinkedIn campaigns, while our SEO team handles technical audits, content, and link building. One vendor for everything.',
-  },
-  {
-    q: 'What is ViboERP and can we use it?',
-    a: 'ViboERP is our own SaaS ERP product built for SMEs. It covers inventory, billing, CRM, and reporting. You can request a demo and we\'ll show you if it fits your operations — or we can build you a custom alternative.',
-  },
+  { q: 'What types of projects do you work on?', a: 'Everything from marketing websites and e-commerce stores to complex SaaS platforms, mobile apps, and enterprise ERP systems. Our sweet spot is full-stack digital products where design and engineering both matter — typically with a 6–24 week delivery window.' },
+  { q: 'How long does a typical project take?', a: 'A landing page or branding site: 2–4 weeks. A web app or mobile app: 6–16 weeks depending on scope. Enterprise systems are quoted individually after a discovery session. We always share a written timeline before work begins — no moving goalposts.' },
+  { q: 'Do you work with international clients?', a: 'Yes. About a third of our work is for clients in the US, UK, UAE, and Singapore. We\'re fully async-friendly and run overlapping hours with most time zones. International projects are scoped and billed in USD.' },
+  { q: 'How is pricing structured?', a: 'Fixed-price for scoped builds, monthly retainers for ongoing partnerships. No hourly billing, no surprise invoices. Starter websites begin at ₹20,000; web and mobile applications from ₹75,000. Enterprise projects are quoted after a free discovery call.' },
+  { q: 'Can you work with our existing technology stack?', a: "Yes — we're stack-agnostic for all major modern frameworks. React, Vue, Laravel, Django, Ruby on Rails, legacy systems — we adapt. If a full rewrite genuinely makes more sense than extending what you have, we'll tell you honestly and explain why." },
+  { q: 'Who owns the code when the project is done?', a: 'You do, fully — all source code, assets, and intellectual property transfer to you upon final payment. We sign NDAs on request. Client data is never used for any internal purpose, demonstration, or third-party access.' },
+  { q: 'Do you offer ongoing maintenance and support?', a: 'Every project includes a post-launch support window (1–12 months depending on tier). Beyond that, we offer monthly retainer options covering hosting management, bug fixes, performance monitoring, and continued feature development. Most clients stay on.' },
 ]
 
-function FAQItem({ faq, index }) {
-  const [open, setOpen] = useState(false)
-  const contentRef = useRef(null)
-
+function FAQItem({ item, isOpen, onToggle }) {
   return (
-    <div
-      className="faq-item opacity-0"
-      style={{
-        borderBottom: '1px solid rgba(255,255,255,0.06)',
-        overflow: 'hidden',
-      }}
-    >
-      <button
-        onClick={() => setOpen(!open)}
-        style={{
-          width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-          padding: '1.5rem 0', background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left',
-          gap: 16,
-        }}
-      >
-        <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
-          <span style={{ color: 'rgba(37,99,235,0.6)', fontSize: '0.75rem', fontFamily: 'var(--font-poppins)', fontWeight: 700, flexShrink: 0, marginTop: 3 }}>
-            {String(index + 1).padStart(2, '0')}
-          </span>
-          <span style={{ color: open ? 'white' : 'rgba(255,255,255,0.7)', fontSize: '1rem', fontWeight: 500, lineHeight: 1.5, transition: 'color 0.3s' }}>
-            {faq.q}
-          </span>
-        </div>
-        <div style={{
-          width: 28, height: 28, borderRadius: '50%', flexShrink: 0,
-          border: `1px solid ${open ? 'rgba(37,99,235,0.4)' : 'rgba(255,255,255,0.1)'}`,
-          background: open ? 'rgba(37,99,235,0.1)' : 'transparent',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          transition: 'all 0.3s',
-        }}>
-          {open ? <Minus size={14} color="rgba(96,165,250,0.9)" /> : <Plus size={14} color="rgba(255,255,255,0.4)" />}
+    <div style={{ borderBottom: '1px solid rgba(255,255,255,0.07)', overflow: 'hidden' }}>
+      <button onClick={onToggle} style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '22px 0', background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left', gap: 16 }}>
+        <span style={{ fontFamily: 'var(--font-syne)', fontWeight: 600, fontSize: 16, color: isOpen ? '#fff' : 'rgba(255,255,255,0.78)', lineHeight: 1.4, transition: 'color 0.2s' }}>
+          {item.q}
+        </span>
+        <div style={{ flexShrink: 0, width: 28, height: 28, borderRadius: '50%', background: isOpen ? 'linear-gradient(135deg, #5B8AF7, #8B5CF6)' : 'rgba(255,255,255,0.07)', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.25s' }}>
+          {isOpen ? <Minus size={13} color="#fff" /> : <Plus size={13} color="rgba(255,255,255,0.55)" />}
         </div>
       </button>
-      <div
-        ref={contentRef}
-        style={{
-          maxHeight: open ? 400 : 0,
-          overflow: 'hidden',
-          transition: 'max-height 0.4s cubic-bezier(0.22,1,0.36,1)',
-        }}
-      >
-        <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.9rem', lineHeight: 1.8, paddingBottom: '1.5rem', paddingLeft: 36 }}>
-          {faq.a}
-        </p>
-      </div>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}>
+            <p style={{ fontFamily: 'var(--font-outfit)', fontSize: 15, color: 'rgba(255,255,255,0.48)', lineHeight: 1.7, margin: '0 0 22px', paddingRight: 48 }}>
+              {item.a}
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   )
 }
 
 export default function FAQ() {
-  const sectionRef = useRef(null)
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      const mm = gsap.matchMedia()
-      mm.add('(min-width: 768px)', () => {
-        gsap.fromTo('.faq-word',
-          { y: '110%', opacity: 0 },
-          { y: '0%', opacity: 1, stagger: 0.07, duration: 0.85, ease: 'power3.out', scrollTrigger: { trigger: sectionRef.current, start: 'top 75%', once: true } }
-        )
-        gsap.fromTo('.faq-item',
-          { opacity: 0, y: 24 },
-          { opacity: 1, y: 0, stagger: 0.06, duration: 0.6, ease: 'power2.out', scrollTrigger: { trigger: '.faq-list', start: 'top 80%', once: true } }
-        )
-      })
-      mm.add('(max-width: 767px)', () => {
-        gsap.fromTo(['.faq-word', '.faq-item'],
-          { opacity: 0, y: 20 },
-          { opacity: 1, y: 0, stagger: 0.04, duration: 0.5, scrollTrigger: { trigger: sectionRef.current, start: 'top 85%', once: true } }
-        )
-      })
-    }, sectionRef)
-    return () => ctx.revert()
-  }, [])
-
-  const col1 = faqs.slice(0, 4)
-  const col2 = faqs.slice(4)
-
+  const [open, setOpen] = useState(null)
   return (
-    <section id="faq" ref={sectionRef} className="py-24 md:py-36 bg-[#05060f] border-t border-white/[0.04]">
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16">
-
-        {/* Header */}
-        <div className="grid lg:grid-cols-2 gap-12 items-start mb-16">
-          <div>
-            <p className="text-white/25 text-xs uppercase tracking-[0.3em] mb-5">Common Questions</p>
-            <h2 className="font-display font-black leading-none" style={{ fontSize: 'clamp(2.8rem, 6vw, 5.5rem)', letterSpacing: '-0.04em' }}>
-              {['Got', 'Questions?'].map((w, i) => (
-                <span key={i} className="block overflow-hidden">
-                  <span className={`faq-word inline-block opacity-0 will-change-transform ${i === 0 ? 'text-white' : ''}`}>
-                    {i === 1 ? <GradientText colors={['#60a5fa','#818cf8','#a78bfa','#60a5fa']} animationSpeed={6}>{w}</GradientText> : w}
-                  </span>
-                </span>
-              ))}
-            </h2>
-          </div>
-          <div className="lg:pt-16">
-            <p className="text-white/35 text-base leading-relaxed mb-5">
-              Can't find your answer? We're just a message away.
-            </p>
-            <a href="/contact" className="inline-flex items-center gap-2 text-blue-400 text-sm hover:text-blue-300 transition-colors">
-              Ask us directly →
-            </a>
-          </div>
-        </div>
-
-        {/* Two-column FAQ */}
-        <div className="faq-list grid lg:grid-cols-2 gap-x-16">
-          <div>
-            {col1.map((faq, i) => <FAQItem key={i} faq={faq} index={i} />)}
-          </div>
-          <div>
-            {col2.map((faq, i) => <FAQItem key={i} faq={faq} index={i + 4} />)}
-          </div>
-        </div>
-      </div>
+    <section id="faq" style={{ padding: '100px 24px', maxWidth: 780, margin: '0 auto' }}>
+      <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} style={{ textAlign: 'center', marginBottom: 56 }}>
+        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '5px 14px', borderRadius: 99, marginBottom: 20, border: '1px solid rgba(91,138,247,0.25)', background: 'rgba(91,138,247,0.07)', fontFamily: 'var(--font-outfit)', fontSize: 12, color: 'rgba(91,138,247,0.85)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
+          <span style={{ width: 5, height: 5, borderRadius: '50%', background: '#5B8AF7', display: 'inline-block' }} />
+          FAQ
+        </span>
+        <h2 style={{ fontFamily: 'var(--font-syne)', fontWeight: 800, fontSize: 'clamp(30px, 4vw, 48px)', letterSpacing: '-0.03em', color: '#fff', margin: '0 0 14px', lineHeight: 1.1 }}>
+          Everything you<br />need to know.
+        </h2>
+        <p style={{ fontFamily: 'var(--font-outfit)', fontSize: 16, color: 'rgba(255,255,255,0.4)', maxWidth: 400, margin: '0 auto' }}>
+          Straight answers to the questions we hear most often.
+        </p>
+      </motion.div>
+      <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2 }}>
+        {faqs.map((f, i) => <FAQItem key={i} item={f} isOpen={open === i} onToggle={() => setOpen(open === i ? null : i)} />)}
+      </motion.div>
     </section>
   )
 }

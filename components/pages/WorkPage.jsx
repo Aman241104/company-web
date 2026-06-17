@@ -1,353 +1,189 @@
 'use client'
-import { useState } from 'react'
-import { ArrowUpRight } from 'lucide-react'
-import GradientText from '@/components/ui/reactbits/GradientText'
-import LightRays from '@/components/ui/reactbits/LightRays'
-import GradualBlur from '@/components/ui/reactbits/GradualBlur'
+import { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { ArrowRight, ExternalLink } from 'lucide-react'
+
+const Pill = ({ children }) => (
+  <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '5px 14px', borderRadius: 99, marginBottom: 20, border: '1px solid rgba(91,138,247,0.25)', background: 'rgba(91,138,247,0.07)', fontFamily: 'var(--font-outfit)', fontSize: 12, color: 'rgba(91,138,247,0.85)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
+    <span style={{ width: 5, height: 5, borderRadius: '50%', background: '#5B8AF7', display: 'inline-block', animation: 'opacity-glow 2s ease-in-out infinite alternate' }} />
+    {children}
+  </span>
+)
 
 const categories = ['All', 'Web', 'E-Commerce', 'SaaS', 'Healthcare']
 
 const projects = [
-  {
-    name: 'ViboERP',
-    category: 'SaaS',
-    subtitle: 'ERP Platform for Indian SMEs',
-    desc: 'Built from scratch — multi-tenant ERP covering inventory, billing, CRM, HR, and reporting. 200+ active SME clients.',
-    tags: ['Next.js', 'Node.js', 'PostgreSQL', 'Multi-tenant'],
-    accent: '#2563EB', accentRgb: '37,99,235',
-    image: null,
-    url: null,
-    year: '2021 – Present',
-    featured: true,
-  },
-  {
-    name: 'Silver Spoon by ACJ',
-    category: 'E-Commerce',
-    subtitle: 'Luxury Silver Gifting Brand',
-    desc: 'Bespoke Shopify storefront for a premium silver gifting brand — reflecting timeless elegance and craftsmanship.',
-    tags: ['Shopify', 'UI/UX Design', 'E-Commerce'],
-    accent: '#c9a84c', accentRgb: '201,168,76',
-    image: '/silverspoon-screenshot.png',
-    url: 'https://silverspoonbyacj.com',
-    year: '2024',
-  },
-  {
-    name: 'Stylux Interiors',
-    category: 'Web',
-    subtitle: 'Premium Interior Design Studio',
-    desc: 'Turnkey interior design for residential and commercial spaces in Ahmedabad. Delivered in 90 days.',
-    tags: ['Next.js', 'GSAP', 'UI/UX'],
-    accent: '#b5956a', accentRgb: '181,149,106',
-    image: '/interior.png',
-    url: 'https://interior-web-mu.vercel.app/',
-    year: '2024',
-  },
-  {
-    name: 'JJ Films',
-    category: 'Web',
-    subtitle: 'Wedding Films & Real Estate Photography',
-    desc: 'Cinematic portfolio for a luxury wedding films and real estate photography studio.',
-    tags: ['Next.js', 'GSAP', 'Framer Motion'],
-    accent: '#e2d4b7', accentRgb: '226,212,183',
-    image: '/jjfilms.png',
-    url: 'https://jjfilms.vercel.app/',
-    year: '2024',
-  },
-  {
-    name: 'ZingBliss Events',
-    category: 'Web',
-    subtitle: 'Luxury Wedding & Event Planner',
-    desc: 'Crafting extraordinary moments — from grand weddings to intimate milestones.',
-    tags: ['Next.js', 'Framer Motion', 'Luxury UI'],
-    accent: '#d4a96a', accentRgb: '212,169,106',
-    image: '/zingbliss.png',
-    url: 'https://www.zingblissevents.com/',
-    year: '2024',
-  },
-  {
-    name: 'Gourmettazone by Kavita',
-    category: 'E-Commerce',
-    subtitle: 'Custom Cakes & Gourmet Brownies',
-    desc: 'Premium artisan bakery delivering custom cakes and gourmet treats across Ahmedabad.',
-    tags: ['Shopify', 'E-Commerce', 'Brand UI'],
-    accent: '#f472b6', accentRgb: '244,114,182',
-    image: '/sweet.png',
-    url: 'https://sweet-web-delta.vercel.app/',
-    year: '2024',
-  },
-  {
-    name: 'LuxeLiving',
-    category: 'Web',
-    subtitle: 'Luxury Stays in Ahmedabad',
-    desc: 'Curated luxury residences across Ahmedabad — crafted for travelers who expect the very best.',
-    tags: ['Next.js', 'Property UI', 'Booking'],
-    accent: '#facc15', accentRgb: '250,204,21',
-    image: '/luxeliving.png',
-    url: 'https://luxeliving-web.vercel.app/',
-    year: '2024',
-  },
-  {
-    name: 'NexSphere',
-    category: 'Web',
-    subtitle: 'Financial & Advisory Solutions',
-    desc: 'Helping startups and businesses streamline accounting, taxation, compliance, and financial operations globally.',
-    tags: ['Next.js', 'Finance UI', 'Lead Gen'],
-    accent: '#f59e0b', accentRgb: '245,158,11',
-    image: '/nextsphere.png',
-    url: 'https://nextsphere-web.vercel.app/',
-    year: '2024',
-  },
-  {
-    name: 'College Capsule',
-    category: 'SaaS',
-    subtitle: 'Digital Memory Vault for College Journeys',
-    desc: 'A high-fidelity private vault for the stories that defined your college journey. Keep them forever.',
-    tags: ['React', 'SaaS', 'Vault UI'],
-    accent: '#818cf8', accentRgb: '129,140,248',
-    image: '/testimonial.png',
-    url: 'https://testimonial-web-eight.vercel.app/',
-    year: '2024',
-  },
-  {
-    name: 'Chahana Dental Studio',
-    category: 'Healthcare',
-    subtitle: 'Exceptional Dental Care',
-    desc: 'World-class dental practice with state-of-the-art technology and comprehensive treatments.',
-    tags: ['Next.js', 'Healthcare UI', 'SEO'],
-    accent: '#34d399', accentRgb: '52,211,153',
-    image: '/chahana.png',
-    url: 'https://chahanadentalstudio.com/',
-    year: '2024',
-  },
-  {
-    name: 'Aangan Boutique',
-    category: 'E-Commerce',
-    subtitle: 'Ethnic & Bridal Fashion',
-    desc: 'Curated ethnic, indo-western and bridal wear for timeless elegance in Ahmedabad.',
-    tags: ['Shopify', 'Fashion UI', 'E-Commerce'],
-    accent: '#f0abba', accentRgb: '240,171,186',
-    image: '/aangan.png',
-    url: 'https://www.aanganboutique.in/',
-    year: '2024',
-  },
-  {
-    name: 'EyeCare Hospital',
-    category: 'Healthcare',
-    subtitle: 'Precision Vision. Beyond Care.',
-    desc: 'Clinical digital presence for a world-class eye hospital — 99.9% surgical success rate.',
-    tags: ['Next.js', 'Healthcare UI', 'SEO'],
-    accent: '#22d3ee', accentRgb: '34,211,238',
-    image: '/eyehospital.png',
-    url: 'https://eye-hospital-web.vercel.app/',
-    year: '2024',
-  },
-  {
-    name: 'Destination Anywhere',
-    category: 'Web',
-    subtitle: 'Luxury Travel Planner',
-    desc: 'Bespoke travel experiences curated by expert planners — personalized itineraries worldwide.',
-    tags: ['Next.js', 'Travel UI', 'Booking'],
-    accent: '#fb923c', accentRgb: '251,146,60',
-    image: '/destination.png',
-    url: 'https://www.destinationanywhere.co.in/',
-    year: '2024',
-  },
-  {
-    name: 'FruitManager',
-    category: 'SaaS',
-    subtitle: 'Inventory & Transaction Management',
-    desc: 'Smart inventory dashboard for fruit traders — real-time ledger, vendors, and receipt generation.',
-    tags: ['React', 'Dashboard', 'SaaS'],
-    accent: '#4ade80', accentRgb: '74,222,128',
-    image: '/inventory.png',
-    url: 'https://inventory-manager-delta-nine.vercel.app/',
-    year: '2024',
-  },
-  {
-    name: 'HVAC Engineering Co.',
-    category: 'Web',
-    subtitle: 'Precision HVAC & Cooling',
-    desc: '#1 rated HVAC engineering firm — precision cooling systems with annual maintenance packages.',
-    tags: ['Next.js', 'B2B Web', 'Lead Gen'],
-    accent: '#60a5fa', accentRgb: '96,165,250',
-    image: '/hvac.png',
-    url: 'https://hvac-web-topaz.vercel.app/',
-    year: '2024',
-  },
-  {
-    name: 'Classic Organic Chemicals',
-    category: 'Web',
-    subtitle: 'Agro Chemical Supplier',
-    desc: 'Trusted supplier of high-quality agro chemicals, bio fertilizers and plant growth promoters.',
-    tags: ['Next.js', 'B2B Web', 'Corporate'],
-    accent: '#86efac', accentRgb: '134,239,172',
-    image: '/chemical.png',
-    url: 'https://chemical-web-nine.vercel.app/',
-    year: '2024',
-  },
-  {
-    name: 'Elite Cloud Books',
-    category: 'Web',
-    subtitle: 'CPA Outsourcing for US Firms',
-    desc: 'Unlock scalable growth with expert US outsourcing for CPA firms and mid-market businesses.',
-    tags: ['Next.js', 'Finance UI', 'Lead Gen'],
-    accent: '#f87171', accentRgb: '248,113,113',
-    image: '/form-web.png',
-    url: 'https://form-web-alpha.vercel.app/',
-    year: '2024',
-  },
+  { name: 'ViboERP', category: 'SaaS', subtitle: 'ERP Platform for Indian SMEs', desc: 'Built from scratch — multi-tenant ERP covering inventory, billing, CRM, HR, and reporting. 200+ active SME clients across India.', tags: ['Next.js', 'Node.js', 'PostgreSQL', 'Multi-tenant'], image: null, url: null, year: '2021 – Present', featured: true },
+  { name: 'Silver Spoon by ACJ', category: 'E-Commerce', subtitle: 'Luxury Silver Gifting Brand', desc: 'Bespoke Shopify storefront for a premium silver gifting brand. +280% online orders in the first 3 months post-launch.', tags: ['Shopify', 'UI/UX Design', 'E-Commerce'], image: '/silverspoon-screenshot.png', url: 'https://silverspoonbyacj.com', year: '2024' },
+  { name: 'Stylux Interiors', category: 'Web', subtitle: 'Premium Interior Design Studio', desc: 'Turnkey interior design studio for residential and commercial spaces in Ahmedabad. Delivered in 90 days with GSAP-powered animations.', tags: ['Next.js', 'GSAP', 'UI/UX'], image: '/interior.png', url: 'https://interior-web-mu.vercel.app/', year: '2024' },
+  { name: 'JJ Films', category: 'Web', subtitle: 'Wedding Films & Real Estate Photography', desc: 'Cinematic portfolio for a luxury wedding films and real estate photography studio — built to showcase high-end visual work.', tags: ['Next.js', 'GSAP', 'Framer Motion'], image: '/jjfilms.png', url: 'https://jjfilms.vercel.app/', year: '2024' },
+  { name: 'ZingBliss Events', category: 'Web', subtitle: 'Luxury Wedding & Event Planner', desc: 'Crafting extraordinary moments — from grand weddings to intimate milestones. 18K active users with 4.8★ App Store rating.', tags: ['Next.js', 'Framer Motion', 'Luxury UI'], image: '/zingbliss.png', url: 'https://www.zingblissevents.com/', year: '2024' },
+  { name: 'Gourmettazone by Kavita', category: 'E-Commerce', subtitle: 'Custom Cakes & Gourmet Brownies', desc: 'Premium artisan bakery delivering custom cakes and gourmet treats across Ahmedabad — designed for high conversion on mobile.', tags: ['Shopify', 'E-Commerce', 'Brand UI'], image: '/sweet.png', url: 'https://sweet-web-delta.vercel.app/', year: '2024' },
+  { name: 'LuxeLiving', category: 'Web', subtitle: 'Luxury Stays in Ahmedabad', desc: 'Curated luxury residences across Ahmedabad — crafted for travelers who expect the very best. 4.4× ROAS on campaigns.', tags: ['Next.js', 'Property UI', 'Booking'], image: '/luxeliving.png', url: 'https://luxeliving-web.vercel.app/', year: '2024' },
+  { name: 'NexSphere', category: 'Web', subtitle: 'Financial & Advisory Solutions', desc: 'Helping startups and businesses streamline accounting, taxation, compliance, and financial operations globally.', tags: ['Next.js', 'Finance UI', 'Lead Gen'], image: '/nextsphere.png', url: 'https://nextsphere-web.vercel.app/', year: '2024' },
+  { name: 'College Capsule', category: 'SaaS', subtitle: 'Digital Memory Vault for College Journeys', desc: 'A high-fidelity private vault for the stories that defined your college years. Custom SaaS with media storage and social sharing.', tags: ['React', 'SaaS', 'Vault UI'], image: '/testimonial.png', url: 'https://testimonial-web-eight.vercel.app/', year: '2024' },
+  { name: 'Chahana Dental Studio', category: 'Healthcare', subtitle: 'Exceptional Dental Care', desc: 'World-class dental practice site that ranked #1 for 12 local keywords within 3 months of launch via technical SEO.', tags: ['Next.js', 'Healthcare UI', 'SEO'], image: '/chahana.png', url: 'https://chahanadentalstudio.com/', year: '2024' },
+  { name: 'Aangan Boutique', category: 'E-Commerce', subtitle: 'Ethnic & Bridal Fashion', desc: 'Curated ethnic, indo-western and bridal wear for timeless elegance in Ahmedabad — full Shopify storefront with custom UX.', tags: ['Shopify', 'Fashion UI', 'E-Commerce'], image: '/aangan.png', url: 'https://www.aanganboutique.in/', year: '2024' },
+  { name: 'EyeCare Hospital', category: 'Healthcare', subtitle: 'Precision Vision. Beyond Care.', desc: 'Clinical digital presence for a world-class eye hospital — 99.9% surgical success rate, designed to build patient trust.', tags: ['Next.js', 'Healthcare UI', 'SEO'], image: '/eyehospital.png', url: 'https://eye-hospital-web.vercel.app/', year: '2024' },
+  { name: 'Destination Anywhere', category: 'Web', subtitle: 'Luxury Travel Planner', desc: 'Bespoke travel experiences curated by expert planners — personalized itineraries worldwide with an elegant booking flow.', tags: ['Next.js', 'Travel UI', 'Booking'], image: '/destination.png', url: 'https://www.destinationanywhere.co.in/', year: '2024' },
+  { name: 'FruitManager', category: 'SaaS', subtitle: 'Inventory & Transaction Management', desc: 'Smart inventory dashboard for fruit traders — real-time ledger, vendor management, and receipt generation at 3M+ daily transactions.', tags: ['React', 'Dashboard', 'SaaS'], image: '/inventory.png', url: 'https://inventory-manager-delta-nine.vercel.app/', year: '2024' },
+  { name: 'HVAC Engineering Co.', category: 'Web', subtitle: 'Precision HVAC & Cooling', desc: '#1 rated HVAC engineering firm in their region — precision cooling systems site that tripled monthly lead volume.', tags: ['Next.js', 'B2B Web', 'Lead Gen'], image: '/hvac.png', url: 'https://hvac-web-topaz.vercel.app/', year: '2024' },
+  { name: 'Classic Organic Chemicals', category: 'Web', subtitle: 'Agro Chemical Supplier', desc: 'Trusted supplier of high-quality agro chemicals, bio fertilizers and plant growth promoters — B2B lead generation site.', tags: ['Next.js', 'B2B Web', 'Corporate'], image: '/chemical.png', url: 'https://chemical-web-nine.vercel.app/', year: '2024' },
+  { name: 'Elite Cloud Books', category: 'Web', subtitle: 'CPA Outsourcing for US Firms', desc: 'Unlock scalable growth with expert US outsourcing for CPA firms and mid-market businesses — designed for US market lead gen.', tags: ['Next.js', 'Finance UI', 'Lead Gen'], image: '/form-web.png', url: 'https://form-web-alpha.vercel.app/', year: '2024' },
 ]
 
-function ProjectCard({ project }) {
+function ProjectCard({ project, index }) {
   return (
-    <a
-      href={project.url || '#'}
-      target={project.url ? '_blank' : '_self'}
-      rel="noopener noreferrer"
-      className="group block rounded-2xl overflow-hidden border border-white/[0.06] transition-all duration-500 hover:border-white/[0.15] hover:-translate-y-1"
-      style={{ background: 'linear-gradient(145deg, #0a0a10 0%, #0d0d16 100%)' }}
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 16 }}
+      transition={{ duration: 0.45, delay: index * 0.04 }}
     >
-      {/* Screenshot */}
-      <div className="relative overflow-hidden" style={{ aspectRatio: '16/9' }}>
-        {project.image ? (
-          <>
-            <img
-              src={project.image}
-              alt={project.name}
-              className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.04]"
-            />
-            <div className="absolute inset-0 transition-opacity duration-500 group-hover:opacity-60"
-              style={{ background: 'linear-gradient(to bottom, transparent 40%, #0a0a10 100%)' }} />
-          </>
-        ) : (
-          <div className="w-full h-full flex items-center justify-center"
-            style={{ background: `linear-gradient(135deg, rgba(${project.accentRgb},0.08) 0%, rgba(${project.accentRgb},0.03) 100%)` }}>
-            <div style={{ color: `rgba(${project.accentRgb},0.5)`, fontSize: '4rem', fontWeight: 900, fontFamily: 'var(--font-display)' }}>
-              {project.name.slice(0,2).toUpperCase()}
-            </div>
-          </div>
-        )}
-        {/* Visit badge */}
-        <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-1 group-hover:translate-y-0">
-          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold backdrop-blur-md"
-            style={{ background: `rgba(${project.accentRgb},0.9)`, color: '#000' }}>
-            Visit Site <ArrowUpRight size={11} />
-          </div>
-        </div>
-        {/* Category badge */}
-        <div className="absolute bottom-3 left-3">
-          <span className="px-2.5 py-1 rounded-full text-[10px] font-medium backdrop-blur-md"
-            style={{ background: 'rgba(0,0,0,0.5)', color: `rgba(${project.accentRgb},0.9)`, border: `1px solid rgba(${project.accentRgb},0.25)` }}>
-            {project.category}
-          </span>
-        </div>
-      </div>
+      <a href={project.url || '#'} target={project.url ? '_blank' : '_self'} rel="noopener noreferrer"
+        style={{ display: 'block', textDecoration: 'none', background: 'rgba(255,255,255,0.025)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 16, overflow: 'hidden', transition: 'all 0.35s', position: 'relative' }}
+        onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(91,138,247,0.25)'; e.currentTarget.style.transform = 'translateY(-3px)' }}
+        onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.07)'; e.currentTarget.style.transform = 'translateY(0)' }}>
 
-      {/* Content */}
-      <div className="p-5">
-        <div className="flex items-start justify-between gap-2 mb-2">
-          <div>
-            <h3 className="font-display font-bold text-white group-hover:text-white transition-colors"
-              style={{ fontSize: '1.05rem', letterSpacing: '-0.02em' }}>
-              {project.name}
-            </h3>
-            <p className="text-xs mt-0.5" style={{ color: `rgba(${project.accentRgb},0.7)` }}>{project.subtitle}</p>
-          </div>
-          <span className="text-white/20 text-xs shrink-0 mt-0.5">{project.year}</span>
-        </div>
-        <p className="text-white/35 text-sm leading-relaxed mb-3 line-clamp-2">{project.desc}</p>
-        <div className="flex flex-wrap gap-1.5 pt-3 border-t border-white/[0.05]">
-          {project.tags.map(t => (
-            <span key={t} style={{ fontSize: '0.6rem', padding: '2px 8px', borderRadius: 9999, background: `rgba(${project.accentRgb},0.07)`, color: `rgba(${project.accentRgb},0.6)`, border: `1px solid rgba(${project.accentRgb},0.12)` }}>
-              {t}
+        {/* Image */}
+        <div style={{ aspectRatio: '16/9', overflow: 'hidden', position: 'relative' }}>
+          {project.image ? (
+            <>
+              <img src={project.image} alt={project.name} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top', display: 'block', transition: 'transform 0.5s' }}
+                onMouseEnter={e => e.target.style.transform = 'scale(1.04)'}
+                onMouseLeave={e => e.target.style.transform = 'scale(1)'}
+              />
+              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, transparent 50%, rgba(6,6,20,0.9) 100%)' }} />
+            </>
+          ) : (
+            <div style={{ width: '100%', height: '100%', background: 'rgba(91,138,247,0.06)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <span style={{ fontFamily: 'var(--font-syne)', fontWeight: 800, fontSize: 48, color: 'rgba(91,138,247,0.3)', letterSpacing: '-0.04em' }}>{project.name.slice(0,2).toUpperCase()}</span>
+            </div>
+          )}
+          {/* Visit badge */}
+          {project.url && (
+            <div style={{ position: 'absolute', top: 12, right: 12, display: 'flex', alignItems: 'center', gap: 5, padding: '5px 12px', borderRadius: 99, background: 'rgba(91,138,247,0.9)', fontFamily: 'var(--font-outfit)', fontSize: 10.5, fontWeight: 600, color: '#fff', opacity: 0, transition: 'opacity 0.25s' }}
+              className="visit-badge">
+              Visit <ExternalLink size={10} />
+            </div>
+          )}
+          {/* Category */}
+          <div style={{ position: 'absolute', bottom: 12, left: 12 }}>
+            <span style={{ padding: '4px 10px', borderRadius: 99, fontFamily: 'var(--font-outfit)', fontSize: 10, fontWeight: 500, background: 'rgba(0,0,0,0.5)', color: 'rgba(91,138,247,0.9)', border: '1px solid rgba(91,138,247,0.2)', backdropFilter: 'blur(8px)' }}>
+              {project.category}
             </span>
-          ))}
+          </div>
         </div>
-      </div>
-    </a>
+
+        {/* Content */}
+        <div style={{ padding: '20px 20px 20px' }}>
+          <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 8, marginBottom: 8 }}>
+            <div>
+              <h3 style={{ fontFamily: 'var(--font-syne)', fontWeight: 700, fontSize: 16, color: '#fff', margin: '0 0 3px', letterSpacing: '-0.02em' }}>{project.name}</h3>
+              <p style={{ fontFamily: 'var(--font-outfit)', fontSize: 12, color: 'rgba(91,138,247,0.7)', margin: 0 }}>{project.subtitle}</p>
+            </div>
+            <span style={{ fontFamily: 'var(--font-outfit)', fontSize: 11.5, color: 'rgba(255,255,255,0.2)', flexShrink: 0 }}>{project.year}</span>
+          </div>
+          <p style={{ fontFamily: 'var(--font-outfit)', fontSize: 13, color: 'rgba(255,255,255,0.38)', lineHeight: 1.6, margin: '0 0 14px', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{project.desc}</p>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, paddingTop: 12, borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+            {project.tags.map(t => (
+              <span key={t} style={{ fontFamily: 'var(--font-outfit)', fontSize: 10, color: 'rgba(91,138,247,0.6)', background: 'rgba(91,138,247,0.06)', padding: '2px 8px', borderRadius: 99, border: '1px solid rgba(91,138,247,0.12)' }}>{t}</span>
+            ))}
+          </div>
+        </div>
+      </a>
+      <style>{`.visit-badge { opacity: 0 !important } a:hover .visit-badge { opacity: 1 !important }`}</style>
+    </motion.div>
   )
 }
 
 export default function WorkPage() {
   const [activeCategory, setActiveCategory] = useState('All')
+  const [stars, setStars] = useState([])
+  useEffect(() => {
+    setStars(Array.from({ length: 35 }, (_, i) => ({
+      id: i, x: Math.random() * 100, y: Math.random() * 100,
+      size: Math.random() * 1.5 + 0.4, opacity: Math.random() * 0.4 + 0.06, dur: 2 + Math.random() * 3,
+    })))
+  }, [])
 
-  const filtered = activeCategory === 'All'
-    ? projects
-    : projects.filter(p => p.category === activeCategory)
+  const filtered = activeCategory === 'All' ? projects : projects.filter(p => p.category === activeCategory)
 
   return (
     <>
       {/* Hero */}
-      <section className="relative pt-36 pb-16 overflow-hidden" style={{ background: '#03050f' }}>
-        <div className="absolute inset-0 pointer-events-none" style={{ opacity: 0.5 }}>
-          <LightRays raysOrigin="top-center" raysColor="#6d44ff" raysSpeed={0.7} lightSpread={1.1} rayLength={1.6} followMouse mouseInfluence={0.07} />
+      <section style={{ position: 'relative', paddingTop: 140, paddingBottom: 80, textAlign: 'center', overflow: 'hidden' }}>
+        <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}>
+          {stars.map(s => (
+            <div key={s.id} style={{ position: 'absolute', left: `${s.x}%`, top: `${s.y}%`, width: s.size, height: s.size, borderRadius: '50%', background: '#fff', opacity: s.opacity, animation: `opacity-glow ${s.dur}s ease-in-out infinite alternate` }} />
+          ))}
         </div>
-        <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 70% 60% at 50% 0%, rgba(79,70,229,0.07), transparent)' }} />
-        <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 relative z-10 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.02] text-white/30 text-xs tracking-[0.2em] uppercase mb-8">
-            <span className="w-1.5 h-1.5 rounded-full bg-violet-500 animate-pulse" />
-            {projects.length}+ Projects Shipped
-          </div>
-          <h1 className="font-display font-black leading-none mb-5" style={{ fontSize: 'clamp(2rem, 8vw, 7rem)', letterSpacing: '-0.04em' }}>
-            <span className="block text-white">Work That</span>
-            <span className="block">
-              <GradientText colors={['#a78bfa','#4f46e5','#60a5fa','#a78bfa']} animationSpeed={5}>Delivers.</GradientText>
-            </span>
-          </h1>
-          <p className="text-white/40 text-lg max-w-xl mx-auto leading-relaxed">
-            Real websites, real clients, real results — across every industry we've touched.
-          </p>
+        <div style={{ position: 'absolute', top: '30%', left: '50%', transform: 'translate(-50%,-50%)', width: 600, height: 400, borderRadius: '50%', pointerEvents: 'none', background: 'radial-gradient(ellipse, rgba(139,92,246,0.12) 0%, rgba(91,138,247,0.07) 45%, transparent 70%)', filter: 'blur(60px)' }} />
+
+        <div style={{ maxWidth: 860, margin: '0 auto', padding: '0 24px', position: 'relative', zIndex: 1 }}>
+          <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}>
+            <Pill>{projects.length}+ Projects Shipped</Pill>
+          </motion.div>
+          <motion.h1 initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.65, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+            style={{ fontFamily: 'var(--font-syne)', fontWeight: 800, fontSize: 'clamp(42px, 8vw, 80px)', lineHeight: 1.05, letterSpacing: '-0.03em', color: '#fff', margin: '0 0 20px' }}>
+            Work that<br />
+            <span style={{ WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', backgroundImage: 'linear-gradient(135deg, #5B8AF7, #8B5CF6)' }}>delivers.</span>
+          </motion.h1>
+          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.65, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            style={{ fontFamily: 'var(--font-outfit)', fontSize: 17, color: 'rgba(255,255,255,0.45)', lineHeight: 1.65, maxWidth: 520, margin: '0 auto' }}>
+            Real websites. Real clients. Real results — across every industry we've touched.
+          </motion.p>
         </div>
-        <GradualBlur position="bottom" strength={3} height="8rem" />
       </section>
 
       {/* Filters + Grid */}
-      <section className="pb-24" style={{ background: '#03050f' }}>
-        <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16">
-
-          {/* Category filter */}
-          <div className="flex gap-2 flex-wrap mb-12 pt-4">
-            {categories.map(cat => (
-              <button
-                key={cat}
-                onClick={() => setActiveCategory(cat)}
-                className="px-5 py-2 rounded-full text-sm font-medium transition-all duration-300"
-                style={activeCategory === cat
-                  ? { background: 'linear-gradient(135deg,#2563EB,#4f46e5)', color: '#fff', boxShadow: '0 0 20px rgba(37,99,235,0.3)' }
-                  : { background: 'rgba(255,255,255,0.04)', color: 'rgba(255,255,255,0.35)', border: '1px solid rgba(255,255,255,0.07)' }
-                }
-              >
-                {cat}
-                <span className="ml-2 text-xs opacity-50">
-                  {cat === 'All' ? projects.length : projects.filter(p => p.category === cat).length}
-                </span>
-              </button>
-            ))}
-          </div>
+      <section style={{ padding: '0 24px 100px' }}>
+        <div style={{ maxWidth: 1140, margin: '0 auto' }}>
+          {/* Category filters */}
+          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.3 }}
+            style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 48, paddingTop: 8 }}>
+            {categories.map(cat => {
+              const count = cat === 'All' ? projects.length : projects.filter(p => p.category === cat).length
+              const isActive = activeCategory === cat
+              return (
+                <button key={cat} onClick={() => setActiveCategory(cat)}
+                  style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '8px 18px', borderRadius: 99, fontFamily: 'var(--font-outfit)', fontWeight: 500, fontSize: 13.5, cursor: 'pointer', border: 'none', transition: 'all 0.25s',
+                    background: isActive ? 'linear-gradient(135deg, #5B8AF7, #8B5CF6)' : 'rgba(255,255,255,0.04)',
+                    color: isActive ? '#fff' : 'rgba(255,255,255,0.4)',
+                    boxShadow: isActive ? '0 4px 20px rgba(91,138,247,0.3)' : 'none',
+                    outline: isActive ? 'none' : '1px solid rgba(255,255,255,0.07)',
+                  }}>
+                  {cat}
+                  <span style={{ fontSize: 11, opacity: isActive ? 0.7 : 0.4 }}>{count}</span>
+                </button>
+              )
+            })}
+          </motion.div>
 
           {/* Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {filtered.map((p, i) => (
-              <ProjectCard key={p.name} project={p} index={i} />
-            ))}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }} className="work-grid">
+            <AnimatePresence mode="popLayout">
+              {filtered.map((p, i) => <ProjectCard key={p.name} project={p} index={i} />)}
+            </AnimatePresence>
           </div>
 
           {/* Bottom CTA */}
-          <div className="mt-20 text-center">
-            <div className="inline-flex flex-col items-center gap-5 px-8 py-10 rounded-3xl border border-white/[0.06]"
-              style={{ background: 'linear-gradient(135deg, #0a0a14 0%, #0d0d1a 100%)' }}>
-              <p className="text-white/40 text-sm uppercase tracking-[0.25em]">Want to be next?</p>
-              <h2 className="font-display font-black text-white text-3xl md:text-4xl" style={{ letterSpacing: '-0.03em' }}>
-                Let's build something <GradientText colors={['#2563EB','#a78bfa','#2563EB']} animationSpeed={4}>great.</GradientText>
-              </h2>
-              <a href="/contact"
-                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full text-white font-semibold text-sm"
-                style={{ background: 'linear-gradient(135deg, #2563EB, #4f46e5)', boxShadow: '0 0 30px rgba(37,99,235,0.3)' }}>
-                Start a Project <ArrowUpRight size={16} />
-              </a>
-            </div>
-          </div>
+          <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
+            style={{ marginTop: 80, padding: '48px 32px', background: 'rgba(91,138,247,0.05)', border: '1px solid rgba(91,138,247,0.12)', borderRadius: 20, textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
+            <div style={{ position: 'absolute', top: 0, left: '50%', transform: 'translateX(-50%)', width: '60%', height: 1, background: 'linear-gradient(90deg, transparent, rgba(91,138,247,0.5), transparent)' }} />
+            <div style={{ fontFamily: 'var(--font-outfit)', fontSize: 11.5, color: 'rgba(255,255,255,0.3)', textTransform: 'uppercase', letterSpacing: '0.2em', marginBottom: 12 }}>Want to be next?</div>
+            <h2 style={{ fontFamily: 'var(--font-syne)', fontWeight: 800, fontSize: 'clamp(24px, 4vw, 38px)', letterSpacing: '-0.03em', color: '#fff', margin: '0 0 20px', lineHeight: 1.1 }}>
+              Let's build something{' '}
+              <span style={{ WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', backgroundImage: 'linear-gradient(135deg, #5B8AF7, #8B5CF6)' }}>great.</span>
+            </h2>
+            <a href="/contact" style={{ textDecoration: 'none' }}>
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '13px 28px', borderRadius: 99, background: 'linear-gradient(135deg, #5B8AF7, #8B5CF6)', fontFamily: 'var(--font-outfit)', fontWeight: 600, fontSize: 14.5, color: '#fff', cursor: 'pointer', boxShadow: '0 8px 32px rgba(91,138,247,0.28)' }}>
+                Start a Project <ArrowRight size={15} />
+              </span>
+            </a>
+          </motion.div>
         </div>
+        <style>{`@media (max-width: 900px) { .work-grid { grid-template-columns: repeat(2, 1fr) !important; } } @media (max-width: 580px) { .work-grid { grid-template-columns: 1fr !important; } }`}</style>
       </section>
     </>
   )

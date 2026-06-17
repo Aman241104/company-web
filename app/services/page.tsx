@@ -44,7 +44,7 @@ export default function Services() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
-      <main className="bg-[#03050f]">
+      <main className="bg-[#060614]">
         <Navbar />
         <ServicesPage />
         <Footer />

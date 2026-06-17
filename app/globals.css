@@ -89,6 +89,11 @@ body {
   overflow-x: hidden;
 }
 
+/* Space for mobile dock nav */
+@media (max-width: 767px) {
+  body { padding-bottom: 80px; }
+}
+
 ::selection {
   background: rgba(37, 99, 235, 0.35);
   color: #fff;

@@ -4,6 +4,7 @@ import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import CustomCursor from "@/components/CustomCursor";
 import Preloader from "@/components/Preloader";
+import MobileDock from "@/components/MobileDock";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -36,6 +37,7 @@ export default function RootLayout({
         <Preloader />
         <CustomCursor />
         <SmoothScroll>{children}</SmoothScroll>
+        <MobileDock />
       </body>
     </html>
   );

@@ -17,6 +17,7 @@ const links = [
     ],
   },
   { label: 'Work', href: '/work' },
+  { label: 'Labs', href: '/labs' },
   { label: 'Benchmarks', href: '/#architecture-benchmark' },
   { label: 'ROI Engine', href: '/#roi-calculator' },
   { label: 'Pricing', href: '/#pricing' },
@@ -143,11 +144,14 @@ export default function Navbar() {
               <kbd className="px-1.5 py-0.5 rounded bg-white/10 text-[10px] text-white/70">⌘K</kbd>
             </button>
 
-            {/* Live Telemetry Ping */}
-            <div className="hidden xl:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-500/5 border border-emerald-500/15 text-[11px] text-emerald-400 font-mono">
+            {/* Live Telemetry Ping -> /status */}
+            <Link
+              href="/status"
+              className="hidden xl:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-500/5 hover:bg-emerald-500/10 border border-emerald-500/15 hover:border-emerald-500/30 text-[11px] text-emerald-400 font-mono transition-colors"
+            >
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
               <span>99.99% Cloud SLA</span>
-            </div>
+            </Link>
 
             <Link
               href="/contact"

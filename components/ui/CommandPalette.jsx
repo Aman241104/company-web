@@ -24,6 +24,8 @@ import {
 const commands = [
   // Navigation
   { id: 'nav-home', title: 'Go to Home', section: 'Navigation', icon: Globe, href: '/' },
+  { id: 'nav-labs', title: 'Mehta Tech Labs & Code Scaffolders', section: 'Navigation', icon: Code2, href: '/labs' },
+  { id: 'nav-status', title: 'Live System & Cloud SLA Status', section: 'Navigation', icon: Sparkles, href: '/status' },
   { id: 'nav-about', title: 'About Mehta Tech', section: 'Navigation', icon: Sparkles, href: '/about' },
   { id: 'nav-services', title: 'Services & Practice Areas', section: 'Navigation', icon: Layers, href: '/services' },
   { id: 'nav-work', title: 'Work & Case Studies', section: 'Navigation', icon: Briefcase, href: '/work' },

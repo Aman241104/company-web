@@ -1,0 +1,34 @@
+# Mehta Technologies — Web, App & SaaS Development Agency
+
+> Mehta Technologies is a premier full-stack digital product agency and engineering studio based in Mumbai and Bengaluru, India. We engineer high-performance web applications, headless e-commerce storefronts, cross-platform mobile apps (React Native & Flutter), multi-tenant cloud SaaS platforms, and run data-driven performance marketing campaigns.
+
+## Core Capabilities & Services
+- **High-Performance Web Applications**: Next.js 15 App Router, React 19, Tailwind CSS v4, TypeScript, Sub-second Core Web Vitals (<0.7s LCP).
+- **Custom Software & Cloud ERP**: Multi-tenant cloud architectures, PostgreSQL with Row-Level Security (RLS), Redis edge caching, pgBouncer connection pooling, Docker, AWS Fargate.
+- **Cross-Platform Mobile Engineering**: React Native and Flutter for iOS and Android with offline-first SQLite cache and biometric authentication.
+- **Headless Luxury E-Commerce**: Headless Shopify Plus storefronts, custom 3D Canvas configurators, multi-currency localized checkout, and express payment gateways (Stripe, Razorpay, UPI).
+- **Performance Marketing & SEO**: Meta and Google ad campaigns managed for high ROAS, full-funnel attribution, technical SEO, and structured JSON-LD schema.
+
+## Proprietary Products
+- **Vibo ERP Suite**: Cloud-native multi-tenant enterprise resource planning platform unifying inventory, GST e-invoicing, CRM, and biometric HRMS. Serves 2,400+ active enterprise users with 3M+ daily database operations and 99.99% uptime SLA.
+
+## Key Verified Client Outcomes
+- **Silver Spoon by ACJ**: Luxury silver artifacts e-commerce storefront. Migrated from legacy Shopify theme to Headless Next.js 15. Result: +280% sales growth in Q1, 0.68s LCP, 100/100 Core Web Vitals.
+- **Chahana Dental Studio**: Clinical presence and technical medical SEO. Result: Ranked #1 on Google for 12 local dental queries, 3.8x weekly patient inquiries.
+- **Stylux Interiors**: Turnkey luxury architectural portfolio. Result: Delivered in 90 days with 60fps micro-interactions.
+
+## Pricing & Engagement Models
+- **Starter Brand Sites**: Fixed milestone pricing from ₹20,000 (2–3 weeks delivery).
+- **Full-Stack Web & Mobile MVPs**: Fixed milestone pricing from ₹75,000 (4–8 weeks delivery).
+- **Dedicated Engineering Sprints & Retainers**: Outcome-based monthly sprint pods with 100% intellectual property transfer and mutual NDA guarantees.
+
+## Global Hubs & Overlap
+- **Engineering Centers**: Mumbai (HQ) & Bengaluru, India.
+- **Client Operations**: San Francisco (PST), London (GMT), Dubai (GST), Singapore (SGT).
+- **International Guarantee**: 4+ hours of daily synchronous timezone overlap for US & European clients.
+
+## Contact Information
+- **Website**: https://mehtatechnologies.com
+- **Email**: hello@mehtatechnologies.com
+- **WhatsApp Direct**: https://wa.me/919876543210
+- **Phone**: +91-98765-43210

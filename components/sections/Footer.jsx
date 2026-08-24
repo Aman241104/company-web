@@ -7,7 +7,7 @@ const cols = [
     title: 'Products & Platforms',
     links: [
       { label: 'Vibo ERP Suite', href: '/#products' },
-      { label: 'CRM & Pipeline Engine', href: '/#products' },
+      { label: 'Mehta Tech Labs', href: '/labs' },
       { label: 'Inventory Matrix', href: '/#products' },
       { label: 'HRMS & Automated Payroll', href: '/#products' },
       { label: 'AI Search & Analytics', href: '/#products' },
@@ -29,6 +29,7 @@ const cols = [
       { label: 'About Mehta Tech', href: '/about' },
       { label: 'Portfolio & Case Studies', href: '/work' },
       { label: 'Interactive Pricing Matrix', href: '/#pricing' },
+      { label: 'Live System Status', href: '/status' },
       { label: 'Leadership & Team', href: '/#team' },
       { label: 'Careers & Hiring', href: 'mailto:careers@mehtatechnologies.com' },
     ],

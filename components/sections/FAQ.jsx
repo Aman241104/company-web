@@ -1,35 +1,74 @@
 'use client'
 import { useState } from 'react'
+import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
+import { Plus, Minus, HelpCircle, ArrowRight } from 'lucide-react'
 
 const faqs = [
-  { q: 'What types of projects do you work on?', a: 'Everything from marketing websites and e-commerce stores to complex SaaS platforms, mobile apps, and enterprise ERP systems. Our sweet spot is full-stack digital products where design and engineering both matter — typically with a 6–24 week delivery window.' },
-  { q: 'How long does a typical project take?', a: 'A landing page or branding site: 2–4 weeks. A web app or mobile app: 6–16 weeks depending on scope. Enterprise systems are quoted after a discovery session. We always share a written timeline before work begins — no moving goalposts.' },
-  { q: 'Do you work with international clients?', a: "Yes. About a third of our work is for clients in the US, UK, UAE, and Singapore. We're fully async-friendly and run overlapping hours with most time zones. International projects are scoped and billed in USD." },
-  { q: 'How is pricing structured?', a: 'Fixed-price for scoped builds, monthly retainers for ongoing partnerships. No hourly billing, no surprise invoices. Starter websites begin at ₹20,000; web and mobile applications from ₹75,000. Enterprise projects are quoted after a free discovery call.' },
-  { q: 'Can you work with our existing technology stack?', a: "Yes — we adapt to all major modern frameworks. React, Vue, Laravel, Django, Ruby on Rails, legacy systems — we integrate and extend. If a full rewrite genuinely makes more sense, we'll tell you honestly and explain why." },
-  { q: 'Who owns the code when the project is done?', a: 'You do, fully — all source code, assets, and intellectual property transfer to you on final payment. We sign NDAs on request. Client data is never used for any internal purpose or third-party access.' },
-  { q: 'Do you offer ongoing maintenance and support?', a: 'Every project includes a post-launch support window (1–12 months depending on tier). Beyond that, we offer monthly retainers covering hosting, bug fixes, performance monitoring, and continued development. Most clients stay on.' },
+  {
+    q: 'What types of projects do you work on?',
+    a: 'Everything from high-converting marketing websites and custom Shopify stores to multi-tenant SaaS platforms, cross-platform mobile apps (React Native/Flutter), and custom ERP systems. Our core focus is full-stack digital products where engineering precision, security, and UI design matter equally.',
+  },
+  {
+    q: 'How long does a typical project take?',
+    a: 'A custom Next.js landing page or marketing site takes 2–3 weeks. A full-stack web or mobile app takes 4–8 weeks depending on scope and integrations. Enterprise ERP and SaaS platforms take 8–16 weeks. We provide a milestone-guaranteed schedule before kicking off.',
+  },
+  {
+    q: 'Do you work with international clients?',
+    a: 'Yes. Over 35% of our client base is located across the US, UK, UAE, and Europe. We run overlapping hours, operate on asynchronous documentation pipelines, and bill seamlessly in USD or EUR.',
+  },
+  {
+    q: 'How is pricing structured?',
+    a: 'We operate strictly on fixed-price milestone contracts or dedicated monthly engineering retainers. No unexpected billable hours. Starter websites begin at ₹20,000; full-stack web/mobile MVPs from ₹75,000; enterprise systems are custom scoped with transparent line items.',
+  },
+  {
+    q: 'Can you work with or upgrade our existing codebase?',
+    a: 'Yes. We frequently audit and refactor existing React, Node.js, Next.js, Django, Laravel, and Python backends. If a strategic rewrite is more cost-effective in the long run than patching legacy technical debt, we provide an honest architectural evaluation.',
+  },
+  {
+    q: 'Who owns the intellectual property and code when delivered?',
+    a: 'You own 100% of all source code, assets, database schemas, and intellectual property upon completion of the final milestone. We sign mutual NDAs prior to discovery upon request.',
+  },
+  {
+    q: 'What does post-launch support look like?',
+    a: 'Every project includes 1 to 12 months of dedicated post-launch SLA warranty support covering bug fixes, performance monitoring, server maintenance, and security patches. We also offer ongoing monthly retainer partnerships.',
+  },
 ]
 
-function FAQItem({ item, isOpen, onToggle }) {
+function FAQItem({ item, isOpen, onToggle, index }) {
+  const panelId = `faq-panel-${index}`
+  const buttonId = `faq-button-${index}`
+
   return (
-    <div style={{ borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
+    <div className="border-b border-white/[0.08] last:border-b-0">
       <button
+        id={buttonId}
         onClick={onToggle}
-        style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '22px 0', background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left', gap: 24 }}
+        aria-expanded={isOpen}
+        aria-controls={panelId}
+        className="w-full flex items-center justify-between py-6 text-left group transition-colors"
       >
-        <span style={{ fontFamily: 'var(--font-syne)', fontWeight: 600, fontSize: 16, color: isOpen ? '#fff' : 'rgba(255,255,255,0.72)', lineHeight: 1.4, transition: 'color 0.2s' }}>
+        <span className={`text-base sm:text-lg font-bold tracking-tight transition-colors ${isOpen ? 'text-blue-400' : 'text-white group-hover:text-white/90'}`}>
           {item.q}
         </span>
-        <span style={{ flexShrink: 0, fontFamily: 'var(--font-syne)', fontWeight: 400, fontSize: 22, lineHeight: 1, color: isOpen ? '#5B8AF7' : 'rgba(255,255,255,0.3)', transition: 'color 0.2s', width: 20, textAlign: 'center' }}>
-          {isOpen ? '−' : '+'}
-        </span>
+        <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 ml-4 transition-all ${isOpen ? 'bg-blue-600/20 text-blue-400 border border-blue-500/30' : 'bg-white/[0.04] text-white/40 group-hover:text-white group-hover:bg-white/[0.08]'}`}>
+          {isOpen ? <Minus size={14} /> : <Plus size={14} />}
+        </div>
       </button>
-      <AnimatePresence>
+
+      <AnimatePresence initial={false}>
         {isOpen && (
-          <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.28, ease: [0.4, 0, 0.2, 1] }}>
-            <p style={{ fontFamily: 'var(--font-outfit)', fontSize: 15, color: 'rgba(255,255,255,0.52)', lineHeight: 1.75, margin: '0 0 24px', maxWidth: 600 }}>
+          <motion.div
+            id={panelId}
+            role="region"
+            aria-labelledby={buttonId}
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.25, ease: 'easeOut' }}
+            className="overflow-hidden"
+          >
+            <p className="text-sm sm:text-base text-white/60 leading-relaxed font-normal pb-6 max-w-3xl">
               {item.a}
             </p>
           </motion.div>
@@ -40,20 +79,62 @@ function FAQItem({ item, isOpen, onToggle }) {
 }
 
 export default function FAQ() {
-  const [open, setOpen] = useState(null)
+  const [open, setOpen] = useState(0)
+
   return (
-    <section id="faq" style={{ padding: '100px 24px', maxWidth: 760, margin: '0 auto' }}>
-      <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} style={{ marginBottom: 56 }}>
-        <h2 style={{ fontFamily: 'var(--font-syne)', fontWeight: 800, fontSize: 'clamp(30px, 4vw, 48px)', letterSpacing: '-0.03em', color: '#fff', margin: '0 0 14px', lineHeight: 1.1 }}>
-          Common questions.
-        </h2>
-        <p style={{ fontFamily: 'var(--font-outfit)', fontSize: 16, color: 'rgba(255,255,255,0.38)', margin: 0 }}>
-          Straight answers. No fluff.
+    <section id="faq" className="py-24 md:py-32 max-w-[1000px] mx-auto px-6 md:px-8">
+      {/* Section Header */}
+      <div className="text-center max-w-xl mx-auto mb-14 md:mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          <span className="glow-pill mb-4 inline-flex">
+            Frequently Asked Questions
+          </span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight mb-3">
+            Clear answers.{' '}
+            <span className="text-gradient-accent">Zero ambiguity.</span>
+          </h2>
+          <p className="text-sm sm:text-base text-white/50 leading-relaxed">
+            Everything you need to know about our workflow, deliverables, contracts, and IP ownership.
+          </p>
+        </motion.div>
+      </div>
+
+      {/* Accordion List */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+        className="rounded-3xl bg-white/[0.02] border border-white/[0.08] p-6 sm:p-10 shadow-2xl shadow-black/40"
+      >
+        {faqs.map((f, i) => (
+          <FAQItem
+            key={i}
+            item={f}
+            index={i}
+            isOpen={open === i}
+            onToggle={() => setOpen(open === i ? null : i)}
+          />
+        ))}
+      </motion.div>
+
+      {/* Still Have Questions Box */}
+      <div className="mt-8 text-center">
+        <p className="text-xs sm:text-sm text-white/40 mb-3">
+          Have a specific technical question or complex architectural requirement?
         </p>
-      </motion.div>
-      <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.15 }}>
-        {faqs.map((f, i) => <FAQItem key={i} item={f} isOpen={open === i} onToggle={() => setOpen(open === i ? null : i)} />)}
-      </motion.div>
+        <Link
+          href="/contact"
+          className="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-400 hover:text-blue-300 transition-colors"
+        >
+          Speak Directly with a Senior Architect <ArrowRight size={12} />
+        </Link>
+      </div>
     </section>
   )
 }

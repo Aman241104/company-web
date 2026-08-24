@@ -1,51 +1,68 @@
 'use client'
 import { motion } from 'framer-motion'
-import { ArrowRight, Mail, Phone } from 'lucide-react'
+import Link from 'next/link'
+import { ArrowRight, Mail, Phone, Clock, ShieldCheck, Sparkles } from 'lucide-react'
 
 export default function CTA() {
   return (
-    <section id="contact" style={{ padding: '120px 24px 100px', position: 'relative', overflow: 'hidden', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
-      {/* Glow */}
-      <div style={{ position: 'absolute', top: '10%', left: '50%', transform: 'translateX(-50%)', width: 500, height: 300, borderRadius: '50%', pointerEvents: 'none', background: 'radial-gradient(ellipse, rgba(91,138,247,0.09) 0%, rgba(139,92,246,0.05) 50%, transparent 70%)', filter: 'blur(80px)' }} />
+    <section id="contact" className="py-28 md:py-36 bg-[#07080C] relative overflow-hidden border-t border-white/[0.08]">
+      {/* Background Radial Glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[750px] h-[400px] bg-blue-600/[0.08] rounded-full blur-[140px] pointer-events-none -z-10" />
 
-      <div style={{ maxWidth: 640, margin: '0 auto', textAlign: 'center', position: 'relative', zIndex: 1 }}>
-        <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.65 }}>
+      <div className="max-w-[1360px] mx-auto px-6 md:px-8 text-center relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="max-w-3xl mx-auto"
+        >
+          {/* Header pill */}
+          <span className="glow-pill mb-6 inline-flex">
+            Ready to Build?
+          </span>
 
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12, marginBottom: 32 }}>
-            <div style={{ flex: 1, maxWidth: 80, height: 1, background: 'linear-gradient(90deg, transparent, rgba(91,138,247,0.4))' }} />
-            <span style={{ fontFamily: 'var(--font-outfit)', fontSize: 12, color: 'rgba(91,138,247,0.7)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>Let's work together</span>
-            <div style={{ flex: 1, maxWidth: 80, height: 1, background: 'linear-gradient(-90deg, transparent, rgba(91,138,247,0.4))' }} />
-          </div>
-
-          <h2 style={{ fontFamily: 'var(--font-syne)', fontWeight: 800, fontSize: 'clamp(40px, 7vw, 76px)', letterSpacing: '-0.035em', color: '#fff', margin: '0 0 22px', lineHeight: 1.02 }}>
-            Your idea deserves<br />
-            <span style={{ WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', backgroundImage: 'linear-gradient(135deg, #5B8AF7, #8B5CF6)' }}>a real launch.</span>
+          {/* Main Title */}
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.08] mb-6">
+            Your vision deserves{' '}
+            <span className="text-gradient-accent">an elite launch.</span>
           </h2>
 
-          <p style={{ fontFamily: 'var(--font-outfit)', fontSize: 17, color: 'rgba(255,255,255,0.4)', lineHeight: 1.7, margin: '0 0 44px', maxWidth: 480, marginLeft: 'auto', marginRight: 'auto' }}>
-            Free 30-minute discovery call. We'll scope your project honestly, estimate the timeline, and tell you exactly what it will take — no pitch, just clarity.
+          {/* Description */}
+          <p className="text-base sm:text-lg text-white/50 leading-relaxed max-w-xl mx-auto mb-10 font-normal">
+            Book a 30-minute discovery session with our engineering leads. We will review your architecture, define milestones, and provide a fixed-price proposal in 24 hours.
           </p>
 
-          <div style={{ display: 'flex', justifyContent: 'center', gap: 12, marginBottom: 48, flexWrap: 'wrap' }}>
-            <a href="mailto:hello@mehtatechnologies.com" style={{ textDecoration: 'none' }}>
-              <span style={{ display: 'inline-flex', alignItems: 'center', gap: 9, padding: '15px 32px', borderRadius: 99, background: 'linear-gradient(135deg, #5B8AF7, #8B5CF6)', fontFamily: 'var(--font-outfit)', fontWeight: 600, fontSize: 15, color: '#fff', cursor: 'pointer', boxShadow: '0 8px 40px rgba(91,138,247,0.28)' }}>
-                Start a Project <ArrowRight size={15} />
-              </span>
-            </a>
-            <a href="#" style={{ textDecoration: 'none' }}>
-              <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '15px 28px', borderRadius: 99, background: 'transparent', border: '1px solid rgba(255,255,255,0.12)', fontFamily: 'var(--font-outfit)', fontWeight: 500, fontSize: 15, color: 'rgba(255,255,255,0.55)', cursor: 'pointer' }}>
-                Book a Call
-              </span>
+          {/* CTAs */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+            <Link
+              href="/contact"
+              className="w-full sm:w-auto px-8 py-4 rounded-full text-sm font-semibold bg-white text-black hover:bg-white/90 shadow-xl shadow-white/10 transition-all flex items-center justify-center gap-2 active:scale-98"
+            >
+              Schedule Free Discovery Call <ArrowRight size={15} />
+            </Link>
+            <a
+              href="mailto:hello@mehtatechnologies.com"
+              className="w-full sm:w-auto px-8 py-4 rounded-full text-sm font-semibold bg-white/[0.04] hover:bg-white/[0.08] text-white border border-white/10 hover:border-white/20 transition-all flex items-center justify-center gap-2"
+            >
+              Email Brief Directly
             </a>
           </div>
 
-          <div style={{ display: 'flex', justifyContent: 'center', gap: 32, flexWrap: 'wrap' }}>
-            <a href="mailto:hello@mehtatechnologies.com" style={{ display: 'flex', alignItems: 'center', gap: 7, fontFamily: 'var(--font-outfit)', fontSize: 13.5, color: 'rgba(255,255,255,0.3)', textDecoration: 'none' }}>
-              <Mail size={13} strokeWidth={1.5} /> hello@mehtatechnologies.com
-            </a>
-            <a href="tel:+919876543210" style={{ display: 'flex', alignItems: 'center', gap: 7, fontFamily: 'var(--font-outfit)', fontSize: 13.5, color: 'rgba(255,255,255,0.3)', textDecoration: 'none' }}>
-              <Phone size={13} strokeWidth={1.5} /> +91 98765 43210
-            </a>
+          {/* Trust Guarantees */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-10 border-t border-white/[0.08] max-w-2xl mx-auto text-xs text-white/50">
+            <div className="flex items-center justify-center gap-2">
+              <Clock size={14} className="text-blue-400" />
+              <span>24-Hour Scope Turnaround</span>
+            </div>
+            <div className="flex items-center justify-center gap-2">
+              <ShieldCheck size={14} className="text-blue-400" />
+              <span>Mutual NDA Guaranteed</span>
+            </div>
+            <div className="flex items-center justify-center gap-2">
+              <Sparkles size={14} className="text-blue-400" />
+              <span>100% Full IP Ownership</span>
+            </div>
           </div>
 
         </motion.div>

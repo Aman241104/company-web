@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
+import { usePrefersReducedMotion } from '@/lib/usePrefersReducedMotion'
 
 const MLogoSVG = () => (
   <svg width="48" height="42" viewBox="0 0 100 85" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -9,13 +10,21 @@ const MLogoSVG = () => (
   </svg>
 )
 
+const SESSION_KEY = 'mehta-preloader-shown'
+
 export default function Preloader() {
   const topRef = useRef(null)
   const btmRef = useRef(null)
   const [count, setCount] = useState(0)
   const [visible, setVisible] = useState(true)
+  const reducedMotion = usePrefersReducedMotion()
 
   useEffect(() => {
+    if (reducedMotion || window.sessionStorage.getItem(SESSION_KEY)) {
+      setVisible(false)
+      return
+    }
+    window.sessionStorage.setItem(SESSION_KEY, '1')
     document.body.style.overflow = 'hidden'
     let rafId
     const start = performance.now()
@@ -49,7 +58,7 @@ export default function Preloader() {
       cancelAnimationFrame(rafId)
       document.body.style.overflow = ''
     }
-  }, [])
+  }, [reducedMotion])
 
   if (!visible) return null
 

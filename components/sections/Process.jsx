@@ -1,61 +1,127 @@
 'use client'
+import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { Search, Lightbulb, Code2, Rocket } from 'lucide-react'
-import RadialOrbitalTimeline from '@/components/ui/radial-orbital-timeline'
+import { Search, ClipboardList, Lightbulb, Code2, Rocket, LifeBuoy, ArrowRight } from 'lucide-react'
 
 const processSteps = [
   {
-    id: 1, title: 'Discover', date: 'Week 1–2',
-    content: "Deep-dive into your business goals, users, and constraints. We leave with a written product brief — so everyone agrees on what we're building before a line of code is written.",
-    category: 'Discovery', icon: Search, relatedIds: [2], status: 'completed', energy: 100,
+    id: '01',
+    title: 'Discovery & Scoping',
+    icon: Search,
+    desc: 'We analyze your business architecture, unit economics, and user flows to define fixed deliverables, milestone schedules, and technical requirements.',
   },
   {
-    id: 2, title: 'Design', date: 'Week 2–4',
-    content: 'Wireframes and interactive prototypes first, pixels second. You click through the product before we build it — catching expensive assumptions early.',
-    category: 'Design', icon: Lightbulb, relatedIds: [1, 3], status: 'completed', energy: 88,
+    id: '02',
+    title: 'Architecture & UX',
+    icon: Lightbulb,
+    desc: 'Interactive Figma design systems and database schemas you can test before writing a single line of production code.',
   },
   {
-    id: 3, title: 'Develop', date: 'Week 3–16',
-    content: "Weekly sprint reviews, shared staging environment, and CI/CD from day one. You always know what's done, what's next, and what's blocking.",
-    category: 'Development', icon: Code2, relatedIds: [2, 4], status: 'in-progress', energy: 72,
+    id: '03',
+    title: 'Agile Engineering',
+    icon: Code2,
+    desc: 'Two-week sprint cycles with live staging URLs, automated GitHub CI/CD pipelines, and direct Slack communications with your engineers.',
   },
   {
-    id: 4, title: 'Deploy', date: 'Week 8+',
-    content: 'We handle launch, monitoring, and the first 90 days of iteration. Most clients stay on retainer because shipping is where the real work begins.',
-    category: 'Deployment', icon: Rocket, relatedIds: [3], status: 'pending', energy: 55,
+    id: '04',
+    title: 'QA & Security Hardening',
+    icon: ClipboardList,
+    desc: 'End-to-end regression testing, Core Web Vitals profiling, load tests, and security penetration checks before rollout.',
+  },
+  {
+    id: '05',
+    title: 'Production Deployment',
+    icon: Rocket,
+    desc: 'Zero-downtime DNS propagation, automated backup verification, analytics integration, and real-time error logging.',
+  },
+  {
+    id: '06',
+    title: 'SLA Support & Scale',
+    icon: LifeBuoy,
+    desc: 'Guaranteed 99.9% uptime maintenance, feature enhancements, and continuous performance tuning as your user base expands.',
   },
 ]
 
 export default function Process() {
   return (
-    <section id="process" style={{ padding: '100px 24px', maxWidth: 1140, margin: '0 auto' }}>
-      <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} style={{ textAlign: 'center', marginBottom: 72 }}>
-        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '5px 14px', borderRadius: 99, marginBottom: 20, border: '1px solid rgba(91,138,247,0.25)', background: 'rgba(91,138,247,0.07)', fontFamily: 'var(--font-outfit)', fontSize: 12, color: 'rgba(91,138,247,0.85)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
-          <span style={{ width: 5, height: 5, borderRadius: '50%', background: '#5B8AF7', display: 'inline-block' }} />
-          How we work
-        </span>
-        <h2 style={{ fontFamily: 'var(--font-syne)', fontWeight: 800, fontSize: 'clamp(32px, 5vw, 52px)', letterSpacing: '-0.03em', color: '#fff', margin: '0 0 16px', lineHeight: 1.1 }}>
-          A playbook refined<br />
-          <span style={{ WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', backgroundImage: 'linear-gradient(135deg, #5B8AF7, #8B5CF6)' }}>across 150+ projects.</span>
-        </h2>
-        <p style={{ fontFamily: 'var(--font-outfit)', fontSize: 16, color: 'rgba(255,255,255,0.4)', maxWidth: 440, margin: '0 auto' }}>
-          No surprises, no scope creep, no "we'll fix it post-launch." Just a clear process that puts you in control from day one.
-        </p>
-      </motion.div>
-
-      <RadialOrbitalTimeline timelineData={processSteps} />
-
-      {/* CTA strip */}
-      <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.4 }} style={{ marginTop: 56, padding: '28px 32px', background: 'rgba(91,138,247,0.05)', border: '1px solid rgba(91,138,247,0.12)', borderRadius: 16, display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 16 }}>
-        <div>
-          <div style={{ fontFamily: 'var(--font-syne)', fontWeight: 700, fontSize: 18, color: '#fff', marginBottom: 4 }}>Want to see how this works for your project?</div>
-          <div style={{ fontFamily: 'var(--font-outfit)', fontSize: 14, color: 'rgba(255,255,255,0.4)' }}>Free 30-minute discovery call. We assess scope, risks, and timeline — honestly.</div>
-        </div>
-        <a href="#contact" style={{ textDecoration: 'none' }}>
-          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '12px 24px', borderRadius: 99, background: 'linear-gradient(135deg, #5B8AF7, #8B5CF6)', fontFamily: 'var(--font-outfit)', fontWeight: 600, fontSize: 14, color: '#fff', cursor: 'pointer', whiteSpace: 'nowrap' }}>
-            Book a Call
+    <section id="process" className="py-24 md:py-32 max-w-[1360px] mx-auto px-6 md:px-8">
+      {/* Section Header */}
+      <div className="max-w-2xl mx-auto text-center mb-16 md:mb-20">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          <span className="glow-pill mb-4 inline-flex">
+            Engineering Methodology
           </span>
-        </a>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight mb-4">
+            Predictable sprints.{' '}
+            <span className="text-gradient-accent">Zero guesswork.</span>
+          </h2>
+          <p className="text-base sm:text-lg text-white/50 leading-relaxed">
+            No endless delays or scope surprises. We operate with strict milestone accountability, weekly staging deployments, and fixed pricing.
+          </p>
+        </motion.div>
+      </div>
+
+      {/* 3-Column Bento Step Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {processSteps.map((step, index) => {
+          const Icon = step.icon
+          return (
+            <motion.div
+              key={step.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: index * 0.05 }}
+              className="p-8 rounded-2xl bg-white/[0.02] border border-white/[0.08] hover:border-blue-500/30 hover:bg-white/[0.035] transition-all flex flex-col justify-between"
+            >
+              <div>
+                <div className="flex items-center justify-between mb-6">
+                  <div className="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400">
+                    <Icon size={18} />
+                  </div>
+                  <span className="text-xs font-mono font-bold text-white/30 tracking-wider">
+                    STEP {step.id}
+                  </span>
+                </div>
+                <h3 className="text-xl font-bold text-white tracking-tight mb-3">
+                  {step.title}
+                </h3>
+                <p className="text-sm text-white/55 leading-relaxed font-normal">
+                  {step.desc}
+                </p>
+              </div>
+            </motion.div>
+          )
+        })}
+      </div>
+
+      {/* Discovery CTA Banner */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5, delay: 0.3 }}
+        className="mt-12 p-8 sm:p-10 rounded-2xl bg-white/[0.02] border border-white/[0.08] flex flex-col md:flex-row items-center justify-between gap-6"
+      >
+        <div>
+          <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight mb-2">
+            Ready to scope your project with an engineer?
+          </h3>
+          <p className="text-sm text-white/50">
+            Book a complimentary 30-minute architecture discovery session. No sales pressure — strictly technical review.
+          </p>
+        </div>
+        <Link
+          href="/contact"
+          className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full text-xs font-semibold bg-white text-black hover:bg-white/90 active:scale-[0.98] transition-all whitespace-nowrap shadow-lg shadow-white/10"
+        >
+          Book Architecture Session <ArrowRight size={14} />
+        </Link>
       </motion.div>
     </section>
   )

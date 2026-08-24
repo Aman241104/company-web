@@ -1,125 +1,219 @@
 'use client'
 import { useState } from 'react'
+import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
-import { CheckCircle2 } from 'lucide-react'
+import { CheckCircle2, ArrowRight, Zap, TrendingUp, Building2 } from 'lucide-react'
 
-const tabs = ['For Startups', 'For Growing Teams', 'For Enterprises']
-
-const content = {
-  'For Startups': {
-    badge: 'Launch fast',
-    headline: 'Go from idea to live product in weeks, not months.',
-    body: 'We help early-stage founders move at startup speed — scoped MVPs, lean engineering, and launch-ready design without the bloat of a big agency.',
-    points: ['MVP scoping & rapid prototyping', 'Lean full-stack development', 'Investor-ready pitch decks & demos', 'Flexible sprint-based retainers'],
-    color: '#5B8AF7', label: 'MVP Dashboard',
-    stat1: { val: '6 wks', label: 'avg MVP time' }, stat2: { val: '3x', label: 'faster than in-house' },
+const segments = [
+  {
+    id: 'startups',
+    tabName: 'For Early-Stage Founders',
+    icon: Zap,
+    badge: 'Launch Fast · Zero Bloat',
+    headline: 'Go from concept to production-ready product in weeks.',
+    desc: 'We partner with early-stage founders to scope, design, and engineer launch-ready MVPs. No unnecessary agency overhead—just high-velocity full-stack execution.',
+    points: [
+      'Comprehensive MVP scoping & interactive clickable Figma prototype',
+      'Production-grade Next.js & mobile app architecture with clean scalable code',
+      'Automated Stripe / Razorpay subscription billing & user authentication',
+      'Founder-friendly sprint retainers & investor demo readiness',
+    ],
+    stats: [
+      { val: '4–6 Wks', label: 'Average MVP Delivery' },
+      { val: '3x', label: 'Faster than Hiring In-House' },
+      { val: '100%', label: 'Full Code & IP Ownership' },
+    ],
+    highlightTag: 'Fast-Track Track',
+    accentColor: 'from-blue-500/20 to-blue-600/5',
+    borderColor: 'border-blue-500/30',
   },
-  'For Growing Teams': {
-    badge: 'Scale smart',
-    headline: 'Extend your engineering capacity without the hiring headache.',
-    body: 'When your roadmap outpaces your team, we slot in as dedicated partners — shipping features, reducing tech debt, and keeping your stack healthy.',
-    points: ['Dedicated dev team augmentation', 'CI/CD pipelines & DevOps setup', 'Technical architecture reviews', 'Performance & security audits'],
-    color: '#8B5CF6', label: 'Team Analytics',
-    stat1: { val: '40%', label: 'cost vs hiring' }, stat2: { val: '2 days', label: 'to onboard' },
+  {
+    id: 'scaleups',
+    tabName: 'For Growing Teams & Scaleups',
+    icon: TrendingUp,
+    badge: 'Scale Capacity · Accelerate Roadmap',
+    headline: 'Extend your engineering firepower without hiring bottlenecks.',
+    desc: 'When feature backlogs outpace team capacity, we embed as high-output senior engineering partners—shipping critical modules, refactoring bottlenecks, and maintaining code health.',
+    points: [
+      'Dedicated engineering pods that seamlessly integrate with your sprints',
+      'Automated CI/CD deployment pipelines, Docker environments & DevOps',
+      'Database optimization, caching architectures & Core Web Vitals tuning',
+      'Full-funnel performance marketing & ROAS-driven customer acquisition',
+    ],
+    stats: [
+      { val: '40%+', label: 'Cost Savings vs Full-Time Team' },
+      { val: '48 Hrs', label: 'Average Onboarding Time' },
+      { val: '2.4k+', label: 'Concurrent Users Scaled' },
+    ],
+    highlightTag: 'Growth Accelerator',
+    accentColor: 'from-purple-500/20 to-indigo-600/5',
+    borderColor: 'border-purple-500/30',
   },
-  'For Enterprises': {
-    badge: 'Transform at scale',
-    headline: 'Custom software and ERP systems built for enterprise complexity.',
-    body: 'From bespoke CRMs to full ERP implementations, we architect and build systems that handle enterprise-grade data, compliance, and integrations.',
-    points: ['Custom ERP & CRM development', 'Legacy system modernisation', 'Enterprise integrations & APIs', '24/7 SLA-backed support'],
-    color: '#34D399', label: 'Enterprise ERP',
-    stat1: { val: '99.9%', label: 'uptime SLA' }, stat2: { val: '12 mo', label: 'support included' },
+  {
+    id: 'enterprises',
+    tabName: 'For Enterprise Leaders',
+    icon: Building2,
+    badge: 'Enterprise Security · SLA Guaranteed',
+    headline: 'Custom ERPs, cloud platforms, and mission-critical software.',
+    desc: 'From bespoke multi-tenant SaaS to legacy system modernizations, we engineer systems that handle enterprise-grade complexity, data compliance, and multi-tier integrations.',
+    points: [
+      'Custom ERP, HRMS, and multi-warehouse supply chain platforms',
+      'High-throughput REST/GraphQL APIs with microservice topologies',
+      'Strict role-based access control (RBAC), audit logs & SOC2-ready practices',
+      'Guaranteed 99.9% uptime SLAs with 24/7 dedicated engineering support',
+    ],
+    stats: [
+      { val: '99.9%', label: 'Guaranteed Uptime SLA' },
+      { val: '12 Mo', label: 'Included SLA Maintenance' },
+      { val: '3M+', label: 'Daily Transactions Handled' },
+    ],
+    highlightTag: 'Enterprise Grade',
+    accentColor: 'from-emerald-500/20 to-teal-600/5',
+    borderColor: 'border-emerald-500/30',
   },
-}
-
-function TabMock({ tab }) {
-  const { color, label, stat1, stat2 } = content[tab]
-  const bars = [25,38,32,55,48,70,62,80,72,90,85,100]
-  return (
-    <div style={{ background: 'linear-gradient(145deg, #0C0C24 0%, #090920 100%)', border: `1px solid ${color}22`, borderRadius: 14, overflow: 'hidden', boxShadow: `0 0 60px ${color}0A, 0 40px 80px rgba(0,0,0,0.3)`, position: 'relative' }}>
-      <div style={{ position: 'absolute', top: 0, left: '50%', transform: 'translateX(-50%)', width: '50%', height: 1, background: `linear-gradient(90deg, transparent, ${color}60, transparent)` }} />
-      <div style={{ padding: '12px 16px', borderBottom: '1px solid rgba(255,255,255,0.05)', display: 'flex', alignItems: 'center', gap: 8, background: 'rgba(0,0,0,0.2)' }}>
-        <div style={{ display: 'flex', gap: 5 }}>{['#FF5F57','#FEBC2E','#28C840'].map(c => <div key={c} style={{ width: 8, height: 8, borderRadius: '50%', background: c, opacity: 0.7 }} />)}</div>
-        <span style={{ fontFamily: 'var(--font-outfit)', fontSize: 11, color: 'rgba(255,255,255,0.3)' }}>{label}</span>
-        <div style={{ marginLeft: 'auto', padding: '3px 10px', borderRadius: 99, background: `${color}18`, fontFamily: 'var(--font-outfit)', fontSize: 9, color }}> Live</div>
-      </div>
-      <div style={{ padding: '16px 16px 12px' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginBottom: 12 }}>
-          {[stat1, stat2, { val: '80+', label: 'clients served' }, { val: '5★', label: 'avg rating' }].map(s => (
-            <div key={s.label} style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8, padding: '12px' }}>
-              <div style={{ fontFamily: 'var(--font-syne)', fontWeight: 700, fontSize: 20, color: '#fff', lineHeight: 1 }}>{s.val}</div>
-              <div style={{ fontFamily: 'var(--font-outfit)', fontSize: 10, color: 'rgba(255,255,255,0.3)', marginTop: 4 }}>{s.label}</div>
-            </div>
-          ))}
-        </div>
-        <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: 8, padding: 12 }}>
-          <div style={{ fontSize: 9, color: 'rgba(255,255,255,0.25)', fontFamily: 'var(--font-outfit)', marginBottom: 10 }}>Growth Trajectory</div>
-          <div style={{ display: 'flex', alignItems: 'flex-end', gap: 3, height: 56 }}>
-            {bars.map((h, i) => <div key={i} style={{ flex: 1, height: `${h}%`, borderRadius: '2px 2px 0 0', background: i >= 10 ? `linear-gradient(180deg, ${color}, ${color}60)` : `${color}25` }} />)}
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
+]
 
 export default function Featured() {
-  const [active, setActive] = useState(tabs[0])
+  const [activeSegment, setActiveSegment] = useState(segments[0])
+
   return (
-    <section id="featured" style={{ padding: '100px 24px', borderTop: '1px solid rgba(255,255,255,0.05)', borderBottom: '1px solid rgba(255,255,255,0.05)', background: 'rgba(255,255,255,0.01)' }}>
-      <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-        <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} style={{ textAlign: 'center', marginBottom: 48 }}>
-          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '5px 14px', borderRadius: 99, marginBottom: 20, border: '1px solid rgba(91,138,247,0.25)', background: 'rgba(91,138,247,0.07)', fontFamily: 'var(--font-outfit)', fontSize: 12, color: 'rgba(91,138,247,0.85)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
-            <span style={{ width: 5, height: 5, borderRadius: '50%', background: '#5B8AF7', display: 'inline-block' }} />
-            Who we work with
+    <section id="featured" className="py-24 md:py-32 max-w-[1360px] mx-auto px-6 md:px-8 border-t border-white/[0.06]">
+      {/* Header */}
+      <div className="max-w-2xl mx-auto text-center mb-14 md:mb-18">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          <span className="glow-pill mb-4 inline-flex">
+            Strategic Fit
           </span>
-          <h2 style={{ fontFamily: 'var(--font-syne)', fontWeight: 800, fontSize: 'clamp(32px, 5vw, 52px)', letterSpacing: '-0.03em', color: '#fff', margin: '0 0 14px', lineHeight: 1.1 }}>
-            The right team for<br />
-            <span style={{ WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', backgroundImage: 'linear-gradient(135deg, #5B8AF7, #8B5CF6)' }}>wherever you are now.</span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight mb-4">
+            The right engineering team for{' '}
+            <span className="text-gradient-accent">where you are today.</span>
           </h2>
+          <p className="text-base sm:text-lg text-white/50 leading-relaxed">
+            Whether launching your first MVP or scaling enterprise cloud infrastructure, our engagement models adapt directly to your business goals.
+          </p>
         </motion.div>
+      </div>
 
-        {/* Tabs */}
-        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2 }} style={{ display: 'flex', justifyContent: 'center', marginBottom: 48 }}>
-          <div style={{ display: 'flex', gap: 4, padding: 5, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 99 }}>
-            {tabs.map(t => (
-              <button key={t} onClick={() => setActive(t)} style={{ padding: '8px 20px', borderRadius: 99, border: 'none', cursor: 'pointer', fontFamily: 'var(--font-outfit)', fontWeight: 500, fontSize: 13, background: active === t ? 'linear-gradient(135deg, #5B8AF7, #8B5CF6)' : 'transparent', color: active === t ? '#fff' : 'rgba(255,255,255,0.45)', transition: 'all 0.25s' }}>
-                {t}
+      {/* Interactive Tabs */}
+      <div className="flex justify-center mb-12">
+        <div className="flex items-center gap-1.5 p-1.5 rounded-full bg-white/[0.03] border border-white/[0.08] overflow-x-auto max-w-full no-scrollbar">
+          {segments.map((seg) => {
+            const Icon = seg.icon
+            const isActive = activeSegment.id === seg.id
+            return (
+              <button
+                key={seg.id}
+                onClick={() => setActiveSegment(seg)}
+                className={`flex items-center gap-2 px-4 sm:px-6 py-2.5 rounded-full text-xs sm:text-sm font-medium transition-all whitespace-nowrap ${
+                  isActive
+                    ? 'bg-white text-black shadow-lg shadow-white/10 font-semibold'
+                    : 'text-white/60 hover:text-white hover:bg-white/[0.04]'
+                }`}
+              >
+                <Icon size={14} className={isActive ? 'text-blue-600' : 'text-white/40'} />
+                <span>{seg.tabName}</span>
               </button>
-            ))}
-          </div>
-        </motion.div>
+            )
+          })}
+        </div>
+      </div>
 
-        <AnimatePresence mode="wait">
-          <motion.div key={active} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.35 }} className="grid grid-cols-1 md:grid-cols-2" style={{ gap: 48, alignItems: 'center' }}>
-            <div>
-              <span style={{ display: 'inline-block', padding: '4px 12px', borderRadius: 99, marginBottom: 20, background: 'rgba(91,138,247,0.1)', border: '1px solid rgba(91,138,247,0.2)', fontFamily: 'var(--font-outfit)', fontSize: 11.5, color: '#5B8AF7' }}>
-                {content[active].badge}
-              </span>
-              <h3 style={{ fontFamily: 'var(--font-syne)', fontWeight: 700, fontSize: 'clamp(22px, 3vw, 32px)', color: '#fff', margin: '0 0 16px', letterSpacing: '-0.02em', lineHeight: 1.2 }}>
-                {content[active].headline}
+      {/* Segment Content Card */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={activeSegment.id}
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -12 }}
+          transition={{ duration: 0.35 }}
+          className={`rounded-3xl bg-gradient-to-b ${activeSegment.accentColor} border ${activeSegment.borderColor} p-8 sm:p-12 lg:p-14 backdrop-blur-xl relative overflow-hidden shadow-2xl`}
+        >
+          {/* Subtle Ambient Light */}
+          <div className="absolute -top-24 -right-24 w-96 h-96 bg-blue-500/10 rounded-full blur-[100px] pointer-events-none" />
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+            
+            {/* Left Column: Scope details */}
+            <div className="lg:col-span-7">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-white/10 border border-white/15 text-white mb-6">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                {activeSegment.badge}
+              </div>
+
+              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight leading-tight mb-4">
+                {activeSegment.headline}
               </h3>
-              <p style={{ fontFamily: 'var(--font-outfit)', fontSize: 15, color: 'rgba(255,255,255,0.45)', lineHeight: 1.7, margin: '0 0 28px' }}>
-                {content[active].body}
+
+              <p className="text-base text-white/60 leading-relaxed mb-8 font-normal">
+                {activeSegment.desc}
               </p>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-                {content[active].points.map(p => (
-                  <div key={p} style={{ display: 'flex', alignItems: 'flex-start', gap: 10 }}>
-                    <CheckCircle2 size={15} color="#5B8AF7" style={{ flexShrink: 0, marginTop: 2 }} />
-                    <span style={{ fontFamily: 'var(--font-outfit)', fontSize: 14, color: 'rgba(255,255,255,0.65)' }}>{p}</span>
+
+              {/* Checklist */}
+              <div className="space-y-3.5 mb-10">
+                {activeSegment.points.map((pt) => (
+                  <div key={pt} className="flex items-start gap-3">
+                    <CheckCircle2 size={16} className="text-blue-400 shrink-0 mt-0.5" />
+                    <span className="text-sm text-white/80 font-normal leading-relaxed">{pt}</span>
                   </div>
                 ))}
               </div>
-              <a href="#contact" style={{ textDecoration: 'none', display: 'inline-block', marginTop: 32 }}>
-                <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '12px 24px', borderRadius: 99, background: 'linear-gradient(135deg, #5B8AF7, #8B5CF6)', fontFamily: 'var(--font-outfit)', fontWeight: 600, fontSize: 14, color: '#fff', cursor: 'pointer' }}>
-                  Start Here
-                </span>
-              </a>
+
+              <div className="flex flex-wrap items-center gap-4">
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-xs sm:text-sm font-semibold bg-white text-black hover:bg-white/90 active:scale-[0.98] transition-all shadow-md shadow-white/10"
+                >
+                  Discuss Your Requirements <ArrowRight size={14} />
+                </Link>
+                <Link
+                  href="/services"
+                  className="inline-flex items-center gap-2 px-5 py-3 rounded-full text-xs sm:text-sm font-medium text-white/70 hover:text-white bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 transition-all"
+                >
+                  Explore Capabilities
+                </Link>
+              </div>
             </div>
-            <TabMock tab={active} />
-          </motion.div>
-        </AnimatePresence>
-      </div>
+
+            {/* Right Column: Key SLA & Performance Metrics */}
+            <div className="lg:col-span-5">
+              <div className="rounded-2xl bg-[#0B0D14]/90 border border-white/10 p-6 sm:p-8 backdrop-blur-2xl shadow-xl space-y-6">
+                <div className="flex items-center justify-between pb-4 border-b border-white/[0.08]">
+                  <span className="text-xs font-mono uppercase tracking-wider text-white/40">Engagement Benchmark</span>
+                  <span className="text-xs font-medium px-2.5 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20">
+                    {activeSegment.highlightTag}
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-1 gap-4">
+                  {activeSegment.stats.map((s) => (
+                    <div key={s.label} className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06] flex items-center justify-between">
+                      <div>
+                        <div className="text-2xl font-bold text-white tracking-tight">{s.val}</div>
+                        <div className="text-xs text-white/40 mt-0.5">{s.label}</div>
+                      </div>
+                      <div className="w-8 h-8 rounded-lg bg-white/[0.04] border border-white/[0.08] flex items-center justify-center text-blue-400">
+                        <CheckCircle2 size={14} />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="pt-4 border-t border-white/[0.08] text-center">
+                  <span className="text-xs text-white/40">
+                    Transparent milestone billing · Written timeline commitments
+                  </span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </motion.div>
+      </AnimatePresence>
     </section>
   )
 }

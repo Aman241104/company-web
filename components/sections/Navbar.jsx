@@ -1,107 +1,214 @@
 'use client'
 import { useState, useEffect } from 'react'
+import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, ArrowUpRight } from 'lucide-react'
+import { Menu, X, ArrowUpRight, ChevronDown, Search, Activity } from 'lucide-react'
+import CommandPalette from '@/components/ui/CommandPalette'
 
 const links = [
-  { label: 'Services', href: '/services' },
+  {
+    label: 'Services',
+    href: '/services',
+    dropdown: [
+      { label: 'Web & Platforms', href: '/services' },
+      { label: 'Mobile Applications', href: '/services' },
+      { label: 'Custom Software & ERP', href: '/services' },
+      { label: 'Growth & SEO', href: '/services' },
+    ],
+  },
   { label: 'Work', href: '/work' },
-  { label: 'Process', href: '/#process' },
+  { label: 'Benchmarks', href: '/#architecture-benchmark' },
+  { label: 'ROI Engine', href: '/#roi-calculator' },
   { label: 'Pricing', href: '/#pricing' },
   { label: 'About', href: '/about' },
 ]
 
-function NavLink({ href, children }) {
+function NavLink({ href, children, dropdown }) {
   const [hovered, setHovered] = useState(false)
+  const menuId = dropdown ? `navdropdown-${String(children).toLowerCase().replace(/\s+/g, '-')}` : undefined
+  
   return (
-    <a href={href} style={{
-      fontFamily: 'var(--font-outfit)', fontSize: 13, textDecoration: 'none',
-      color: hovered ? '#fff' : 'rgba(255,255,255,0.52)',
-      padding: '6px 14px', borderRadius: 99,
-      background: hovered ? 'rgba(255,255,255,0.07)' : 'transparent',
-      transition: 'all 0.2s',
-    }}
-    onMouseEnter={() => setHovered(true)}
-    onMouseLeave={() => setHovered(false)}
+    <div
+      className="relative"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
     >
-      {children}
-    </a>
+      <Link
+        href={href}
+        aria-haspopup={dropdown ? 'menu' : undefined}
+        aria-expanded={dropdown ? hovered : undefined}
+        aria-controls={menuId}
+        className="inline-flex items-center gap-1.5 py-2 text-[13.5px] font-medium text-white/70 hover:text-white transition-colors"
+      >
+        {children}
+        {dropdown && (
+          <ChevronDown
+            size={12}
+            aria-hidden="true"
+            className={`transition-transform duration-200 opacity-60 ${hovered ? 'rotate-180 opacity-100' : ''}`}
+          />
+        )}
+      </Link>
+
+      {dropdown && (
+        <AnimatePresence>
+          {hovered && (
+            <motion.div
+              id={menuId}
+              role="menu"
+              initial={{ opacity: 0, y: 4, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 4, scale: 0.98 }}
+              transition={{ duration: 0.15 }}
+              className="absolute top-full left-0 mt-2 min-w-[220px] p-1.5 rounded-xl bg-[#0B0D14]/95 backdrop-blur-2xl border border-white/10 shadow-2xl shadow-black/80 z-50"
+            >
+              {dropdown.map((d) => (
+                <Link
+                  key={d.label}
+                  href={d.href}
+                  className="block px-3 py-2 text-[13px] text-white/70 hover:text-white hover:bg-white/[0.06] rounded-lg transition-colors"
+                >
+                  {d.label}
+                </Link>
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
+      )}
+    </div>
   )
 }
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+  const [paletteOpen, setPaletteOpen] = useState(false)
 
   useEffect(() => {
-    const fn = () => setScrolled(window.scrollY > 24)
+    const fn = () => setScrolled(window.scrollY > 20)
     window.addEventListener('scroll', fn, { passive: true })
-    return () => window.removeEventListener('scroll', fn)
+
+    const handleCustomOpen = () => setPaletteOpen(true)
+    window.addEventListener('open-command-palette', handleCustomOpen)
+
+    return () => {
+      window.removeEventListener('scroll', fn)
+      window.removeEventListener('open-command-palette', handleCustomOpen)
+    }
   }, [])
 
   return (
-    <header style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100, display: 'flex', justifyContent: 'center', padding: '16px 24px', pointerEvents: 'none' }}>
-      <motion.nav
-        initial={{ opacity: 0, y: -16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.55 }}
-        style={{
-          pointerEvents: 'all', width: '100%', maxWidth: 760,
-          display: 'flex', alignItems: 'center',
-          padding: '8px 8px 8px 20px', borderRadius: 99,
-          border: `1px solid ${scrolled ? 'rgba(255,255,255,0.1)' : 'rgba(255,255,255,0.07)'}`,
-          background: scrolled ? 'rgba(6,6,20,0.92)' : 'rgba(6,6,20,0.5)',
-          backdropFilter: 'blur(20px)',
-          boxShadow: scrolled ? '0 8px 48px rgba(0,0,0,0.5)' : 'none',
-          transition: 'all 0.35s ease',
-        }}
-      >
-        {/* Logo */}
-        <a href="/" style={{ display: 'flex', alignItems: 'center', gap: 9, textDecoration: 'none', flexShrink: 0 }}>
-          <div style={{ width: 30, height: 30, borderRadius: 8, background: 'linear-gradient(135deg, #5B8AF7 0%, #8B5CF6 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--font-syne)', fontWeight: 800, fontSize: 13, color: '#fff', flexShrink: 0 }}>M</div>
-          <span style={{ fontFamily: 'var(--font-syne)', fontWeight: 700, fontSize: 13.5, color: '#fff', letterSpacing: '-0.02em', whiteSpace: 'nowrap' }}>
-            Mehta <span style={{ color: 'rgba(255,255,255,0.35)' }}>Technologies</span>
-          </span>
-        </a>
+    <>
+      <CommandPalette isOpen={paletteOpen} onClose={() => setPaletteOpen(false)} />
 
-        {/* Desktop links */}
-        <div className="hidden md:flex" style={{ flex: 1, justifyContent: 'center', gap: 2, display: 'flex' }}>
-          {links.map(l => <NavLink key={l.label} href={l.href}>{l.label}</NavLink>)}
+      <motion.header
+        initial={{ opacity: 0, y: -12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4 }}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          scrolled
+            ? 'bg-[#07080C]/85 backdrop-blur-xl border-b border-white/[0.08] shadow-lg shadow-black/30'
+            : 'bg-transparent border-b border-transparent'
+        }`}
+      >
+        <div className="max-w-[1360px] mx-auto flex items-center justify-between px-6 md:px-8 py-3.5">
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-2.5 group shrink-0">
+            <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center font-bold text-sm text-white shadow-sm shadow-blue-500/20 group-hover:bg-blue-500 transition-colors">
+              M
+            </div>
+            <span className="font-bold text-[15px] tracking-tight text-white">
+              Mehta <span className="text-white/40 font-normal">Technologies</span>
+            </span>
+          </Link>
+
+          {/* Desktop links */}
+          <nav className="hidden lg:flex items-center gap-7">
+            {links.map((l) => (
+              <NavLink key={l.label} href={l.href} dropdown={l.dropdown}>
+                {l.label}
+              </NavLink>
+            ))}
+          </nav>
+
+          {/* Right Tools & CTA */}
+          <div className="hidden md:flex items-center gap-3">
+            {/* Command Palette Trigger */}
+            <button
+              onClick={() => setPaletteOpen(true)}
+              className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 text-xs text-white/50 hover:text-white transition-all font-mono"
+            >
+              <Search size={12} className="text-blue-400" />
+              <span>Search</span>
+              <kbd className="px-1.5 py-0.5 rounded bg-white/10 text-[10px] text-white/70">⌘K</kbd>
+            </button>
+
+            {/* Live Telemetry Ping */}
+            <div className="hidden xl:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-500/5 border border-emerald-500/15 text-[11px] text-emerald-400 font-mono">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span>99.99% Cloud SLA</span>
+            </div>
+
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold bg-white text-black hover:bg-white/90 transition-all active:scale-[0.98] shadow-sm shadow-white/10"
+            >
+              Let&apos;s Talk <ArrowUpRight size={13} />
+            </Link>
+          </div>
+
+          {/* Mobile Search + toggle */}
+          <div className="flex md:hidden items-center gap-2">
+            <button
+              onClick={() => setPaletteOpen(true)}
+              className="p-2 rounded-lg bg-white/[0.05] border border-white/10 text-white/70 hover:text-white transition-colors"
+              aria-label="Open search"
+            >
+              <Search size={16} />
+            </button>
+            <button
+              onClick={() => setOpen(!open)}
+              aria-label={open ? 'Close menu' : 'Open menu'}
+              aria-expanded={open}
+              className="p-2 rounded-lg bg-white/[0.05] border border-white/10 text-white hover:bg-white/10 transition-colors"
+            >
+              {open ? <X size={18} /> : <Menu size={18} />}
+            </button>
+          </div>
         </div>
 
-        {/* CTA */}
-        <a href="/contact" className="hidden md:flex" style={{ textDecoration: 'none', flexShrink: 0 }}>
-          <span style={{ display: 'flex', alignItems: 'center', gap: 5, padding: '8px 18px', borderRadius: 99, background: 'linear-gradient(135deg, #5B8AF7, #8B5CF6)', fontFamily: 'var(--font-outfit)', fontWeight: 600, fontSize: 12.5, color: '#fff', cursor: 'pointer' }}>
-            Get in Touch <ArrowUpRight size={13} />
-          </span>
-        </a>
-
-        {/* Mobile toggle */}
-        <button onClick={() => setOpen(!open)} className="flex md:hidden" style={{ marginLeft: 'auto', background: 'rgba(255,255,255,0.07)', border: 'none', borderRadius: 8, padding: 7, cursor: 'pointer', color: '#fff' }}>
-          {open ? <X size={17} /> : <Menu size={17} />}
-        </button>
-      </motion.nav>
-
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ opacity: 0, y: -8, scale: 0.98 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -8, scale: 0.98 }}
-            transition={{ duration: 0.2 }}
-            style={{ position: 'fixed', top: 78, left: 16, right: 16, background: 'rgba(9,9,28,0.97)', backdropFilter: 'blur(24px)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 16, padding: '8px 8px 12px', pointerEvents: 'all' }}
-          >
-            {links.map(l => (
-              <a key={l.label} href={l.href} onClick={() => setOpen(false)} style={{ display: 'block', fontFamily: 'var(--font-outfit)', fontSize: 15, color: 'rgba(255,255,255,0.65)', textDecoration: 'none', padding: '12px 12px', borderRadius: 8 }}>
-                {l.label}
-              </a>
-            ))}
-            <a href="/contact" onClick={() => setOpen(false)} style={{ display: 'block', marginTop: 8, textAlign: 'center', padding: 13, borderRadius: 99, textDecoration: 'none', background: 'linear-gradient(135deg, #5B8AF7, #8B5CF6)', fontFamily: 'var(--font-outfit)', fontWeight: 600, fontSize: 14, color: '#fff' }}>
-              Get in Touch
-            </a>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </header>
+        {/* Mobile menu dropdown */}
+        <AnimatePresence>
+          {open && (
+            <motion.div
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.2 }}
+              className="md:hidden mx-4 mb-4 p-3 rounded-2xl bg-[#0B0D14]/98 backdrop-blur-2xl border border-white/10 shadow-2xl"
+            >
+              {links.map((l) => (
+                <Link
+                  key={l.label}
+                  href={l.href}
+                  onClick={() => setOpen(false)}
+                  className="block px-3 py-2.5 text-sm font-medium text-white/75 hover:text-white hover:bg-white/[0.06] rounded-xl transition-colors"
+                >
+                  {l.label}
+                </Link>
+              ))}
+              <Link
+                href="/contact"
+                onClick={() => setOpen(false)}
+                className="mt-2 block w-full py-2.5 text-center text-xs font-semibold rounded-xl bg-blue-600 hover:bg-blue-500 text-white transition-colors"
+              >
+                Let&apos;s Talk
+              </Link>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.header>
+    </>
   )
 }
+

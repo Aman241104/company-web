@@ -1,414 +1,322 @@
 'use client'
-import { useEffect, useRef, useState } from 'react'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { ArrowUpRight } from 'lucide-react'
+import { useState } from 'react'
+import Image from 'next/image'
+import Link from 'next/link'
+import { motion, AnimatePresence } from 'framer-motion'
+import { ArrowUpRight, ExternalLink, Sparkles, CheckCircle2 } from 'lucide-react'
 import BrowserMockup from '@/components/ui/BrowserMockup'
-import PhoneMockup from '@/components/ui/PhoneMockup'
 import ViboERPDashboard from '@/components/ui/ViboERPDashboard'
 import ProjectModal from '@/components/ui/ProjectModal'
 
-gsap.registerPlugin(ScrollTrigger)
-
 const SS = (src, alt) => function ScreenshotMockup() {
-  return <img src={src} alt={alt} style={{ width:'100%', height:'100%', objectFit:'cover', objectPosition:'top', display:'block' }} />
+  return (
+    <div className="relative w-full h-[240px] sm:h-[300px] overflow-hidden">
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        className="object-cover object-top group-hover:scale-[1.03] transition-transform duration-500"
+      />
+    </div>
+  )
 }
 
-const projects = [
+export const projects = [
   {
-    id: '01', name: 'ViboERP', category: 'SaaS Platform',
-    tags: ['ERP', 'Multi-Tenant', 'Analytics'],
-    result: '2,400+ active users', year: '2024', type: 'Product',
-    accent: '#2563EB', accentRgb: '37,99,235',
-    mockupType: 'browser', mockupUrl: 'app.viboerp.com',
-    MockupContent: ViboERPDashboard,
-    gradient: 'linear-gradient(135deg, #03060f 0%, #060d1e 100%)',
-    desc: 'A full-scale ERP SaaS — inventory, CRM, HR & finance in one unified dashboard.',
+    id: '01',
+    name: 'ViboERP',
+    category: 'SaaS Platform',
+    categoryFilter: 'SaaS',
+    tags: ['Next.js', 'PostgreSQL', 'Multi-Tenant', 'Analytics'],
+    result: '2,400+ active users',
+    year: '2024',
+    type: 'Product',
+    accent: '#3B82F6',
+    mockupType: 'browser',
+    mockupUrl: 'app.viboerp.com',
+    MockupContent: () => (
+      <div className="p-4 sm:p-5">
+        <ViboERPDashboard />
+      </div>
+    ),
+    link: null,
+    desc: 'A full-scale ERP SaaS — automated billing, CRM, inventory, HR & finance in one unified dashboard.',
   },
   {
-    id: '02', name: 'Silver Spoon by ACJ', category: 'E-Commerce',
-    tags: ['Shopify', 'UI/UX', 'Luxury Gifting'],
-    result: 'Live · silverspoonbyacj.com', year: '2024', type: 'Web',
-    accent: '#3b82f6', accentRgb: '59,130,246',
-    mockupType: 'browser', mockupUrl: 'silverspoonbyacj.com',
+    id: '02',
+    name: 'Silver Spoon by ACJ',
+    category: 'Luxury E-Commerce',
+    categoryFilter: 'E-Commerce',
+    tags: ['Shopify Plus', 'UI/UX Design', 'Luxury Gifting'],
+    result: '+280% online sales in 3 mos',
+    year: '2024',
+    type: 'E-Commerce',
+    accent: '#60A5FA',
+    mockupType: 'browser',
+    mockupUrl: 'silverspoonbyacj.com',
     MockupContent: SS('/silverspoon-screenshot.png', 'Silver Spoon by ACJ'),
     link: 'https://silverspoonbyacj.com',
-    gradient: 'linear-gradient(135deg, #07080f 0%, #0a0c17 100%)',
     desc: 'Premium silver gifting brand — bespoke Shopify storefront reflecting timeless elegance and craftsmanship.',
   },
   {
-    id: '03', name: 'Stylux Interiors', category: 'Interior Design',
-    tags: ['Next.js', 'GSAP', 'UI/UX'],
-    result: 'Turnkey delivery in 90 days', year: '2024', type: 'Web',
-    accent: '#3b82f6', accentRgb: '59,130,246',
-    mockupType: 'browser', mockupUrl: 'styluxinteriors.com',
+    id: '03',
+    name: 'Stylux Interiors',
+    category: 'Interior Design',
+    categoryFilter: 'Web',
+    tags: ['Next.js', 'GSAP Animation', 'Turnkey UI'],
+    result: 'Turnkey delivery in 90 days',
+    year: '2024',
+    type: 'Web Platform',
+    accent: '#3B82F6',
+    mockupType: 'browser',
+    mockupUrl: 'styluxinteriors.com',
     MockupContent: SS('/interior.png', 'Stylux Interiors'),
     link: 'https://interior-web-mu.vercel.app/',
-    gradient: 'linear-gradient(135deg, #07080f 0%, #0a0c17 100%)',
-    desc: 'Premium turnkey interior design studio delivering residential and commercial spaces in Ahmedabad.',
+    desc: 'Turnkey interior design studio delivering residential and commercial architectural spaces.',
   },
   {
-    id: '04', name: 'JJ Films', category: 'Wedding Films & Real Estate',
-    tags: ['Next.js', 'GSAP', 'Cinematic UI'],
-    result: 'Full-service creative studio', year: '2024', type: 'Web',
-    accent: '#3b82f6', accentRgb: '59,130,246',
-    mockupType: 'browser', mockupUrl: 'jjfilms.in',
+    id: '04',
+    name: 'JJ Films',
+    category: 'Wedding Films & Media',
+    categoryFilter: 'Media',
+    tags: ['Next.js', 'Cinematic UI', 'Video CDN'],
+    result: 'High-ticket lead generation',
+    year: '2024',
+    type: 'Web Platform',
+    accent: '#8B5CF6',
+    mockupType: 'browser',
+    mockupUrl: 'jjfilms.in',
     MockupContent: SS('/jjfilms.png', 'JJ Films'),
     link: 'https://jjfilms.vercel.app/',
-    gradient: 'linear-gradient(135deg, #07080f 0%, #0a0c17 100%)',
-    desc: 'Cinematic portfolio for a luxury wedding films and real estate photography studio.',
+    desc: 'Cinematic portfolio for a luxury wedding films and real estate cinematography studio.',
   },
   {
-    id: '05', name: 'ZingBliss Events', category: 'Event Management',
-    tags: ['Next.js', 'Framer Motion', 'Luxury'],
-    result: 'Grand weddings & ceremonies', year: '2024', type: 'Web',
-    accent: '#3b82f6', accentRgb: '59,130,246',
-    mockupType: 'browser', mockupUrl: 'zingblissevents.com',
+    id: '05',
+    name: 'ZingBliss Events',
+    category: 'Luxury Event Management',
+    categoryFilter: 'Web',
+    tags: ['Next.js', 'Framer Motion', 'Luxury UI'],
+    result: 'Top-tier conversion rate',
+    year: '2024',
+    type: 'Web Platform',
+    accent: '#EC4899',
+    mockupType: 'browser',
+    mockupUrl: 'zingblissevents.com',
     MockupContent: SS('/zingbliss.png', 'ZingBliss Events'),
     link: 'https://www.zingblissevents.com/',
-    gradient: 'linear-gradient(135deg, #07080f 0%, #0a0c17 100%)',
-    desc: 'Luxury event planning studio crafting extraordinary wedding moments and intimate ceremonies.',
+    desc: 'Luxury event planning studio crafting extraordinary wedding moments and celebrity ceremonies.',
   },
   {
-    id: '06', name: 'EyeCare Hospital', category: 'Healthcare',
-    tags: ['Next.js', 'Healthcare UI', 'SEO'],
-    result: '99.9% clinical success rate', year: '2024', type: 'Web',
-    accent: '#3b82f6', accentRgb: '59,130,246',
-    mockupType: 'browser', mockupUrl: 'eyecarehospital.com',
+    id: '06',
+    name: 'EyeCare Hospital',
+    category: 'Healthcare & Clinical',
+    categoryFilter: 'Web',
+    tags: ['Next.js', 'Healthcare UX', 'Technical SEO'],
+    result: '99.9% clinical trust rate',
+    year: '2024',
+    type: 'Healthcare',
+    accent: '#10B981',
+    mockupType: 'browser',
+    mockupUrl: 'eyecarehospital.com',
     MockupContent: SS('/eyehospital.png', 'EyeCare Hospital'),
     link: 'https://eye-hospital-web.vercel.app/',
-    gradient: 'linear-gradient(135deg, #07080f 0%, #0a0c17 100%)',
-    desc: 'Digital presence for a world-class eye care hospital — clinical trust built into every pixel.',
+    desc: 'Digital clinical presence for a world-class eye hospital — surgical trust engineered into every pixel.',
   },
   {
-    id: '07', name: 'Destination Anywhere', category: 'Travel & Hospitality',
-    tags: ['Next.js', 'Booking UI', 'Travel'],
-    result: 'Luxury travel planner', year: '2024', type: 'Web',
-    accent: '#3b82f6', accentRgb: '59,130,246',
-    mockupType: 'browser', mockupUrl: 'destinationanywhere.co.in',
+    id: '07',
+    name: 'Destination Anywhere',
+    category: 'Luxury Travel & Itinerary',
+    categoryFilter: 'Web',
+    tags: ['Next.js', 'Custom Booking Flow', 'Travel'],
+    result: 'Global booking planner',
+    year: '2024',
+    type: 'Web Platform',
+    accent: '#F59E0B',
+    mockupType: 'browser',
+    mockupUrl: 'destinationanywhere.co.in',
     MockupContent: SS('/destination.png', 'Destination Anywhere'),
     link: 'https://www.destinationanywhere.co.in/',
-    gradient: 'linear-gradient(135deg, #07080f 0%, #0a0c17 100%)',
     desc: 'Bespoke luxury travel planning platform with curated packages and personalized journey builder.',
   },
   {
-    id: '08', name: 'Aangan Boutique', category: 'Fashion E-Commerce',
-    tags: ['Shopify', 'Fashion UI', 'E-Commerce'],
-    result: 'Ethnic & bridal wear brand', year: '2024', type: 'Web',
-    accent: '#3b82f6', accentRgb: '59,130,246',
-    mockupType: 'browser', mockupUrl: 'aanganboutique.in',
+    id: '08',
+    name: 'Aangan Boutique',
+    category: 'Ethnic & Bridal Fashion',
+    categoryFilter: 'E-Commerce',
+    tags: ['Shopify Plus', 'Fashion UX', 'Conversion'],
+    result: '3x mobile conversion',
+    year: '2024',
+    type: 'E-Commerce',
+    accent: '#EF4444',
+    mockupType: 'browser',
+    mockupUrl: 'aanganboutique.in',
     MockupContent: SS('/aangan.png', 'Aangan Boutique'),
     link: 'https://www.aanganboutique.in/',
-    gradient: 'linear-gradient(135deg, #07080f 0%, #0a0c17 100%)',
-    desc: 'Curated ethnic, indo-western and bridal wear for timeless elegance, in the heart of Ahmedabad.',
+    desc: 'Curated ethnic, indo-western and bridal wear boutique storefront engineered for mobile shoppers.',
   },
 ]
 
-function ProjectPanel({ project, index, onOpen }) {
-  const { MockupContent } = project
-
-  return (
-    <div
-      className="proj-panel relative flex-shrink-0 flex flex-col md:flex-row items-center justify-center overflow-hidden"
-      data-cursor="view"
-      style={{
-        width: '100vw',
-        minHeight: '100vh',
-        background: project.gradient,
-      }}
-    >
-      {/* Dot grid */}
-      <div className="absolute inset-0 pointer-events-none" style={{
-        backgroundImage: 'radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px)',
-        backgroundSize: '28px 28px',
-      }} />
-
-      {/* Glow */}
-      <div className="absolute inset-0 pointer-events-none" style={{
-        background: `radial-gradient(ellipse 60% 50% at 30% 50%, rgba(${project.accentRgb},0.1) 0%, transparent 70%)`,
-      }} />
-
-      {/* Ghost number */}
-      <span
-        className="absolute right-0 bottom-0 font-display font-black select-none pointer-events-none leading-none"
-        style={{
-          fontSize: 'clamp(12rem, 28vw, 32rem)',
-          color: `rgba(${project.accentRgb}, 0.04)`,
-          letterSpacing: '-0.04em',
-          lineHeight: 0.8,
-        }}
-        aria-hidden
-      >
-        {project.id}
-      </span>
-
-      {/* Inner content */}
-      <div className="relative z-10 w-full max-w-[1400px] mx-auto px-8 md:px-14 lg:px-20 py-28 grid md:grid-cols-[1fr_1.1fr] gap-12 md:gap-16 items-center">
-
-        {/* Left: text */}
-        <div className="flex flex-col">
-          <div className="flex items-center gap-4 mb-8">
-            <span
-              className="font-display font-bold tabular-nums text-xs"
-              style={{ color: `rgba(${project.accentRgb},0.5)` }}
-            >
-              {project.id} / 0{projects.length}
-            </span>
-            <div className="h-px flex-1 max-w-[3rem]" style={{ background: `rgba(${project.accentRgb},0.3)` }} />
-            <span
-              className="text-[10px] px-3 py-1 rounded-full font-medium"
-              style={{ background: `rgba(${project.accentRgb},0.1)`, color: project.accent, border: `1px solid rgba(${project.accentRgb},0.2)` }}
-            >
-              {project.type}
-            </span>
-            <span className="text-white/20 text-xs">{project.year}</span>
-          </div>
-
-          <h2
-            className="font-display font-black text-white leading-none mb-4"
-            style={{ fontSize: 'clamp(3.5rem, 7vw, 9rem)', letterSpacing: '-0.04em' }}
-          >
-            {project.name}
-          </h2>
-
-          <p
-            className="font-display font-medium mb-5"
-            style={{ color: project.accent, fontSize: 'clamp(0.9rem, 1.5vw, 1.2rem)', letterSpacing: '-0.01em' }}
-          >
-            {project.category}
-          </p>
-
-          <p className="text-white/35 text-base leading-relaxed mb-8 max-w-md">
-            {project.desc}
-          </p>
-
-          <div className="flex flex-wrap gap-2 mb-8">
-            {project.tags.map((t) => (
-              <span
-                key={t}
-                className="text-[11px] px-3 py-1 rounded-full"
-                style={{ background: `rgba(${project.accentRgb},0.08)`, color: project.accent, border: `1px solid rgba(${project.accentRgb},0.15)` }}
-              >
-                {t}
-              </span>
-            ))}
-          </div>
-
-          <div className="flex items-center gap-3 pt-6 border-t border-white/[0.06]">
-            <div className="w-2 h-2 rounded-full" style={{ background: project.accent }} />
-            <span className="text-white font-semibold text-sm">{project.result}</span>
-          </div>
-        </div>
-
-        {/* Right: mockup */}
-        <div
-          className="relative flex items-center justify-center"
-          style={{ filter: `drop-shadow(0 30px 80px rgba(${project.accentRgb},0.2))` }}
-        >
-          {project.mockupType === 'phone' ? (
-            <div className="flex justify-center">
-              <PhoneMockup style={{ maxWidth: 240 }}>
-                <MockupContent />
-              </PhoneMockup>
-            </div>
-          ) : (
-            <BrowserMockup url={project.mockupUrl}>
-              <MockupContent />
-            </BrowserMockup>
-          )}
-        </div>
-      </div>
-
-      {/* Bottom actions */}
-      <div className="absolute bottom-8 left-8 md:left-14 right-8 md:right-14 flex items-center justify-between">
-        <div className="flex items-center gap-2 pointer-events-none" style={{ color: `rgba(${project.accentRgb},0.3)` }}>
-          <span className="text-[10px] uppercase tracking-[0.25em]">{project.id} of 0{projects.length}</span>
-        </div>
-        {project.link && (
-          <a
-            href={project.link} target="_blank" rel="noopener noreferrer"
-            className="group flex items-center gap-2 px-5 py-2.5 rounded-full font-medium text-xs border transition-all duration-300"
-            style={{ background: `rgba(${project.accentRgb},0.1)`, borderColor: `rgba(${project.accentRgb},0.3)`, backdropFilter: 'blur(8px)', color: project.accent }}
-            onMouseEnter={(e) => { e.currentTarget.style.background = `rgba(${project.accentRgb},0.25)`; e.currentTarget.style.borderColor = `rgba(${project.accentRgb},0.5)` }}
-            onMouseLeave={(e) => { e.currentTarget.style.background = `rgba(${project.accentRgb},0.1)`; e.currentTarget.style.borderColor = `rgba(${project.accentRgb},0.3)` }}
-          >
-            Visit Site <ArrowUpRight size={13} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </a>
-        )}
-        <button
-          onClick={onOpen}
-          className="group flex items-center gap-2 px-5 py-2.5 rounded-full text-white font-medium text-xs border transition-all duration-300"
-          style={{
-            background: `rgba(${project.accentRgb},0.1)`,
-            borderColor: `rgba(${project.accentRgb},0.3)`,
-            backdropFilter: 'blur(8px)',
-          }}
-          onMouseEnter={(e) => { e.currentTarget.style.background = `rgba(${project.accentRgb},0.25)` }}
-          onMouseLeave={(e) => { e.currentTarget.style.background = `rgba(${project.accentRgb},0.1)` }}
-        >
-          <span>View Case Study</span>
-          <ArrowUpRight size={13} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" style={{ color: project.accent }} />
-        </button>
-      </div>
-    </div>
-  )
-}
-
-/* Mobile card view (fallback) */
-function ProjectCard({ project, onOpen }) {
-  const { MockupContent } = project
-  return (
-    <div
-      className="rounded-2xl border border-white/[0.06] overflow-hidden"
-      style={{ background: project.gradient }}
-    >
-      <div className="relative overflow-hidden" style={{
-        background: `radial-gradient(ellipse at 50% 120%, rgba(${project.accentRgb},0.15) 0%, transparent 60%)`,
-      }}>
-        <div className="p-5" style={{ filter: `drop-shadow(0 16px 40px rgba(${project.accentRgb},0.2))` }}>
-          {project.mockupType === 'phone'
-            ? <div className="flex justify-center"><PhoneMockup style={{ maxWidth: 160 }}><MockupContent /></PhoneMockup></div>
-            : <div className="overflow-hidden" style={{ maxHeight: 160 }}><BrowserMockup url={project.mockupUrl}><MockupContent /></BrowserMockup></div>
-          }
-        </div>
-      </div>
-      <div className="p-6">
-        <div className="flex items-center gap-2 mb-3">
-          <span className="text-white/30 text-xs tabular-nums">{project.id}</span>
-          <span className="text-[10px] px-2 py-0.5 rounded-full"
-            style={{ background: `rgba(${project.accentRgb},0.1)`, color: project.accent, border: `1px solid rgba(${project.accentRgb},0.15)` }}>
-            {project.type}
-          </span>
-        </div>
-        <h3 className="font-display font-black text-white mb-1" style={{ fontSize: '1.8rem', letterSpacing: '-0.03em' }}>{project.name}</h3>
-        <p className="text-xs mb-3" style={{ color: `rgba(${project.accentRgb},0.7)` }}>{project.category}</p>
-        <p className="text-white/35 text-sm leading-relaxed mb-4">{project.desc}</p>
-        <div className="flex flex-wrap gap-1.5">
-          {project.tags.map((t) => (
-            <span key={t} className="text-[10px] px-2 py-0.5 rounded-full"
-              style={{ background: `rgba(${project.accentRgb},0.08)`, color: project.accent }}>
-              {t}
-            </span>
-          ))}
-        </div>
-        <div className="flex items-center justify-between mt-4 pt-4 border-t border-white/[0.05]">
-          <div className="flex items-center gap-2">
-            <div className="w-1.5 h-1.5 rounded-full" style={{ background: project.accent }} />
-            <span className="text-white/50 text-xs font-medium">{project.result}</span>
-          </div>
-          <button
-            onClick={onOpen}
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-[11px] font-medium"
-            style={{ background: `rgba(${project.accentRgb},0.1)`, color: project.accent, border: `1px solid rgba(${project.accentRgb},0.2)` }}
-          >
-            View <ArrowUpRight size={11} />
-          </button>
-        </div>
-      </div>
-    </div>
-  )
-}
+const categories = ['All', 'SaaS', 'E-Commerce', 'Web', 'Media']
 
 export default function Work() {
-  const sectionRef = useRef(null)
-  const trackRef = useRef(null)
-  const headRef = useRef(null)
+  const [activeCategory, setActiveCategory] = useState('All')
   const [activeProject, setActiveProject] = useState(null)
 
-  /* Header animation */
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      const mm = gsap.matchMedia()
-      mm.add('(min-width: 768px)', () => {
-        gsap.fromTo('.work-h-word',
-          { y: '108%', opacity: 0 },
-          {
-            y: '0%', opacity: 1, stagger: 0.09, duration: 0.85, ease: 'power3.out',
-            scrollTrigger: { trigger: headRef.current, start: 'top 80%', once: true },
-          }
-        )
-      })
-      mm.add('(max-width: 767px)', () => {
-        gsap.fromTo('.work-h-word',
-          { opacity: 0, y: 24 },
-          {
-            opacity: 1, y: 0, stagger: 0.08, duration: 0.65, ease: 'power2.out',
-            scrollTrigger: { trigger: headRef.current, start: 'top 85%', once: true },
-          }
-        )
-      })
-    })
-    return () => ctx.revert()
-  }, [])
-
-  /* Horizontal scroll — desktop only */
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      const mm = gsap.matchMedia()
-
-      mm.add('(min-width: 1024px)', () => {
-        const track = trackRef.current
-        if (!track) return
-        ScrollTrigger.refresh()
-
-        const totalMove = track.scrollWidth - window.innerWidth
-
-        gsap.to(track, {
-          x: -totalMove,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top top',
-            end: () => '+=' + totalMove,
-            pin: true,
-            scrub: 1.2,
-            anticipatePin: 1,
-            invalidateOnRefresh: true,
-          },
-        })
-      })
-    }, sectionRef)
-
-    return () => ctx.revert()
-  }, [])
+  const filteredProjects =
+    activeCategory === 'All'
+      ? projects
+      : projects.filter((p) => p.categoryFilter === activeCategory)
 
   return (
-    <section id="work" ref={sectionRef} className="bg-[#04050e]">
-
-      {/* Section heading — visible above horizontal track */}
-      <div ref={headRef} className="px-6 md:px-12 lg:px-16 pt-20 md:pt-28 pb-10 max-w-[1400px] mx-auto lg:absolute lg:top-0 lg:left-0 lg:right-0 lg:z-20 lg:pointer-events-none lg:opacity-0">
-        {/* Mobile header only — desktop header is overlaid by pin */}
-        <p className="lg:hidden text-white/25 text-xs uppercase tracking-[0.3em] mb-5">Selected Work</p>
-        <h2 className="lg:hidden font-display font-black leading-none" style={{ fontSize: 'clamp(2rem, 8vw, 7rem)', letterSpacing: '-0.04em' }}>
-          {['Projects', 'That', 'Deliver.'].map((w, i) => (
-            <span key={i} className="block overflow-hidden">
-              <span className={`work-h-word inline-block opacity-0 will-change-transform ${i !== 2 ? 'text-white' : ''}`}>
-                {i === 2 ? <span className="text-blue-400">{w}</span> : w}
-              </span>
+    <section id="work" className="py-24 md:py-32 bg-[#07080C] relative">
+      <div className="max-w-[1360px] mx-auto px-6 md:px-8">
+        
+        {/* Section Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-14">
+          <div>
+            <span className="glow-pill mb-4 inline-flex">
+              Featured Case Studies
             </span>
-          ))}
-        </h2>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
+              Work that creates{' '}
+              <span className="text-gradient-accent">measurable impact.</span>
+            </h2>
+          </div>
+
+          {/* Category Filter Pills */}
+          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-2">
+            {categories.map((cat) => {
+              const isActive = activeCategory === cat
+              return (
+                <button
+                  key={cat}
+                  onClick={() => setActiveCategory(cat)}
+                  className={`px-4 py-2 rounded-full text-xs font-semibold transition-all whitespace-nowrap ${
+                    isActive
+                      ? 'bg-white text-black shadow-md shadow-white/10'
+                      : 'bg-white/[0.04] text-white/60 hover:text-white hover:bg-white/[0.08] border border-white/[0.07]'
+                  }`}
+                >
+                  {cat}
+                </button>
+              )
+            })}
+          </div>
+        </div>
+
+        {/* 2-Column Bento Project Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <AnimatePresence mode="popLayout">
+            {filteredProjects.map((project, index) => {
+              const { MockupContent } = project
+              return (
+                <motion.div
+                  key={project.id}
+                  layout
+                  initial={{ opacity: 0, y: 24 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.96 }}
+                  transition={{ duration: 0.45, delay: index * 0.05 }}
+                  className="group rounded-2xl bg-white/[0.02] border border-white/[0.08] hover:border-white/[0.18] overflow-hidden flex flex-col justify-between transition-all duration-300 shadow-xl shadow-black/40"
+                >
+                  {/* Browser Mockup Area */}
+                  <div className="p-4 sm:p-6 bg-gradient-to-b from-white/[0.03] to-transparent border-b border-white/[0.06]">
+                    <div className="rounded-xl border border-white/10 overflow-hidden bg-[#0B0D14] shadow-2xl">
+                      {/* Browser header */}
+                      <div className="flex items-center justify-between px-3.5 py-2 bg-black/40 border-b border-white/[0.06] text-[11px] text-white/40">
+                        <div className="flex gap-1.5">
+                          <span className="w-2 h-2 rounded-full bg-red-500/60" />
+                          <span className="w-2 h-2 rounded-full bg-yellow-500/60" />
+                          <span className="w-2 h-2 rounded-full bg-green-500/60" />
+                        </div>
+                        <span className="font-mono text-white/50">{project.mockupUrl}</span>
+                        <div className="w-8" />
+                      </div>
+                      
+                      {/* Content view */}
+                      <div className="relative overflow-hidden bg-[#07080C]">
+                        <MockupContent />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Project Details Footer */}
+                  <div className="p-6 sm:p-8 flex flex-col justify-between flex-1">
+                    <div>
+                      <div className="flex items-center justify-between gap-4 mb-3">
+                        <span className="text-xs font-semibold text-blue-400 uppercase tracking-wider">
+                          {project.category}
+                        </span>
+                        <span className="text-xs font-mono text-white/35">
+                          {project.year}
+                        </span>
+                      </div>
+
+                      <h3 className="text-2xl font-bold text-white tracking-tight mb-2 group-hover:text-blue-400 transition-colors">
+                        {project.name}
+                      </h3>
+
+                      <p className="text-sm text-white/55 leading-relaxed mb-6 font-normal">
+                        {project.desc}
+                      </p>
+
+                      <div className="flex flex-wrap gap-1.5 mb-6">
+                        {project.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="text-[11px] font-medium px-2.5 py-0.5 rounded-md bg-white/[0.04] text-white/60 border border-white/[0.06]"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="pt-5 border-t border-white/[0.06] flex items-center justify-between gap-4">
+                      <div className="flex items-center gap-2 text-xs font-semibold text-emerald-400">
+                        <CheckCircle2 size={13} />
+                        <span>{project.result}</span>
+                      </div>
+
+                      <div className="flex items-center gap-3">
+                        {project.link && (
+                          <a
+                            href={project.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 text-xs font-medium text-white/70 hover:text-white transition-colors"
+                          >
+                            Visit Site <ArrowUpRight size={12} />
+                          </a>
+                        )}
+                        <button
+                          onClick={() => setActiveProject(project)}
+                          className="px-4 py-1.5 rounded-full text-xs font-semibold bg-white/[0.06] hover:bg-white/[0.12] text-white border border-white/10 transition-all active:scale-[0.98]"
+                        >
+                          Case Study
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              )
+            })}
+          </AnimatePresence>
+        </div>
+
+        {/* View All Projects Strip */}
+        <div className="mt-14 text-center">
+          <Link
+            href="/work"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-xs font-semibold bg-white/[0.04] hover:bg-white/[0.08] text-white border border-white/10 transition-all"
+          >
+            View All 150+ Shipped Projects <ArrowUpRight size={13} />
+          </Link>
+        </div>
+
       </div>
 
-      {/* DESKTOP: horizontal scroll track */}
-      <div
-        ref={trackRef}
-        className="hidden lg:flex will-change-transform"
-        style={{ width: `${projects.length * 100}vw` }}
-      >
-        {projects.map((p, i) => (
-          <ProjectPanel key={p.id} project={p} index={i} onOpen={() => setActiveProject(p)} />
-        ))}
-      </div>
-
-      {/* MOBILE: vertical card grid */}
-      <div className="lg:hidden px-4 sm:px-5 pb-20 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
-        {projects.map((p) => (
-          <ProjectCard key={p.id} project={p} onOpen={() => setActiveProject(p)} />
-        ))}
-      </div>
-
-      {/* Modal */}
+      {/* Project Case Study Modal */}
       {activeProject && (
         <ProjectModal
           project={activeProject}

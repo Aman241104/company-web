@@ -1,34 +1,19 @@
 import type { Metadata } from "next";
-import { Poppins, Inter, Syne, Outfit } from "next/font/google";
+import { Sora, Inter } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import CustomCursor from "@/components/CustomCursor";
-import Preloader from "@/components/Preloader";
 import MobileDock from "@/components/MobileDock";
 
-const poppins = Poppins({
-  variable: "--font-poppins",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
-  display: "swap",
-});
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
-  display: "swap",
-});
-
-const syne = Syne({
+const sora = Sora({
   variable: "--font-syne",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
   display: "swap",
 });
 
-const outfit = Outfit({
-  variable: "--font-outfit",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
   display: "swap",
@@ -87,15 +72,12 @@ export const metadata: Metadata = {
     shortcut: "/favicon.ico",
     apple: "/favicon.ico",
   },
-  verification: {
-    google: "",
-  },
 };
 
 export const viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#060614",
+  themeColor: "#07080C",
 };
 
 const organizationSchema = {
@@ -126,13 +108,12 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${poppins.variable} ${inter.variable} ${syne.variable} ${outfit.variable}`} suppressHydrationWarning>
-      <body>
+    <html lang="en" className={`${sora.variable} ${inter.variable}`} style={{ colorScheme: 'dark' }} suppressHydrationWarning>
+      <body className="bg-[#07080C] text-white selection:bg-blue-600/30 selection:text-white">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
         />
-        <Preloader />
         <CustomCursor />
         <SmoothScroll>{children}</SmoothScroll>
         <MobileDock />

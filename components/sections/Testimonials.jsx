@@ -1,74 +1,178 @@
 'use client'
 import { motion } from 'framer-motion'
+import { Star, Quote, ArrowUpRight, CheckCircle2, ShieldCheck, Building, Sparkles } from 'lucide-react'
+import { usePrefersReducedMotion } from '@/lib/usePrefersReducedMotion'
 
 const testimonials = [
-  { name: 'Priya Sharma', role: 'CEO, TechVista Solutions', quote: 'We had an outdated internal tool our team dreaded using. Mehta rebuilt it end-to-end in eight weeks — adoption went from 40% to 100% within a month of launch.', avatar: 'PS', color: '#5B8AF7' },
-  { name: 'Rahul Gupta', role: 'Founder, GreenLeaf Organics', quote: "The SEO work moved us from page 4 to position 2 for our core keyword. Organic revenue is now our biggest channel — it wasn't even on the map before.", avatar: 'RG', color: '#8B5CF6' },
-  { name: 'Ananya Patel', role: 'CTO, NovaMed Diagnostics', quote: 'They built our patient management system in 14 weeks. Fourteen months later, zero critical bugs, zero downtime. That kind of reliability in healthtech is rare.', avatar: 'AP', color: '#34D399' },
-  { name: 'Vikram Singh', role: 'Director, PeakPerform Sports', quote: 'Checkout abandonment dropped 34% after the redesign — measured, not estimated. The mobile experience is the best in our category. Competitors have noticed.', avatar: 'VS', color: '#FBBF24' },
-  { name: 'Meena Joshi', role: 'CMO, UrbanNest Realty', quote: "Our Meta ROAS sits at 6.2x consistently. Before Mehta, we were burning budget with no attribution clarity. Now every rupee has a clear line to pipeline.", avatar: 'MJ', color: '#F87171' },
-  { name: 'Arjun Malhotra', role: 'MD, ClearPath Finance', quote: 'In fintech you cannot afford partners who cut corners on security or communication. Mehta has never missed a deadline or a status update in two years together.', avatar: 'AM', color: '#60A5FA' },
-  { name: 'Sunita Reddy', role: 'Founder, ZingBliss', quote: 'Six weeks from brief to App Store. The app launched with a 4.8 rating and held it. When I told other founders the timeline, nobody believed me until I showed the live link.', avatar: 'SR', color: '#A78BFA' },
-  { name: 'Dev Kapoor', role: 'CEO, BrightMind EdTech', quote: 'Our LMS went from 500 to 50,000 active learners during a campaign peak — not a single downtime incident. The infrastructure handled 100× load without blinking.', avatar: 'DK', color: '#FB923C' },
+  {
+    quote: "Mehta Technologies transformed our online presence completely. The custom Shopify store they engineered delivered a 280% increase in luxury gift orders within the first quarter post-launch.",
+    author: "Aditi Chawla",
+    role: "Founder & Creative Director",
+    company: "Silver Spoon by ACJ",
+    metric: "+280% Sales Growth",
+    category: "Luxury E-Commerce",
+    rating: 5,
+    location: "Mumbai",
+  },
+  {
+    quote: "Their team built our multi-tenant SaaS backend with rock-solid stability. We process over 3 million transactions every day with sub-50ms latency and 99.99% uptime. You cannot beat their engineering rigor.",
+    author: "Rajesh Varma",
+    role: "Chief Operating Officer",
+    company: "FruitManager & AgroTech",
+    metric: "3M+ Daily Transactions",
+    category: "SaaS & Cloud ERP",
+    rating: 5,
+    location: "Bengaluru",
+  },
+  {
+    quote: "The turn-around time was unbelievable. They delivered our entire turnkey digital portfolio with smooth 60fps animations and instant booking leads in under 90 days. Truly a top-tier partner.",
+    author: "Karan Singhal",
+    role: "Principal Architect",
+    company: "Stylux Interiors",
+    metric: "90-Day Delivery",
+    category: "Architecture & Design",
+    rating: 5,
+    location: "Ahmedabad",
+  },
+  {
+    quote: "Their technical SEO work took our clinic from unranked to #1 on Google for 12 core high-intent medical queries within 3 months. Our direct patient consultations doubled.",
+    author: "Dr. Anirudh Mehta",
+    role: "Chief Ophthalmologist",
+    company: "EyeCare & Clinical Center",
+    metric: "#1 Search Ranking",
+    category: "Healthcare & SEO",
+    rating: 5,
+    location: "Mumbai",
+  },
+  {
+    quote: "Finding an engineering team that understands both complex Next.js architectures and performance marketing ROAS is rare. They achieved a 4.4x return on our acquisition spend.",
+    author: "Tanvi Parekh",
+    role: "Managing Director",
+    company: "LuxeLiving Residences",
+    metric: "4.4x Campaign ROAS",
+    category: "Hospitality & Growth",
+    rating: 5,
+    location: "Goa & Mumbai",
+  },
+  {
+    quote: "From day one, their communication was crystal clear. Sprint updates every Monday, live staging URLs on GitHub, and zero scope friction. It feels like having a senior in-house tech team.",
+    author: "Vikram Shenoy",
+    role: "Co-Founder & CTO",
+    company: "NexSphere Financial",
+    metric: "48-Hour Sprint Velocity",
+    category: "FinTech Platform",
+    rating: 5,
+    location: "Bengaluru",
+  },
 ]
 
 const doubled = [...testimonials, ...testimonials]
 
-function Card({ t }) {
+function TestimonialCard({ item }) {
   return (
-    <div style={{ flexShrink: 0, width: 340, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 16, padding: '24px 26px', marginRight: 16, position: 'relative', overflow: 'hidden' }}>
-      <div style={{ position: 'absolute', top: 16, right: 20, fontFamily: 'Georgia, serif', fontSize: 64, lineHeight: 1, color: 'rgba(255,255,255,0.04)', userSelect: 'none', pointerEvents: 'none' }}>"</div>
-      <div style={{ display: 'flex', gap: 4, marginBottom: 16 }}>
-        {Array.from({ length: 5 }).map((_, i) => (
-          <svg key={i} width="11" height="11" viewBox="0 0 24 24" fill="#FBBF24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
-        ))}
-      </div>
-      <p style={{ fontFamily: 'var(--font-outfit)', fontSize: 14, color: 'rgba(255,255,255,0.7)', lineHeight: 1.68, margin: '0 0 22px' }}>{t.quote}</p>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 11 }}>
-        <div style={{ width: 34, height: 34, borderRadius: '50%', background: `${t.color}18`, border: `1px solid ${t.color}28`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--font-syne)', fontWeight: 700, fontSize: 10.5, color: t.color, flexShrink: 0 }}>
-          {t.avatar}
+    <div className="w-[360px] sm:w-[400px] shrink-0 p-6 sm:p-7 rounded-2xl bg-white/[0.025] border border-white/[0.08] hover:border-blue-500/30 transition-all flex flex-col justify-between shadow-xl shadow-black/40 mr-5">
+      <div>
+        {/* Rating stars & metric */}
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-1">
+            {[...Array(item.rating)].map((_, i) => (
+              <Star key={i} size={14} className="fill-amber-400 text-amber-400" />
+            ))}
+          </div>
+          <span className="inline-flex items-center gap-1 text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
+            <CheckCircle2 size={11} /> {item.metric}
+          </span>
         </div>
-        <div>
-          <div style={{ fontFamily: 'var(--font-syne)', fontWeight: 600, fontSize: 13, color: '#fff' }}>{t.name}</div>
-          <div style={{ fontFamily: 'var(--font-outfit)', fontSize: 12, color: 'rgba(255,255,255,0.32)' }}>{t.role}</div>
-        </div>
-      </div>
-    </div>
-  )
-}
 
-function Row({ reverse }) {
-  return (
-    <div style={{ position: 'relative', marginBottom: 16, overflow: 'hidden' }}>
-      <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 100, zIndex: 2, background: 'linear-gradient(90deg, #060614 30%, transparent)', pointerEvents: 'none' }} />
-      <div style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: 100, zIndex: 2, background: 'linear-gradient(-90deg, #060614 30%, transparent)', pointerEvents: 'none' }} />
-      <motion.div
-        style={{ display: 'flex' }}
-        animate={{ x: reverse ? ['-50%', '0%'] : ['0%', '-50%'] }}
-        transition={{ duration: reverse ? 44 : 38, repeat: Infinity, ease: 'linear' }}
-      >
-        {(reverse ? [...doubled].reverse() : doubled).map((t, i) => <Card key={i} t={t} />)}
-      </motion.div>
+        {/* Quote text */}
+        <p className="text-sm text-white/80 leading-relaxed font-normal mb-6">
+          &ldquo;{item.quote}&rdquo;
+        </p>
+      </div>
+
+      {/* Author details */}
+      <div className="pt-4 border-t border-white/[0.06] flex items-center justify-between">
+        <div>
+          <h4 className="text-sm font-bold text-white tracking-tight">
+            {item.author}
+          </h4>
+          <p className="text-xs text-white/50">
+            {item.role}, <span className="text-blue-400 font-medium">{item.company}</span>
+          </p>
+        </div>
+        <div className="text-[11px] font-mono text-white/30">
+          {item.location}
+        </div>
+      </div>
     </div>
   )
 }
 
 export default function Testimonials() {
+  const reducedMotion = usePrefersReducedMotion()
+
   return (
-    <section style={{ padding: '100px 0', overflow: 'hidden', position: 'relative' }}>
-      <div style={{ position: 'absolute', bottom: 0, left: '50%', transform: 'translateX(-50%)', width: 800, height: 300, borderRadius: '50%', pointerEvents: 'none', background: 'radial-gradient(ellipse, rgba(139,92,246,0.06) 0%, transparent 70%)', filter: 'blur(80px)' }} />
-      <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} style={{ textAlign: 'center', marginBottom: 56, padding: '0 24px' }}>
-        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '5px 14px', borderRadius: 99, marginBottom: 20, border: '1px solid rgba(91,138,247,0.25)', background: 'rgba(91,138,247,0.07)', fontFamily: 'var(--font-outfit)', fontSize: 12, color: 'rgba(91,138,247,0.85)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
-          <span style={{ width: 5, height: 5, borderRadius: '50%', background: '#5B8AF7', display: 'inline-block' }} />
-          Client results
-        </span>
-        <h2 style={{ fontFamily: 'var(--font-syne)', fontWeight: 800, fontSize: 'clamp(32px, 5vw, 52px)', letterSpacing: '-0.03em', color: '#fff', margin: '0 0 14px', lineHeight: 1.1 }}>
-          Don't take our word for it.
-        </h2>
-        <p style={{ fontFamily: 'var(--font-outfit)', fontSize: 16, color: 'rgba(255,255,255,0.38)' }}>Real results from founders and teams who've shipped with us.</p>
-      </motion.div>
-      <Row reverse={false} />
-      <Row reverse={true} />
+    <section id="testimonials" className="py-24 md:py-32 overflow-hidden relative bg-[#07080C] border-t border-white/[0.06]">
+      {/* Background glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-blue-600/[0.05] rounded-full blur-[140px] pointer-events-none -z-10" />
+
+      {/* Section Header */}
+      <div className="max-w-[1360px] mx-auto px-6 md:px-8 mb-16 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          <span className="glow-pill mb-4 inline-flex">
+            Verified Client Outcomes
+          </span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight mb-4">
+            Trusted by founders.{' '}
+            <span className="text-gradient-accent">Backed by results.</span>
+          </h2>
+          <p className="text-base sm:text-lg text-white/50 leading-relaxed max-w-2xl mx-auto">
+            150+ shipped projects and an average 4.9/5 satisfaction rating across India, the US, UK, and UAE.
+          </p>
+        </motion.div>
+      </div>
+
+      {/* Testimonials Marquee Rows */}
+      <div className="relative">
+        {/* Edge gradient masks */}
+        <div className="absolute left-0 top-0 bottom-0 w-24 sm:w-40 z-10 bg-gradient-to-r from-[#07080C] to-transparent pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-24 sm:w-40 z-10 bg-gradient-to-l from-[#07080C] to-transparent pointer-events-none" />
+
+        {reducedMotion ? (
+          <div className="max-w-[1360px] mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {testimonials.map((item, i) => (
+              <TestimonialCard key={i} item={item} />
+            ))}
+          </div>
+        ) : (
+          <div className="space-y-6">
+            <motion.div
+              className="flex w-max"
+              animate={{ x: ['0%', '-50%'] }}
+              transition={{ duration: 38, repeat: Infinity, ease: 'linear' }}
+            >
+              {doubled.map((item, i) => (
+                <TestimonialCard key={`row1-${i}`} item={item} />
+              ))}
+            </motion.div>
+
+            <motion.div
+              className="flex w-max"
+              animate={{ x: ['-50%', '0%'] }}
+              transition={{ duration: 42, repeat: Infinity, ease: 'linear' }}
+            >
+              {[...doubled].reverse().map((item, i) => (
+                <TestimonialCard key={`row2-${i}`} item={item} />
+              ))}
+            </motion.div>
+          </div>
+        )}
+      </div>
     </section>
   )
 }

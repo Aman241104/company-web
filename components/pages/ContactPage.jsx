@@ -1,228 +1,345 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
+import { useSearchParams } from 'next/navigation'
 import { motion } from 'framer-motion'
-import { Mail, Phone, MapPin, Clock, ArrowRight, Send, Check } from 'lucide-react'
-import CircularText from '@/components/ui/reactbits/CircularText'
+import { Mail, Phone, MapPin, Clock, ArrowRight, Send, CheckCircle2, ShieldCheck, Sparkles } from 'lucide-react'
 
-const Pill = ({ children }) => (
-  <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '5px 14px', borderRadius: 99, marginBottom: 20, border: '1px solid rgba(91,138,247,0.25)', background: 'rgba(91,138,247,0.07)', fontFamily: 'var(--font-outfit)', fontSize: 12, color: 'rgba(91,138,247,0.85)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
-    <span style={{ width: 5, height: 5, borderRadius: '50%', background: '#5B8AF7', display: 'inline-block', animation: 'opacity-glow 2s ease-in-out infinite alternate' }} />
-    {children}
-  </span>
-)
+const services = [
+  'Website Development',
+  'Software Development & API',
+  'Mobile App (iOS & Android)',
+  'Custom SaaS / ERP Platform',
+  'Performance Marketing & CRO',
+  'Technical SEO & Growth',
+  'Vibo ERP Demo & Access',
+  'Other Custom Architecture',
+]
 
-const services = ['Website Development', 'Software Development', 'Mobile App', 'SaaS Development', 'Performance Marketing', 'SEO', 'ViboERP Demo', 'Other']
-const budgets = ['₹50K – ₹1L', '₹1L – ₹5L', '₹5L – ₹20L', '₹20L+', 'Not sure yet']
+const budgets = [
+  '₹20,000 – ₹50,000',
+  '₹50,000 – ₹1,50,000',
+  '₹1,50,000 – ₹5,00,000',
+  '₹5,00,000+',
+  'Custom Enterprise Scope',
+]
 
 const contactInfo = [
-  { icon: Mail, label: 'Email Us', value: 'hello@mehtatechnologies.com', href: 'mailto:hello@mehtatechnologies.com', color: '#5B8AF7', colorRgb: '91,138,247' },
-  { icon: Phone, label: 'Call Us', value: '+91 98765 43210', href: 'tel:+919876543210', color: '#34D399', colorRgb: '52,211,153' },
-  { icon: MapPin, label: 'Our Offices', value: 'Mumbai & Bengaluru', href: null, color: '#8B5CF6', colorRgb: '139,92,246' },
-  { icon: Clock, label: 'Response Time', value: 'Within 24 hours', href: null, color: '#FBBF24', colorRgb: '251,191,36' },
+  {
+    icon: Mail,
+    label: 'Direct Engineering Inbox',
+    value: 'hello@mehtatechnologies.com',
+    href: 'mailto:hello@mehtatechnologies.com',
+  },
+  {
+    icon: Phone,
+    label: 'Direct Phone & WhatsApp',
+    value: '+91 98765 43210',
+    href: 'tel:+919876543210',
+  },
+  {
+    icon: MapPin,
+    label: 'Engineering Hubs',
+    value: 'Mumbai & Bengaluru, India',
+    href: null,
+  },
+  {
+    icon: Clock,
+    label: 'Guaranteed Response',
+    value: 'Within 24 business hours',
+    href: null,
+  },
 ]
 
 const nextSteps = [
-  { n: '1', text: 'We review your brief and research your industry' },
-  { n: '2', text: 'Free 30-min discovery call to align on scope and goals' },
-  { n: '3', text: 'Detailed proposal — timeline, pricing, and approach' },
-  { n: '4', text: 'Project kick-off — usually within 1 week of approval' },
+  { n: '1', title: 'Architectural Review', text: 'Our technical leads analyze your requirements and existing tech stack.' },
+  { n: '2', title: '30-Min Discovery Session', text: 'We align on features, scalability goals, and product roadmap.' },
+  { n: '3', title: 'Milestone Proposal', text: 'You receive a detailed fixed-price contract with transparent line items.' },
+  { n: '4', title: 'Sprint Kickoff', text: 'We begin development with live GitHub staging access within 5 days.' },
 ]
 
-export default function ContactPage() {
-  const [form, setForm] = useState({ name: '', company: '', email: '', phone: '', service: '', budget: '', project: '' })
+function ContactForm() {
+  const searchParams = useSearchParams()
+  const initialService = searchParams.get('service') || ''
+  const initialBudget = searchParams.get('budget') || ''
+
+  const [form, setForm] = useState({
+    name: '',
+    company: '',
+    email: '',
+    phone: '',
+    service: initialService,
+    budget: initialBudget,
+    project: '',
+  })
   const [sent, setSent] = useState(false)
-  const [focused, setFocused] = useState(null)
-  const [stars, setStars] = useState([])
 
   useEffect(() => {
-    setStars(Array.from({ length: 35 }, (_, i) => ({
-      id: i, x: Math.random() * 100, y: Math.random() * 100,
-      size: Math.random() * 1.5 + 0.4, opacity: Math.random() * 0.35 + 0.05, dur: 2 + Math.random() * 3,
-    })))
-  }, [])
+    if (initialService) setForm((prev) => ({ ...prev, service: initialService }))
+    if (initialBudget) setForm((prev) => ({ ...prev, budget: initialBudget }))
+  }, [initialService, initialBudget])
 
   const handleSubmit = (e) => {
     e.preventDefault()
     if (!form.email) return
-    const subject = encodeURIComponent(`New Project Enquiry — ${form.service || 'General'} from ${form.name || 'Website'}`)
-    const body = encodeURIComponent(`Name: ${form.name}\nCompany: ${form.company}\nEmail: ${form.email}\nPhone: ${form.phone}\nService: ${form.service}\nBudget: ${form.budget}\n\nProject Details:\n${form.project}`)
+    const subject = encodeURIComponent(`Project Brief — ${form.service || 'General'} from ${form.name || 'Website'}`)
+    const body = encodeURIComponent(
+      `Client Name: ${form.name}\nCompany: ${form.company}\nEmail: ${form.email}\nPhone: ${form.phone}\nService Category: ${form.service}\nBudget Range: ${form.budget}\n\nProject Scope & Details:\n${form.project}`
+    )
     window.location.href = `mailto:hello@mehtatechnologies.com?subject=${subject}&body=${body}`
     setSent(true)
   }
 
-  const inputBase = {
-    width: '100%', padding: '12px 14px', borderRadius: 10, color: '#fff',
-    fontSize: 14, outline: 'none', fontFamily: 'var(--font-outfit)', transition: 'all 0.25s ease',
-  }
-
-  const inputStyle = (name) => ({
-    ...inputBase,
-    background: focused === name ? 'rgba(91,138,247,0.05)' : 'rgba(255,255,255,0.03)',
-    border: `1px solid ${focused === name ? 'rgba(91,138,247,0.4)' : 'rgba(255,255,255,0.08)'}`,
-    boxShadow: focused === name ? '0 0 0 3px rgba(91,138,247,0.08)' : 'none',
-  })
-
   return (
-    <>
-      {/* Hero */}
-      <section style={{ position: 'relative', paddingTop: 140, paddingBottom: 64, textAlign: 'center', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}>
-          {stars.map(s => (
-            <div key={s.id} style={{ position: 'absolute', left: `${s.x}%`, top: `${s.y}%`, width: s.size, height: s.size, borderRadius: '50%', background: '#fff', opacity: s.opacity, animation: `opacity-glow ${s.dur}s ease-in-out infinite alternate` }} />
-          ))}
-        </div>
-        <div style={{ position: 'absolute', top: '40%', left: '50%', transform: 'translate(-50%,-50%)', width: 500, height: 350, borderRadius: '50%', pointerEvents: 'none', background: 'radial-gradient(ellipse, rgba(91,138,247,0.13) 0%, rgba(139,92,246,0.07) 45%, transparent 70%)', filter: 'blur(60px)' }} />
+    <div className="rounded-3xl bg-white/[0.02] border border-white/[0.08] p-8 sm:p-10 shadow-2xl shadow-black/40 relative overflow-hidden">
+      <div className="absolute top-0 left-1/4 right-1/4 h-[1px] bg-gradient-to-r from-transparent via-blue-500/50 to-transparent" />
 
-        <div style={{ maxWidth: 720, margin: '0 auto', padding: '0 24px', position: 'relative', zIndex: 1 }}>
-          <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}>
-            <Pill>Free Consultation · No Commitment</Pill>
-          </motion.div>
-          <motion.h1 initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.65, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            style={{ fontFamily: 'var(--font-syne)', fontWeight: 800, fontSize: 'clamp(42px, 8vw, 76px)', lineHeight: 1.05, letterSpacing: '-0.03em', color: '#fff', margin: '0 0 20px' }}>
-            Let's build<br />
-            <span style={{ WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', backgroundImage: 'linear-gradient(135deg, #5B8AF7, #8B5CF6)' }}>together.</span>
-          </motion.h1>
-          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.65, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            style={{ fontFamily: 'var(--font-outfit)', fontSize: 17, color: 'rgba(255,255,255,0.45)', lineHeight: 1.65, maxWidth: 480, margin: '0 auto' }}>
-            Tell us about your project. We'll reply within 24 hours with a clear path forward.
-          </motion.p>
+      {sent ? (
+        <div className="py-16 text-center space-y-4">
+          <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto">
+            <CheckCircle2 size={32} />
+          </div>
+          <h3 className="text-2xl font-bold text-white tracking-tight">
+            Brief Sent Successfully!
+          </h3>
+          <p className="text-sm text-white/50 max-w-sm mx-auto">
+            Our engineering team has received your details and will review them before our discovery call.
+          </p>
+          <button
+            onClick={() => setSent(false)}
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-400 hover:text-blue-300 pt-4"
+          >
+            Submit Another Inquiry →
+          </button>
         </div>
+      ) : (
+        <form onSubmit={handleSubmit} className="space-y-5">
+          <div>
+            <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight mb-1">
+              Submit Your Project Brief
+            </h3>
+            <p className="text-xs sm:text-sm text-white/50">
+              Fill in your specifications for an accurate milestone timeline and cost breakdown.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-xs font-mono uppercase tracking-wider text-white/40 mb-1.5">
+                Your Name <span className="text-blue-400">*</span>
+              </label>
+              <input
+                type="text"
+                required
+                placeholder="Gaurav Mehta"
+                value={form.name}
+                onChange={(e) => setForm({ ...form, name: e.target.value })}
+                className="w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder-white/20 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-mono uppercase tracking-wider text-white/40 mb-1.5">
+                Company / Organization
+              </label>
+              <input
+                type="text"
+                placeholder="Acme Corp"
+                value={form.company}
+                onChange={(e) => setForm({ ...form, company: e.target.value })}
+                className="w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder-white/20 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all"
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-xs font-mono uppercase tracking-wider text-white/40 mb-1.5">
+                Work Email <span className="text-blue-400">*</span>
+              </label>
+              <input
+                type="email"
+                required
+                placeholder="name@company.com"
+                value={form.email}
+                onChange={(e) => setForm({ ...form, email: e.target.value })}
+                className="w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder-white/20 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-mono uppercase tracking-wider text-white/40 mb-1.5">
+                Phone / WhatsApp
+              </label>
+              <input
+                type="tel"
+                placeholder="+91 98765 43210"
+                value={form.phone}
+                onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                className="w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder-white/20 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all"
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-xs font-mono uppercase tracking-wider text-white/40 mb-1.5">
+                Service Focus
+              </label>
+              <select
+                value={form.service}
+                onChange={(e) => setForm({ ...form, service: e.target.value })}
+                className="w-full px-4 py-3 rounded-xl bg-[#0B0D14] border border-white/10 text-white text-sm focus:outline-none focus:border-blue-500 transition-all cursor-pointer"
+              >
+                <option value="">Select a service category</option>
+                {services.map((s) => (
+                  <option key={s} value={s}>
+                    {s}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label className="block text-xs font-mono uppercase tracking-wider text-white/40 mb-1.5">
+                Estimated Budget
+              </label>
+              <select
+                value={form.budget}
+                onChange={(e) => setForm({ ...form, budget: e.target.value })}
+                className="w-full px-4 py-3 rounded-xl bg-[#0B0D14] border border-white/10 text-white text-sm focus:outline-none focus:border-blue-500 transition-all cursor-pointer"
+              >
+                <option value="">Select budget range</option>
+                {budgets.map((b) => (
+                  <option key={b} value={b}>
+                    {b}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-xs font-mono uppercase tracking-wider text-white/40 mb-1.5">
+              Project Architecture & Requirements
+            </label>
+            <textarea
+              rows={4}
+              placeholder="Describe your current system, objectives, target launch date, and key features..."
+              value={form.project}
+              onChange={(e) => setForm({ ...form, project: e.target.value })}
+              className="w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder-white/20 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all resize-none"
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="w-full py-4 rounded-full text-xs sm:text-sm font-semibold bg-white text-black hover:bg-white/90 shadow-xl shadow-white/10 transition-all flex items-center justify-center gap-2 active:scale-[0.98]"
+          >
+            Submit Project Brief <ArrowRight size={15} />
+          </button>
+
+          <p className="text-center text-xs text-white/40 font-mono">
+            Direct NDA Protected · 24h Turnaround · Zero Spam Guaranteed
+          </p>
+        </form>
+      )}
+    </div>
+  )
+}
+
+export default function ContactPage() {
+  return (
+    <div className="pt-32 pb-24 overflow-hidden">
+      {/* Header */}
+      <section className="max-w-[1360px] mx-auto px-6 md:px-8 mb-16 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="max-w-3xl mx-auto"
+        >
+          <span className="glow-pill mb-4 inline-flex">
+            Get In Touch
+          </span>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.08] mb-6">
+            Let&apos;s build something{' '}
+            <span className="text-gradient-accent">exceptional together.</span>
+          </h1>
+          <p className="text-base sm:text-lg text-white/50 leading-relaxed">
+            Have a project in mind? Book a 30-minute discovery consultation with our founding team.
+          </p>
+        </motion.div>
       </section>
 
-      {/* Form + Info */}
-      <section style={{ padding: '0 24px 100px' }}>
-        <div style={{ maxWidth: 980, margin: '0 auto' }}>
-          <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }}
-            style={{ display: 'grid', gridTemplateColumns: '1fr 340px', gap: 20, alignItems: 'start' }} className="contact-grid">
+      {/* Main Grid: Form + Info / Steps */}
+      <section className="max-w-[1360px] mx-auto px-6 md:px-8 mb-24">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          {/* Left Column: Contact Form */}
+          <div className="lg:col-span-7">
+            <Suspense fallback={<div className="h-96 rounded-3xl bg-white/[0.02] animate-pulse" />}>
+              <ContactForm />
+            </Suspense>
+          </div>
 
-            {/* Form */}
-            <div style={{ background: 'rgba(255,255,255,0.025)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 20, overflow: 'hidden', position: 'relative' }}>
-              <div style={{ position: 'absolute', top: 0, left: '50%', transform: 'translateX(-50%)', width: '60%', height: 1, background: 'linear-gradient(90deg, transparent, rgba(91,138,247,0.4), transparent)' }} />
-              <div style={{ padding: '32px 28px' }}>
-                {sent ? (
-                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '48px 0', textAlign: 'center' }}>
-                    <div style={{ position: 'relative', marginBottom: 24 }}>
-                      <div style={{ width: 64, height: 64, borderRadius: '50%', background: 'rgba(52,211,153,0.1)', border: '1px solid rgba(52,211,153,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto' }}>
-                        <Send size={24} color="#34D399" />
-                      </div>
-                      <div style={{ position: 'absolute', top: -8, right: -8 }}>
-                        <CircularText text="SENT ✓ SENT ✓ " spinDuration={12} className="fill-emerald-400/40 text-[9px]" radius={38} />
-                      </div>
-                    </div>
-                    <h3 style={{ fontFamily: 'var(--font-syne)', fontWeight: 700, fontSize: 22, color: '#fff', margin: '0 0 8px' }}>Message Sent!</h3>
-                    <p style={{ fontFamily: 'var(--font-outfit)', fontSize: 14, color: 'rgba(255,255,255,0.4)', margin: '0 0 24px' }}>We'll get back to you within 24 hours.</p>
-                    <button onClick={() => { setSent(false); setForm({ name:'',company:'',email:'',phone:'',service:'',budget:'',project:'' }) }}
-                      style={{ fontFamily: 'var(--font-outfit)', fontSize: 13.5, color: '#5B8AF7', background: 'none', border: 'none', cursor: 'pointer' }}>
-                      Send another message →
-                    </button>
-                  </div>
-                ) : (
-                  <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-                    <div>
-                      <p style={{ fontFamily: 'var(--font-syne)', fontWeight: 700, fontSize: 18, color: '#fff', margin: '0 0 4px' }}>Tell us about your project</p>
-                      <p style={{ fontFamily: 'var(--font-outfit)', fontSize: 13.5, color: 'rgba(255,255,255,0.38)', margin: 0 }}>The more detail you share, the better we can help.</p>
-                    </div>
-
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }} className="form-grid">
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-                        <label style={{ fontFamily: 'var(--font-outfit)', fontSize: 11.5, color: 'rgba(255,255,255,0.4)', letterSpacing: '0.04em' }}>Your Name <span style={{ color: '#5B8AF7' }}>*</span></label>
-                        <input type="text" placeholder="Full name" value={form.name} onChange={e => setForm({...form, name: e.target.value})} onFocus={() => setFocused('name')} onBlur={() => setFocused(null)} style={inputStyle('name')} required />
-                      </div>
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-                        <label style={{ fontFamily: 'var(--font-outfit)', fontSize: 11.5, color: 'rgba(255,255,255,0.4)', letterSpacing: '0.04em' }}>Company</label>
-                        <input type="text" placeholder="Your company" value={form.company} onChange={e => setForm({...form, company: e.target.value})} onFocus={() => setFocused('company')} onBlur={() => setFocused(null)} style={inputStyle('company')} />
-                      </div>
-                    </div>
-
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }} className="form-grid">
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-                        <label style={{ fontFamily: 'var(--font-outfit)', fontSize: 11.5, color: 'rgba(255,255,255,0.4)', letterSpacing: '0.04em' }}>Email <span style={{ color: '#5B8AF7' }}>*</span></label>
-                        <input type="email" placeholder="you@company.com" value={form.email} onChange={e => setForm({...form, email: e.target.value})} onFocus={() => setFocused('email')} onBlur={() => setFocused(null)} style={inputStyle('email')} required />
-                      </div>
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-                        <label style={{ fontFamily: 'var(--font-outfit)', fontSize: 11.5, color: 'rgba(255,255,255,0.4)', letterSpacing: '0.04em' }}>Phone</label>
-                        <input type="tel" placeholder="Your phone" value={form.phone} onChange={e => setForm({...form, phone: e.target.value})} onFocus={() => setFocused('phone')} onBlur={() => setFocused(null)} style={inputStyle('phone')} />
-                      </div>
-                    </div>
-
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }} className="form-grid">
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-                        <label style={{ fontFamily: 'var(--font-outfit)', fontSize: 11.5, color: 'rgba(255,255,255,0.4)', letterSpacing: '0.04em' }}>Service Needed</label>
-                        <select value={form.service} onChange={e => setForm({...form, service: e.target.value})} onFocus={() => setFocused('service')} onBlur={() => setFocused(null)} style={{ ...inputStyle('service'), appearance: 'none', cursor: 'pointer' }}>
-                          <option value="" style={{ background: '#060614' }}>Select a service</option>
-                          {services.map(s => <option key={s} value={s} style={{ background: '#060614' }}>{s}</option>)}
-                        </select>
-                      </div>
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-                        <label style={{ fontFamily: 'var(--font-outfit)', fontSize: 11.5, color: 'rgba(255,255,255,0.4)', letterSpacing: '0.04em' }}>Budget Range</label>
-                        <select value={form.budget} onChange={e => setForm({...form, budget: e.target.value})} onFocus={() => setFocused('budget')} onBlur={() => setFocused(null)} style={{ ...inputStyle('budget'), appearance: 'none', cursor: 'pointer' }}>
-                          <option value="" style={{ background: '#060614' }}>Select budget</option>
-                          {budgets.map(b => <option key={b} value={b} style={{ background: '#060614' }}>{b}</option>)}
-                        </select>
-                      </div>
-                    </div>
-
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-                      <label style={{ fontFamily: 'var(--font-outfit)', fontSize: 11.5, color: 'rgba(255,255,255,0.4)', letterSpacing: '0.04em' }}>Project Details</label>
-                      <textarea rows={5} placeholder="Tell us what you're building, what problem you're solving, your timeline, and any technical context..." value={form.project} onChange={e => setForm({...form, project: e.target.value})} onFocus={() => setFocused('project')} onBlur={() => setFocused(null)} style={{ ...inputStyle('project'), resize: 'vertical', minHeight: 120 }} />
-                    </div>
-
-                    <button type="submit" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, padding: '14px', borderRadius: 12, background: 'linear-gradient(135deg, #5B8AF7, #8B5CF6)', fontFamily: 'var(--font-outfit)', fontWeight: 600, fontSize: 15, color: '#fff', cursor: 'pointer', border: 'none', boxShadow: '0 8px 32px rgba(91,138,247,0.28)', marginTop: 4 }}>
-                      Send Project Brief <ArrowRight size={15} />
-                    </button>
-                    <p style={{ fontFamily: 'var(--font-outfit)', fontSize: 12, color: 'rgba(255,255,255,0.28)', textAlign: 'center', margin: 0 }}>Free consultation · No commitment · Reply within 24h</p>
-                  </form>
-                )}
-              </div>
-            </div>
-
-            {/* Info panel */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-              {contactInfo.map(({ icon: Icon, label, value, href, color, colorRgb }) => {
-                const inner = (
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 14, padding: '16px', borderRadius: 14, background: 'rgba(255,255,255,0.025)', border: '1px solid rgba(255,255,255,0.07)', transition: 'border-color 0.25s' }}
-                    onMouseEnter={e => e.currentTarget.style.borderColor = `rgba(${colorRgb},0.25)`}
-                    onMouseLeave={e => e.currentTarget.style.borderColor = 'rgba(255,255,255,0.07)'}>
-                    <div style={{ width: 40, height: 40, borderRadius: 10, background: `rgba(${colorRgb},0.1)`, border: `1px solid rgba(${colorRgb},0.2)`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                      <Icon size={16} color={color} />
+          {/* Right Column: Contact Channels & What Happens Next */}
+          <div className="lg:col-span-5 space-y-6">
+            {/* Quick Contact Channels */}
+            <div className="space-y-3">
+              {contactInfo.map((info) => {
+                const Icon = info.icon
+                const content = (
+                  <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.08] hover:border-blue-500/30 transition-all flex items-center gap-4 group">
+                    <div className="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 shrink-0 group-hover:scale-105 transition-transform">
+                      <Icon size={18} />
                     </div>
                     <div>
-                      <p style={{ fontFamily: 'var(--font-outfit)', fontSize: 11, color: 'rgba(255,255,255,0.35)', margin: '0 0 2px' }}>{label}</p>
-                      <p style={{ fontFamily: 'var(--font-outfit)', fontSize: 13.5, fontWeight: 500, color: 'rgba(255,255,255,0.7)', margin: 0 }}>{value}</p>
+                      <div className="text-[11px] font-mono uppercase tracking-wider text-white/40">
+                        {info.label}
+                      </div>
+                      <div className="text-sm font-semibold text-white group-hover:text-blue-400 transition-colors">
+                        {info.value}
+                      </div>
                     </div>
                   </div>
                 )
-                return href ? (
-                  <a key={label} href={href} style={{ textDecoration: 'none' }}>{inner}</a>
+                return info.href ? (
+                  <a key={info.label} href={info.href} className="block">
+                    {content}
+                  </a>
                 ) : (
-                  <div key={label}>{inner}</div>
+                  <div key={info.label}>{content}</div>
                 )
               })}
+            </div>
 
-              {/* What happens next */}
-              <div style={{ padding: '20px', borderRadius: 14, background: 'rgba(255,255,255,0.025)', border: '1px solid rgba(255,255,255,0.07)' }}>
-                <p style={{ fontFamily: 'var(--font-outfit)', fontSize: 10.5, color: 'rgba(255,255,255,0.28)', textTransform: 'uppercase', letterSpacing: '0.15em', margin: '0 0 16px' }}>What happens next</p>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-                  {nextSteps.map(step => (
-                    <div key={step.n} style={{ display: 'flex', alignItems: 'flex-start', gap: 10 }}>
-                      <div style={{ width: 22, height: 22, borderRadius: '50%', background: 'rgba(91,138,247,0.1)', border: '1px solid rgba(91,138,247,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: 1 }}>
-                        <span style={{ fontFamily: 'var(--font-syne)', fontWeight: 700, fontSize: 9.5, color: 'rgba(91,138,247,0.8)' }}>{step.n}</span>
-                      </div>
-                      <span style={{ fontFamily: 'var(--font-outfit)', fontSize: 13, color: 'rgba(255,255,255,0.42)', lineHeight: 1.55 }}>{step.text}</span>
-                    </div>
-                  ))}
-                </div>
+            {/* What Happens Next Card */}
+            <div className="rounded-3xl bg-white/[0.02] border border-white/[0.08] p-6 sm:p-7 space-y-4">
+              <div className="text-xs font-mono uppercase tracking-wider text-white/40">
+                What Happens Next
               </div>
-
-              <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '10px 14px', borderRadius: 10, background: 'rgba(52,211,153,0.04)', border: '1px solid rgba(52,211,153,0.12)' }}>
-                <div style={{ width: 7, height: 7, borderRadius: '50%', background: '#34D399', boxShadow: '0 0 6px rgba(52,211,153,0.5)' }} />
-                <span style={{ fontFamily: 'var(--font-outfit)', fontSize: 12.5, color: 'rgba(255,255,255,0.42)' }}>Available for new projects immediately</span>
+              <div className="space-y-4">
+                {nextSteps.map((step) => (
+                  <div key={step.n} className="flex items-start gap-3.5">
+                    <div className="w-6 h-6 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-mono font-bold flex items-center justify-center shrink-0 mt-0.5">
+                      {step.n}
+                    </div>
+                    <div>
+                      <div className="text-xs font-bold text-white mb-0.5">{step.title}</div>
+                      <div className="text-xs text-white/50 leading-relaxed">{step.text}</div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
-          </motion.div>
+
+            {/* Live Availability Badge */}
+            <div className="p-4 rounded-2xl bg-emerald-500/5 border border-emerald-500/15 flex items-center gap-3 text-xs text-emerald-400">
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+              <span>Available for new Q1/Q2 sprint kickoffs immediately</span>
+            </div>
+
+          </div>
+
         </div>
-        <style>{`@media (max-width: 820px) { .contact-grid { grid-template-columns: 1fr !important; } .form-grid { grid-template-columns: 1fr !important; } }`}</style>
       </section>
-    </>
+    </div>
   )
 }

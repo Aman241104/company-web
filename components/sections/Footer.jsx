@@ -1,88 +1,143 @@
 'use client'
-
-function LinkedInIcon() { return <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg> }
-function XIcon() { return <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> }
-function InstagramIcon() { return <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg> }
+import Link from 'next/link'
+import { ArrowUpRight, Mail, Phone, MapPin, Heart } from 'lucide-react'
 
 const cols = [
-  { title: 'Services', links: [
-    { label: 'Website Development', href: '/services' },
-    { label: 'Software Development', href: '/services' },
-    { label: 'Mobile Apps', href: '/services' },
-    { label: 'Performance Marketing', href: '/services' },
-    { label: 'SEO Optimization', href: '/services' },
-    { label: 'SaaS Products', href: '/services' },
-  ]},
-  { title: 'Portfolio', links: [
-    { label: 'All Projects', href: '/work' },
-    { label: 'Web Projects', href: '/work' },
-    { label: 'E-Commerce', href: '/work' },
-    { label: 'SaaS & Apps', href: '/work' },
-    { label: 'ViboERP', href: '/work' },
-  ]},
-  { title: 'Company', links: [
-    { label: 'About Us', href: '/about' },
-    { label: 'Our Process', href: '/#process' },
-    { label: 'Pricing', href: '/#pricing' },
-    { label: 'Contact', href: '/contact' },
-    { label: 'Privacy Policy', href: '#' },
-    { label: 'Terms of Service', href: '#' },
-  ]},
-]
-
-const socials = [
-  { icon: <LinkedInIcon />, href: '#', label: 'LinkedIn' },
-  { icon: <XIcon />, href: '#', label: 'X / Twitter' },
-  { icon: <InstagramIcon />, href: '#', label: 'Instagram' },
+  {
+    title: 'Products & Platforms',
+    links: [
+      { label: 'Vibo ERP Suite', href: '/#products' },
+      { label: 'CRM & Pipeline Engine', href: '/#products' },
+      { label: 'Inventory Matrix', href: '/#products' },
+      { label: 'HRMS & Automated Payroll', href: '/#products' },
+      { label: 'AI Search & Analytics', href: '/#products' },
+    ],
+  },
+  {
+    title: 'Services',
+    links: [
+      { label: 'Web Applications (Next.js)', href: '/services' },
+      { label: 'Mobile Apps (iOS & Android)', href: '/services' },
+      { label: 'Custom Enterprise ERP', href: '/services' },
+      { label: 'AI Integration & Workflows', href: '/services' },
+      { label: 'Technical SEO & Performance', href: '/services' },
+    ],
+  },
+  {
+    title: 'Company',
+    links: [
+      { label: 'About Mehta Tech', href: '/about' },
+      { label: 'Portfolio & Case Studies', href: '/work' },
+      { label: 'Interactive Pricing Matrix', href: '/#pricing' },
+      { label: 'Leadership & Team', href: '/#team' },
+      { label: 'Careers & Hiring', href: 'mailto:careers@mehtatechnologies.com' },
+    ],
+  },
 ]
 
 export default function Footer() {
   return (
-    <footer style={{ borderTop: '1px solid rgba(255,255,255,0.07)', background: 'rgba(0,0,0,0.3)' }}>
-      <div style={{ maxWidth: 1100, margin: '0 auto', padding: '64px 24px 0' }}>
-        <div className="grid grid-cols-2 md:grid-cols-4" style={{ gap: 40, marginBottom: 56 }}>
-          {/* Brand */}
-          <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 9, marginBottom: 16 }}>
-              <div style={{ width: 30, height: 30, borderRadius: 8, background: 'linear-gradient(135deg, #5B8AF7, #8B5CF6)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--font-syne)', fontWeight: 800, fontSize: 13, color: '#fff' }}>M</div>
-              <span style={{ fontFamily: 'var(--font-syne)', fontWeight: 700, fontSize: 14, color: '#fff', letterSpacing: '-0.02em' }}>Mehta Technologies</span>
-            </div>
-            <p style={{ fontFamily: 'var(--font-outfit)', fontSize: 13.5, color: 'rgba(255,255,255,0.35)', lineHeight: 1.65, margin: '0 0 24px', maxWidth: 240 }}>
-              Great software, delivered. 150+ products shipped across India, US, UK & UAE since 2019.
+    <footer className="bg-[#05060A] border-t border-white/[0.08] text-white">
+      <div className="max-w-[1360px] mx-auto px-6 md:px-8 pt-16 pb-12">
+        {/* Main Footer Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 pb-16 border-b border-white/[0.08]">
+          
+          {/* Brand Column */}
+          <div className="lg:col-span-4 space-y-6">
+            <Link href="/" className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center font-extrabold text-white text-sm">
+                M
+              </div>
+              <span className="text-base font-bold tracking-tight text-white">
+                Mehta Technologies
+              </span>
+            </Link>
+
+            <p className="text-xs sm:text-sm text-white/50 leading-relaxed max-w-sm font-normal">
+              High-performance digital engineering studio. We build production-ready web applications, mobile apps, and scalable SaaS platforms for visionary founders and global enterprises.
             </p>
-            <div style={{ display: 'flex', gap: 8 }}>
-              {socials.map(s => (
-                <a key={s.label} href={s.href} aria-label={s.label} style={{ width: 34, height: 34, borderRadius: 8, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'rgba(255,255,255,0.4)', textDecoration: 'none', transition: 'all 0.2s' }}
-                  onMouseEnter={e => { e.currentTarget.style.background = 'rgba(91,138,247,0.1)'; e.currentTarget.style.color = '#5B8AF7'; e.currentTarget.style.borderColor = 'rgba(91,138,247,0.2)' }}
-                  onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.05)'; e.currentTarget.style.color = 'rgba(255,255,255,0.4)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)' }}
-                >
-                  {s.icon}
+
+            <div className="space-y-2 text-xs text-white/50">
+              <div className="flex items-center gap-2">
+                <MapPin size={13} className="text-blue-400" />
+                <span>Mumbai, India · Working Globally</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Mail size={13} className="text-blue-400" />
+                <a href="mailto:hello@mehtatechnologies.com" className="hover:text-white transition-colors">
+                  hello@mehtatechnologies.com
                 </a>
-              ))}
+              </div>
+            </div>
+
+            {/* Social Icons */}
+            <div className="flex items-center gap-3 pt-2">
+              <a
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+                className="w-8 h-8 rounded-lg bg-white/[0.04] hover:bg-blue-600/20 hover:text-blue-400 border border-white/[0.08] flex items-center justify-center text-white/50 transition-all"
+              >
+                <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                  <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+                </svg>
+              </a>
+              <a
+                href="https://github.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub"
+                className="w-8 h-8 rounded-lg bg-white/[0.04] hover:bg-blue-600/20 hover:text-blue-400 border border-white/[0.08] flex items-center justify-center text-white/50 transition-all"
+              >
+                <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                  <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/>
+                </svg>
+              </a>
             </div>
           </div>
 
-          {/* Link columns */}
-          {cols.map(col => (
-            <div key={col.title}>
-              <div style={{ fontFamily: 'var(--font-syne)', fontWeight: 600, fontSize: 13, color: 'rgba(255,255,255,0.6)', marginBottom: 16, letterSpacing: '0.03em' }}>{col.title}</div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                {col.links.map(l => (
-                  <a key={l.label} href={l.href} style={{ fontFamily: 'var(--font-outfit)', fontSize: 13.5, color: 'rgba(255,255,255,0.32)', textDecoration: 'none', transition: 'color 0.2s' }}
-                    onMouseEnter={e => e.target.style.color = 'rgba(255,255,255,0.75)'}
-                    onMouseLeave={e => e.target.style.color = 'rgba(255,255,255,0.32)'}
-                  >
-                    {l.label}
-                  </a>
-                ))}
+          {/* Navigation Columns */}
+          <div className="lg:col-span-8 grid grid-cols-2 sm:grid-cols-3 gap-8">
+            {cols.map((col) => (
+              <div key={col.title}>
+                <h4 className="text-xs font-mono uppercase tracking-wider text-white/40 mb-4">
+                  {col.title}
+                </h4>
+                <ul className="space-y-2.5">
+                  {col.links.map((link) => (
+                    <li key={link.label}>
+                      <Link
+                        href={link.href}
+                        className="text-xs sm:text-sm text-white/60 hover:text-white transition-colors block"
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
+
         </div>
 
-        <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)', padding: '20px 0', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}>
-          <span style={{ fontFamily: 'var(--font-outfit)', fontSize: 12.5, color: 'rgba(255,255,255,0.22)' }}>© 2026 Mehta Technologies. All rights reserved.</span>
-          <span style={{ fontFamily: 'var(--font-outfit)', fontSize: 12.5, color: 'rgba(255,255,255,0.22)' }}>hello@mehtatechnologies.com</span>
+        {/* Bottom Bar */}
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/40">
+          <div>
+            © {new Date().getFullYear()} Mehta Technologies. All rights reserved.
+          </div>
+          <div className="flex items-center gap-6">
+            <Link href="/privacy" className="hover:text-white/70 transition-colors">
+              Privacy Policy
+            </Link>
+            <Link href="/terms" className="hover:text-white/70 transition-colors">
+              Terms of Service
+            </Link>
+            <Link href="/contact" className="hover:text-white/70 transition-colors">
+              Contact
+            </Link>
+          </div>
         </div>
       </div>
     </footer>

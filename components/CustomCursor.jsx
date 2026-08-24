@@ -1,18 +1,20 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
+import { usePrefersReducedMotion } from '@/lib/usePrefersReducedMotion'
 
 export default function CustomCursor() {
   const dotRef = useRef(null)
   const ringRef = useRef(null)
   const labelRef = useRef(null)
   const [isTouch, setIsTouch] = useState(true)
+  const reducedMotion = usePrefersReducedMotion()
 
   useEffect(() => {
     setIsTouch(window.matchMedia('(pointer: coarse)').matches)
   }, [])
 
   useEffect(() => {
-    if (isTouch) return
+    if (isTouch || reducedMotion) return
     const dot = dotRef.current
     const ring = ringRef.current
     const label = labelRef.current
@@ -94,7 +96,18 @@ export default function CustomCursor() {
     }
     bindAll()
 
-    const observer = new MutationObserver(bindAll)
+    // Debounced: DOM churn from framer-motion/GSAP fires many mutations per frame during
+    // animations — rebinding on every single one is wasteful, so batch via rAF instead.
+    let rebindScheduled = false
+    const scheduleRebind = () => {
+      if (rebindScheduled) return
+      rebindScheduled = true
+      requestAnimationFrame(() => {
+        rebindScheduled = false
+        bindAll()
+      })
+    }
+    const observer = new MutationObserver(scheduleRebind)
     observer.observe(document.body, { childList: true, subtree: true })
 
     return () => {
@@ -102,9 +115,9 @@ export default function CustomCursor() {
       document.removeEventListener('mousemove', onMove)
       observer.disconnect()
     }
-  }, [isTouch])
+  }, [isTouch, reducedMotion])
 
-  if (isTouch) return null
+  if (isTouch || reducedMotion) return null
 
   return (
     <>

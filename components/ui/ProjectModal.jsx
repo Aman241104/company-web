@@ -1,213 +1,175 @@
 'use client'
 import { useEffect, useRef } from 'react'
-import { gsap } from 'gsap'
-import { X, ArrowUpRight, Tag, Calendar } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { X, ArrowUpRight, CheckCircle2, Layers, Calendar, ExternalLink, Globe, Sparkles } from 'lucide-react'
 import BrowserMockup from './BrowserMockup'
-import PhoneMockup from './PhoneMockup'
 
 export default function ProjectModal({ project, onClose }) {
-  const overlayRef = useRef(null)
-  const panelRef = useRef(null)
   const { MockupContent } = project
 
   useEffect(() => {
     document.body.style.overflow = 'hidden'
-    const tl = gsap.timeline()
-    tl.fromTo(overlayRef.current,
-      { opacity: 0 },
-      { opacity: 1, duration: 0.35, ease: 'power2.out' }
-    )
-    tl.fromTo(panelRef.current,
-      { opacity: 0, y: 40, scale: 0.96 },
-      { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: 'power3.out' },
-      '-=0.2'
-    )
-    return () => { document.body.style.overflow = '' }
-  }, [])
-
-  const close = () => {
-    const tl = gsap.timeline({ onComplete: onClose })
-    tl.to(panelRef.current, { opacity: 0, y: 24, scale: 0.96, duration: 0.3, ease: 'power2.in' })
-    tl.to(overlayRef.current, { opacity: 0, duration: 0.25 }, '-=0.1')
-  }
-
-  const handleBackdrop = (e) => {
-    if (e.target === overlayRef.current) close()
-  }
-
-  useEffect(() => {
-    const onKey = (e) => { if (e.key === 'Escape') close() }
+    const onKey = (e) => {
+      if (e.key === 'Escape') onClose()
+    }
     window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
-  }, [])
+    return () => {
+      document.body.style.overflow = ''
+      window.removeEventListener('keydown', onKey)
+    }
+  }, [onClose])
+
+  const accent = project.accent || '#3B82F6'
 
   return (
     <div
-      ref={overlayRef}
-      className="fixed inset-0 z-[600] flex items-center justify-center p-4 md:p-6 lg:p-10"
-      style={{ background: 'rgba(4,4,8,0.9)', backdropFilter: 'blur(16px)' }}
-      onClick={handleBackdrop}
+      className="fixed inset-0 z-[600] flex items-center justify-center p-4 sm:p-6 md:p-8 bg-black/80 backdrop-blur-xl overflow-y-auto"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose()
+      }}
     >
-      <div
-        ref={panelRef}
-        className="relative w-full flex flex-col lg:flex-row gap-0 overflow-hidden rounded-2xl border border-white/[0.08]"
-        style={{
-          maxWidth: 1100,
-          maxHeight: '90vh',
-          background: '#0a0a12',
-          boxShadow: `0 40px 120px rgba(0,0,0,0.8), 0 0 0 1px rgba(${project.accentRgb},0.15), 0 0 80px rgba(${project.accentRgb},0.06)`,
-        }}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.95, y: 20 }}
+        transition={{ duration: 0.3, ease: 'easeOut' }}
+        className="relative w-full max-w-5xl rounded-3xl bg-[#0B0D14] border border-white/10 shadow-2xl shadow-black/90 overflow-hidden flex flex-col lg:flex-row my-auto max-h-[90vh]"
       >
         {/* Close button */}
         <button
-          onClick={close}
-          className="absolute top-4 right-4 z-20 w-9 h-9 rounded-full flex items-center justify-center border border-white/10 text-white/40 hover:text-white hover:border-white/30 transition-all"
-          style={{ background: 'rgba(0,0,0,0.4)', backdropFilter: 'blur(8px)' }}
+          onClick={onClose}
+          aria-label="Close case study modal"
+          className="absolute top-4 right-4 z-30 p-2.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 text-white transition-all"
         >
-          <X size={15} />
+          <X size={16} />
         </button>
 
-        {/* LEFT: Live Preview */}
-        <div
-          className="flex-1 flex flex-col overflow-hidden"
-          style={{ background: project.gradient, minHeight: project.mockupType === 'phone' ? 420 : 480 }}
-        >
-          {/* Dot grid */}
-          <div className="absolute inset-0 pointer-events-none" style={{
-            backgroundImage: 'radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px)',
-            backgroundSize: '24px 24px',
-          }} />
+        {/* LEFT COLUMN: Live Preview Mockup */}
+        <div className="lg:w-[55%] p-6 sm:p-8 bg-gradient-to-br from-white/[0.03] to-transparent border-b lg:border-b-0 lg:border-r border-white/10 flex flex-col justify-between overflow-y-auto">
+          <div>
+            <div className="flex items-center gap-2 mb-4">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="text-[11px] font-mono uppercase tracking-wider text-white/50">
+                Interactive Preview
+              </span>
+            </div>
 
-          {/* Preview label */}
-          <div className="flex items-center gap-2 px-5 pt-5 pb-3 shrink-0 relative z-10">
-            <div className="w-1.5 h-1.5 rounded-full" style={{ background: project.accent }} />
-            <span className="text-[10px] uppercase tracking-[0.2em]" style={{ color: `rgba(${project.accentRgb},0.6)` }}>
-              Live Preview
-            </span>
+            <div className="rounded-2xl border border-white/10 overflow-hidden bg-[#07080C] shadow-2xl">
+              {/* Browser chrome header */}
+              <div className="flex items-center justify-between px-4 py-2.5 bg-black/40 border-b border-white/[0.06] text-xs text-white/40">
+                <div className="flex gap-1.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-red-500/60" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/60" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-green-500/60" />
+                </div>
+                <span className="font-mono text-[11px] text-white/50 truncate max-w-[200px]">
+                  {project.mockupUrl || 'app.mehtatechnologies.com'}
+                </span>
+                <div className="w-6" />
+              </div>
+
+              {/* View area */}
+              <div className="max-h-[360px] sm:max-h-[420px] overflow-y-auto bg-[#07080C]">
+                {MockupContent ? <MockupContent /> : null}
+              </div>
+            </div>
           </div>
 
-          <div
-            className="flex-1 flex items-center justify-center px-5 pb-5 relative z-10"
-            style={{
-              filter: `drop-shadow(0 20px 60px rgba(${project.accentRgb},0.25))`,
-            }}
-          >
-            {project.mockupType === 'phone' ? (
-              <PhoneMockup style={{ maxWidth: 220 }}>
-                <MockupContent />
-              </PhoneMockup>
-            ) : (
-              <div className="w-full">
-                <BrowserMockup url={project.mockupUrl}>
-                  <div style={{ maxHeight: 340, overflowY: 'auto', scrollbarWidth: 'none' }}>
-                    <MockupContent />
-                  </div>
-                </BrowserMockup>
-              </div>
+          <div className="mt-6 flex items-center justify-between pt-4 border-t border-white/[0.08]">
+            <div className="text-xs text-white/40 font-mono">
+              Designed & Engineered by Mehta Technologies
+            </div>
+            {project.link && (
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-400 hover:text-blue-300 transition-colors"
+              >
+                Open in New Tab <ExternalLink size={12} />
+              </a>
             )}
           </div>
         </div>
 
-        {/* RIGHT: Project Details */}
-        <div
-          className="lg:w-[340px] shrink-0 flex flex-col overflow-y-auto"
-          style={{ background: '#0d0d18', borderLeft: '1px solid rgba(255,255,255,0.05)', scrollbarWidth: 'none' }}
-        >
-          <div className="p-7 flex flex-col gap-6 flex-1">
-            {/* Header */}
+        {/* RIGHT COLUMN: Case Study Breakdown */}
+        <div className="lg:w-[45%] p-6 sm:p-8 flex flex-col justify-between overflow-y-auto bg-[#0A0C14]">
+          <div className="space-y-6">
             <div>
-              <div className="flex items-center gap-3 mb-4">
-                <span className="font-display font-bold text-xs tabular-nums" style={{ color: `rgba(${project.accentRgb},0.5)` }}>
-                  {project.id}
+              <div className="flex items-center gap-3 mb-3">
+                <span className="px-3 py-1 rounded-full text-[11px] font-semibold bg-blue-500/10 border border-blue-500/20 text-blue-400">
+                  {project.category}
                 </span>
-                <span
-                  className="text-[10px] px-2.5 py-0.5 rounded-full font-medium"
-                  style={{ background: `rgba(${project.accentRgb},0.1)`, color: project.accent, border: `1px solid rgba(${project.accentRgb},0.2)` }}
-                >
-                  {project.type}
+                <span className="text-xs font-mono text-white/40">
+                  {project.year || '2024'}
                 </span>
-                <div className="flex items-center gap-1.5 ml-auto">
-                  <Calendar size={11} className="text-white/20" />
-                  <span className="text-white/25 text-[10px]">{project.year}</span>
-                </div>
               </div>
 
-              <h2
-                className="font-display font-black text-white leading-none mb-2"
-                style={{ fontSize: 'clamp(1.8rem, 3vw, 2.5rem)', letterSpacing: '-0.03em' }}
-              >
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mb-2">
                 {project.name}
               </h2>
-              <p style={{ color: project.accent }} className="text-sm font-medium mb-4">
-                {project.category}
-              </p>
-              <p className="text-white/35 text-sm leading-relaxed">
+
+              <p className="text-sm text-white/60 leading-relaxed font-normal">
                 {project.desc}
               </p>
             </div>
 
-            {/* Result */}
-            <div
-              className="rounded-xl p-4 flex items-center gap-3"
-              style={{ background: `rgba(${project.accentRgb},0.07)`, border: `1px solid rgba(${project.accentRgb},0.15)` }}
-            >
-              <div className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0" style={{ background: `rgba(${project.accentRgb},0.15)` }}>
-                <span style={{ color: project.accent, fontSize: 14 }}>↑</span>
+            {/* Key Measurable Outcome */}
+            <div className="p-4 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center gap-3.5">
+              <div className="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center text-blue-400 shrink-0">
+                <CheckCircle2 size={18} />
               </div>
               <div>
-                <p className="text-white/30 text-[10px] uppercase tracking-wide mb-0.5">Key Result</p>
-                <p className="text-white font-semibold text-sm">{project.result}</p>
+                <div className="text-[11px] uppercase tracking-wider font-semibold text-blue-400/80">
+                  Verified Outcome
+                </div>
+                <div className="text-base font-bold text-white tracking-tight">
+                  {project.result}
+                </div>
               </div>
             </div>
 
-            {/* Tags */}
+            {/* Tech Stack */}
             <div>
-              <div className="flex items-center gap-2 mb-3">
-                <Tag size={11} className="text-white/20" />
-                <p className="text-white/25 text-[10px] uppercase tracking-[0.15em]">Technologies</p>
+              <div className="text-xs font-mono uppercase tracking-wider text-white/40 mb-2.5">
+                Engineered With
               </div>
-              <div className="flex flex-wrap gap-2">
-                {project.tags.map((t) => (
+              <div className="flex flex-wrap gap-1.5">
+                {project.tags.map((tag) => (
                   <span
-                    key={t}
-                    className="text-[11px] px-2.5 py-1 rounded-full font-medium"
-                    style={{ background: `rgba(${project.accentRgb},0.08)`, color: project.accent, border: `1px solid rgba(${project.accentRgb},0.15)` }}
+                    key={tag}
+                    className="px-2.5 py-1 rounded-md text-xs font-medium bg-white/[0.04] text-white/70 border border-white/[0.08]"
                   >
-                    {t}
+                    {tag}
                   </span>
                 ))}
               </div>
             </div>
-
-            {/* Spacer */}
-            <div className="flex-1" />
-
-            {/* Actions */}
-            <div className="flex flex-col gap-3 pt-4 border-t border-white/[0.06]">
-              {project.mockupUrl && (
-                <a
-                  href={`https://${project.mockupUrl}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-center justify-center gap-2 py-3.5 rounded-xl text-white font-semibold text-sm relative overflow-hidden"
-                  style={{ background: `linear-gradient(135deg, rgba(${project.accentRgb},0.8), rgba(${project.accentRgb},0.5))` }}
-                >
-                  <span className="absolute inset-0 translate-x-[-110%] skew-x-[-20deg] bg-white/10 group-hover:translate-x-[150%] transition-transform duration-700" />
-                  <span className="relative">Visit Live Site</span>
-                  <ArrowUpRight size={15} className="relative transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </a>
-              )}
-              <a
-                href="#contact"
-                onClick={close}
-                className="flex items-center justify-center gap-2 py-3 rounded-xl text-white/50 text-sm border border-white/[0.08] hover:text-white hover:border-white/20 transition-all"
-              >
-                Build Something Similar
-              </a>
-            </div>
           </div>
+
+          {/* Action CTAs */}
+          <div className="pt-6 mt-8 border-t border-white/[0.08] flex flex-col sm:flex-row gap-3">
+            {project.link && (
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 py-3 px-4 rounded-full text-xs font-semibold bg-white text-black hover:bg-white/90 text-center transition-all flex items-center justify-center gap-2"
+              >
+                Visit Live Site <ArrowUpRight size={13} />
+              </a>
+            )}
+            <a
+              href="/contact"
+              onClick={onClose}
+              className="flex-1 py-3 px-4 rounded-full text-xs font-semibold bg-white/[0.06] hover:bg-white/[0.12] text-white border border-white/10 text-center transition-all flex items-center justify-center gap-2"
+            >
+              Build Similar Project
+            </a>
+          </div>
+
         </div>
-      </div>
+      </motion.div>
     </div>
   )
 }

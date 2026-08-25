@@ -536,11 +536,11 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
         </div>
 
         {/* Key Metrics Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-16 sm:mb-20">
           {study.metrics.map((m) => (
-            <div key={m.label} className="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.08] space-y-1">
-              <div className="text-xs font-mono uppercase text-white/40">{m.label}</div>
-              <div className="text-3xl font-extrabold text-emerald-400 font-mono">{m.value}</div>
+            <div key={m.label} className="p-4 sm:p-6 rounded-2xl bg-white/[0.02] border border-white/[0.08] space-y-1">
+              <div className="text-[10px] sm:text-xs font-mono uppercase text-white/40">{m.label}</div>
+              <div className="text-2xl sm:text-3xl font-extrabold text-emerald-400 font-mono">{m.value}</div>
               <div className="text-xs text-white/50">{m.detail}</div>
             </div>
           ))}

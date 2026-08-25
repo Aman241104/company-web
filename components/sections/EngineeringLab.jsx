@@ -261,22 +261,22 @@ export default function EngineeringLab() {
 
               {/* Scoper Blueprint Specs Grid */}
               <div className="p-6 rounded-2xl bg-black/40 border border-white/[0.08] space-y-6">
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-5 border-b border-white/[0.06]">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-white/[0.06]">
                   <div>
                     <span className="text-[11px] font-mono text-blue-400 uppercase tracking-wider">
                       Architectural Blueprint
                     </span>
-                    <h3 className="text-xl font-bold text-white mt-0.5">{selectedBlueprint.title}</h3>
+                    <h3 className="text-lg sm:text-xl font-bold text-white mt-0.5">{selectedBlueprint.title}</h3>
                     <p className="text-xs text-white/55 mt-1 max-w-xl">{selectedBlueprint.description}</p>
                   </div>
-                  <div className="flex items-center gap-4 shrink-0">
-                    <div className="text-right">
+                  <div className="flex items-center gap-4 self-start sm:self-auto shrink-0 pt-2 sm:pt-0">
+                    <div className="text-left sm:text-right">
                       <div className="text-[10px] text-white/40 font-mono">TIMELINE</div>
-                      <div className="text-sm font-bold text-white">{selectedBlueprint.timeline}</div>
+                      <div className="text-xs sm:text-sm font-bold text-white">{selectedBlueprint.timeline}</div>
                     </div>
-                    <div className="text-right">
+                    <div className="text-left sm:text-right">
                       <div className="text-[10px] text-white/40 font-mono">ESTIMATION</div>
-                      <div className="text-sm font-bold text-emerald-400">{selectedBlueprint.estimatedCost}</div>
+                      <div className="text-xs sm:text-sm font-bold text-emerald-400">{selectedBlueprint.estimatedCost}</div>
                     </div>
                   </div>
                 </div>

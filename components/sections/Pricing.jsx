@@ -197,7 +197,7 @@ export default function Pricing() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="rounded-3xl bg-white/[0.02] border border-white/[0.08] p-8 sm:p-10 backdrop-blur-xl"
+          className="rounded-3xl bg-white/[0.02] border border-white/[0.08] p-5 sm:p-8 md:p-10 backdrop-blur-xl"
         >
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-white/[0.08]">
             <div className="flex items-center gap-3.5">

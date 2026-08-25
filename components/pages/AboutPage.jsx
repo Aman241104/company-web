@@ -133,7 +133,7 @@ export default function AboutPage() {
           </div>
 
           <div className="lg:col-span-5">
-            <div className="rounded-3xl bg-white/[0.02] border border-white/[0.08] p-8 sm:p-10 shadow-2xl shadow-black/60 relative overflow-hidden">
+            <div className="rounded-3xl bg-white/[0.02] border border-white/[0.08] p-5 sm:p-8 md:p-10 shadow-2xl shadow-black/60 relative overflow-hidden">
               <div className="text-xs font-mono uppercase tracking-wider text-white/40 mb-6">
                 Company Snapshot
               </div>
@@ -261,9 +261,9 @@ export default function AboutPage() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.06 }}
-              className="flex items-start gap-6 p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06]"
+              className="flex items-start gap-3.5 sm:gap-6 p-4 sm:p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06]"
             >
-              <div className="px-3 py-1.5 rounded-lg bg-blue-500/10 border border-blue-500/20 text-blue-400 font-mono font-bold text-xs shrink-0">
+              <div className="px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-blue-500/10 border border-blue-500/20 text-blue-400 font-mono font-bold text-[11px] sm:text-xs shrink-0">
                 {item.year}
               </div>
               <p className="text-xs sm:text-sm text-white/70 leading-relaxed font-normal pt-0.5">

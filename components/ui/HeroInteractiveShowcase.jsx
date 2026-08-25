@@ -191,44 +191,73 @@ export default function HeroInteractiveShowcase() {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.98 }}
             transition={{ duration: 0.35, ease: 'easeOut' }}
-            className="relative min-h-[360px] sm:min-h-0 sm:aspect-[16/9] w-full rounded-2xl overflow-hidden border border-white/10 group bg-[#050608]"
+            className="w-full rounded-2xl overflow-hidden border border-white/10 group bg-[#050608]"
           >
-            <Image
-              src={activeTab.image}
-              alt={activeTab.title}
-              fill
-              priority
-              className="object-cover object-top transition-transform duration-700 group-hover:scale-[1.02]"
-            />
+            {/* Image Canvas Container */}
+            <div className="relative aspect-[16/10] sm:aspect-[16/9] w-full overflow-hidden bg-[#050608]">
+              <Image
+                src={activeTab.image}
+                alt={activeTab.title}
+                fill
+                priority
+                className="object-cover object-top transition-transform duration-700 group-hover:scale-[1.02]"
+              />
 
-            {/* Ambient Dark Bottom Gradient */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#080A12] via-[#080A12]/40 to-transparent opacity-95" />
+              {/* Desktop-only Ambient Dark Bottom Gradient */}
+              <div className="hidden sm:block absolute inset-0 bg-gradient-to-t from-[#080A12] via-[#080A12]/30 to-transparent opacity-95" />
 
-            {/* Bottom Overlay Metric Stats */}
-            <div className="absolute bottom-0 inset-x-0 p-3.5 sm:p-6 flex flex-col justify-end">
-              <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 sm:gap-4">
-                <div className="max-w-md">
-                  <h4 className="text-sm sm:text-lg md:text-xl font-bold text-white tracking-tight drop-shadow-md">
-                    {activeTab.title}
-                  </h4>
-                  <p className="text-[11px] sm:text-xs md:text-sm text-white/70 mt-0.5 sm:mt-1 font-normal leading-relaxed drop-shadow line-clamp-2 sm:line-clamp-none">
-                    {activeTab.subtitle}
-                  </p>
+              {/* Desktop-only Bottom Overlay */}
+              <div className="hidden sm:flex absolute bottom-0 inset-x-0 p-6 flex-col justify-end">
+                <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+                  <div className="max-w-md">
+                    <h4 className="text-lg md:text-xl font-bold text-white tracking-tight drop-shadow-md">
+                      {activeTab.title}
+                    </h4>
+                    <p className="text-xs md:text-sm text-white/70 mt-1 font-normal leading-relaxed drop-shadow">
+                      {activeTab.subtitle}
+                    </p>
+                  </div>
+
+                  {/* 4 Metric Pills */}
+                  <div className="grid grid-cols-4 gap-2 bg-black/70 backdrop-blur-md p-2 rounded-xl border border-white/10">
+                    {activeTab.metrics.map((m) => (
+                      <div key={m.label} className="text-center px-2 py-1">
+                        <div className={`text-xs sm:text-sm font-extrabold font-mono ${m.highlight ? 'text-blue-400' : 'text-white'}`}>
+                          {m.val}
+                        </div>
+                        <div className="text-[10px] text-white/45 font-medium tracking-tight">
+                          {m.label}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
+              </div>
+            </div>
 
-                {/* 4 Metric Pills */}
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 sm:gap-2 bg-black/70 backdrop-blur-md p-1.5 sm:p-2 rounded-xl border border-white/10">
-                  {activeTab.metrics.map((m) => (
-                    <div key={m.label} className="text-center px-1.5 sm:px-2 py-1">
-                      <div className={`text-xs sm:text-sm font-extrabold font-mono ${m.highlight ? 'text-blue-400' : 'text-white'}`}>
-                        {m.val}
-                      </div>
-                      <div className="text-[8.5px] sm:text-[10px] text-white/45 font-medium tracking-tight">
-                        {m.label}
-                      </div>
+            {/* Mobile-only Content Card (Clean separation below image with zero image overlap) */}
+            <div className="sm:hidden p-4 bg-[#090B14] border-t border-white/[0.08] space-y-3">
+              <div>
+                <h4 className="text-sm font-bold text-white tracking-tight">
+                  {activeTab.title}
+                </h4>
+                <p className="text-xs text-white/60 mt-1 leading-relaxed">
+                  {activeTab.subtitle}
+                </p>
+              </div>
+
+              {/* 4 Metric Pills on Mobile */}
+              <div className="grid grid-cols-2 gap-2 bg-white/[0.03] p-2 rounded-xl border border-white/[0.06]">
+                {activeTab.metrics.map((m) => (
+                  <div key={m.label} className="text-center p-1.5 rounded-lg bg-black/40">
+                    <div className={`text-xs font-extrabold font-mono ${m.highlight ? 'text-blue-400' : 'text-white'}`}>
+                      {m.val}
                     </div>
-                  ))}
-                </div>
+                    <div className="text-[9px] text-white/45 font-medium">
+                      {m.label}
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </motion.div>

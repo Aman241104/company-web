@@ -92,11 +92,11 @@ export default function Products() {
                 className="object-cover object-top group-hover:scale-105 transition-transform duration-700 opacity-95 group-hover:opacity-100"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#07080C] via-transparent to-transparent" />
-              <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-xs text-white/70">
-                <span className="px-2.5 py-1 rounded-md bg-black/70 backdrop-blur-md border border-white/10 font-mono text-[11px] text-white">
-                  Real-time Multi-Tenant Telemetry
+              <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between gap-2 flex-wrap text-xs text-white/70">
+                <span className="px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-md bg-black/80 backdrop-blur-md border border-white/10 font-mono text-[10px] sm:text-[11px] text-white">
+                  Multi-Tenant Telemetry
                 </span>
-                <span className="px-2.5 py-1 rounded-md bg-blue-600 text-white font-semibold text-[11px]">
+                <span className="px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-md bg-blue-600 text-white font-semibold text-[10px] sm:text-[11px]">
                   Live Production
                 </span>
               </div>

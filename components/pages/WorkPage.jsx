@@ -243,16 +243,16 @@ function ProjectCard({ project, index }) {
           )}
 
           {/* Category Pill */}
-          <div className="absolute top-4 left-4">
-            <span className="px-3 py-1 rounded-full text-[11px] font-semibold bg-black/60 backdrop-blur-md text-blue-400 border border-white/10">
+          <div className="absolute top-3 sm:top-4 left-3 sm:left-4">
+            <span className="px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-[11px] font-semibold bg-black/70 backdrop-blur-md text-blue-400 border border-white/10">
               {project.category}
             </span>
           </div>
 
           {/* Metric badge */}
           {project.result && (
-            <div className="absolute bottom-4 right-4">
-              <span className="px-3 py-1 rounded-full text-[11px] font-bold bg-blue-600/90 text-white shadow-lg shadow-blue-900/40">
+            <div className="absolute bottom-3 sm:bottom-4 right-3 sm:right-4 max-w-[70%] text-right">
+              <span className="inline-block px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-[11px] font-bold bg-blue-600/90 text-white shadow-lg shadow-blue-900/40 truncate">
                 {project.result}
               </span>
             </div>

@@ -5,19 +5,10 @@ import ClientMarquee from '@/components/sections/ClientMarquee'
 import Services from '@/components/sections/Services'
 import Products from '@/components/sections/Products'
 import Stats from '@/components/sections/Stats'
-import BlueprintGenerator from '@/components/sections/BlueprintGenerator'
-import ClientPortalSimulator from '@/components/sections/ClientPortalSimulator'
-import ArchitectureBenchmark from '@/components/sections/ArchitectureBenchmark'
-import PerformanceComparison from '@/components/sections/PerformanceComparison'
-import CodeExplorer from '@/components/sections/CodeExplorer'
-import InteractiveTechMatrix from '@/components/sections/InteractiveTechMatrix'
-import Industries from '@/components/sections/Industries'
+import EngineeringLab from '@/components/sections/EngineeringLab'
 import Process from '@/components/sections/Process'
-import GlobalNetwork from '@/components/sections/GlobalNetwork'
-import Featured from '@/components/sections/Featured'
 import Work from '@/components/sections/Work'
 import Testimonials from '@/components/sections/Testimonials'
-import RoiCalculator from '@/components/sections/RoiCalculator'
 import Pricing from '@/components/sections/Pricing'
 import FAQ from '@/components/sections/FAQ'
 import CTA from '@/components/sections/CTA'
@@ -139,19 +130,10 @@ export default function Home() {
         <Services />
         <Products />
         <Stats />
-        <BlueprintGenerator />
-        <ClientPortalSimulator />
-        <ArchitectureBenchmark />
-        <PerformanceComparison />
-        <CodeExplorer />
-        <InteractiveTechMatrix />
-        <Industries />
-        <Process />
-        <GlobalNetwork />
-        <Featured />
+        <EngineeringLab />
         <Work />
+        <Process />
         <Testimonials />
-        <RoiCalculator />
         <Pricing />
         <FAQ />
         <CTA />

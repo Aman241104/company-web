@@ -158,11 +158,17 @@ const categories = ['All', 'SaaS', 'E-Commerce', 'Web', 'Media']
 export default function Work() {
   const [activeCategory, setActiveCategory] = useState('All')
   const [activeProject, setActiveProject] = useState(null)
+  const [showAll, setShowAll] = useState(false)
 
-  const filteredProjects =
+  const allFiltered =
     activeCategory === 'All'
       ? projects
       : projects.filter((p) => p.categoryFilter === activeCategory)
+
+  const displayedProjects =
+    activeCategory === 'All' && !showAll
+      ? allFiltered.slice(0, 4)
+      : allFiltered
 
   return (
     <section id="work" className="py-16 sm:py-24 md:py-32 bg-[#07080C] relative">
@@ -204,7 +210,7 @@ export default function Work() {
         {/* 2-Column Bento Project Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
           <AnimatePresence mode="popLayout">
-            {filteredProjects.map((project, index) => {
+            {displayedProjects.map((project, index) => {
               const { MockupContent } = project
               return (
                 <SpotlightCard
@@ -286,7 +292,7 @@ export default function Work() {
                         )}
                         <button
                           onClick={() => setActiveProject(project)}
-                          className="px-4 py-1.5 rounded-full text-xs font-semibold bg-white/[0.06] hover:bg-white/[0.12] text-white border border-white/10 transition-all active:scale-[0.98]"
+                          className="px-4 py-1.5 rounded-full text-xs font-semibold bg-white/[0.06] hover:bg-white/[0.12] text-white border border-white/10 transition-all active:scale-[0.98] cursor-pointer"
                         >
                           Case Study
                         </button>
@@ -300,14 +306,23 @@ export default function Work() {
         </div>
 
         {/* View All Projects Strip */}
-        <div className="mt-14 text-center">
+        <div className="mt-12 sm:mt-14 flex items-center justify-center gap-4 flex-wrap">
+          {activeCategory === 'All' && (
+            <button
+              onClick={() => setShowAll(!showAll)}
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-xs font-semibold bg-white/[0.06] hover:bg-white/[0.12] text-white border border-white/10 transition-all cursor-pointer"
+            >
+              {showAll ? 'Show Fewer Projects' : `Show Remaining Projects (+${allFiltered.length - 4})`}
+            </button>
+          )}
           <Link
             href="/work"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-xs font-semibold bg-white/[0.04] hover:bg-white/[0.08] text-white border border-white/10 transition-all"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-xs font-semibold bg-blue-600 hover:bg-blue-500 text-white transition-all shadow-lg shadow-blue-600/25"
           >
-            View All 150+ Shipped Projects <ArrowUpRight size={13} />
+            Explore Complete Portfolio Archive <ArrowUpRight size={13} />
           </Link>
         </div>
+
 
       </div>
 

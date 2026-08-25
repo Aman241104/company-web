@@ -3,14 +3,13 @@ import { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Home, Layers, Briefcase, Search, Sparkles, PhoneCall, Zap, MessageSquare } from 'lucide-react'
+import { Home, Layers, Briefcase, Sparkles, Zap } from 'lucide-react'
 
-const dockItems = [
-  { label: 'Home', href: '/', icon: Home, type: 'link' },
-  { label: 'Services', href: '/services', icon: Layers, type: 'link' },
-  { label: 'Work', href: '/work', icon: Briefcase, type: 'link' },
-  { label: 'Search', action: 'search', icon: Search, type: 'button' },
-  { label: 'Consult', href: '/contact', icon: Zap, type: 'link', highlight: true },
+const dockNavItems = [
+  { label: 'Home', href: '/', icon: Home },
+  { label: 'Services', href: '/services', icon: Layers },
+  { label: 'Work', href: '/work', icon: Briefcase },
+  { label: 'Labs', href: '/labs', icon: Sparkles },
 ]
 
 export default function MobileDock() {
@@ -25,9 +24,9 @@ export default function MobileDock() {
         window.requestAnimationFrame(() => {
           const y = window.scrollY
           // Show when scrolling up or near the top
-          if (y < 40) {
+          if (y < 60) {
             setVisible(true)
-          } else if (y > lastY + 10) {
+          } else if (y > lastY + 12) {
             setVisible(false)
           } else if (y < lastY - 8) {
             setVisible(true)
@@ -42,85 +41,66 @@ export default function MobileDock() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [lastY])
 
-  const triggerSearch = () => {
-    window.dispatchEvent(new CustomEvent('open-command-palette'))
+  const openFastTrack = (e) => {
+    e.preventDefault()
+    window.dispatchEvent(new CustomEvent('open-fast-track'))
   }
 
   return (
     <AnimatePresence>
       {visible && (
         <motion.nav
-          initial={{ y: 80, opacity: 0 }}
+          initial={{ y: 70, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          exit={{ y: 80, opacity: 0 }}
-          transition={{ type: 'spring', stiffness: 350, damping: 28 }}
+          exit={{ y: 70, opacity: 0 }}
+          transition={{ type: 'spring', stiffness: 380, damping: 30 }}
           aria-label="Mobile Navigation Dock"
-          className="md:hidden fixed bottom-3 inset-x-0 z-50 flex justify-center px-4 pointer-events-none"
+          className="md:hidden fixed bottom-3 inset-x-0 z-50 flex justify-center px-3 pointer-events-none"
           style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}
         >
-          <div className="pointer-events-auto rounded-full bg-[#080A12]/90 backdrop-blur-2xl border border-white/15 p-1.5 shadow-[0_12px_40px_rgba(0,0,0,0.8),0_0_24px_rgba(37,99,235,0.2)] flex items-center gap-1">
-            {dockItems.map((item) => {
-              if (item.type === 'button') {
-                return (
-                  <button
-                    key={item.label}
-                    onClick={triggerSearch}
-                    aria-label="Open Command Search"
-                    className="relative flex flex-col items-center justify-center w-13 h-13 rounded-full text-white/60 hover:text-white transition-all active:scale-90"
-                  >
-                    <div className="w-8 h-8 rounded-full bg-white/[0.05] border border-white/10 flex items-center justify-center">
-                      <Search size={16} className="text-blue-400" />
-                    </div>
-                    <span className="text-[9px] font-mono text-white/40 mt-0.5">⌘K</span>
-                  </button>
-                )
-              }
-
+          <div className="pointer-events-auto rounded-full bg-[#080A12]/94 backdrop-blur-2xl border border-white/15 p-1.5 shadow-[0_12px_40px_rgba(0,0,0,0.85),0_0_24px_rgba(37,99,235,0.18)] flex items-center justify-between gap-0.5 max-w-[350px] w-full mx-auto">
+            {dockNavItems.map((item) => {
               const isActive = pathname === item.href
-
-              if (item.highlight) {
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className="relative flex items-center justify-center px-3.5 h-10 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold text-xs shadow-lg shadow-blue-600/40 active:scale-95 transition-transform"
-                  >
-                    <div className="flex items-center gap-1.5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-300 animate-pulse" />
-                      <span>{item.label}</span>
-                    </div>
-                  </Link>
-                )
-              }
+              const Icon = item.icon
 
               return (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`relative flex flex-col items-center justify-center w-12 h-11 rounded-full transition-all active:scale-90 ${
-                    isActive ? 'text-white' : 'text-white/45 hover:text-white/80'
+                  className={`relative flex-1 flex flex-col items-center justify-center h-11 px-1 rounded-full transition-all active:scale-90 ${
+                    isActive ? 'text-white' : 'text-white/50 hover:text-white/80'
                   }`}
                 >
                   {isActive && (
                     <motion.div
                       layoutId="dock-active-pill"
                       className="absolute inset-0 rounded-full bg-white/[0.08] border border-white/15 shadow-inner"
-                      transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                      transition={{ type: 'spring', stiffness: 420, damping: 32 }}
                     />
                   )}
                   
-                  <item.icon size={17} className={`relative z-10 ${isActive ? 'text-blue-400' : ''}`} />
+                  <Icon size={17} className={`relative z-10 ${isActive ? 'text-blue-400' : ''}`} />
                   
-                  <span className={`relative z-10 text-[9px] font-medium tracking-tight mt-0.5 ${isActive ? 'text-white font-semibold' : 'text-white/40'}`}>
+                  <span className={`relative z-10 text-[10px] font-medium tracking-tight mt-0.5 ${isActive ? 'text-white font-semibold' : 'text-white/45'}`}>
                     {item.label}
                   </span>
 
                   {isActive && (
-                    <span className="absolute bottom-1 w-1 h-1 rounded-full bg-blue-400 z-10 shadow-[0_0_6px_#60a5fa]" />
+                    <span className="absolute bottom-0.5 w-1 h-1 rounded-full bg-blue-400 z-10 shadow-[0_0_6px_#60a5fa]" />
                   )}
                 </Link>
               )
             })}
+
+            {/* Fast-Track Consultation Action Button */}
+            <button
+              onClick={openFastTrack}
+              aria-label="Open Fast-Track Consultation Drawer"
+              className="relative flex items-center justify-center gap-1.5 px-3.5 h-9 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-semibold text-xs shadow-lg shadow-blue-600/35 active:scale-95 transition-all shrink-0 ml-1 cursor-pointer"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-300 animate-pulse" />
+              <span>Consult</span>
+            </button>
           </div>
         </motion.nav>
       )}

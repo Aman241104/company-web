@@ -149,9 +149,9 @@ export default function CodeExplorer() {
   }
 
   return (
-    <section id="code-explorer" className="py-24 md:py-32 max-w-[1360px] mx-auto px-6 md:px-8 border-t border-white/[0.06]">
+    <section id="code-explorer" className="py-16 sm:py-24 md:py-32 max-w-[1360px] mx-auto px-5 sm:px-6 md:px-8 border-t border-white/[0.06]">
       {/* Header */}
-      <div className="max-w-3xl mx-auto text-center mb-16">
+      <div className="max-w-3xl mx-auto text-center mb-12 sm:mb-16">
         <span className="glow-pill mb-4 inline-flex">
           Production Architecture & Code
         </span>
@@ -159,7 +159,7 @@ export default function CodeExplorer() {
           Production-grade engineering.{' '}
           <span className="text-gradient-accent">Zero boilerplate fluff.</span>
         </h2>
-        <p className="text-base sm:text-lg text-white/50 leading-relaxed">
+        <p className="text-sm sm:text-base lg:text-lg text-white/50 leading-relaxed">
           Inspect actual production patterns we implement for multi-tenancy, sub-second edge routing, and automated billing.
         </p>
       </div>
@@ -168,26 +168,26 @@ export default function CodeExplorer() {
       <div className="rounded-3xl bg-[#090B12] border border-white/[0.12] overflow-hidden shadow-2xl shadow-black/90">
         
         {/* Terminal Header */}
-        <div className="px-6 py-4 bg-black/60 border-b border-white/[0.08] flex items-center justify-between flex-wrap gap-4">
-          <div className="flex items-center gap-3">
+        <div className="px-4 sm:px-6 py-3 sm:py-4 bg-black/60 border-b border-white/[0.08] flex items-center justify-between flex-wrap gap-2.5 sm:gap-4">
+          <div className="flex items-center gap-2.5 sm:gap-3">
             <div className="flex gap-1.5">
-              <span className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
-              <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
-              <span className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
+              <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-red-500/80" />
+              <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-yellow-500/80" />
+              <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-green-500/80" />
             </div>
-            <div className="h-4 w-[1px] bg-white/10 mx-1" />
-            <span className="font-mono text-xs text-white/60">
+            <div className="h-4 w-[1px] bg-white/10 mx-0.5 sm:mx-1" />
+            <span className="font-mono text-[11px] sm:text-xs text-white/60">
               {activeSnippet.filename}
             </span>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
             <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-semibold bg-blue-500/10 text-blue-400 border border-blue-500/20">
               {activeSnippet.tag}
             </span>
             <button
               onClick={handleCopy}
-              className="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] text-white/60 hover:text-white text-xs font-mono transition-colors"
+              className="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] text-white/60 hover:text-white text-xs font-mono transition-colors cursor-pointer"
             >
               {copied ? (
                 <>
@@ -202,18 +202,18 @@ export default function CodeExplorer() {
           </div>
         </div>
 
-        {/* Tab Switcher */}
-        <div className="px-6 pt-3 pb-3 border-b border-white/[0.08] bg-white/[0.01] flex items-center gap-2 overflow-x-auto no-scrollbar">
+        {/* Tab Selectors */}
+        <div className="px-4 sm:px-6 pt-3 sm:pt-4 border-b border-white/[0.08] bg-white/[0.01] flex items-center gap-1.5 sm:gap-2 overflow-x-auto no-scrollbar">
           {snippets.map((s) => {
-            const isSelected = s.id === selectedId
+            const isActive = s.id === selectedId
             return (
               <button
                 key={s.id}
                 onClick={() => setSelectedId(s.id)}
-                className={`px-3.5 py-1.5 rounded-xl text-xs font-mono font-medium whitespace-nowrap transition-all ${
-                  isSelected
-                    ? 'bg-blue-600/20 text-blue-300 border border-blue-500/30'
-                    : 'text-white/40 hover:text-white hover:bg-white/[0.03] border border-transparent'
+                className={`px-3 sm:px-4 py-2 sm:py-2.5 rounded-t-xl text-xs font-mono font-medium transition-all whitespace-nowrap cursor-pointer ${
+                  isActive
+                    ? 'bg-blue-600/10 text-blue-400 border-t-2 border-blue-500 border-x border-white/[0.08]'
+                    : 'text-white/40 hover:text-white/70 hover:bg-white/[0.02]'
                 }`}
               >
                 {s.title}
@@ -222,9 +222,9 @@ export default function CodeExplorer() {
           })}
         </div>
 
-        {/* Code Content */}
-        <div className="p-6 sm:p-8 bg-[#06070B] overflow-x-auto">
-          <pre className="font-mono text-xs sm:text-sm text-white/80 leading-relaxed">
+        {/* Code Content Container */}
+        <div className="p-4 sm:p-6 lg:p-8 bg-[#06070B] overflow-x-auto">
+          <pre className="text-[11px] sm:text-xs font-mono leading-relaxed text-white/80">
             <code>{activeSnippet.code}</code>
           </pre>
         </div>

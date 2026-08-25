@@ -20,10 +20,10 @@ import {
 } from 'lucide-react'
 
 const tabs = [
-  { id: 'sprint', label: 'Sprint & Kanban Velocity', icon: Kanban },
-  { id: 'staging', label: 'Live Staging & QA Scorecard', icon: Globe2 },
-  { id: 'telemetry', label: 'API Telemetry & Edge SLA', icon: Activity },
-  { id: 'feed', label: 'Direct Engineer Stream', icon: MessageSquare },
+  { id: 'sprint', label: 'Sprint & Kanban Velocity', mobileLabel: 'Sprint & Kanban', icon: Kanban },
+  { id: 'staging', label: 'Live Staging & QA Scorecard', mobileLabel: 'Live Staging', icon: Globe2 },
+  { id: 'telemetry', label: 'API Telemetry & Edge SLA', mobileLabel: 'Edge Telemetry', icon: Activity },
+  { id: 'feed', label: 'Direct Engineer Stream', mobileLabel: 'Engineer Feed', icon: MessageSquare },
 ]
 
 const sprintTickets = [
@@ -58,9 +58,9 @@ export default function ClientPortalSimulator() {
   }, [])
 
   return (
-    <section id="portal-simulator" className="py-24 md:py-32 max-w-[1360px] mx-auto px-6 md:px-8 border-t border-white/[0.06]">
+    <section id="portal-simulator" className="py-16 sm:py-24 md:py-32 max-w-[1360px] mx-auto px-5 sm:px-6 md:px-8 border-t border-white/[0.06]">
       {/* Header */}
-      <div className="max-w-3xl mx-auto text-center mb-16">
+      <div className="max-w-3xl mx-auto text-center mb-12 sm:mb-16">
         <span className="glow-pill mb-4 inline-flex">
           Client Transparency & Workflow
         </span>
@@ -68,7 +68,7 @@ export default function ClientPortalSimulator() {
           Experience our live{' '}
           <span className="text-gradient-accent">client project portal.</span>
         </h2>
-        <p className="text-base sm:text-lg text-white/50 leading-relaxed">
+        <p className="text-sm sm:text-base lg:text-lg text-white/50 leading-relaxed">
           From Day 1, you receive dedicated dashboard access with real-time sprint ticket tracking, automatic staging environments, and live engineering updates.
         </p>
       </div>
@@ -77,22 +77,22 @@ export default function ClientPortalSimulator() {
       <div className="rounded-3xl bg-[#090B12] border border-white/[0.12] overflow-hidden shadow-2xl shadow-black/80">
         
         {/* Top Window Bar */}
-        <div className="px-6 py-4 bg-black/60 border-b border-white/[0.08] flex items-center justify-between flex-wrap gap-4">
-          <div className="flex items-center gap-3">
+        <div className="px-4 sm:px-6 py-3 sm:py-4 bg-black/60 border-b border-white/[0.08] flex items-center justify-between flex-wrap gap-2.5 sm:gap-4">
+          <div className="flex items-center gap-2.5 sm:gap-3">
             <div className="flex gap-1.5">
-              <span className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
-              <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
-              <span className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
+              <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-red-500/80" />
+              <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-yellow-500/80" />
+              <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-green-500/80" />
             </div>
-            <div className="h-4 w-[1px] bg-white/10 mx-1" />
-            <div className="flex items-center gap-2 text-xs font-mono text-white/60">
-              <span className="text-blue-400 font-bold">portal.mehtatechnologies.com</span>
+            <div className="h-4 w-[1px] bg-white/10 mx-0.5 sm:mx-1" />
+            <div className="flex items-center gap-1.5 text-[11px] sm:text-xs font-mono text-white/60 truncate max-w-[170px] sm:max-w-none">
+              <span className="text-blue-400 font-bold truncate">portal.mehtatech.app</span>
               <span className="text-white/20">/</span>
-              <span>acme-corp-sprint-04</span>
+              <span className="truncate">sprint-04</span>
             </div>
           </div>
 
-          <div className="flex items-center gap-4 text-xs font-mono">
+          <div className="flex items-center gap-3 sm:gap-4 text-[11px] sm:text-xs font-mono">
             <div className="flex items-center gap-1.5 text-emerald-400">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
               <span>Staging Active ({ping}ms)</span>
@@ -104,7 +104,7 @@ export default function ClientPortalSimulator() {
         </div>
 
         {/* Navigation Tabs */}
-        <div className="px-6 pt-4 border-b border-white/[0.08] bg-white/[0.01] flex items-center gap-2 overflow-x-auto no-scrollbar">
+        <div className="px-4 sm:px-6 pt-3 sm:pt-4 border-b border-white/[0.08] bg-white/[0.01] flex items-center gap-2 overflow-x-auto no-scrollbar">
           {tabs.map((tab) => {
             const Icon = tab.icon
             const isActive = tab.id === activeTab
@@ -112,21 +112,22 @@ export default function ClientPortalSimulator() {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center gap-2 px-4 py-3 border-b-2 text-xs font-semibold whitespace-nowrap transition-all ${
+                className={`flex items-center gap-2 px-3 sm:px-4 py-2.5 sm:py-3 border-b-2 text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
                   isActive
                     ? 'border-blue-500 text-white bg-blue-500/10 rounded-t-lg'
                     : 'border-transparent text-white/50 hover:text-white/80'
                 }`}
               >
                 <Icon size={14} className={isActive ? 'text-blue-400' : 'opacity-60'} />
-                <span>{tab.label}</span>
+                <span className="hidden sm:inline">{tab.label}</span>
+                <span className="sm:hidden">{tab.mobileLabel}</span>
               </button>
             )
           })}
         </div>
 
         {/* Tab Body */}
-        <div className="p-6 sm:p-10 min-h-[420px] bg-[#07080C]">
+        <div className="p-5 sm:p-10 min-h-[380px] bg-[#07080C]">
           <AnimatePresence mode="wait">
             
             {/* Tab 1: Sprint & Kanban */}

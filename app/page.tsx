@@ -10,6 +10,7 @@ import ClientPortalSimulator from '@/components/sections/ClientPortalSimulator'
 import ArchitectureBenchmark from '@/components/sections/ArchitectureBenchmark'
 import PerformanceComparison from '@/components/sections/PerformanceComparison'
 import CodeExplorer from '@/components/sections/CodeExplorer'
+import InteractiveTechMatrix from '@/components/sections/InteractiveTechMatrix'
 import Industries from '@/components/sections/Industries'
 import Process from '@/components/sections/Process'
 import GlobalNetwork from '@/components/sections/GlobalNetwork'
@@ -143,6 +144,7 @@ export default function Home() {
         <ArchitectureBenchmark />
         <PerformanceComparison />
         <CodeExplorer />
+        <InteractiveTechMatrix />
         <Industries />
         <Process />
         <GlobalNetwork />

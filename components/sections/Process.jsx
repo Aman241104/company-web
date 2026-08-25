@@ -44,9 +44,9 @@ const processSteps = [
 
 export default function Process() {
   return (
-    <section id="process" className="py-24 md:py-32 max-w-[1360px] mx-auto px-6 md:px-8">
+    <section id="process" className="py-16 sm:py-24 md:py-32 max-w-[1360px] mx-auto px-5 sm:px-6 md:px-8">
       {/* Section Header */}
-      <div className="max-w-2xl mx-auto text-center mb-16 md:mb-20">
+      <div className="max-w-2xl mx-auto text-center mb-12 sm:mb-16 md:mb-20">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -60,14 +60,14 @@ export default function Process() {
             Predictable sprints.{' '}
             <span className="text-gradient-accent">Zero guesswork.</span>
           </h2>
-          <p className="text-base sm:text-lg text-white/50 leading-relaxed">
+          <p className="text-sm sm:text-base lg:text-lg text-white/50 leading-relaxed">
             No endless delays or scope surprises. We operate with strict milestone accountability, weekly staging deployments, and fixed pricing.
           </p>
         </motion.div>
       </div>
 
       {/* 3-Column Bento Step Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
         {processSteps.map((step, index) => {
           const Icon = step.icon
           return (
@@ -77,10 +77,10 @@ export default function Process() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: index * 0.05 }}
-              className="p-8 rounded-2xl bg-white/[0.02] border border-white/[0.08] hover:border-blue-500/30 hover:bg-white/[0.035] transition-all flex flex-col justify-between"
+              className="p-6 sm:p-8 rounded-2xl bg-white/[0.02] border border-white/[0.08] hover:border-blue-500/30 hover:bg-white/[0.035] transition-all flex flex-col justify-between"
             >
               <div>
-                <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center justify-between mb-4 sm:mb-6">
                   <div className="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400">
                     <Icon size={18} />
                   </div>
@@ -88,10 +88,10 @@ export default function Process() {
                     STEP {step.id}
                   </span>
                 </div>
-                <h3 className="text-xl font-bold text-white tracking-tight mb-3">
+                <h3 className="text-lg sm:text-xl font-bold text-white tracking-tight mb-2 sm:mb-3">
                   {step.title}
                 </h3>
-                <p className="text-sm text-white/55 leading-relaxed font-normal">
+                <p className="text-xs sm:text-sm text-white/55 leading-relaxed font-normal">
                   {step.desc}
                 </p>
               </div>
@@ -106,7 +106,7 @@ export default function Process() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5, delay: 0.3 }}
-        className="mt-12 p-8 sm:p-10 rounded-2xl bg-white/[0.02] border border-white/[0.08] flex flex-col md:flex-row items-center justify-between gap-6"
+        className="mt-10 sm:mt-12 p-6 sm:p-10 rounded-2xl bg-white/[0.02] border border-white/[0.08] flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left"
       >
         <div>
           <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight mb-2">

@@ -5,11 +5,11 @@ import { ArrowRight, Mail, Phone, Clock, ShieldCheck, Sparkles } from 'lucide-re
 
 export default function CTA() {
   return (
-    <section id="contact" className="py-28 md:py-36 bg-[#07080C] relative overflow-hidden border-t border-white/[0.08]">
+    <section id="contact" className="py-20 sm:py-28 md:py-36 bg-[#07080C] relative overflow-hidden border-t border-white/[0.08]">
       {/* Background Radial Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[750px] h-[400px] bg-blue-600/[0.08] rounded-full blur-[140px] pointer-events-none -z-10" />
 
-      <div className="max-w-[1360px] mx-auto px-6 md:px-8 text-center relative z-10">
+      <div className="max-w-[1360px] mx-auto px-5 sm:px-6 md:px-8 text-center relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}

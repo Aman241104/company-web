@@ -40,9 +40,9 @@ export default function GlobalNetwork() {
   }, [])
 
   return (
-    <section id="global-network" className="py-24 md:py-32 max-w-[1360px] mx-auto px-6 md:px-8 border-t border-white/[0.06]">
+    <section id="global-network" className="py-16 sm:py-24 md:py-32 max-w-[1360px] mx-auto px-5 sm:px-6 md:px-8 border-t border-white/[0.06]">
       {/* Header */}
-      <div className="max-w-3xl mx-auto text-center mb-16">
+      <div className="max-w-3xl mx-auto text-center mb-12 sm:mb-16">
         <span className="glow-pill mb-4 inline-flex">
           International Delivery Infrastructure
         </span>
@@ -50,13 +50,13 @@ export default function GlobalNetwork() {
           Global engineering delivery.{' '}
           <span className="text-gradient-accent">Seamless timezone overlap.</span>
         </h2>
-        <p className="text-base sm:text-lg text-white/50 leading-relaxed">
+        <p className="text-sm sm:text-base lg:text-lg text-white/50 leading-relaxed">
           Over 35% of our client base spans the US, UK, and Middle East. We operate on structured asynchronous sprint pipelines with 4+ hours of live daily synchronous overlap.
         </p>
       </div>
 
       {/* Grid of Global Hubs with Live World Clocks */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-12">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 mb-10 sm:mb-12">
         {hubs.map((hub, index) => (
           <motion.div
             key={hub.city}
@@ -64,10 +64,10 @@ export default function GlobalNetwork() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: index * 0.05 }}
-            className="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.08] hover:border-blue-500/30 hover:bg-white/[0.035] transition-all flex flex-col justify-between"
+            className="p-5 sm:p-6 rounded-2xl bg-white/[0.02] border border-white/[0.08] hover:border-blue-500/30 hover:bg-white/[0.035] transition-all flex flex-col justify-between"
           >
             <div>
-              <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center justify-between mb-3 sm:mb-4">
                 <span className="text-xs font-mono uppercase tracking-wider text-blue-400">
                   {hub.region}
                 </span>
@@ -77,14 +77,14 @@ export default function GlobalNetwork() {
                 </span>
               </div>
 
-              <h3 className="text-xl font-bold text-white tracking-tight mb-1">
+              <h3 className="text-lg sm:text-xl font-bold text-white tracking-tight mb-1">
                 {hub.city}
               </h3>
               <p className="text-xs text-white/40 mb-4">{hub.label}</p>
             </div>
 
-            <div className="pt-4 border-t border-white/[0.06] flex items-center justify-between">
-              <div className="flex items-center gap-2 text-sm font-mono font-bold text-white">
+            <div className="pt-3.5 sm:pt-4 border-t border-white/[0.06] flex items-center justify-between flex-wrap gap-2">
+              <div className="flex items-center gap-2 text-xs sm:text-sm font-mono font-bold text-white">
                 <Clock size={14} className="text-blue-400" />
                 <span>{times[hub.city] || 'Syncing...'}</span>
               </div>
@@ -97,7 +97,7 @@ export default function GlobalNetwork() {
       </div>
 
       {/* Overlap Guarantee Banner */}
-      <div className="p-8 sm:p-10 rounded-3xl bg-blue-600/[0.08] border border-blue-500/20 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div className="p-6 sm:p-10 rounded-3xl bg-blue-600/[0.08] border border-blue-500/20 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
         <div className="space-y-1 text-center md:text-left">
           <div className="text-xs font-mono uppercase tracking-wider text-blue-400 font-bold">
             Asynchronous & Synchronous Guarantee

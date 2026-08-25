@@ -77,9 +77,9 @@ export default function Featured() {
   const [activeSegment, setActiveSegment] = useState(segments[0])
 
   return (
-    <section id="featured" className="py-24 md:py-32 max-w-[1360px] mx-auto px-6 md:px-8 border-t border-white/[0.06]">
+    <section id="featured" className="py-16 sm:py-24 md:py-32 max-w-[1360px] mx-auto px-5 sm:px-6 md:px-8 border-t border-white/[0.06]">
       {/* Header */}
-      <div className="max-w-2xl mx-auto text-center mb-14 md:mb-18">
+      <div className="max-w-2xl mx-auto text-center mb-12 sm:mb-16 md:mb-18">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -93,14 +93,14 @@ export default function Featured() {
             The right engineering team for{' '}
             <span className="text-gradient-accent">where you are today.</span>
           </h2>
-          <p className="text-base sm:text-lg text-white/50 leading-relaxed">
+          <p className="text-sm sm:text-base lg:text-lg text-white/50 leading-relaxed">
             Whether launching your first MVP or scaling enterprise cloud infrastructure, our engagement models adapt directly to your business goals.
           </p>
         </motion.div>
       </div>
 
       {/* Interactive Tabs */}
-      <div className="flex justify-center mb-12">
+      <div className="flex justify-center mb-10 sm:mb-12">
         <div className="flex items-center gap-1.5 p-1.5 rounded-full bg-white/[0.03] border border-white/[0.08] overflow-x-auto max-w-full no-scrollbar">
           {segments.map((seg) => {
             const Icon = seg.icon
@@ -109,7 +109,7 @@ export default function Featured() {
               <button
                 key={seg.id}
                 onClick={() => setActiveSegment(seg)}
-                className={`flex items-center gap-2 px-4 sm:px-6 py-2.5 rounded-full text-xs sm:text-sm font-medium transition-all whitespace-nowrap ${
+                className={`flex items-center gap-2 px-3.5 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-medium transition-all whitespace-nowrap cursor-pointer ${
                   isActive
                     ? 'bg-white text-black shadow-lg shadow-white/10 font-semibold'
                     : 'text-white/60 hover:text-white hover:bg-white/[0.04]'
@@ -131,7 +131,7 @@ export default function Featured() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -12 }}
           transition={{ duration: 0.35 }}
-          className={`rounded-3xl bg-gradient-to-b ${activeSegment.accentColor} border ${activeSegment.borderColor} p-8 sm:p-12 lg:p-14 backdrop-blur-xl relative overflow-hidden shadow-2xl`}
+          className={`rounded-3xl bg-gradient-to-b ${activeSegment.accentColor} border ${activeSegment.borderColor} p-6 sm:p-10 lg:p-14 backdrop-blur-xl relative overflow-hidden shadow-2xl`}
         >
           {/* Subtle Ambient Light */}
           <div className="absolute -top-24 -right-24 w-96 h-96 bg-blue-500/10 rounded-full blur-[100px] pointer-events-none" />

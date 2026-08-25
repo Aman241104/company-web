@@ -82,9 +82,9 @@ export default function FAQ() {
   const [open, setOpen] = useState(0)
 
   return (
-    <section id="faq" className="py-24 md:py-32 max-w-[1000px] mx-auto px-6 md:px-8">
+    <section id="faq" className="py-16 sm:py-24 md:py-32 max-w-[1000px] mx-auto px-5 sm:px-6 md:px-8">
       {/* Section Header */}
-      <div className="text-center max-w-xl mx-auto mb-14 md:mb-16">
+      <div className="text-center max-w-xl mx-auto mb-10 sm:mb-14 md:mb-16">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -109,13 +109,13 @@ export default function FAQ() {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-        className="rounded-3xl bg-white/[0.02] border border-white/[0.08] p-6 sm:p-10 shadow-2xl shadow-black/40"
+        transition={{ duration: 0.45 }}
+        className="rounded-3xl bg-white/[0.02] border border-white/[0.08] p-5 sm:p-8 md:p-10"
       >
-        {faqs.map((f, i) => (
+        {faqs.map((faq, i) => (
           <FAQItem
-            key={i}
-            item={f}
+            key={faq.q}
+            item={faq}
             index={i}
             isOpen={open === i}
             onToggle={() => setOpen(open === i ? null : i)}
@@ -123,16 +123,16 @@ export default function FAQ() {
         ))}
       </motion.div>
 
-      {/* Still Have Questions Box */}
+      {/* Still Have Questions CTA */}
       <div className="mt-8 text-center">
         <p className="text-xs sm:text-sm text-white/40 mb-3">
-          Have a specific technical question or complex architectural requirement?
+          Have a unique technical question or custom scope?
         </p>
         <Link
           href="/contact"
-          className="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-400 hover:text-blue-300 transition-colors"
+          className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-blue-400 hover:text-blue-300 transition-colors"
         >
-          Speak Directly with a Senior Architect <ArrowRight size={12} />
+          Ask our engineering leads directly <ArrowRight size={13} />
         </Link>
       </div>
     </section>

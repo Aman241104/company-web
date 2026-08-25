@@ -93,14 +93,14 @@ export default function Pricing() {
   const calculatedTotal = selectedType.base + selectedAddons.reduce((acc, a) => acc + a.price, 0)
 
   return (
-    <section id="pricing" className="py-24 md:py-32 bg-[#07080C] relative border-t border-white/[0.06]">
+    <section id="pricing" className="py-16 sm:py-24 md:py-32 bg-[#07080C] relative border-t border-white/[0.06]">
       {/* Background glow */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-blue-600/[0.06] rounded-full blur-[140px] pointer-events-none -z-10" />
 
-      <div className="max-w-[1360px] mx-auto px-6 md:px-8">
+      <div className="max-w-[1360px] mx-auto px-5 sm:px-6 md:px-8">
         
         {/* Section Header */}
-        <div className="max-w-2xl mx-auto text-center mb-16 md:mb-20">
+        <div className="max-w-2xl mx-auto text-center mb-12 sm:mb-16 md:mb-20">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -114,14 +114,14 @@ export default function Pricing() {
               Transparent fixed pricing.{' '}
               <span className="text-gradient-accent">Zero surprise invoices.</span>
             </h2>
-            <p className="text-base sm:text-lg text-white/50 leading-relaxed">
+            <p className="text-sm sm:text-base lg:text-lg text-white/50 leading-relaxed">
               Every deliverable is written into your milestone contract before work begins. No hidden costs, no scope creep.
             </p>
           </motion.div>
         </div>
 
         {/* 3-Column Modern Pricing Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 items-stretch mb-12 sm:mb-16">
           {plans.map((plan, i) => (
             <motion.div
               key={plan.name}
@@ -129,7 +129,7 @@ export default function Pricing() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.45, delay: i * 0.08 }}
-              className={`rounded-3xl p-8 sm:p-9 flex flex-col justify-between relative transition-all duration-300 ${
+              className={`rounded-3xl p-6 sm:p-8 md:p-9 flex flex-col justify-between relative transition-all duration-300 ${
                 plan.highlight
                   ? 'bg-gradient-to-b from-blue-600/15 via-white/[0.03] to-white/[0.01] border-2 border-blue-500/40 shadow-2xl shadow-blue-900/20'
                   : 'bg-white/[0.02] border border-white/[0.08] hover:border-white/[0.18]'

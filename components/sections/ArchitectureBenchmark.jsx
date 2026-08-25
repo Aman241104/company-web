@@ -50,9 +50,9 @@ export default function ArchitectureBenchmark() {
   const activeData = benchmarkCategories.find((c) => c.id === activeTab) || benchmarkCategories[0]
 
   return (
-    <section id="architecture-benchmark" className="py-24 md:py-32 max-w-[1360px] mx-auto px-6 md:px-8 border-t border-white/[0.06]">
+    <section id="architecture-benchmark" className="py-16 sm:py-24 md:py-32 max-w-[1360px] mx-auto px-5 sm:px-6 md:px-8 border-t border-white/[0.06]">
       {/* Header */}
-      <div className="max-w-3xl mx-auto text-center mb-16">
+      <div className="max-w-3xl mx-auto text-center mb-12 sm:mb-16">
         <span className="glow-pill mb-4 inline-flex">
           Stack Specifications
         </span>
@@ -60,13 +60,13 @@ export default function ArchitectureBenchmark() {
           Engineered on modern standards.{' '}
           <span className="text-gradient-accent">Zero legacy debt.</span>
         </h2>
-        <p className="text-base sm:text-lg text-white/50 leading-relaxed">
+        <p className="text-sm sm:text-base lg:text-lg text-white/50 leading-relaxed">
           See how our Next.js 15, PostgreSQL, and global edge architectures outperform traditional software agency builds.
         </p>
       </div>
 
       {/* Tabs */}
-      <div className="flex items-center justify-center gap-3 flex-wrap mb-12">
+      <div className="flex items-center justify-center gap-2 sm:gap-3 flex-wrap mb-10 sm:mb-12">
         {benchmarkCategories.map((cat) => {
           const Icon = cat.icon
           const isActive = cat.id === activeTab
@@ -74,7 +74,7 @@ export default function ArchitectureBenchmark() {
             <button
               key={cat.id}
               onClick={() => setActiveTab(cat.id)}
-              className={`px-5 py-3 rounded-full text-xs font-semibold transition-all flex items-center gap-2 ${
+              className={`px-3.5 sm:px-5 py-2 sm:py-3 rounded-full text-xs font-semibold transition-all flex items-center gap-2 cursor-pointer ${
                 isActive
                   ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/30'
                   : 'bg-white/[0.04] text-white/60 hover:text-white hover:bg-white/[0.08] border border-white/10'
@@ -95,54 +95,54 @@ export default function ArchitectureBenchmark() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -16 }}
           transition={{ duration: 0.3 }}
-          className="rounded-3xl bg-white/[0.02] border border-white/[0.08] p-8 sm:p-10 shadow-2xl shadow-black/50"
+          className="rounded-3xl bg-white/[0.02] border border-white/[0.08] p-5 sm:p-10 shadow-2xl shadow-black/50"
         >
           {/* Header comparison banner */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pb-8 mb-8 border-b border-white/[0.08]">
-            <div className="p-5 rounded-2xl bg-blue-500/10 border border-blue-500/30 space-y-1">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 sm:gap-4 pb-6 sm:pb-8 mb-6 sm:mb-8 border-b border-white/[0.08]">
+            <div className="p-4 sm:p-5 rounded-2xl bg-blue-500/10 border border-blue-500/30 space-y-1">
               <div className="text-[11px] font-mono uppercase tracking-wider text-blue-400 font-bold">
                 Mehta Technologies Architecture
               </div>
-              <div className="text-base font-extrabold text-white">
+              <div className="text-sm sm:text-base font-extrabold text-white">
                 {activeData.mehtaStack}
               </div>
             </div>
-            <div className="p-5 rounded-2xl bg-white/[0.02] border border-white/[0.08] space-y-1">
+            <div className="p-4 sm:p-5 rounded-2xl bg-white/[0.02] border border-white/[0.08] space-y-1">
               <div className="text-[11px] font-mono uppercase tracking-wider text-white/40 font-bold">
                 Conventional Legacy Standard
               </div>
-              <div className="text-base font-semibold text-white/60">
+              <div className="text-sm sm:text-base font-semibold text-white/60">
                 {activeData.legacyStack}
               </div>
             </div>
           </div>
 
           {/* Metric Comparison Rows */}
-          <div className="space-y-4">
-            {activeData.metrics.map((m, index) => (
+          <div className="space-y-3 sm:space-y-4">
+            {activeData.metrics.map((m) => (
               <div
                 key={m.name}
-                className="p-5 rounded-2xl bg-white/[0.015] border border-white/[0.06] hover:border-white/15 transition-all grid grid-cols-1 md:grid-cols-12 gap-4 items-center"
+                className="p-4 sm:p-5 rounded-2xl bg-white/[0.015] border border-white/[0.06] hover:border-white/15 transition-all grid grid-cols-1 sm:grid-cols-12 gap-2.5 sm:gap-4 items-center"
               >
-                <div className="md:col-span-4">
+                <div className="sm:col-span-4">
                   <div className="text-xs font-bold text-white tracking-tight">{m.name}</div>
                 </div>
 
-                <div className="md:col-span-3">
+                <div className="sm:col-span-3">
                   <div className="text-xs font-mono font-bold text-emerald-400 flex items-center gap-1.5">
                     <span className="w-2 h-2 rounded-full bg-emerald-400 shrink-0" />
                     {m.mehta}
                   </div>
                 </div>
 
-                <div className="md:col-span-3">
+                <div className="sm:col-span-3">
                   <div className="text-xs font-mono text-white/40">
                     {m.legacy}
                   </div>
                 </div>
 
-                <div className="md:col-span-2 text-right">
-                  <span className="px-3 py-1 rounded-full text-[11px] font-mono font-bold bg-blue-500/15 border border-blue-500/30 text-blue-300">
+                <div className="sm:col-span-2 text-left sm:text-right">
+                  <span className="inline-block px-2.5 sm:px-3 py-1 rounded-full text-[10px] sm:text-[11px] font-mono font-bold bg-blue-500/15 border border-blue-500/30 text-blue-300">
                     {m.diff}
                   </span>
                 </div>
@@ -151,12 +151,12 @@ export default function ArchitectureBenchmark() {
           </div>
 
           {/* Live Telemetry Ping */}
-          <div className="mt-8 pt-6 border-t border-white/[0.06] flex items-center justify-between flex-wrap gap-4 text-xs text-white/40 font-mono">
+          <div className="mt-6 sm:mt-8 pt-5 sm:pt-6 border-t border-white/[0.06] flex items-center justify-between flex-wrap gap-3 text-xs text-white/40 font-mono">
             <div className="flex items-center gap-2 text-emerald-400">
               <Activity size={14} className="animate-pulse" />
-              <span>Real-time benchmark test passing across 12 edge nodes</span>
+              <span>Real-time benchmark passing on edge nodes</span>
             </div>
-            <span>Standard SLA: 99.99% Cloud Uptime</span>
+            <span>SLA: 99.99% Cloud Uptime</span>
           </div>
         </motion.div>
       </AnimatePresence>

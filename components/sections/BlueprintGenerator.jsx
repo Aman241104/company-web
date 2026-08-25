@@ -116,9 +116,9 @@ export default function BlueprintGenerator() {
   }
 
   return (
-    <section id="blueprint-generator" className="py-24 md:py-32 max-w-[1360px] mx-auto px-6 md:px-8 border-t border-white/[0.06]">
+    <section id="blueprint-generator" className="py-16 sm:py-24 md:py-32 max-w-[1360px] mx-auto px-5 sm:px-6 md:px-8 border-t border-white/[0.06]">
       {/* Section Header */}
-      <div className="max-w-3xl mx-auto text-center mb-16">
+      <div className="max-w-3xl mx-auto text-center mb-12 sm:mb-16">
         <span className="glow-pill mb-4 inline-flex">
           Automated Scoping Engine
         </span>
@@ -126,13 +126,13 @@ export default function BlueprintGenerator() {
           Instant architecture &{' '}
           <span className="text-gradient-accent">tech stack blueprint.</span>
         </h2>
-        <p className="text-base sm:text-lg text-white/50 leading-relaxed">
+        <p className="text-sm sm:text-base lg:text-lg text-white/50 leading-relaxed">
           Select your product archetype to review recommended tech stack specifications, database schemas, and milestone roadmaps.
         </p>
       </div>
 
       {/* Blueprint Archetype Tabs */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-12">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3 mb-10 sm:mb-12">
         {blueprints.map((bp) => {
           const Icon = bp.icon
           const isSelected = bp.id === selectedId
@@ -140,14 +140,14 @@ export default function BlueprintGenerator() {
             <button
               key={bp.id}
               onClick={() => setSelectedId(bp.id)}
-              className={`p-4 rounded-2xl text-left transition-all flex items-center gap-3.5 ${
+              className={`p-3.5 sm:p-4 rounded-2xl text-left transition-all flex items-center gap-3 sm:gap-3.5 cursor-pointer ${
                 isSelected
                   ? 'bg-blue-600/20 border border-blue-500/40 text-white shadow-xl shadow-blue-900/20'
                   : 'bg-white/[0.02] border border-white/[0.08] text-white/60 hover:text-white hover:bg-white/[0.04]'
               }`}
             >
               <div
-                className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${
+                className={`w-9 sm:w-10 h-9 sm:h-10 rounded-xl flex items-center justify-center shrink-0 ${
                   isSelected ? 'bg-blue-600 text-white' : 'bg-white/[0.05] text-white/60'
                 }`}
               >
@@ -170,11 +170,11 @@ export default function BlueprintGenerator() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -16 }}
           transition={{ duration: 0.3 }}
-          className="rounded-3xl bg-[#090B12] border border-white/[0.1] p-8 sm:p-12 shadow-2xl shadow-black/60 relative overflow-hidden"
+          className="rounded-3xl bg-[#090B12] border border-white/[0.1] p-5 sm:p-10 lg:p-12 shadow-2xl shadow-black/60 relative overflow-hidden"
         >
           <div className="absolute top-0 left-1/4 right-1/4 h-[1px] bg-gradient-to-r from-transparent via-blue-500/60 to-transparent" />
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
             
             {/* Left: Architecture Specifications */}
             <div className="lg:col-span-7 space-y-6">

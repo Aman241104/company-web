@@ -71,9 +71,9 @@ export default function PerformanceComparison() {
   const activeStudy = studies.find((s) => s.id === selectedId) || studies[0]
 
   return (
-    <section className="py-24 md:py-32 max-w-[1360px] mx-auto px-6 md:px-8 border-t border-white/[0.06]">
+    <section className="py-16 sm:py-24 md:py-32 max-w-[1360px] mx-auto px-5 sm:px-6 md:px-8 border-t border-white/[0.06]">
       {/* Header */}
-      <div className="max-w-3xl mx-auto text-center mb-16">
+      <div className="max-w-3xl mx-auto text-center mb-12 sm:mb-16">
         <span className="glow-pill mb-4 inline-flex">
           Empirical Engineering Benchmarks
         </span>
@@ -81,20 +81,20 @@ export default function PerformanceComparison() {
           Before vs. After:{' '}
           <span className="text-gradient-accent">Measurable Transformation.</span>
         </h2>
-        <p className="text-base sm:text-lg text-white/50 leading-relaxed">
+        <p className="text-sm sm:text-base lg:text-lg text-white/50 leading-relaxed">
           We don&apos;t just deliver &ldquo;clean code&rdquo; — we engineer radical improvements in Core Web Vitals, speed index, and revenue conversion metrics.
         </p>
       </div>
 
       {/* Case Selector Tabs */}
-      <div className="flex items-center justify-center gap-2 flex-wrap mb-12">
+      <div className="flex items-center justify-center gap-1.5 sm:gap-2 flex-wrap mb-10 sm:mb-12">
         {studies.map((s) => {
           const isActive = s.id === selectedId
           return (
             <button
               key={s.id}
               onClick={() => setSelectedId(s.id)}
-              className={`px-5 py-2.5 rounded-full text-xs font-semibold transition-all ${
+              className={`px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-semibold transition-all cursor-pointer ${
                 isActive
                   ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/30'
                   : 'bg-white/[0.04] text-white/60 hover:text-white hover:bg-white/[0.08] border border-white/10'
@@ -114,10 +114,10 @@ export default function PerformanceComparison() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -16 }}
           transition={{ duration: 0.35 }}
-          className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch"
+          className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-stretch"
         >
           {/* Left Column: Legacy / Before */}
-          <div className="lg:col-span-6 rounded-3xl bg-red-950/[0.08] border border-red-500/20 p-8 sm:p-10 flex flex-col justify-between space-y-8">
+          <div className="lg:col-span-6 rounded-3xl bg-red-950/[0.08] border border-red-500/20 p-5 sm:p-8 md:p-10 flex flex-col justify-between space-y-6 sm:space-y-8">
             <div>
               <div className="flex items-center justify-between pb-4 border-b border-red-500/15 mb-6">
                 <div className="flex items-center gap-2">
@@ -130,24 +130,24 @@ export default function PerformanceComparison() {
               </div>
 
               {/* Metric Row */}
-              <div className="grid grid-cols-3 gap-3 mb-8">
-                <div className="p-4 rounded-2xl bg-black/40 border border-white/[0.06] text-center">
-                  <div className="text-[10px] font-mono text-white/40 uppercase mb-1">PageSpeed</div>
-                  <div className="text-2xl font-extrabold text-red-400 font-mono">{activeStudy.before.pagespeed}/100</div>
+              <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-6 sm:mb-8">
+                <div className="p-2.5 sm:p-4 rounded-xl sm:rounded-2xl bg-black/40 border border-white/[0.06] text-center">
+                  <div className="text-[9px] sm:text-[10px] font-mono text-white/40 uppercase mb-0.5 sm:mb-1">PageSpeed</div>
+                  <div className="text-lg sm:text-2xl font-extrabold text-red-400 font-mono">{activeStudy.before.pagespeed}/100</div>
                 </div>
-                <div className="p-4 rounded-2xl bg-black/40 border border-white/[0.06] text-center">
-                  <div className="text-[10px] font-mono text-white/40 uppercase mb-1">LCP Latency</div>
-                  <div className="text-2xl font-extrabold text-red-400 font-mono">{activeStudy.before.lcp}</div>
+                <div className="p-2.5 sm:p-4 rounded-xl sm:rounded-2xl bg-black/40 border border-white/[0.06] text-center">
+                  <div className="text-[9px] sm:text-[10px] font-mono text-white/40 uppercase mb-0.5 sm:mb-1">LCP Latency</div>
+                  <div className="text-lg sm:text-2xl font-extrabold text-red-400 font-mono">{activeStudy.before.lcp}</div>
                 </div>
-                <div className="p-4 rounded-2xl bg-black/40 border border-white/[0.06] text-center">
-                  <div className="text-[10px] font-mono text-white/40 uppercase mb-1">JS Payload</div>
-                  <div className="text-2xl font-extrabold text-red-400 font-mono">{activeStudy.before.bundle}</div>
+                <div className="p-2.5 sm:p-4 rounded-xl sm:rounded-2xl bg-black/40 border border-white/[0.06] text-center">
+                  <div className="text-[9px] sm:text-[10px] font-mono text-white/40 uppercase mb-0.5 sm:mb-1">JS Payload</div>
+                  <div className="text-lg sm:text-2xl font-extrabold text-red-400 font-mono">{activeStudy.before.bundle}</div>
                 </div>
               </div>
 
               {/* Problems list */}
-              <div className="space-y-2.5">
-                <div className="text-xs font-mono uppercase tracking-wider text-white/40 mb-3">
+              <div className="space-y-2 sm:space-y-2.5">
+                <div className="text-xs font-mono uppercase tracking-wider text-white/40 mb-2.5 sm:mb-3">
                   Critical Bottlenecks Identified
                 </div>
                 {activeStudy.before.issues.map((issue) => (
@@ -159,13 +159,13 @@ export default function PerformanceComparison() {
               </div>
             </div>
 
-            <div className="p-4 rounded-2xl bg-red-500/10 border border-red-500/15 text-xs text-red-300 font-medium">
+            <div className="p-3.5 sm:p-4 rounded-2xl bg-red-500/10 border border-red-500/15 text-xs text-red-300 font-medium">
               Baseline Conversion: <span className="font-bold text-white font-mono">{activeStudy.before.conversion}</span>
             </div>
           </div>
 
           {/* Right Column: Mehta Tech Next.js 15 / After */}
-          <div className="lg:col-span-6 rounded-3xl bg-blue-950/[0.12] border border-blue-500/30 p-8 sm:p-10 flex flex-col justify-between space-y-8 shadow-2xl shadow-blue-950/40 relative overflow-hidden">
+          <div className="lg:col-span-6 rounded-3xl bg-blue-950/[0.12] border border-blue-500/30 p-5 sm:p-8 md:p-10 flex flex-col justify-between space-y-6 sm:space-y-8 shadow-2xl shadow-blue-950/40 relative overflow-hidden">
             <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-blue-500 via-emerald-400 to-transparent" />
 
             <div>
@@ -173,31 +173,31 @@ export default function PerformanceComparison() {
                 <div className="flex items-center gap-2">
                   <CheckCircle2 size={18} className="text-emerald-400" />
                   <span className="text-xs font-mono font-bold uppercase tracking-wider text-emerald-400">
-                    Mehta Tech Architecture (After)
+                    Mehta Tech (After)
                   </span>
                 </div>
                 <span className="text-xs text-emerald-400/80 font-mono font-bold">100/100 Core Web Vitals</span>
               </div>
 
               {/* Metric Row */}
-              <div className="grid grid-cols-3 gap-3 mb-8">
-                <div className="p-4 rounded-2xl bg-[#07080C] border border-emerald-500/30 text-center">
-                  <div className="text-[10px] font-mono text-white/40 uppercase mb-1">PageSpeed</div>
-                  <div className="text-2xl font-extrabold text-emerald-400 font-mono">{activeStudy.after.pagespeed}/100</div>
+              <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-6 sm:mb-8">
+                <div className="p-2.5 sm:p-4 rounded-xl sm:rounded-2xl bg-[#07080C] border border-emerald-500/30 text-center">
+                  <div className="text-[9px] sm:text-[10px] font-mono text-white/40 uppercase mb-0.5 sm:mb-1">PageSpeed</div>
+                  <div className="text-lg sm:text-2xl font-extrabold text-emerald-400 font-mono">{activeStudy.after.pagespeed}/100</div>
                 </div>
-                <div className="p-4 rounded-2xl bg-[#07080C] border border-emerald-500/30 text-center">
-                  <div className="text-[10px] font-mono text-white/40 uppercase mb-1">LCP Latency</div>
-                  <div className="text-2xl font-extrabold text-emerald-400 font-mono">{activeStudy.after.lcp}</div>
+                <div className="p-2.5 sm:p-4 rounded-xl sm:rounded-2xl bg-[#07080C] border border-emerald-500/30 text-center">
+                  <div className="text-[9px] sm:text-[10px] font-mono text-white/40 uppercase mb-0.5 sm:mb-1">LCP Latency</div>
+                  <div className="text-lg sm:text-2xl font-extrabold text-emerald-400 font-mono">{activeStudy.after.lcp}</div>
                 </div>
-                <div className="p-4 rounded-2xl bg-[#07080C] border border-emerald-500/30 text-center">
-                  <div className="text-[10px] font-mono text-white/40 uppercase mb-1">JS Payload</div>
-                  <div className="text-2xl font-extrabold text-emerald-400 font-mono">{activeStudy.after.bundle}</div>
+                <div className="p-2.5 sm:p-4 rounded-xl sm:rounded-2xl bg-[#07080C] border border-emerald-500/30 text-center">
+                  <div className="text-[9px] sm:text-[10px] font-mono text-white/40 uppercase mb-0.5 sm:mb-1">JS Payload</div>
+                  <div className="text-lg sm:text-2xl font-extrabold text-emerald-400 font-mono">{activeStudy.after.bundle}</div>
                 </div>
               </div>
 
               {/* Results list */}
-              <div className="space-y-2.5">
-                <div className="text-xs font-mono uppercase tracking-wider text-white/40 mb-3">
+              <div className="space-y-2 sm:space-y-2.5">
+                <div className="text-xs font-mono uppercase tracking-wider text-white/40 mb-2.5 sm:mb-3">
                   Verified Production Outcomes
                 </div>
                 {activeStudy.after.results.map((res) => (
@@ -209,9 +209,9 @@ export default function PerformanceComparison() {
               </div>
             </div>
 
-            <div className="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-xs text-emerald-300 font-medium flex items-center justify-between">
-              <span>Production Conversion: <strong className="text-white font-mono">{activeStudy.after.conversion}</strong></span>
-              <span className="text-[11px] font-mono uppercase bg-emerald-500/20 px-2 py-0.5 rounded text-emerald-300">Verified Result</span>
+            <div className="p-3.5 sm:p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-xs text-emerald-300 font-medium flex items-center justify-between">
+              <span>Conversion: <strong className="text-white font-mono">{activeStudy.after.conversion}</strong></span>
+              <span className="text-[10px] sm:text-[11px] font-mono uppercase bg-emerald-500/20 px-2 py-0.5 rounded text-emerald-300">Verified</span>
             </div>
           </div>
         </motion.div>

@@ -4,44 +4,68 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowRight, ExternalLink, ArrowUpRight, Sparkles, Filter } from 'lucide-react'
+import SpotlightCard from '@/components/ui/SpotlightCard'
+import ShinyText from '@/components/ui/ShinyText'
 
 const categories = ['All', 'Web App', 'E-Commerce', 'SaaS & Cloud', 'Healthcare & Services']
 
 const projects = [
   {
-    name: 'Vibo ERP Suite',
+    name: 'Vibo ERP Platform',
     slug: 'vibo-erp',
     category: 'SaaS & Cloud',
     subtitle: 'Enterprise Cloud ERP Platform',
     desc: 'Proprietary cloud ERP system with inventory, GST e-invoicing, CRM pipeline, and biometric HRMS sync for 2,400+ active enterprise users.',
-    tags: ['Next.js', 'PostgreSQL', 'Multi-Tenant', 'Redis'],
-    image: '/assets/saas_hero_visual.jpg',
+    tags: ['Next.js 15', 'PostgreSQL RLS', 'Multi-Tenant', 'Redis'],
+    image: '/assets/vibo_erp_mockup.jpg',
     url: null,
     year: '2024',
     result: '3M+ Daily Queries',
   },
   {
-    name: 'Silver Spoon by ACJ',
+    name: 'Silver Spoon / Argentum',
     slug: 'silver-spoon',
     category: 'E-Commerce',
     subtitle: 'Luxury Silver Artifacts & Gifting',
     desc: 'Bespoke high-converting Shopify storefront with custom 3D configurator and express checkout. +280% online luxury sales in Q1.',
-    tags: ['Shopify', 'Liquid', 'Custom UX', 'Stripe'],
-    image: '/silverspoon-screenshot.png',
+    tags: ['Shopify Plus', 'Next.js SSR', 'Custom UX', 'Stripe'],
+    image: '/assets/silver_spoon_mockup.jpg',
     url: 'https://silverspoonbyacj.com',
     year: '2024',
     result: '+280% Sales Growth',
   },
   {
-    name: 'Stylux Interiors',
+    name: 'Autonomous AI Orchestrator',
+    category: 'SaaS & Cloud',
+    subtitle: 'AI Agent Telemetry & Workflow Engine',
+    desc: 'Neural workflow builder and multi-agent execution orchestrator with real-time token telemetry and self-healing pipelines.',
+    tags: ['LangGraph', 'Vector RAG', 'OpenAI & Claude-3', 'Live Traces'],
+    image: '/assets/ai_agent_mockup.jpg',
+    url: null,
+    year: '2024',
+    result: '4,110 tok/s Throughput',
+  },
+  {
+    name: 'Nexus Algorithmic Fintech',
+    category: 'SaaS & Cloud',
+    subtitle: 'High-Frequency Trading & Treasury Router',
+    desc: 'Institutional-grade algorithmic treasury, instant multi-currency routing, and sub-millisecond execution engine.',
+    tags: ['WebSocket', 'Order Book', 'AES-256', '2.17ms Speed'],
+    image: '/assets/fintech_mockup.jpg',
+    url: null,
+    year: '2024',
+    result: '$1.96B Routed',
+  },
+  {
+    name: 'Studio Aeterna Architecture',
     category: 'Web App',
-    subtitle: 'Luxury Interior Design Studio',
+    subtitle: 'Luxury Architecture & Interiors',
     desc: 'Turnkey architectural portfolio engineered with 60fps micro-interactions, responsive 3D floor plan viewers, and fast lead capture.',
-    tags: ['Next.js', 'Tailwind', 'GSAP', 'Framer Motion'],
-    image: '/interior.png',
+    tags: ['Next.js 15', 'Tailwind', 'GSAP', 'Framer Motion'],
+    image: '/assets/stylux_mockup.jpg',
     url: 'https://interior-web-mu.vercel.app/',
     year: '2024',
-    result: '90-Day Turnkey Delivery',
+    result: 'Turnkey 60-Day Delivery',
   },
   {
     name: 'JJ Films Cinematic Studio',
@@ -147,11 +171,10 @@ const projects = [
 
 function ProjectCard({ project, index }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, scale: 0.95 }}
-      transition={{ duration: 0.4, delay: index * 0.04 }}
+    <SpotlightCard
+      enableTilt={false}
+      spotlightColor="rgba(59, 130, 246, 0.15)"
+      borderColor="rgba(59, 130, 246, 0.3)"
       className="group rounded-3xl bg-white/[0.02] border border-white/[0.08] hover:border-blue-500/30 overflow-hidden flex flex-col justify-between transition-all duration-300 shadow-xl shadow-black/40"
     >
       <div>
@@ -162,7 +185,7 @@ function ProjectCard({ project, index }) {
               src={project.image}
               alt={project.name}
               fill
-              className="object-cover object-top group-hover:scale-105 transition-transform duration-500 opacity-85 group-hover:opacity-100"
+              className="object-cover object-top group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100"
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center font-bold text-2xl text-blue-400/40 bg-blue-600/10">
@@ -237,16 +260,13 @@ function ProjectCard({ project, index }) {
           >
             Visit Live Project <ArrowUpRight size={13} />
           </a>
-        ) : !project.slug ? (
-          <Link
-            href="/contact"
-            className="w-full py-2.5 rounded-full text-xs font-semibold bg-blue-600/20 hover:bg-blue-600 text-blue-400 hover:text-white border border-blue-500/30 transition-all flex items-center justify-center gap-1.5"
-          >
-            Request Proprietary Demo <ArrowRight size={13} />
-          </Link>
-        ) : null}
+        ) : (
+          <div className="w-full py-2.5 rounded-full text-xs font-medium text-white/40 border border-white/[0.06] text-center">
+            Enterprise Client IP Protected
+          </div>
+        )}
       </div>
-    </motion.div>
+    </SpotlightCard>
   )
 }
 
@@ -273,7 +293,7 @@ export default function WorkPage() {
           </span>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.08] mb-6">
             Engineering that drives{' '}
-            <span className="text-gradient-accent">measurable outcomes.</span>
+            <ShinyText>measurable outcomes.</ShinyText>
           </h1>
           <p className="text-base sm:text-lg text-white/50 leading-relaxed">
             150+ shipped production applications, luxury e-commerce storefronts, and cloud SaaS platforms.

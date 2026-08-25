@@ -47,6 +47,10 @@ export default function ThemeCustomizer() {
     if (saved && themes.find((t) => t.id === saved)) {
       applyTheme(saved)
     }
+
+    const handleOpen = () => setIsOpen(true)
+    window.addEventListener('open-theme-customizer', handleOpen)
+    return () => window.removeEventListener('open-theme-customizer', handleOpen)
   }, [])
 
   const applyTheme = (themeId) => {
@@ -61,14 +65,14 @@ export default function ThemeCustomizer() {
   }
 
   return (
-    <div className="fixed bottom-20 sm:bottom-6 left-4 sm:left-6 z-40">
+    <div className="hidden md:block fixed bottom-6 left-6 z-40">
       {/* Theme Trigger Button */}
       <motion.button
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         onClick={() => setIsOpen(!isOpen)}
         aria-label="Toggle Theme Customizer"
-        className="flex items-center gap-2 px-3 py-2.5 rounded-full bg-[#0B0D14]/90 hover:bg-[#0B0D14] text-white border border-white/10 hover:border-white/20 shadow-xl backdrop-blur-xl transition-all"
+        className="flex items-center gap-2 px-3 py-2.5 rounded-full bg-[#0B0D14]/90 hover:bg-[#0B0D14] text-white border border-white/10 hover:border-white/20 shadow-xl backdrop-blur-xl transition-all cursor-pointer"
       >
         <Palette size={14} className="text-blue-400" />
         <span className="text-[11px] font-mono font-medium hidden sm:inline">Theme</span>

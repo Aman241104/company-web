@@ -24,8 +24,15 @@ export default function FastTrackDrawer() {
     const handleEsc = (e) => {
       if (e.key === 'Escape') setIsOpen(false)
     }
+    const handleOpen = () => setIsOpen(true)
+
     window.addEventListener('keydown', handleEsc)
-    return () => window.removeEventListener('keydown', handleEsc)
+    window.addEventListener('open-fast-track', handleOpen)
+
+    return () => {
+      window.removeEventListener('keydown', handleEsc)
+      window.removeEventListener('open-fast-track', handleOpen)
+    }
   }, [])
 
   const handleNdaSubmit = (e) => {
@@ -37,13 +44,13 @@ export default function FastTrackDrawer() {
 
   return (
     <>
-      {/* Floating Trigger Button */}
-      <div className="fixed bottom-20 sm:bottom-6 right-4 sm:right-6 z-40">
+      {/* Floating Trigger Button - Desktop only so it never collides with MobileDock */}
+      <div className="hidden md:block fixed bottom-6 right-6 z-40">
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => setIsOpen(true)}
-          className="flex items-center gap-2.5 px-4 py-3 rounded-full bg-[#0B0D14]/90 hover:bg-[#0B0D14] text-white border border-blue-500/30 hover:border-blue-500/60 shadow-2xl shadow-blue-600/30 backdrop-blur-xl transition-all group"
+          className="flex items-center gap-2.5 px-4 py-3 rounded-full bg-[#0B0D14]/90 hover:bg-[#0B0D14] text-white border border-blue-500/30 hover:border-blue-500/60 shadow-2xl shadow-blue-600/30 backdrop-blur-xl transition-all group cursor-pointer"
         >
           <span className="relative flex h-2.5 w-2.5">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
@@ -58,14 +65,14 @@ export default function FastTrackDrawer() {
       {/* Slide-in Consultation Drawer */}
       <AnimatePresence>
         {isOpen && (
-          <div className="fixed inset-0 z-50 flex justify-end">
+          <div className="fixed inset-0 z-[60] flex justify-end">
             {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsOpen(false)}
-              className="fixed inset-0 bg-black/60 backdrop-blur-sm"
+              className="fixed inset-0 bg-black/75 backdrop-blur-sm"
             />
 
             {/* Drawer Body */}
@@ -73,8 +80,8 @@ export default function FastTrackDrawer() {
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
-              transition={{ type: 'spring', damping: 26, stiffness: 280 }}
-              className="relative w-full max-w-md bg-[#090A10] border-l border-white/10 h-full overflow-y-auto p-6 sm:p-8 flex flex-col justify-between shadow-2xl z-10"
+              transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+              className="relative w-full max-w-md bg-[#080A10] border-l border-white/10 h-full p-6 sm:p-8 flex flex-col justify-between overflow-y-auto z-10 shadow-2xl"
             >
               <div>
                 {/* Header */}

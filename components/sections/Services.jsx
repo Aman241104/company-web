@@ -50,9 +50,9 @@ const services = [
 
 export default function Services() {
   return (
-    <section id="services" className="py-24 md:py-32 max-w-[1360px] mx-auto px-6 md:px-8">
+    <section id="services" className="py-16 sm:py-24 md:py-32 max-w-[1360px] mx-auto px-5 sm:px-6 md:px-8">
       {/* Section Header */}
-      <div className="max-w-2xl mx-auto text-center mb-16 md:mb-20">
+      <div className="max-w-2xl mx-auto text-center mb-12 sm:mb-16 md:mb-20">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -66,14 +66,14 @@ export default function Services() {
             One accountable team.{' '}
             <span className="text-gradient-accent">Every layer.</span>
           </h2>
-          <p className="text-base sm:text-lg text-white/50 leading-relaxed">
+          <p className="text-sm sm:text-base lg:text-lg text-white/50 leading-relaxed">
             Six interconnected disciplines under one roof. No fragmented agencies or unaccountable handoffs — we own the outcome end to end.
           </p>
         </motion.div>
       </div>
 
       {/* 3-Column Modern Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
         {services.map((service, index) => {
           const Icon = service.icon
           return (
@@ -83,7 +83,7 @@ export default function Services() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.45, delay: index * 0.06 }}
-              className="group p-8 rounded-2xl bg-white/[0.02] border border-white/[0.08] hover:border-blue-500/30 hover:bg-white/[0.035] transition-all duration-300 flex flex-col justify-between"
+              className="group p-6 sm:p-8 rounded-2xl bg-white/[0.02] border border-white/[0.08] hover:border-blue-500/30 hover:bg-white/[0.035] transition-all duration-300 flex flex-col justify-between"
             >
               <div>
                 <div className="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center mb-6 text-blue-400 group-hover:scale-105 group-hover:bg-blue-500/15 transition-all">

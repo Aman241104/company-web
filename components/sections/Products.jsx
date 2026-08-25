@@ -3,6 +3,9 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { CheckCircle2, ArrowUpRight, UserCheck, Boxes, Users2, ListChecks, Receipt, Cpu, ArrowRight, ShieldCheck, Sparkles } from 'lucide-react'
+import BorderBeam from '@/components/ui/BorderBeam'
+import SpotlightCard from '@/components/ui/SpotlightCard'
+import ShinyText from '@/components/ui/ShinyText'
 
 const features = [
   'Multi-tenant Cloud Architecture with schema isolation',
@@ -24,16 +27,16 @@ const microProducts = [
 
 export default function Products() {
   return (
-    <section id="products" className="py-24 md:py-32 max-w-[1360px] mx-auto px-6 md:px-8">
+    <section id="products" className="py-16 sm:py-24 md:py-32 max-w-[1360px] mx-auto px-5 sm:px-6 md:px-8">
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-16">
         <div>
           <span className="glow-pill mb-4 inline-flex">
             Proprietary SaaS Platform
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
             Software built for scale.{' '}
-            <span className="text-gradient-accent">Ready to deploy.</span>
+            <ShinyText>Ready to deploy.</ShinyText>
           </h2>
         </div>
         <div>
@@ -47,18 +50,17 @@ export default function Products() {
       </div>
 
       {/* Bento Grid: Featured Flagship Vibo ERP + Micro Product Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-stretch">
         
         {/* Flagship: Vibo ERP Card with Visual preview */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.55 }}
-          className="lg:col-span-7 rounded-3xl bg-white/[0.02] border border-blue-500/20 p-8 sm:p-10 flex flex-col justify-between relative overflow-hidden shadow-2xl shadow-blue-900/10"
+        <SpotlightCard
+          enableTilt={false}
+          spotlightColor="rgba(59, 130, 246, 0.2)"
+          borderColor="rgba(59, 130, 246, 0.4)"
+          className="lg:col-span-7 rounded-3xl bg-white/[0.02] border border-blue-500/20 p-5 sm:p-8 md:p-10 flex flex-col justify-between relative overflow-hidden shadow-2xl shadow-blue-900/10"
         >
-          {/* Subtle Top Accent Glow */}
-          <div className="absolute top-0 left-1/4 right-1/4 h-[1px] bg-gradient-to-r from-transparent via-blue-500/60 to-transparent" />
+          {/* Animated Border Beam */}
+          <BorderBeam size={220} duration={12} colorFrom="#3b82f6" colorTo="#a855f7" />
           
           <div>
             <div className="flex items-center justify-between gap-2 mb-6">
@@ -82,20 +84,20 @@ export default function Products() {
             </p>
 
             {/* Visual SaaS snapshot banner */}
-            <div className="relative aspect-[21/9] rounded-2xl overflow-hidden border border-white/10 mb-6 group">
+            <div className="relative aspect-[16/9] rounded-2xl overflow-hidden border border-white/10 mb-6 group bg-black">
               <Image
-                src="/assets/saas_hero_visual.jpg"
+                src="/assets/vibo_erp_mockup.jpg"
                 alt="Vibo ERP Platform View"
                 fill
-                className="object-cover group-hover:scale-105 transition-transform duration-700 opacity-90 group-hover:opacity-100"
+                className="object-cover object-top group-hover:scale-105 transition-transform duration-700 opacity-95 group-hover:opacity-100"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#07080C] via-transparent to-transparent" />
               <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-xs text-white/70">
-                <span className="px-2.5 py-1 rounded-md bg-black/60 backdrop-blur-md border border-white/10 font-mono text-[11px]">
-                  Real-time Analytics Dashboard
+                <span className="px-2.5 py-1 rounded-md bg-black/70 backdrop-blur-md border border-white/10 font-mono text-[11px] text-white">
+                  Real-time Multi-Tenant Telemetry
                 </span>
-                <span className="px-2.5 py-1 rounded-md bg-blue-600/80 text-white font-semibold text-[11px]">
-                  Live Preview
+                <span className="px-2.5 py-1 rounded-md bg-blue-600 text-white font-semibold text-[11px]">
+                  Live Production
                 </span>
               </div>
             </div>
@@ -124,19 +126,18 @@ export default function Products() {
               </Link>
             </div>
           </div>
-        </motion.div>
+        </SpotlightCard>
 
         {/* Micro SaaS Grid */}
         <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
           {microProducts.map((p, index) => {
             const Icon = p.icon
             return (
-              <motion.div
+              <SpotlightCard
                 key={p.title}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.05 }}
+                enableTilt={true}
+                spotlightColor="rgba(59, 130, 246, 0.12)"
+                borderColor="rgba(59, 130, 246, 0.25)"
                 className="p-5 rounded-2xl bg-white/[0.02] border border-white/[0.07] hover:border-white/[0.15] hover:bg-white/[0.04] transition-all flex flex-col justify-between"
               >
                 <div>
@@ -146,7 +147,7 @@ export default function Products() {
                   <h4 className="text-sm font-bold text-white mb-1.5">{p.title}</h4>
                   <p className="text-xs text-white/50 leading-relaxed">{p.desc}</p>
                 </div>
-              </motion.div>
+              </SpotlightCard>
             )
           })}
         </div>
@@ -155,3 +156,4 @@ export default function Products() {
     </section>
   )
 }
+

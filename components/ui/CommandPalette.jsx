@@ -38,10 +38,11 @@ const commands = [
   { id: 'svc-saas', title: 'Custom SaaS & Cloud ERP Platforms', section: 'Services', icon: Layers, href: '/services' },
 
   // Case Studies
-  { id: 'case-vibo', title: 'Vibo ERP — Cloud Suite (2,400+ Users)', section: 'Case Studies', icon: Briefcase, href: '/#products' },
-  { id: 'case-silverspoon', title: 'Silver Spoon by ACJ (+280% Sales)', section: 'Case Studies', icon: Briefcase, href: '/work' },
-  { id: 'case-stylux', title: 'Stylux Interiors (90-Day Turnkey)', section: 'Case Studies', icon: Briefcase, href: '/work' },
-  { id: 'case-chahana', title: 'Chahana Dental (#1 Google Rank)', section: 'Case Studies', icon: Briefcase, href: '/work' },
+  { id: 'case-svspace', title: 'SV Space Designs — Turnkey Luxury Studio', section: 'Case Studies', icon: Briefcase, href: '/work/sv-space-designs' },
+  { id: 'case-prihaan', title: 'Prihaan Spices & Agro (252+ SKUs)', section: 'Case Studies', icon: Briefcase, href: '/work/prihaan-spices' },
+  { id: 'case-silverspoon', title: 'The Silver Spoon by ACJ (+280% Sales)', section: 'Case Studies', icon: Briefcase, href: '/work/silver-spoon' },
+  { id: 'case-vibo', title: 'Vibo ERP Cloud Platform (2,400+ Users)', section: 'Case Studies', icon: Briefcase, href: '/work/vibo-erp' },
+  { id: 'case-chahana', title: 'Chahana Dental Studio (#1 Google Rank)', section: 'Case Studies', icon: Briefcase, href: '/work/chahana-dental' },
 
   // Quick Actions & Calculators
   { id: 'act-estimator', title: 'Open Scope & Cost Estimator', section: 'Interactive Tools', icon: Calculator, href: '/#pricing' },

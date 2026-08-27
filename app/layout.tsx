@@ -85,9 +85,7 @@ const organizationSchema = {
   ],
   sameAs: [
     "https://linkedin.com/company/mehta-technologies",
-    "https://x.com/mehtatechnologies",
     "https://instagram.com/mehtatechnologies",
-    "https://github.com/mehta-technologies",
   ],
   foundingDate: "2019",
   numberOfEmployees: { "@type": "QuantitativeValue", value: 18 },

@@ -154,7 +154,7 @@ function ContactForm() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-[60px] sm:mt-5">
             <div>
               <label htmlFor="contact-email" className="block text-xs font-mono uppercase tracking-wider text-white/40 mb-1.5">
                 Work Email <span className="text-blue-400">*</span>
@@ -262,7 +262,7 @@ export default function ContactPage() {
   return (
     <div className="pt-32 pb-24 overflow-hidden">
       {/* Header */}
-      <section className="max-w-[1360px] mx-auto px-6 md:px-8 mb-16 text-center">
+      <section className="max-w-[1360px] mx-auto px-6 md:px-8 mb-[24px] sm:mb-16 text-center">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}

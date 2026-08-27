@@ -29,9 +29,10 @@ const cols = [
     links: [
       { label: 'About Mehta Tech', href: '/about' },
       { label: 'Portfolio & Case Studies', href: '/work' },
+      { label: 'Industries & Solutions', href: '/solutions' },
       { label: 'Interactive Pricing Matrix', href: '/#pricing' },
       { label: 'Live System Status', href: '/status' },
-      { label: 'Leadership & Team', href: '/#team' },
+      { label: 'Leadership & Team', href: '/about#team' },
       { label: 'Careers & Hiring', href: 'mailto:careers@mehtatechnologies.com' },
     ],
   },

@@ -17,7 +17,7 @@ const links = [
       { label: 'Growth & SEO', href: '/services' },
     ],
   },
-  { label: 'Solutions', href: '/services' },
+  { label: 'Solutions', href: '/solutions' },
   { label: 'Case Studies', href: '/work' },
   { label: 'About Us', href: '/about' },
   { label: 'Careers', href: 'mailto:careers@mehtatechnologies.com' },

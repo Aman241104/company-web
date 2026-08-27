@@ -124,10 +124,12 @@ function ContactForm() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-mono uppercase tracking-wider text-white/40 mb-1.5">
+              <label htmlFor="contact-name" className="block text-xs font-mono uppercase tracking-wider text-white/40 mb-1.5">
                 Your Name <span className="text-blue-400">*</span>
               </label>
               <input
+                id="contact-name"
+                name="name"
                 type="text"
                 required
                 placeholder="Gaurav Mehta"
@@ -137,10 +139,12 @@ function ContactForm() {
               />
             </div>
             <div>
-              <label className="block text-xs font-mono uppercase tracking-wider text-white/40 mb-1.5">
+              <label htmlFor="contact-company" className="block text-xs font-mono uppercase tracking-wider text-white/40 mb-1.5">
                 Company / Organization
               </label>
               <input
+                id="contact-company"
+                name="company"
                 type="text"
                 placeholder="Acme Corp"
                 value={form.company}
@@ -152,10 +156,12 @@ function ContactForm() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-mono uppercase tracking-wider text-white/40 mb-1.5">
+              <label htmlFor="contact-email" className="block text-xs font-mono uppercase tracking-wider text-white/40 mb-1.5">
                 Work Email <span className="text-blue-400">*</span>
               </label>
               <input
+                id="contact-email"
+                name="email"
                 type="email"
                 required
                 placeholder="name@company.com"
@@ -165,10 +171,12 @@ function ContactForm() {
               />
             </div>
             <div>
-              <label className="block text-xs font-mono uppercase tracking-wider text-white/40 mb-1.5">
+              <label htmlFor="contact-phone" className="block text-xs font-mono uppercase tracking-wider text-white/40 mb-1.5">
                 Phone / WhatsApp
               </label>
               <input
+                id="contact-phone"
+                name="phone"
                 type="tel"
                 placeholder="+91 98765 43210"
                 value={form.phone}
@@ -180,10 +188,12 @@ function ContactForm() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-mono uppercase tracking-wider text-white/40 mb-1.5">
+              <label htmlFor="contact-service" className="block text-xs font-mono uppercase tracking-wider text-white/40 mb-1.5">
                 Service Focus
               </label>
               <select
+                id="contact-service"
+                name="serviceFocus"
                 value={form.service}
                 onChange={(e) => setForm({ ...form, service: e.target.value })}
                 className="w-full px-4 py-3 rounded-xl bg-[#0B0D14] border border-white/10 text-white text-sm focus:outline-none focus:border-blue-500 transition-all cursor-pointer"
@@ -197,10 +207,12 @@ function ContactForm() {
               </select>
             </div>
             <div>
-              <label className="block text-xs font-mono uppercase tracking-wider text-white/40 mb-1.5">
+              <label htmlFor="contact-budget" className="block text-xs font-mono uppercase tracking-wider text-white/40 mb-1.5">
                 Estimated Budget
               </label>
               <select
+                id="contact-budget"
+                name="budget"
                 value={form.budget}
                 onChange={(e) => setForm({ ...form, budget: e.target.value })}
                 className="w-full px-4 py-3 rounded-xl bg-[#0B0D14] border border-white/10 text-white text-sm focus:outline-none focus:border-blue-500 transition-all cursor-pointer"
@@ -216,10 +228,12 @@ function ContactForm() {
           </div>
 
           <div>
-            <label className="block text-xs font-mono uppercase tracking-wider text-white/40 mb-1.5">
+            <label htmlFor="contact-requirements" className="block text-xs font-mono uppercase tracking-wider text-white/40 mb-1.5">
               Project Architecture & Requirements
             </label>
             <textarea
+              id="contact-requirements"
+              name="requirements"
               rows={4}
               placeholder="Describe your current system, objectives, target launch date, and key features..."
               value={form.project}

@@ -13,6 +13,7 @@ export const metadata: Metadata = {
     title: "Contact Mehta Technologies — Free Consultation",
     description:
       "Free 30-min discovery call, 24-hour response. Tell us about your project and we'll send a detailed proposal.",
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: "Mehta Technologies — Digital Agency India" }],
   },
 }
 

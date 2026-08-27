@@ -13,6 +13,7 @@ export const metadata: Metadata = {
     title: "Our Work — Portfolio & Case Studies | Mehta Technologies",
     description:
       "150+ projects: ViboERP SaaS, Silver Spoon e-commerce, JJ Films, ZingBliss Events & more. See how we deliver measurable results.",
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: "Mehta Technologies — Digital Agency India" }],
   },
 }
 

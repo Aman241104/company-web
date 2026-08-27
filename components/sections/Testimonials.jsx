@@ -121,7 +121,7 @@ export default function Testimonials() {
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-150px" }}
           transition={{ duration: 0.5 }}
         >
           <span className="glow-pill mb-4 inline-flex">

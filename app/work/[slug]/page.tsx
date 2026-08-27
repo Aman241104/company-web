@@ -461,10 +461,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!study) return { title: 'Case Study Not Found' }
 
   return {
-    title: `${study.name} — Case Study | Mehta Technologies`,
+    title: `${study.name} — Case Study`,
     description: study.summary,
     openGraph: {
-      title: `${study.name} — Case Study | Mehta Technologies`,
+      title: `${study.name} — Case Study`,
       description: study.summary,
       images: [{ url: study.heroImage }],
     },

@@ -63,7 +63,7 @@ export default function Services() {
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-150px" }}
           transition={{ duration: 0.5 }}
         >
           <span className="mb-4 inline-block text-xs font-bold tracking-widest uppercase text-blue-600">
@@ -88,7 +88,7 @@ export default function Services() {
               key={service.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "-150px" }}
               transition={{ duration: 0.45, delay: index * 0.06 }}
               className="group p-6 sm:p-8 rounded-2xl bg-white border border-neutral-200 shadow-sm hover:border-blue-300 hover:shadow-md transition-all duration-300 flex flex-col justify-between"
             >

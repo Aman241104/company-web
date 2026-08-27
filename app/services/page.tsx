@@ -13,6 +13,7 @@ export const metadata: Metadata = {
     title: "Services — Web, App, SaaS, SEO & Marketing | Mehta Technologies",
     description:
       "Website development, custom software, mobile apps, SaaS, performance marketing & SEO. Fixed timelines, transparent pricing.",
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: "Mehta Technologies — Digital Agency India" }],
   },
 }
 

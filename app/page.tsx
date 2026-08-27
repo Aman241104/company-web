@@ -14,10 +14,8 @@ import FAQ from '@/components/sections/FAQ'
 import CTA from '@/components/sections/CTA'
 import Footer from '@/components/sections/Footer'
 import FastTrackDrawer from '@/components/ui/FastTrackDrawer'
-import ThemeCustomizer from '@/components/ui/ThemeCustomizer'
 
 export const metadata: Metadata = {
-  title: "Mehta Technologies — Web, App & SaaS Development Agency India",
   description:
     "Mehta Technologies builds high-performance websites, mobile apps, SaaS platforms & runs performance marketing in Mumbai & Bengaluru. 150+ projects shipped. Talk to us today.",
   alternates: { canonical: "https://mehtatechnologies.com" },
@@ -26,6 +24,7 @@ export const metadata: Metadata = {
     title: "Mehta Technologies — Web, App & SaaS Development Agency India",
     description:
       "150+ digital products shipped. We build websites, apps, SaaS platforms, and run marketing campaigns that deliver real business growth.",
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: "Mehta Technologies — Digital Agency India" }],
   },
 }
 
@@ -139,7 +138,6 @@ export default function Home() {
         <CTA />
         <Footer />
         <FastTrackDrawer />
-        <ThemeCustomizer />
       </main>
     </>
   )

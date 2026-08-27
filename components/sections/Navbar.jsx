@@ -5,6 +5,10 @@ import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, ArrowUpRight, ChevronDown } from 'lucide-react'
 
+const WHATSAPP_NUMBER = '919876543210'
+const WHATSAPP_MESSAGE = "Hi Mehta Technologies, I'd like to talk about a project."
+const WHATSAPP_HREF = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`
+
 const links = [
   { label: 'Products', href: '/#products' },
   {
@@ -124,12 +128,14 @@ export default function Navbar() {
 
           {/* Right Tools & CTA */}
           <div className="hidden md:flex items-center gap-3">
-            <Link
-              href="/contact"
+            <a
+              href={WHATSAPP_HREF}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold bg-blue-600 text-white hover:bg-blue-700 transition-all active:scale-[0.98] shadow-sm shadow-blue-600/20"
             >
               Let&apos;s Talk <ArrowUpRight size={13} />
-            </Link>
+            </a>
           </div>
 
           {/* Mobile menu toggle */}
@@ -165,13 +171,15 @@ export default function Navbar() {
                   {l.label}
                 </Link>
               ))}
-              <Link
-                href="/contact"
+              <a
+                href={WHATSAPP_HREF}
+                target="_blank"
+                rel="noopener noreferrer"
                 onClick={() => setOpen(false)}
                 className="mt-2 block w-full py-2.5 text-center text-xs font-semibold rounded-xl bg-blue-600 hover:bg-blue-500 text-white transition-colors"
               >
                 Let&apos;s Talk
-              </Link>
+              </a>
             </motion.div>
           )}
         </AnimatePresence>

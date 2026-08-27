@@ -13,6 +13,7 @@ export const metadata: Metadata = {
     title: "Solutions — Industry-Specific Software | Mehta Technologies",
     description:
       "Domain-tailored software for manufacturing, chemicals & pharma, construction, fintech, healthcare, retail, education, and travel businesses.",
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: "Mehta Technologies — Digital Agency India" }],
   },
 }
 

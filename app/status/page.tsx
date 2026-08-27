@@ -5,7 +5,7 @@ import Footer from '@/components/sections/Footer'
 import { CheckCircle2, ShieldCheck, Activity, Server, Zap, Globe, Clock, ArrowLeft, ArrowUpRight } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: "Live System & SLA Status — Mehta Technologies",
+  title: "Live System & SLA Status",
   description:
     "Real-time operational status, uptime metrics, global edge latency, and SLA health across all Mehta Technologies production systems and client infrastructure clusters.",
   alternates: { canonical: "https://mehtatechnologies.com/status" },

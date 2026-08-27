@@ -5,7 +5,7 @@ import Footer from '@/components/sections/Footer'
 import { ShieldCheck, Lock, Eye, Server, ArrowLeft } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy | Mehta Technologies',
+  title: 'Privacy Policy',
   description: 'Our commitment to data privacy, client confidentiality, security protocols, and intellectual property protection.',
   alternates: { canonical: 'https://mehtatechnologies.com/privacy' },
 }

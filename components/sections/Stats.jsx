@@ -15,7 +15,7 @@ export default function Stats() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
+        viewport={{ once: true, margin: "-150px" }}
         transition={{ duration: 0.5 }}
         className="rounded-2xl bg-white/[0.02] border border-white/[0.08] p-6 sm:p-10 grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8"
       >

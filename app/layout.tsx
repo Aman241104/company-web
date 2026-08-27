@@ -28,18 +28,6 @@ export const metadata: Metadata = {
   },
   description:
     "Mehta Technologies is a full-stack digital agency in Mumbai & Bengaluru. We build high-performance websites, mobile apps, SaaS platforms, and run performance marketing campaigns that drive measurable business growth.",
-  keywords: [
-    "web development agency India",
-    "software development company Mumbai",
-    "Next.js development",
-    "SaaS development India",
-    "mobile app development",
-    "performance marketing agency",
-    "SEO services India",
-    "React development",
-    "digital agency Bengaluru",
-    "custom software development",
-  ],
   authors: [{ name: "Mehta Technologies", url: "https://mehtatechnologies.com" }],
   creator: "Mehta Technologies",
   publisher: "Mehta Technologies",

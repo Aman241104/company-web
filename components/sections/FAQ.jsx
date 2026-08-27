@@ -88,7 +88,7 @@ export default function FAQ() {
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-150px" }}
           transition={{ duration: 0.5 }}
         >
           <span className="glow-pill mb-4 inline-flex">
@@ -108,7 +108,7 @@ export default function FAQ() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
+        viewport={{ once: true, margin: "-150px" }}
         transition={{ duration: 0.45 }}
         className="rounded-3xl bg-white/[0.02] border border-white/[0.08] p-5 sm:p-8 md:p-10"
       >

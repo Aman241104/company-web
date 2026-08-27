@@ -5,7 +5,7 @@ import Footer from '@/components/sections/Footer'
 import { FileText, CheckCircle2, ShieldAlert, Zap, ArrowLeft } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Terms of Service | Mehta Technologies',
+  title: 'Terms of Service',
   description: 'Terms of engagement, milestone delivery guarantees, SLA warranties, and payment guidelines.',
   alternates: { canonical: 'https://mehtatechnologies.com/terms' },
 }

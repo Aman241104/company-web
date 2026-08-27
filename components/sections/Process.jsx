@@ -50,7 +50,7 @@ export default function Process() {
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-150px" }}
           transition={{ duration: 0.5 }}
         >
           <span className="glow-pill mb-4 inline-flex">
@@ -75,7 +75,7 @@ export default function Process() {
               key={step.id}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "-150px" }}
               transition={{ duration: 0.4, delay: index * 0.05 }}
               className="p-6 sm:p-8 rounded-2xl bg-white/[0.02] border border-white/[0.08] hover:border-blue-500/30 hover:bg-white/[0.035] transition-all flex flex-col justify-between"
             >
@@ -104,7 +104,7 @@ export default function Process() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
+        viewport={{ once: true, margin: "-150px" }}
         transition={{ duration: 0.5, delay: 0.3 }}
         className="mt-10 sm:mt-12 p-6 sm:p-10 rounded-2xl bg-white/[0.02] border border-white/[0.08] flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left"
       >

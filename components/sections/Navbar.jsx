@@ -124,15 +124,6 @@ export default function Navbar() {
 
           {/* Right Tools & CTA */}
           <div className="hidden md:flex items-center gap-3">
-            {/* Live Telemetry Ping -> /status */}
-            <Link
-              href="/status"
-              className="hidden xl:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-500/5 hover:bg-emerald-500/10 border border-emerald-500/15 hover:border-emerald-500/30 text-[11px] text-emerald-400 font-mono transition-colors"
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              <span>99.99% Cloud SLA</span>
-            </Link>
-
             <Link
               href="/contact"
               className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold bg-white text-black hover:bg-white/90 transition-all active:scale-[0.98] shadow-sm shadow-white/10"

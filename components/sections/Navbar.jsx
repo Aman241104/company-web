@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, ArrowUpRight, ChevronDown } from 'lucide-react'
 
 const links = [
+  { label: 'Products', href: '/#products' },
   {
     label: 'Services',
     href: '/services',
@@ -16,12 +17,10 @@ const links = [
       { label: 'Growth & SEO', href: '/services' },
     ],
   },
-  { label: 'Work', href: '/work' },
-  { label: 'Labs', href: '/labs' },
-  { label: 'Benchmarks', href: '/#architecture-benchmark' },
-  { label: 'ROI Engine', href: '/#roi-calculator' },
-  { label: 'Pricing', href: '/#pricing' },
-  { label: 'About', href: '/about' },
+  { label: 'Solutions', href: '/services' },
+  { label: 'Case Studies', href: '/work' },
+  { label: 'About Us', href: '/about' },
+  { label: 'Careers', href: 'mailto:careers@mehtatechnologies.com' },
 ]
 
 function NavLink({ href, children, dropdown }) {
@@ -108,8 +107,9 @@ export default function Navbar() {
             <div className="w-8 h-8 rounded-lg overflow-hidden shadow-sm shadow-blue-500/20 ring-1 ring-white/10">
               <Image src="/brand/mehta-logo-icon-dark.png" alt="Mehta Technologies" width={32} height={32} className="w-full h-full object-cover" priority />
             </div>
-            <span className="font-bold text-[15px] tracking-tight text-white">
-              Mehta <span className="text-white/40 font-normal">Technologies</span>
+            <span className="flex flex-col leading-none">
+              <span className="font-bold text-[14px] tracking-tight text-white">MEHTA</span>
+              <span className="text-[9px] tracking-[0.15em] text-white/50 font-medium">TECHNOLOGIES</span>
             </span>
           </Link>
 
@@ -126,7 +126,7 @@ export default function Navbar() {
           <div className="hidden md:flex items-center gap-3">
             <Link
               href="/contact"
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold bg-white text-black hover:bg-white/90 transition-all active:scale-[0.98] shadow-sm shadow-white/10"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold bg-blue-600 text-white hover:bg-blue-700 transition-all active:scale-[0.98] shadow-sm shadow-blue-600/20"
             >
               Let&apos;s Talk <ArrowUpRight size={13} />
             </Link>

@@ -1,6 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, ArrowUpRight, ChevronDown, Search, Activity } from 'lucide-react'
 import CommandPalette from '@/components/ui/CommandPalette'
@@ -115,8 +116,8 @@ export default function Navbar() {
         <div className="max-w-[1360px] mx-auto flex items-center justify-between px-6 md:px-8 py-3.5">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5 group shrink-0">
-            <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center font-bold text-sm text-white shadow-sm shadow-blue-500/20 group-hover:bg-blue-500 transition-colors">
-              M
+            <div className="w-8 h-8 rounded-lg overflow-hidden shadow-sm shadow-blue-500/20 ring-1 ring-white/10">
+              <Image src="/brand/mehta-logo-icon-dark.png" alt="Mehta Technologies" width={32} height={32} className="w-full h-full object-cover" priority />
             </div>
             <span className="font-bold text-[15px] tracking-tight text-white">
               Mehta <span className="text-white/40 font-normal">Technologies</span>

@@ -4,6 +4,7 @@ import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import CustomCursor from "@/components/CustomCursor";
 import MobileDock from "@/components/MobileDock";
+import FloatingWhatsApp from "@/components/ui/FloatingWhatsApp";
 
 const sora = Sora({
   variable: "--font-syne",
@@ -117,6 +118,7 @@ export default function RootLayout({
         <CustomCursor />
         <SmoothScroll>{children}</SmoothScroll>
         <MobileDock />
+        <FloatingWhatsApp />
       </body>
     </html>
   );

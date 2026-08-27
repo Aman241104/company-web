@@ -1,5 +1,6 @@
 'use client'
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowUpRight, Mail, Phone, MapPin, Heart } from 'lucide-react'
 
 const cols = [
@@ -46,8 +47,8 @@ export default function Footer() {
           {/* Brand Column */}
           <div className="lg:col-span-4 space-y-6">
             <Link href="/" className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center font-extrabold text-white text-sm">
-                M
+              <div className="w-8 h-8 rounded-lg overflow-hidden ring-1 ring-white/10">
+                <Image src="/brand/mehta-logo-icon-dark.png" alt="Mehta Technologies" width={32} height={32} className="w-full h-full object-cover" />
               </div>
               <span className="text-base font-bold tracking-tight text-white">
                 Mehta Technologies

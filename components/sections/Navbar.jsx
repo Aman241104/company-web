@@ -3,8 +3,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, ArrowUpRight, ChevronDown, Search, Activity } from 'lucide-react'
-import CommandPalette from '@/components/ui/CommandPalette'
+import { Menu, X, ArrowUpRight, ChevronDown } from 'lucide-react'
 
 const links = [
   {
@@ -84,25 +83,15 @@ function NavLink({ href, children, dropdown }) {
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
-  const [paletteOpen, setPaletteOpen] = useState(false)
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 20)
     window.addEventListener('scroll', fn, { passive: true })
-
-    const handleCustomOpen = () => setPaletteOpen(true)
-    window.addEventListener('open-command-palette', handleCustomOpen)
-
-    return () => {
-      window.removeEventListener('scroll', fn)
-      window.removeEventListener('open-command-palette', handleCustomOpen)
-    }
+    return () => window.removeEventListener('scroll', fn)
   }, [])
 
   return (
     <>
-      <CommandPalette isOpen={paletteOpen} onClose={() => setPaletteOpen(false)} />
-
       <motion.header
         initial={{ opacity: 0, y: -12 }}
         animate={{ opacity: 1, y: 0 }}
@@ -135,16 +124,6 @@ export default function Navbar() {
 
           {/* Right Tools & CTA */}
           <div className="hidden md:flex items-center gap-3">
-            {/* Command Palette Trigger */}
-            <button
-              onClick={() => setPaletteOpen(true)}
-              className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 text-xs text-white/50 hover:text-white transition-all font-mono"
-            >
-              <Search size={12} className="text-blue-400" />
-              <span>Search</span>
-              <kbd className="px-1.5 py-0.5 rounded bg-white/10 text-[10px] text-white/70">⌘K</kbd>
-            </button>
-
             {/* Live Telemetry Ping -> /status */}
             <Link
               href="/status"
@@ -162,15 +141,8 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* Mobile Search + toggle */}
+          {/* Mobile menu toggle */}
           <div className="flex md:hidden items-center gap-2">
-            <button
-              onClick={() => setPaletteOpen(true)}
-              className="p-2 rounded-lg bg-white/[0.05] border border-white/10 text-white/70 hover:text-white transition-colors"
-              aria-label="Open search"
-            >
-              <Search size={16} />
-            </button>
             <button
               onClick={() => setOpen(!open)}
               aria-label={open ? 'Close menu' : 'Open menu'}

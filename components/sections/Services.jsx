@@ -50,7 +50,14 @@ const services = [
 
 export default function Services() {
   return (
-    <section id="services" className="py-16 sm:py-24 md:py-32 max-w-[1360px] mx-auto px-5 sm:px-6 md:px-8">
+    <section id="services" className="relative bg-white overflow-hidden">
+      {/* Blend into the dark hero above */}
+      <div className="pointer-events-none absolute top-0 inset-x-0 h-16 sm:h-20 bg-gradient-to-b from-[#07080C] to-white z-0" />
+      {/* Soft accent glows */}
+      <div className="pointer-events-none absolute -top-20 -right-20 w-[28rem] h-[28rem] rounded-full bg-blue-200/25 blur-[100px] z-0" />
+      <div className="pointer-events-none absolute bottom-0 -left-24 w-96 h-96 rounded-full bg-purple-200/20 blur-[100px] z-0" />
+
+      <div className="relative z-10 py-16 sm:py-24 md:py-32 max-w-[1360px] mx-auto px-5 sm:px-6 md:px-8">
       {/* Section Header */}
       <div className="max-w-2xl mx-auto text-center mb-12 sm:mb-16 md:mb-20">
         <motion.div
@@ -59,14 +66,14 @@ export default function Services() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <span className="glow-pill mb-4 inline-flex">
+          <span className="mb-4 inline-block text-xs font-bold tracking-widest uppercase text-blue-600">
             Capabilities & Disciplines
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-neutral-900 tracking-tight leading-tight mb-4">
             One accountable team.{' '}
             <span className="text-gradient-accent">Every layer.</span>
           </h2>
-          <p className="text-sm sm:text-base lg:text-lg text-white/50 leading-relaxed">
+          <p className="text-sm sm:text-base lg:text-lg text-neutral-500 leading-relaxed">
             Six interconnected disciplines under one roof. No fragmented agencies or unaccountable handoffs — we own the outcome end to end.
           </p>
         </motion.div>
@@ -83,26 +90,26 @@ export default function Services() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.45, delay: index * 0.06 }}
-              className="group p-6 sm:p-8 rounded-2xl bg-white/[0.02] border border-white/[0.08] hover:border-blue-500/30 hover:bg-white/[0.035] transition-all duration-300 flex flex-col justify-between"
+              className="group p-6 sm:p-8 rounded-2xl bg-white border border-neutral-200 shadow-sm hover:border-blue-300 hover:shadow-md transition-all duration-300 flex flex-col justify-between"
             >
               <div>
-                <div className="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center mb-6 text-blue-400 group-hover:scale-105 group-hover:bg-blue-500/15 transition-all">
+                <div className="w-12 h-12 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center mb-6 text-blue-600 group-hover:scale-105 group-hover:bg-blue-100 transition-all">
                   <Icon size={22} />
                 </div>
-                <h3 className="text-xl font-bold text-white tracking-tight mb-3">
+                <h3 className="text-xl font-bold text-neutral-900 tracking-tight mb-3">
                   {service.title}
                 </h3>
-                <p className="text-sm text-white/55 leading-relaxed mb-6 font-normal">
+                <p className="text-sm text-neutral-500 leading-relaxed mb-6 font-normal">
                   {service.desc}
                 </p>
               </div>
 
               <div>
-                <div className="flex flex-wrap gap-1.5 pt-4 border-t border-white/[0.06] mb-6">
+                <div className="flex flex-wrap gap-1.5 pt-4 border-t border-neutral-100 mb-6">
                   {service.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="text-[11px] font-medium px-2.5 py-1 rounded-md bg-white/[0.03] text-white/60 border border-white/[0.06]"
+                      className="text-[11px] font-medium px-2.5 py-1 rounded-md bg-neutral-50 text-neutral-500 border border-neutral-200"
                     >
                       {tag}
                     </span>
@@ -111,7 +118,7 @@ export default function Services() {
 
                 <Link
                   href={service.href}
-                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-400 group-hover:text-blue-300 transition-colors"
+                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-600 group-hover:text-blue-700 transition-colors"
                 >
                   Explore Capabilities <ArrowRight size={13} className="transition-transform group-hover:translate-x-1" />
                 </Link>
@@ -119,6 +126,7 @@ export default function Services() {
             </motion.div>
           )
         })}
+      </div>
       </div>
     </section>
   )

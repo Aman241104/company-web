@@ -159,7 +159,7 @@ export default function Navbar() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.2 }}
-              className="md:hidden mx-4 mb-4 p-3 rounded-2xl bg-[#0B0D14]/98 backdrop-blur-2xl border border-white/10 shadow-2xl"
+              className="md:hidden mx-4 mb-4 p-3 rounded-2xl bg-[#0B0D14] backdrop-blur-2xl border border-white/10 shadow-2xl"
             >
               {links.map((l) => (
                 <Link

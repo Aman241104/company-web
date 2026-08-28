@@ -1,9 +1,12 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Home, Layers, Briefcase, Sparkles, Zap } from 'lucide-react'
+
+const DOCK_BOTTOM_OFFSET = 12 // matches `bottom-3` on the nav
+const DOCK_SAFETY_BUFFER = 8 // small cushion so content never sits flush against the pill
 
 const dockNavItems = [
   { label: 'Home', href: '/', icon: Home },
@@ -16,6 +19,25 @@ export default function MobileDock() {
   const pathname = usePathname()
   const [visible, setVisible] = useState(true)
   const [lastY, setLastY] = useState(0)
+  const navRef = useRef(null)
+
+  // Publish the dock's real rendered footprint (height + its fixed offset
+  // from the viewport bottom, plus a safety buffer) as a CSS custom property
+  // so any part of the site can reserve exactly enough clearance to never be
+  // covered by the dock — self-adjusting if the dock's own size ever changes,
+  // instead of a hardcoded pixel guess tuned to one device.
+  useEffect(() => {
+    const el = navRef.current
+    if (!el || typeof ResizeObserver === 'undefined') return
+    const publish = () => {
+      const clearance = el.offsetHeight + DOCK_BOTTOM_OFFSET + DOCK_SAFETY_BUFFER
+      document.documentElement.style.setProperty('--mobile-dock-clearance', `${clearance}px`)
+    }
+    publish()
+    const ro = new ResizeObserver(publish)
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [])
 
   useEffect(() => {
     let ticking = false
@@ -50,6 +72,7 @@ export default function MobileDock() {
     <AnimatePresence>
       {visible && (
         <motion.nav
+          ref={navRef}
           initial={{ y: 70, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 70, opacity: 0 }}

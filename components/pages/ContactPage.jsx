@@ -1,8 +1,75 @@
 'use client'
-import { useState, useEffect, Suspense } from 'react'
+import { useState, useEffect, useRef, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { Mail, Phone, MapPin, Clock, ArrowRight, Send, CheckCircle2, ShieldCheck, Sparkles } from 'lucide-react'
+
+/**
+ * Guards a set of stacked elements (mobile-dock "rows" of interest — form field
+ * rows here) from ever visually landing under the fixed MobileDock on initial
+ * page load, for ANY viewport height.
+ *
+ * Why this can't be a fixed pixel margin: MobileDock is `position: fixed` to
+ * the viewport bottom, so the pixel band it occupies is constant *measured
+ * from the bottom of the viewport* but slides up/down in document-space as
+ * viewport height changes. A static margin tuned for one device height (e.g.
+ * 375x812) can land a field squarely under the dock on a different height
+ * (e.g. 390x844) — which is exactly what happened in round 2/3. The only
+ * robust fix is to measure the dock's real rendered size (via the
+ * `--mobile-dock-clearance` custom property MobileDock publishes through a
+ * ResizeObserver) and the actual viewport height at runtime, then nudge any
+ * row that would land in the dock's band just past the bottom of the
+ * viewport — where it's simply below the fold, not hidden behind the dock.
+ */
+function useMobileDockClearance(row0Ref, row1Ref, row2Ref, row3Ref) {
+  useEffect(() => {
+    const MOBILE_BREAKPOINT = 768 // matches Tailwind `md` / MobileDock's `md:hidden`
+    const rows = [row0Ref, row1Ref, row2Ref, row3Ref]
+
+    const applyClearance = () => {
+      // Reset first so shrinking/growing the window (or rotating) never
+      // leaves a stale correction behind.
+      rows.forEach((ref) => {
+        if (ref.current) ref.current.style.marginTop = ''
+      })
+
+      if (typeof window === 'undefined' || window.innerWidth >= MOBILE_BREAKPOINT) return
+
+      const clearanceRaw = getComputedStyle(document.documentElement)
+        .getPropertyValue('--mobile-dock-clearance')
+        .trim()
+      const clearance = parseFloat(clearanceRaw) || 90 // sane fallback before MobileDock's observer runs
+      const dangerZoneTop = window.innerHeight - clearance
+
+      rows.forEach((ref) => {
+        const el = ref.current
+        if (!el) return
+        const rect = el.getBoundingClientRect()
+        const wouldBeCoveredOnLoad = rect.top < window.innerHeight && rect.bottom > dangerZoneTop
+        if (wouldBeCoveredOnLoad) {
+          // Push this row (and everything after it, via normal flow) just
+          // past the bottom of the viewport — clear of the dock, reachable
+          // with a small scroll instead of hidden behind it.
+          const push = Math.ceil(window.innerHeight - rect.top) + 14
+          el.style.marginTop = `${push}px`
+        }
+      })
+    }
+
+    applyClearance()
+    // Re-check once more shortly after mount in case fonts/images still
+    // reflowed content after the first pass, and whenever the viewport
+    // itself changes (resize, orientation change).
+    const settleTimer = setTimeout(applyClearance, 350)
+    window.addEventListener('resize', applyClearance)
+    window.addEventListener('orientationchange', applyClearance)
+    return () => {
+      clearTimeout(settleTimer)
+      window.removeEventListener('resize', applyClearance)
+      window.removeEventListener('orientationchange', applyClearance)
+    }
+  }, [row0Ref, row1Ref, row2Ref, row3Ref])
+}
 
 const services = [
   'Website Development',
@@ -72,6 +139,11 @@ function ContactForm() {
     project: '',
   })
   const [sent, setSent] = useState(false)
+  const nameRowRef = useRef(null)
+  const emailRowRef = useRef(null)
+  const serviceRowRef = useRef(null)
+  const requirementsRowRef = useRef(null)
+  useMobileDockClearance(nameRowRef, emailRowRef, serviceRowRef, requirementsRowRef)
 
   useEffect(() => {
     if (initialService) setForm((prev) => ({ ...prev, service: initialService }))
@@ -122,7 +194,7 @@ function ContactForm() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div ref={nameRowRef} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label htmlFor="contact-name" className="block text-xs font-mono uppercase tracking-wider text-white/40 mb-1.5">
                 Your Name <span className="text-blue-400">*</span>
@@ -154,7 +226,7 @@ function ContactForm() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-[60px] sm:mt-5">
+          <div ref={emailRowRef} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label htmlFor="contact-email" className="block text-xs font-mono uppercase tracking-wider text-white/40 mb-1.5">
                 Work Email <span className="text-blue-400">*</span>
@@ -186,7 +258,7 @@ function ContactForm() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div ref={serviceRowRef} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label htmlFor="contact-service" className="block text-xs font-mono uppercase tracking-wider text-white/40 mb-1.5">
                 Service Focus
@@ -227,7 +299,7 @@ function ContactForm() {
             </div>
           </div>
 
-          <div>
+          <div ref={requirementsRowRef}>
             <label htmlFor="contact-requirements" className="block text-xs font-mono uppercase tracking-wider text-white/40 mb-1.5">
               Project Architecture & Requirements
             </label>
@@ -262,7 +334,7 @@ export default function ContactPage() {
   return (
     <div className="pt-32 pb-24 overflow-hidden">
       {/* Header */}
-      <section className="max-w-[1360px] mx-auto px-6 md:px-8 mb-[24px] sm:mb-16 text-center">
+      <section className="max-w-[1360px] mx-auto px-6 md:px-8 mb-16 text-center">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}

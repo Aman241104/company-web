@@ -111,10 +111,12 @@ body::before {
   z-index: 0;
 }
 
-/* Space for mobile dock nav */
+/* Space for mobile dock nav. --mobile-dock-clearance is published by
+   MobileDock.jsx via ResizeObserver (its real rendered height + fixed
+   bottom offset + safety buffer); 76px is the pre-JS/no-JS fallback. */
 @media (max-width: 767px) {
   body {
-    padding-bottom: 76px;
+    padding-bottom: var(--mobile-dock-clearance, 76px);
   }
 }
 

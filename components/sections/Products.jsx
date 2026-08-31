@@ -90,13 +90,13 @@ export default function Products() {
             </p>
 
             {/* Visual SaaS snapshot banner */}
-            <div className="relative aspect-[16/9] rounded-2xl overflow-hidden border border-neutral-200 mb-6 group bg-black">
+            <div className="relative aspect-[16/9] rounded-2xl overflow-hidden border border-neutral-200 mb-6 group bg-[#0B0D14] p-6 sm:p-8">
               <Image
-                src="/assets/vibo_erp_mockup.jpg"
+                src="/assets/saas_hero_mockup.png"
                 alt="Vibo ERP Platform View"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover object-top group-hover:scale-105 transition-transform duration-700 opacity-95 group-hover:opacity-100"
+                className="object-contain object-center group-hover:scale-[1.03] transition-transform duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#07080C] via-transparent to-transparent" />
               <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between gap-2 flex-wrap text-xs text-white/70">

@@ -12,7 +12,9 @@ const caseStudiesData: Record<string, {
   client: string
   category: string
   year: string
-  heroImage: string
+  heroImage?: string
+  heroImageFit?: 'cover' | 'contain'
+  status?: 'in-progress'
   liveUrl?: string
   headline: string
   summary: string
@@ -20,7 +22,7 @@ const caseStudiesData: Record<string, {
   solution: string
   architecture: string[]
   metrics: { label: string; value: string; detail: string }[]
-  quote: { text: string; author: string; role: string }
+  quote?: { text: string; author: string; role: string }
 }> = {
   'sv-space-designs': {
     slug: 'sv-space-designs',
@@ -28,7 +30,7 @@ const caseStudiesData: Record<string, {
     client: 'SV Space Designs Studio',
     category: 'Architecture & Turnkey Studio',
     year: '2025',
-    heroImage: '/assets/stylux_mockup.jpg',
+    heroImage: '/assets/sv-space-designs-live.jpg',
     liveUrl: 'https://www.svspacedesigns.in',
     headline: 'Editorial luxury interior studio portfolio with turnkey execution showcase & custom grain aesthetic.',
     summary: 'A bespoke digital experience for Ahmedabad-based interior architecture studio SV Space Designs, highlighting vendor-direct material pricing, interactive video walkthroughs, and sub-second performance.',
@@ -53,7 +55,7 @@ const caseStudiesData: Record<string, {
     client: 'Prihaan Spices & Agro Foods',
     category: 'Spices & Agro E-Commerce',
     year: '2025',
-    heroImage: '/prihaanfin.png',
+    heroImage: '/assets/prihaan-spices-live.jpg',
     liveUrl: 'https://www.prihaanspices.in',
     headline: 'Scaling 252+ organic spice SKUs with Supabase storage CDN & instant WhatsApp checkout.',
     summary: 'An authentic Indian spices and dry fruits e-commerce storefront featuring instant multi-category filtering, Supabase media hosting, and streamlined zero-friction WhatsApp ordering.',
@@ -103,7 +105,8 @@ const caseStudiesData: Record<string, {
     client: 'Mehta Tech Proprietary Product',
     category: 'Enterprise SaaS & Cloud',
     year: '2024',
-    heroImage: '/assets/vibo_erp_mockup.jpg',
+    heroImage: '/assets/saas_hero_mockup.png',
+    heroImageFit: 'contain',
     liveUrl: 'https://app.viboerp.com/',
     headline: 'High-throughput cloud ERP suite serving 2,400+ enterprises with 99.99% uptime.',
     summary: 'An all-in-one multi-tenant cloud enterprise platform unifying GST e-invoicing, inventory sync, biometric HRMS, and CRM pipelines.',
@@ -203,7 +206,7 @@ const caseStudiesData: Record<string, {
     client: 'Ares Executive Network',
     category: 'Executive B2B Network',
     year: '2025',
-    heroImage: '/assets/fintech_mockup.jpg',
+    heroImage: '/assets/ares-business-league-live.jpg',
     liveUrl: 'https://www.aresbusinessleague.com',
     headline: 'Executive business networking league, member directory & chapter referral tracking portal.',
     summary: 'A private business league portal unifying executive member directories, chapter attendance tracking, and cross-company business referral telemetry.',
@@ -224,28 +227,23 @@ const caseStudiesData: Record<string, {
   },
   'club-mj-events': {
     slug: 'club-mj-events',
-    name: 'Club MJ Events',
-    client: 'Club MJ Entertainment',
-    category: 'Concert & VIP Ticketing',
+    name: 'CMJ Events',
+    client: 'CMJ Events',
+    category: 'Luxury Wedding & Event Planning',
     year: '2025',
-    heroImage: '/jjfilms.png',
+    heroImage: '/assets/club-mj-events-live.jpg',
     liveUrl: 'https://www.clubmjevents.com',
-    headline: 'High-throughput concert ticketing, artist bookings, and VIP nightlife hospitality platform.',
-    summary: 'A fast ticketing and nightlife event platform capable of handling intense traffic surges during artist announcements and ticket drop windows.',
-    challenge: 'Ticket drop spikes previously crashed legacy booking portals, resulting in failed payments and customer frustration.',
-    solution: 'Engineered a scalable edge-cached Next.js ticketing flow with instant QR generation and sub-second payment integration.',
-    architecture: ['Next.js App Router', 'Tailwind CSS', 'Payment Gateway Integration', 'Edge CDN'],
+    headline: 'Award-winning wedding & event studio’s digital presence, built to turn portfolio browsing into consultations.',
+    summary: 'A digital presence for CMJ Events, an Ahmedabad-based in-house design and production studio behind 250+ weddings, corporate productions, and private celebrations across India and worldwide.',
+    challenge: 'A portfolio-driven business needed a fast, gallery-heavy site that lets prospective clients browse hundreds of real celebrations without sacrificing load speed, while routing high-intent inquiries straight into a consultation funnel.',
+    solution: 'Built a Next.js gallery and inquiry experience with optimized image delivery for a large real-event photo library, structured service pages by celebration type, and a direct WhatsApp/consultation funnel.',
+    architecture: ['Next.js App Router', 'Tailwind CSS', 'Framer Motion', 'Vercel Edge'],
     metrics: [
-      { label: 'Total Ticket Bookings', value: '50,000+', detail: 'Processed across major concerts & festivals' },
-      { label: 'Peak Checkout Latency', value: '< 1.8s', detail: 'During high-demand ticket drops' },
-      { label: 'Payment Success Rate', value: '99.7%', detail: 'Zero dropped transaction errors' },
-      { label: 'User Rating', value: '4.9 / 5', detail: 'Across attendees and promoters' },
+      { label: 'Events Delivered', value: '250+', detail: 'Weddings, corporate productions & private celebrations' },
+      { label: 'Client Satisfaction', value: '98%', detail: 'Self-reported across delivered events' },
+      { label: 'Industry Recognition', value: 'EMF Global Ace Awards 2026', detail: 'Best Wedding of the Year & Best Mehndi Function of the Year' },
+      { label: 'Reach', value: '15+ Cities', detail: 'Domestic & destination celebrations, India and worldwide' },
     ],
-    quote: {
-      text: 'Our largest concert ticket drop sold out in minutes without a single glitch. The engineering is rock solid.',
-      author: 'Promoter Team',
-      role: 'Club MJ Events',
-    },
   },
   'naam-transfer': {
     slug: 'naam-transfer',
@@ -253,7 +251,7 @@ const caseStudiesData: Record<string, {
     client: 'Naam Transfer Legal Tech',
     category: 'Legal Property Documentation',
     year: '2025',
-    heroImage: '/advocate.png',
+    heroImage: '/assets/naam-transfer-live.jpg',
     liveUrl: 'https://www.naamtransfer.com',
     headline: 'Property title deed transfer, municipal registry documentation & legal name change portal.',
     summary: 'A specialized legal workflow platform streamlining property name transfers, electricity bill name changes, and municipal property tax transfers.',
@@ -303,7 +301,7 @@ const caseStudiesData: Record<string, {
     client: 'Jukebox Digital Agency',
     category: 'Brand & Performance Marketing',
     year: '2025',
-    heroImage: '/assets/ai_agent_mockup.jpg',
+    heroImage: '/assets/jukebox-media-live.jpg',
     liveUrl: 'https://www.jukeboxmedia.in',
     headline: 'Full-funnel digital marketing, creator talent management & high-ROAS viral campaigns.',
     summary: 'A performance marketing showcase featuring brand campaign case studies, influencer rosters, and real-time ROAS tracking metrics.',
@@ -328,7 +326,7 @@ const caseStudiesData: Record<string, {
     client: 'Rising Rechargeable Power Systems',
     category: 'Clean Energy & Battery Systems Supply',
     year: '2025',
-    heroImage: '/inventory.png',
+    heroImage: '/assets/rising-rechargeable-live.jpg',
     liveUrl: 'https://www.risingrechargeable.com',
     headline: 'Industrial rechargeable battery packs, renewable energy storage & lithium-ion solutions.',
     summary: 'An industrial B2B storefront showcasing rechargeable lithium battery packs, solar energy storage units, and custom power bank assemblies.',
@@ -353,7 +351,7 @@ const caseStudiesData: Record<string, {
     client: 'FGP Industries Manufacturing',
     category: 'Industrial FRP Composites Manufacturing',
     year: '2024',
-    heroImage: '/chemical.png',
+    heroImage: '/assets/fgp-industries-live.jpg',
     liveUrl: 'https://fgpind.com',
     headline: 'Industrial fiberglass reinforced plastics (FRP) manufacturing & chemical process equipment.',
     summary: 'An engineering and manufacturing catalog showcasing heavy-duty industrial FRP storage tanks, ducting systems, scrubbers, and composite equipment.',
@@ -427,25 +425,15 @@ const caseStudiesData: Record<string, {
     name: 'Jade Travels',
     client: 'Jade Travels International',
     category: 'Corporate & Luxury Global Travel',
-    year: '2024',
-    heroImage: '/luxeliving.png',
+    year: '2026',
+    status: 'in-progress',
     liveUrl: 'https://www.jadetravels.co.in',
-    headline: 'Corporate travel management, international holiday packages & customized luxury travel itineraries.',
-    summary: 'A comprehensive travel platform offering corporate booking solutions, curated international holiday itineraries, and visa assistance services.',
+    headline: 'Corporate travel management & luxury travel itinerary platform — currently in development.',
+    summary: 'A planned travel platform for Jade Travels, covering corporate booking solutions and curated international holiday itineraries. Build is in progress; case study will be updated with real results at launch.',
     challenge: 'Providing both streamlined corporate account travel tools and inspiring vacation packages for luxury leisure travelers.',
-    solution: 'Developed a dual-path portal catering to both corporate travel managers and individual holiday seekers with instant quoting.',
+    solution: 'Building a dual-path portal catering to both corporate travel managers and individual holiday seekers with instant quoting.',
     architecture: ['Next.js 15', 'Tailwind CSS', 'Booking Form Pipeline', 'Vercel Deployment'],
-    metrics: [
-      { label: 'Corporate Accounts Served', value: '120+', detail: 'Ongoing corporate travel management' },
-      { label: 'Holiday Inquiries', value: '+180%', detail: 'Growth in international package bookings' },
-      { label: 'Response Time SLA', value: '< 15 mins', detail: 'Instant travel inquiry dispatch' },
-      { label: 'Customer Retention', value: '94%', detail: 'Repeat corporate bookings' },
-    ],
-    quote: {
-      text: 'Jade Travels handles our company’s international delegations flawlessly. The website makes booking effortless.',
-      author: 'Corporate Client',
-      role: 'Jade Travels Partner',
-    },
+    metrics: [],
   },
 }
 
@@ -470,7 +458,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       url: `${base}/work/${study.slug}`,
       title: `${study.name} — Case Study`,
       description: study.summary,
-      images: [{ url: study.heroImage }],
+      images: [{ url: study.heroImage || '/og.png' }],
     },
   }
 }
@@ -514,7 +502,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             {study.summary}
           </p>
 
-          {study.liveUrl && (
+          {study.liveUrl && study.status !== 'in-progress' && (
             <div>
               <a
                 href={study.liveUrl}
@@ -529,27 +517,37 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
         </div>
 
         {/* Hero Cover Image */}
-        <div className="relative aspect-[16/9] rounded-3xl overflow-hidden border border-white/10 mb-16 shadow-2xl bg-[#0B0D14]">
-          <Image
-            src={study.heroImage}
-            alt={study.name}
-            fill
-            priority
-            sizes="(max-width: 1200px) 100vw, 1200px"
-            className="object-cover object-top"
-          />
+        <div className={`relative aspect-[16/9] rounded-3xl overflow-hidden border border-white/10 mb-16 shadow-2xl bg-[#0B0D14] ${study.heroImageFit === 'contain' ? 'p-10 sm:p-16' : ''}`}>
+          {study.heroImage ? (
+            <Image
+              src={study.heroImage}
+              alt={study.name}
+              fill
+              priority
+              sizes="(max-width: 1200px) 100vw, 1200px"
+              className={study.heroImageFit === 'contain' ? 'object-contain object-center' : 'object-cover object-top'}
+            />
+          ) : (
+            <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 text-center px-6">
+              <Clock size={28} className="text-blue-400" />
+              <div className="text-sm font-semibold text-white/70">Build in progress</div>
+              <div className="text-xs text-white/50 max-w-sm">This case study will be updated with a live preview and real results once the project ships.</div>
+            </div>
+          )}
         </div>
 
         {/* Key Metrics Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-16 sm:mb-20">
-          {study.metrics.map((m) => (
-            <div key={m.label} className="p-4 sm:p-6 rounded-2xl bg-white/[0.02] border border-white/[0.08] space-y-1">
-              <div className="text-[10px] sm:text-xs font-mono uppercase text-white/55">{m.label}</div>
-              <div className="text-2xl sm:text-3xl font-extrabold text-emerald-400 font-mono">{m.value}</div>
-              <div className="text-xs text-white/50">{m.detail}</div>
-            </div>
-          ))}
-        </div>
+        {study.metrics.length > 0 && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-16 sm:mb-20">
+            {study.metrics.map((m) => (
+              <div key={m.label} className="p-4 sm:p-6 rounded-2xl bg-white/[0.02] border border-white/[0.08] space-y-1">
+                <div className="text-[10px] sm:text-xs font-mono uppercase text-white/55">{m.label}</div>
+                <div className="text-2xl sm:text-3xl font-extrabold text-emerald-400 font-mono">{m.value}</div>
+                <div className="text-xs text-white/50">{m.detail}</div>
+              </div>
+            ))}
+          </div>
+        )}
 
         {/* Narrative: Challenge & Solution */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-20">
@@ -590,17 +588,19 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
         </div>
 
         {/* Client Quote */}
-        <div className="p-8 sm:p-12 rounded-3xl bg-blue-600/[0.08] border border-blue-500/25 mb-20 text-center relative overflow-hidden">
-          <div className="max-w-2xl mx-auto space-y-4">
-            <p className="text-lg sm:text-xl text-white font-medium italic leading-relaxed">
-              &ldquo;{study.quote.text}&rdquo;
-            </p>
-            <div>
-              <div className="text-sm font-bold text-blue-300">{study.quote.author}</div>
-              <div className="text-xs text-white/55">{study.quote.role}</div>
+        {study.quote && (
+          <div className="p-8 sm:p-12 rounded-3xl bg-blue-600/[0.08] border border-blue-500/25 mb-20 text-center relative overflow-hidden">
+            <div className="max-w-2xl mx-auto space-y-4">
+              <p className="text-lg sm:text-xl text-white font-medium italic leading-relaxed">
+                &ldquo;{study.quote.text}&rdquo;
+              </p>
+              <div>
+                <div className="text-sm font-bold text-blue-300">{study.quote.author}</div>
+                <div className="text-xs text-white/55">{study.quote.role}</div>
+              </div>
             </div>
           </div>
-        </div>
+        )}
 
         {/* Bottom Call to Action */}
         <div className="text-center p-10 rounded-3xl bg-white/[0.02] border border-white/[0.08]">

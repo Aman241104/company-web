@@ -66,7 +66,7 @@ function HeroLeadForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-2.5 max-w-md">
+    <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-2.5 max-w-md pr-16 sm:pr-0">
       <input
         type="text"
         name="company_website"

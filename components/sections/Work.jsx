@@ -3,21 +3,30 @@ import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ArrowUpRight, ExternalLink, Sparkles, CheckCircle2 } from 'lucide-react'
+import { ArrowUpRight, ExternalLink, Sparkles, CheckCircle2, Clock } from 'lucide-react'
 import BrowserMockup from '@/components/ui/BrowserMockup'
 import ProjectModal from '@/components/ui/ProjectModal'
 import SpotlightCard from '@/components/ui/SpotlightCard'
 import ShinyText from '@/components/ui/ShinyText'
 
-const SS = (src, alt) => function ScreenshotMockup() {
+const InProgressMockup = () => (
+  <div className="relative w-full h-[220px] sm:h-[280px] overflow-hidden bg-blue-600/10 flex flex-col items-center justify-center gap-1.5 text-center px-4">
+    <span className="text-[10px] font-mono uppercase tracking-wider text-blue-400/70">Build In Progress</span>
+    <span className="text-xs text-white/40">Preview coming at launch</span>
+  </div>
+)
+
+const SS = (src, alt, fit = 'cover') => function ScreenshotMockup() {
   return (
-    <div className="relative w-full h-[220px] sm:h-[280px] overflow-hidden bg-black">
+    <div className={`relative w-full h-[220px] sm:h-[280px] overflow-hidden bg-black ${fit === 'contain' ? 'p-6 sm:p-8 bg-[#0B0D14]' : ''}`}>
       <Image
         src={src}
         alt={alt}
         fill
         sizes="(max-width: 1024px) 100vw, 50vw"
-        className="object-cover object-top group-hover:scale-[1.03] transition-transform duration-500"
+        className={fit === 'contain'
+          ? 'object-contain object-center group-hover:scale-[1.03] transition-transform duration-500'
+          : 'object-cover object-top group-hover:scale-[1.03] transition-transform duration-500'}
       />
     </div>
   )
@@ -36,7 +45,7 @@ export const projects = [
     accent: '#B45309',
     mockupType: 'browser',
     mockupUrl: 'svspacedesigns.in',
-    MockupContent: SS('/assets/stylux_mockup.jpg', 'SV Space Designs Architecture & Interior Studio'),
+    MockupContent: SS('/assets/sv-space-designs-live.jpg', 'SV Space Designs Architecture & Interior Studio'),
     link: 'https://www.svspacedesigns.in',
     desc: 'Interior design and turnkey execution studio in Ahmedabad delivering residential penthouses, bungalows, cafes, and commercial spaces with vendor-direct material pricing.',
   },
@@ -52,7 +61,7 @@ export const projects = [
     accent: '#D97706',
     mockupType: 'browser',
     mockupUrl: 'prihaanspices.in',
-    MockupContent: SS('/prihaanfin.png', 'Prihaan Spices E-Commerce'),
+    MockupContent: SS('/assets/prihaan-spices-live.jpg', 'Prihaan Spices E-Commerce'),
     link: 'https://www.prihaanspices.in',
     desc: 'Authentic Indian spices, masalas and dry fruits e-commerce storefront featuring 252+ live SKUs, Supabase media CDN, and streamlined WhatsApp checkout pipeline.',
   },
@@ -84,7 +93,7 @@ export const projects = [
     accent: '#3B82F6',
     mockupType: 'browser',
     mockupUrl: 'app.viboerp.com',
-    MockupContent: SS('/assets/vibo_erp_mockup.jpg', 'Vibo ERP Platform'),
+    MockupContent: SS('/assets/saas_hero_mockup.png', 'Vibo ERP Platform', 'contain'),
     link: 'https://app.viboerp.com/',
     desc: 'Proprietary multi-tenant cloud ERP SaaS suite — automated billing, inventory matrix, and AI copilots for 2,400+ enterprises.',
   },
@@ -148,25 +157,25 @@ export const projects = [
     accent: '#3B82F6',
     mockupType: 'browser',
     mockupUrl: 'aresbusinessleague.com',
-    MockupContent: SS('/assets/fintech_mockup.jpg', 'Ares Business League'),
+    MockupContent: SS('/assets/ares-business-league-live.jpg', 'Ares Business League'),
     link: 'https://www.aresbusinessleague.com',
     desc: 'Premier business networking league, member directory, referral tracking, and executive chapter leadership portal.',
   },
   {
     id: '09',
-    name: 'Club MJ Events',
-    category: 'Concert & VIP Ticketing',
-    categoryFilter: 'Media',
-    tags: ['Next.js', 'Ticketing Engine', 'VIP Booking', 'Nightlife Media'],
-    result: '50K+ Ticket Bookings',
+    name: 'CMJ Events',
+    category: 'Luxury Wedding & Event Planning',
+    categoryFilter: 'Web',
+    tags: ['Next.js', 'Gallery Performance', 'Lead Funnel', 'Ahmedabad'],
+    result: '250+ Events Delivered',
     year: '2025',
     type: 'Client Project',
     accent: '#8B5CF6',
     mockupType: 'browser',
     mockupUrl: 'clubmjevents.com',
-    MockupContent: SS('/jjfilms.png', 'Club MJ Events'),
+    MockupContent: SS('/assets/club-mj-events-live.jpg', 'CMJ Events'),
     link: 'https://www.clubmjevents.com',
-    desc: 'Premium nightlife, concert ticketing, artist booking, and VIP hospitality experiential platform.',
+    desc: 'Award-winning in-house design and production studio behind 250+ weddings, corporate productions, and private celebrations across India and worldwide.',
   },
   {
     id: '10',
@@ -180,7 +189,7 @@ export const projects = [
     accent: '#0284C7',
     mockupType: 'browser',
     mockupUrl: 'naamtransfer.com',
-    MockupContent: SS('/advocate.png', 'Naam Transfer Portal'),
+    MockupContent: SS('/assets/naam-transfer-live.jpg', 'Naam Transfer Portal'),
     link: 'https://www.naamtransfer.com',
     desc: 'Online property title deed transfer, municipal registry documentation, and legal name change workflow portal.',
   },
@@ -212,7 +221,7 @@ export const projects = [
     accent: '#F43F5E',
     mockupType: 'browser',
     mockupUrl: 'jukeboxmedia.in',
-    MockupContent: SS('/assets/ai_agent_mockup.jpg', 'Jukebox Media Agency'),
+    MockupContent: SS('/assets/jukebox-media-live.jpg', 'Jukebox Media Agency'),
     link: 'https://www.jukeboxmedia.in',
     desc: 'Full-funnel digital marketing, creator talent management, and viral campaign engine for modern consumer brands.',
   },
@@ -228,7 +237,7 @@ export const projects = [
     accent: '#EAB308',
     mockupType: 'browser',
     mockupUrl: 'risingrechargeable.com',
-    MockupContent: SS('/inventory.png', 'Rising Rechargeable Energy'),
+    MockupContent: SS('/assets/rising-rechargeable-live.jpg', 'Rising Rechargeable Energy'),
     link: 'https://www.risingrechargeable.com',
     desc: 'Industrial rechargeable battery packs, renewable energy storage systems, and lithium-ion power solutions storefront.',
   },
@@ -244,7 +253,7 @@ export const projects = [
     accent: '#64748B',
     mockupType: 'browser',
     mockupUrl: 'fgpind.com',
-    MockupContent: SS('/chemical.png', 'FGP Industries FRP'),
+    MockupContent: SS('/assets/fgp-industries-live.jpg', 'FGP Industries FRP'),
     link: 'https://fgpind.com',
     desc: 'Industrial fiberglass reinforced plastics (FRP) manufacturing, chemical process equipment, and custom composite storage tanks.',
   },
@@ -285,14 +294,15 @@ export const projects = [
     category: 'Corporate & Global Travel',
     categoryFilter: 'Web',
     tags: ['Next.js', 'Corporate Travel', 'International Tours', 'Visa Booking'],
-    result: '120+ Corporate Accounts',
-    year: '2024',
+    result: 'In Development',
+    inProgress: true,
+    year: '2026',
     type: 'Client Project',
     accent: '#06B6D4',
     mockupUrl: 'jadetravels.co.in',
-    MockupContent: SS('/luxeliving.png', 'Jade Travels International'),
+    MockupContent: InProgressMockup,
     link: 'https://www.jadetravels.co.in',
-    desc: 'Corporate travel management and international holiday planner offering customized luxury tours, flight bookings, and visa services.',
+    desc: 'Corporate travel management and international holiday planner offering customized luxury tours, flight bookings, and visa services. Build in progress.',
   },
 ]
 
@@ -417,13 +427,13 @@ export default function Work() {
                     </div>
 
                     <div className="pt-5 border-t border-white/[0.06] flex items-center justify-between gap-4">
-                      <div className="flex items-center gap-2 text-xs font-semibold text-emerald-400">
-                        <CheckCircle2 size={13} />
+                      <div className={`flex items-center gap-2 text-xs font-semibold ${project.inProgress ? 'text-blue-400' : 'text-emerald-400'}`}>
+                        {project.inProgress ? <Clock size={13} /> : <CheckCircle2 size={13} />}
                         <span>{project.result}</span>
                       </div>
 
                       <div className="flex items-center gap-3">
-                        {project.link && (
+                        {project.link && !project.inProgress && (
                           <a
                             href={project.link}
                             target="_blank"

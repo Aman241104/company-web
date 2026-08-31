@@ -57,7 +57,6 @@ const localBusinessSchema = {
     opens: "09:00",
     closes: "18:00",
   },
-  aggregateRating: { "@type": "AggregateRating", ratingValue: "4.9", reviewCount: "80" },
   serviceArea: { "@type": "Country", name: "India" },
   sameAs: [
     "https://linkedin.com/company/mehta-technologies",

@@ -10,7 +10,16 @@ export default function CustomCursor() {
   const reducedMotion = usePrefersReducedMotion()
 
   useEffect(() => {
-    setIsTouch(window.matchMedia('(pointer: coarse)').matches)
+    const hasFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches
+    setIsTouch(!hasFinePointer)
+
+    // Defensive fallback for hybrid touchscreen-laptop devices that misreport
+    // pointer capability: flip to real-cursor mode on the first genuine mouse move.
+    const onFirstPointerMove = (e) => {
+      if (e.pointerType === 'mouse') setIsTouch(false)
+    }
+    window.addEventListener('pointermove', onFirstPointerMove, { once: true })
+    return () => window.removeEventListener('pointermove', onFirstPointerMove)
   }, [])
 
   useEffect(() => {

@@ -79,7 +79,7 @@ const organizationSchema = {
   "@type": "Organization",
   name: "Mehta Technologies",
   url: "https://mehtatechnologies.com",
-  logo: "https://mehtatechnologies.com/favicon.ico",
+  logo: "https://mehtatechnologies.com/brand/mehta-logo-icon-light.png",
   description:
     "Full-stack digital agency in Mumbai & Bengaluru specialising in web development, mobile apps, SaaS platforms, and performance marketing.",
   email: "hello@mehtatechnologies.com",

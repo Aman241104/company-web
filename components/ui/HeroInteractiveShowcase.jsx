@@ -23,7 +23,8 @@ const archetypes = [
     icon: Cloud,
     tag: 'Cloud ERP v2.4',
     url: 'app.viboerp.com/analytics',
-    image: '/assets/vibo_erp_mockup.jpg',
+    image: '/assets/saas_hero_mockup.png',
+    imageFit: 'contain',
     title: 'Vibo ERP — Multi-Tenant Cloud Architecture',
     subtitle: 'Automated billing, inventory matrix, and AI copilots for 2,400+ enterprises.',
     metrics: [
@@ -194,14 +195,16 @@ export default function HeroInteractiveShowcase() {
             className="w-full rounded-2xl overflow-hidden border border-white/10 group bg-[#050608]"
           >
             {/* Image Canvas Container */}
-            <div className="relative aspect-[16/10] sm:aspect-[16/9] w-full overflow-hidden bg-[#050608]">
+            <div className={`relative aspect-[16/10] sm:aspect-[16/9] w-full overflow-hidden bg-[#050608] ${activeTab.imageFit === 'contain' ? 'p-8 sm:p-12' : ''}`}>
               <Image
                 src={activeTab.image}
                 alt={activeTab.title}
                 fill
                 priority
                 sizes="(max-width: 1024px) 100vw, 60vw"
-                className="object-cover object-top transition-transform duration-700 group-hover:scale-[1.02]"
+                className={activeTab.imageFit === 'contain'
+                  ? 'object-contain object-center transition-transform duration-700 group-hover:scale-[1.03]'
+                  : 'object-cover object-top transition-transform duration-700 group-hover:scale-[1.02]'}
               />
 
               {/* Desktop-only Ambient Dark Bottom Gradient */}

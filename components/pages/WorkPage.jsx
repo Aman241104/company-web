@@ -17,7 +17,7 @@ const projects = [
     subtitle: 'Architecture & Turnkey Interior Studio',
     desc: 'Interior design and turnkey execution studio in Ahmedabad delivering residential penthouses, bungalows, cafes, and commercial spaces with vendor-direct pricing.',
     tags: ['Next.js 15', 'Turnkey Studio', 'Custom Grain UI', 'Ahmedabad'],
-    image: '/assets/stylux_mockup.jpg',
+    image: '/assets/sv-space-designs-live.jpg',
     url: 'https://www.svspacedesigns.in',
     year: '2025',
     result: '100/100 Mobile Speed',
@@ -29,7 +29,7 @@ const projects = [
     subtitle: 'Organic Spices & Dry Fruits Storefront',
     desc: 'Authentic Indian spices, masalas and dry fruits e-commerce storefront featuring 252+ live SKUs, Supabase media CDN, and streamlined WhatsApp checkout pipeline.',
     tags: ['Next.js 15', 'Supabase CDN', '252+ SKUs', 'WhatsApp Checkout'],
-    image: '/prihaanfin.png',
+    image: '/assets/prihaan-spices-live.jpg',
     url: 'https://www.prihaanspices.in',
     year: '2025',
     result: '+185% WhatsApp Orders',
@@ -53,7 +53,8 @@ const projects = [
     subtitle: 'Enterprise Cloud ERP Platform',
     desc: 'Proprietary cloud ERP system with inventory, GST e-invoicing, CRM pipeline, and biometric HRMS sync for 2,400+ active enterprise users.',
     tags: ['Next.js 15', 'PostgreSQL RLS', 'Multi-Tenant', 'Automated GST'],
-    image: '/assets/vibo_erp_mockup.jpg',
+    image: '/assets/saas_hero_mockup.png',
+    imageFit: 'contain',
     url: 'https://app.viboerp.com/',
     year: '2024',
     result: '2,400+ Active Enterprises',
@@ -101,22 +102,22 @@ const projects = [
     subtitle: 'Executive Business Networking Platform',
     desc: 'Premier business networking league, member directory, referral tracking, and executive chapter leadership portal.',
     tags: ['Next.js', 'Member Directory', 'Referral Tracking', 'Executive CRM'],
-    image: '/assets/fintech_mockup.jpg',
+    image: '/assets/ares-business-league-live.jpg',
     url: 'https://www.aresbusinessleague.com',
     year: '2025',
     result: '500+ Executive Members',
   },
   {
-    name: 'Club MJ Events',
+    name: 'CMJ Events',
     slug: 'club-mj-events',
-    category: 'Media',
-    subtitle: 'Concert Ticketing & VIP Experiences',
-    desc: 'Premium nightlife, concert ticketing, artist booking, and VIP hospitality experiential platform.',
-    tags: ['Next.js', 'Ticketing Engine', 'VIP Booking', 'Nightlife Media'],
-    image: '/jjfilms.png',
+    category: 'Web',
+    subtitle: 'Luxury Wedding & Event Planning',
+    desc: 'Award-winning in-house design and production studio behind 250+ weddings, corporate productions, and private celebrations across India and worldwide.',
+    tags: ['Next.js', 'Gallery Performance', 'Lead Funnel', 'Ahmedabad'],
+    image: '/assets/club-mj-events-live.jpg',
     url: 'https://www.clubmjevents.com',
     year: '2025',
-    result: '50K+ Ticket Bookings',
+    result: '250+ Events Delivered',
   },
   {
     name: 'Naam Transfer',
@@ -125,7 +126,7 @@ const projects = [
     subtitle: 'Property Title & Legal Deed Automation',
     desc: 'Online property title deed transfer, municipal registry documentation, and legal name change workflow portal.',
     tags: ['Next.js', 'Gov Registry', 'Automated Intake', 'Document Engine'],
-    image: '/advocate.png',
+    image: '/assets/naam-transfer-live.jpg',
     url: 'https://www.naamtransfer.com',
     year: '2025',
     result: '100% Automated Intake',
@@ -149,7 +150,7 @@ const projects = [
     subtitle: 'Brand Growth & Performance Marketing',
     desc: 'Full-funnel digital marketing, creator talent management, and viral campaign engine for modern consumer brands.',
     tags: ['Next.js', 'Creator CRM', 'Performance Marketing', 'ROAS Tracker'],
-    image: '/assets/ai_agent_mockup.jpg',
+    image: '/assets/jukebox-media-live.jpg',
     url: 'https://www.jukeboxmedia.in',
     year: '2025',
     result: '4.8x Average ROAS',
@@ -161,7 +162,7 @@ const projects = [
     subtitle: 'Clean Energy & Battery Systems Supply',
     desc: 'Industrial rechargeable battery packs, renewable energy storage systems, and lithium-ion power solutions storefront.',
     tags: ['Next.js', 'Lithium Storage', 'B2B Catalog', 'Clean Energy'],
-    image: '/inventory.png',
+    image: '/assets/rising-rechargeable-live.jpg',
     url: 'https://www.risingrechargeable.com',
     year: '2025',
     result: 'Clean Energy Supply',
@@ -173,7 +174,7 @@ const projects = [
     subtitle: 'Industrial FRP Composites Manufacturing',
     desc: 'Industrial fiberglass reinforced plastics (FRP) manufacturing, chemical process equipment, and custom composite storage tanks.',
     tags: ['Next.js', 'FRP Composites', 'Industrial Tanks', 'Chemical Engineering'],
-    image: '/chemical.png',
+    image: '/assets/fgp-industries-live.jpg',
     url: 'https://fgpind.com',
     year: '2024',
     result: 'Heavy Industrial Specs',
@@ -209,10 +210,11 @@ const projects = [
     subtitle: 'Corporate & Luxury Global Travel',
     desc: 'Corporate travel management and international holiday planner offering customized luxury tours, flight bookings, and visa services.',
     tags: ['Next.js', 'Corporate Travel', 'International Tours', 'Visa Booking'],
-    image: '/luxeliving.png',
+    image: null,
     url: 'https://www.jadetravels.co.in',
-    year: '2024',
-    result: '120+ Corporate Accounts',
+    year: '2026',
+    result: 'In Development',
+    inProgress: true,
   },
 ]
 
@@ -228,15 +230,22 @@ function ProjectCard({ project, index }) {
     >
       <div>
         {/* Visual Cover */}
-        <div className="relative aspect-[16/10] bg-[#07080C] overflow-hidden">
+        <div className={`relative aspect-[16/10] bg-[#07080C] overflow-hidden ${project.imageFit === 'contain' ? 'p-6' : ''}`}>
           {project.image ? (
             <Image
               src={project.image}
               alt={project.name}
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-              className="object-cover object-top group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100"
+              className={project.imageFit === 'contain'
+                ? 'object-contain object-center group-hover:scale-[1.03] transition-transform duration-500'
+                : 'object-cover object-top group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100'}
             />
+          ) : project.inProgress ? (
+            <div className="w-full h-full flex flex-col items-center justify-center gap-1.5 bg-blue-600/10 text-center px-4">
+              <span className="text-[10px] font-mono uppercase tracking-wider text-blue-400/70">Build In Progress</span>
+              <span className="text-xs text-white/40">Preview coming at launch</span>
+            </div>
           ) : (
             <div className="w-full h-full flex items-center justify-center font-bold text-2xl text-blue-400/40 bg-blue-600/10">
               {project.name.slice(0, 2).toUpperCase()}
@@ -301,7 +310,11 @@ function ProjectCard({ project, index }) {
             Read Case Study Deep-Dive <ArrowRight size={12} />
           </Link>
         )}
-        {project.url ? (
+        {project.inProgress ? (
+          <div className="w-full py-2.5 rounded-full text-xs font-medium text-blue-400/70 border border-blue-500/20 text-center">
+            Build In Progress
+          </div>
+        ) : project.url ? (
           <a
             href={project.url}
             target="_blank"

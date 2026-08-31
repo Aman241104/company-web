@@ -7,7 +7,7 @@ import HeroDashboardShowcase from '@/components/ui/HeroDashboardShowcase'
 
 const trustStats = [
   { icon: CheckCircle2, label: '150+ Projects Delivered' },
-  { icon: Star, label: '4.9/5 Client Rating' },
+  { icon: Star, label: '4.9/5 Client Rating', href: '#testimonials' },
   { icon: Clock, label: 'Fixed-Price Proposal in 24 Hrs' },
   { icon: Zap, label: '99.9% Uptime SLA' },
 ]
@@ -66,7 +66,7 @@ function HeroLeadForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-2.5 max-w-md pr-16 sm:pr-0">
+    <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-2.5 max-w-md pr-20 sm:pr-0">
       <input
         type="text"
         name="company_website"
@@ -84,7 +84,7 @@ function HeroLeadForm() {
         placeholder="Your name"
         value={form.name}
         onChange={handleChange}
-        className="w-full sm:w-36 px-4 py-3 rounded-xl text-sm bg-white/[0.04] border border-white/10 text-white placeholder:text-white/35 focus:outline-none focus:border-blue-500/50 transition-colors"
+        className="w-full sm:w-36 px-4 py-3 rounded-xl text-sm bg-white/[0.04] border border-white/10 text-white placeholder:text-white/45 focus:outline-none focus:border-blue-500/50 transition-colors"
       />
       <input
         required
@@ -93,7 +93,7 @@ function HeroLeadForm() {
         placeholder="Phone number"
         value={form.phone}
         onChange={handleChange}
-        className="w-full sm:w-36 px-4 py-3 rounded-xl text-sm bg-white/[0.04] border border-white/10 text-white placeholder:text-white/35 focus:outline-none focus:border-blue-500/50 transition-colors"
+        className="w-full sm:w-36 px-4 py-3 rounded-xl text-sm bg-white/[0.04] border border-white/10 text-white placeholder:text-white/45 focus:outline-none focus:border-blue-500/50 transition-colors"
       />
       <button
         type="submit"
@@ -194,6 +194,14 @@ export default function Hero() {
             >
               {trustStats.map((stat) => {
                 const Icon = stat.icon
+                if (stat.href) {
+                  return (
+                    <a key={stat.label} href={stat.href} className="flex items-center gap-1.5 text-xs text-white/50 hover:text-white/80 transition-colors">
+                      <Icon size={13} className="text-blue-400 shrink-0" />
+                      <span className="underline decoration-white/20 underline-offset-2">{stat.label}</span>
+                    </a>
+                  )
+                }
                 return (
                   <div key={stat.label} className="flex items-center gap-1.5 text-xs text-white/50">
                     <Icon size={13} className="text-blue-400 shrink-0" />

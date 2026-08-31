@@ -523,7 +523,8 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
               src={study.heroImage}
               alt={study.name}
               fill
-              priority
+              loading="eager"
+              fetchPriority="high"
               sizes="(max-width: 1200px) 100vw, 1200px"
               className={study.heroImageFit === 'contain' ? 'object-contain object-center' : 'object-cover object-top'}
             />

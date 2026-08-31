@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   MessageSquare,
@@ -19,6 +19,10 @@ export default function FastTrackDrawer() {
   const [isOpen, setIsOpen] = useState(false)
   const [ndaRequested, setNdaRequested] = useState(false)
   const [ndaEmail, setNdaEmail] = useState('')
+  const drawerRef = useRef(null)
+  const closeButtonRef = useRef(null)
+  const triggerButtonRef = useRef(null)
+  const lastFocusedRef = useRef(null)
 
   useEffect(() => {
     const handleEsc = (e) => {
@@ -35,6 +39,37 @@ export default function FastTrackDrawer() {
     }
   }, [])
 
+  useEffect(() => {
+    if (isOpen) {
+      lastFocusedRef.current = document.activeElement
+      document.body.style.overflow = 'hidden'
+      closeButtonRef.current?.focus()
+
+      const handleTab = (e) => {
+        if (e.key !== 'Tab' || !drawerRef.current) return
+        const focusable = drawerRef.current.querySelectorAll(
+          'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        )
+        if (focusable.length === 0) return
+        const first = focusable[0]
+        const last = focusable[focusable.length - 1]
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault()
+          last.focus()
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault()
+          first.focus()
+        }
+      }
+      window.addEventListener('keydown', handleTab)
+      return () => {
+        window.removeEventListener('keydown', handleTab)
+        document.body.style.overflow = ''
+        ;(lastFocusedRef.current || triggerButtonRef.current)?.focus()
+      }
+    }
+  }, [isOpen])
+
   const handleNdaSubmit = (e) => {
     e.preventDefault()
     if (!ndaEmail) return
@@ -47,6 +82,7 @@ export default function FastTrackDrawer() {
       {/* Floating Trigger Button - Desktop only so it never collides with MobileDock */}
       <div className="hidden md:block fixed bottom-6 right-6 z-40">
         <motion.button
+          ref={triggerButtonRef}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => setIsOpen(true)}
@@ -77,6 +113,10 @@ export default function FastTrackDrawer() {
 
             {/* Drawer Body */}
             <motion.div
+              ref={drawerRef}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="fast-track-drawer-title"
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
@@ -88,18 +128,20 @@ export default function FastTrackDrawer() {
                 <div className="flex items-center justify-between pb-5 border-b border-white/[0.08] mb-6">
                   <div>
                     <div className="flex items-center gap-2 mb-1">
-                      <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                      <span className="w-2 h-2 rounded-full bg-emerald-400" />
                       <span className="text-[11px] font-mono uppercase tracking-wider text-emerald-400">
-                        Live Technical Desk
+                        Direct Support Channels
                       </span>
                     </div>
-                    <h3 className="text-xl font-bold text-white tracking-tight">
+                    <h3 id="fast-track-drawer-title" className="text-xl font-bold text-white tracking-tight">
                       Fast-Track Discovery
                     </h3>
                   </div>
 
                   <button
+                    ref={closeButtonRef}
                     onClick={() => setIsOpen(false)}
+                    aria-label="Close dialog"
                     className="p-2 rounded-xl bg-white/[0.04] text-white/50 hover:text-white hover:bg-white/10 transition-colors"
                   >
                     <X size={18} />
@@ -191,7 +233,7 @@ export default function FastTrackDrawer() {
                         placeholder="Enter work email for NDA"
                         value={ndaEmail}
                         onChange={(e) => setNdaEmail(e.target.value)}
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder-white/25 text-xs focus:outline-none focus:border-blue-500 transition-colors"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder-white/45 text-xs focus:outline-none focus:border-blue-500 transition-colors"
                       />
                       <button
                         type="submit"

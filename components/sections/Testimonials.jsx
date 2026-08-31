@@ -93,9 +93,9 @@ function TestimonialCard({ item }) {
       {/* Author details */}
       <div className="pt-4 border-t border-white/[0.06] flex items-center justify-between">
         <div>
-          <h4 className="text-sm font-bold text-white tracking-tight">
+          <h3 className="text-sm font-bold text-white tracking-tight">
             {item.author}
-          </h4>
+          </h3>
           <p className="text-xs text-white/50">
             {item.role}, <span className="text-blue-400 font-medium">{item.company}</span>
           </p>

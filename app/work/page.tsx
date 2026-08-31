@@ -6,13 +6,13 @@ import WorkPage from '@/components/pages/WorkPage'
 export const metadata: Metadata = {
   title: "Our Work — Portfolio & Case Studies",
   description:
-    "150+ projects shipped across e-commerce, SaaS, healthcare, hospitality & more. Explore Mehta Technologies' portfolio: ViboERP, Silver Spoon, JJ Films, ZingBliss Events & more.",
+    "150+ projects shipped across e-commerce, SaaS, healthcare, hospitality & more. Explore Mehta Technologies' portfolio: ViboERP, Silver Spoon, CMJ Events, ZingBliss Events & more.",
   alternates: { canonical: "https://mehtatechnologies.com/work" },
   openGraph: {
     url: "https://mehtatechnologies.com/work",
     title: "Our Work — Portfolio & Case Studies | Mehta Technologies",
     description:
-      "150+ projects: ViboERP SaaS, Silver Spoon e-commerce, JJ Films, ZingBliss Events & more. See how we deliver measurable results.",
+      "150+ projects: ViboERP SaaS, Silver Spoon e-commerce, CMJ Events, ZingBliss Events & more. See how we deliver measurable results.",
     images: [{ url: "/og.png", width: 1200, height: 630, alt: "Mehta Technologies — Digital Agency India" }],
   },
 }

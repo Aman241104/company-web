@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, ArrowUpRight, ChevronDown } from 'lucide-react'
+import { Menu, X, ArrowUpRight, ChevronDown, Mail } from 'lucide-react'
 
 const WHATSAPP_NUMBER = '919876543210'
 const WHATSAPP_MESSAGE = "Hi Mehta Technologies, I'd like to talk about a project."
@@ -45,6 +45,9 @@ function NavLink({ href, children, dropdown }) {
         className="inline-flex items-center gap-1.5 py-2 text-[13.5px] font-medium text-white/70 hover:text-white transition-colors"
       >
         {children}
+        {href.startsWith('mailto:') && (
+          <Mail size={11} aria-hidden="true" className="opacity-50" />
+        )}
         {dropdown && (
           <ChevronDown
             size={12}
@@ -93,6 +96,15 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', fn)
   }, [])
 
+  useEffect(() => {
+    if (!open) return
+    const handleEsc = (e) => {
+      if (e.key === 'Escape') setOpen(false)
+    }
+    window.addEventListener('keydown', handleEsc)
+    return () => window.removeEventListener('keydown', handleEsc)
+  }, [open])
+
   return (
     <>
       <motion.header
@@ -109,7 +121,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5 group shrink-0">
             <div className="w-8 h-8 rounded-lg overflow-hidden shadow-sm shadow-blue-500/20 ring-1 ring-white/10">
-              <Image src="/brand/mehta-logo-icon-dark.png" alt="Mehta Technologies" width={32} height={32} className="w-full h-full object-cover" priority />
+              <Image src="/brand/mehta-logo-icon-dark.png" alt="Mehta Technologies" width={32} height={32} className="w-full h-full object-cover" loading="eager" fetchPriority="high" />
             </div>
             <span className="flex flex-col leading-none">
               <span className="font-bold text-[14px] tracking-tight text-white">MEHTA</span>

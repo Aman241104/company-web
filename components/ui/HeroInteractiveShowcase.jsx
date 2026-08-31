@@ -200,7 +200,8 @@ export default function HeroInteractiveShowcase() {
                 src={activeTab.image}
                 alt={activeTab.title}
                 fill
-                priority
+                loading="eager"
+                fetchPriority="high"
                 sizes="(max-width: 1024px) 100vw, 60vw"
                 className={activeTab.imageFit === 'contain'
                   ? 'object-contain object-center transition-transform duration-700 group-hover:scale-[1.03]'

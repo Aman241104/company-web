@@ -19,7 +19,8 @@ export default function HeroDashboardShowcase() {
           alt="Vibo ERP dashboard, AI assistant, and mobile app showcase"
           width={1376}
           height={768}
-          priority
+          loading="eager"
+          fetchPriority="high"
           className="w-full h-auto select-none drop-shadow-[0_35px_60px_rgba(0,0,0,0.65)]"
           sizes="(min-width: 1280px) 900px, (min-width: 1024px) 760px, 100vw"
         />

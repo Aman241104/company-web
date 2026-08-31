@@ -133,11 +133,12 @@ function ServiceCard({ svc, index }) {
   const Icon = svc.icon
   return (
     <motion.div
+      id={`service-${svc.num}`}
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.06 }}
-      className="rounded-3xl bg-white/[0.02] border border-white/[0.08] hover:border-blue-500/30 p-8 sm:p-10 transition-all duration-300 shadow-2xl shadow-black/40 relative overflow-hidden"
+      className="rounded-3xl bg-white/[0.02] border border-white/[0.08] hover:border-blue-500/30 p-8 sm:p-10 transition-all duration-300 shadow-2xl shadow-black/40 relative overflow-hidden scroll-mt-28"
     >
       {/* Top Accent Line */}
       <div className="absolute top-0 left-1/4 right-1/4 h-[1px] bg-gradient-to-r from-transparent via-blue-500/50 to-transparent" />
@@ -179,7 +180,7 @@ function ServiceCard({ svc, index }) {
         
         {/* Features List */}
         <div className="lg:col-span-8 space-y-3">
-          <div className="text-xs font-mono uppercase tracking-wider text-white/40 mb-4">
+          <div className="text-xs font-mono uppercase tracking-wider text-white/55 mb-4">
             Key Architecture & Capabilities
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -196,11 +197,11 @@ function ServiceCard({ svc, index }) {
         <div className="lg:col-span-4 rounded-2xl bg-[#0B0D14] border border-white/[0.08] p-6 flex flex-col justify-between space-y-6">
           <div className="space-y-4">
             <div className="flex items-center justify-between pb-3 border-b border-white/[0.06]">
-              <span className="text-xs text-white/40 font-mono uppercase">Timeline</span>
+              <span className="text-xs text-white/55 font-mono uppercase">Timeline</span>
               <span className="text-xs font-bold text-white">{svc.timeline}</span>
             </div>
             <div className="flex items-center justify-between pb-3 border-b border-white/[0.06]">
-              <span className="text-xs text-white/40 font-mono uppercase">Investment</span>
+              <span className="text-xs text-white/55 font-mono uppercase">Investment</span>
               <span className="text-xs font-bold text-blue-400 font-mono">{svc.pricing}</span>
             </div>
             {svc.caseStudy && (

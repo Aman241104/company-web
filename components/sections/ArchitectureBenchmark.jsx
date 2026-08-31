@@ -108,7 +108,7 @@ export default function ArchitectureBenchmark() {
               </div>
             </div>
             <div className="p-4 sm:p-5 rounded-2xl bg-white/[0.02] border border-white/[0.08] space-y-1">
-              <div className="text-[11px] font-mono uppercase tracking-wider text-white/40 font-bold">
+              <div className="text-[11px] font-mono uppercase tracking-wider text-white/55 font-bold">
                 Conventional Legacy Standard
               </div>
               <div className="text-sm sm:text-base font-semibold text-white/60">
@@ -136,7 +136,7 @@ export default function ArchitectureBenchmark() {
                 </div>
 
                 <div className="sm:col-span-3">
-                  <div className="text-xs font-mono text-white/40">
+                  <div className="text-xs font-mono text-white/55">
                     {m.legacy}
                   </div>
                 </div>
@@ -151,7 +151,7 @@ export default function ArchitectureBenchmark() {
           </div>
 
           {/* Live Telemetry Ping */}
-          <div className="mt-6 sm:mt-8 pt-5 sm:pt-6 border-t border-white/[0.06] flex items-center justify-between flex-wrap gap-3 text-xs text-white/40 font-mono">
+          <div className="mt-6 sm:mt-8 pt-5 sm:pt-6 border-t border-white/[0.06] flex items-center justify-between flex-wrap gap-3 text-xs text-white/55 font-mono">
             <div className="flex items-center gap-2 text-emerald-400">
               <Activity size={14} className="animate-pulse" />
               <span>Real-time benchmark passing on edge nodes</span>

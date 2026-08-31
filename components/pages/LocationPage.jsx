@@ -25,7 +25,7 @@ export default function LocationPage({ location }) {
             <span className="text-gradient-accent">Website Development Agency.</span>
           </h1>
           <p className="text-base sm:text-lg text-white/50 leading-relaxed mb-3">{tagline}</p>
-          <p className="text-sm sm:text-base text-white/45 leading-relaxed max-w-2xl mx-auto">{intro}</p>
+          <p className="text-sm sm:text-base text-white/55 leading-relaxed max-w-2xl mx-auto">{intro}</p>
         </motion.div>
       </section>
 
@@ -68,7 +68,7 @@ export default function LocationPage({ location }) {
                   <p className="text-[11px] font-mono uppercase tracking-wider text-blue-400 mb-1.5">{cs.category}</p>
                   <h3 className="text-lg font-bold text-white tracking-tight">{cs.name}</h3>
                 </div>
-                <ArrowUpRight size={18} className="text-white/40 group-hover:text-white transition-colors shrink-0" />
+                <ArrowUpRight size={18} className="text-white/55 group-hover:text-white transition-colors shrink-0" />
               </Link>
             ))}
           </div>

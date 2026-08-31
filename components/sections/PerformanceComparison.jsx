@@ -132,22 +132,22 @@ export default function PerformanceComparison() {
               {/* Metric Row */}
               <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-6 sm:mb-8">
                 <div className="p-2.5 sm:p-4 rounded-xl sm:rounded-2xl bg-black/40 border border-white/[0.06] text-center">
-                  <div className="text-[9px] sm:text-[10px] font-mono text-white/40 uppercase mb-0.5 sm:mb-1">PageSpeed</div>
+                  <div className="text-[9px] sm:text-[10px] font-mono text-white/55 uppercase mb-0.5 sm:mb-1">PageSpeed</div>
                   <div className="text-lg sm:text-2xl font-extrabold text-red-400 font-mono">{activeStudy.before.pagespeed}/100</div>
                 </div>
                 <div className="p-2.5 sm:p-4 rounded-xl sm:rounded-2xl bg-black/40 border border-white/[0.06] text-center">
-                  <div className="text-[9px] sm:text-[10px] font-mono text-white/40 uppercase mb-0.5 sm:mb-1">LCP Latency</div>
+                  <div className="text-[9px] sm:text-[10px] font-mono text-white/55 uppercase mb-0.5 sm:mb-1">LCP Latency</div>
                   <div className="text-lg sm:text-2xl font-extrabold text-red-400 font-mono">{activeStudy.before.lcp}</div>
                 </div>
                 <div className="p-2.5 sm:p-4 rounded-xl sm:rounded-2xl bg-black/40 border border-white/[0.06] text-center">
-                  <div className="text-[9px] sm:text-[10px] font-mono text-white/40 uppercase mb-0.5 sm:mb-1">JS Payload</div>
+                  <div className="text-[9px] sm:text-[10px] font-mono text-white/55 uppercase mb-0.5 sm:mb-1">JS Payload</div>
                   <div className="text-lg sm:text-2xl font-extrabold text-red-400 font-mono">{activeStudy.before.bundle}</div>
                 </div>
               </div>
 
               {/* Problems list */}
               <div className="space-y-2 sm:space-y-2.5">
-                <div className="text-xs font-mono uppercase tracking-wider text-white/40 mb-2.5 sm:mb-3">
+                <div className="text-xs font-mono uppercase tracking-wider text-white/55 mb-2.5 sm:mb-3">
                   Critical Bottlenecks Identified
                 </div>
                 {activeStudy.before.issues.map((issue) => (
@@ -182,22 +182,22 @@ export default function PerformanceComparison() {
               {/* Metric Row */}
               <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-6 sm:mb-8">
                 <div className="p-2.5 sm:p-4 rounded-xl sm:rounded-2xl bg-[#07080C] border border-emerald-500/30 text-center">
-                  <div className="text-[9px] sm:text-[10px] font-mono text-white/40 uppercase mb-0.5 sm:mb-1">PageSpeed</div>
+                  <div className="text-[9px] sm:text-[10px] font-mono text-white/55 uppercase mb-0.5 sm:mb-1">PageSpeed</div>
                   <div className="text-lg sm:text-2xl font-extrabold text-emerald-400 font-mono">{activeStudy.after.pagespeed}/100</div>
                 </div>
                 <div className="p-2.5 sm:p-4 rounded-xl sm:rounded-2xl bg-[#07080C] border border-emerald-500/30 text-center">
-                  <div className="text-[9px] sm:text-[10px] font-mono text-white/40 uppercase mb-0.5 sm:mb-1">LCP Latency</div>
+                  <div className="text-[9px] sm:text-[10px] font-mono text-white/55 uppercase mb-0.5 sm:mb-1">LCP Latency</div>
                   <div className="text-lg sm:text-2xl font-extrabold text-emerald-400 font-mono">{activeStudy.after.lcp}</div>
                 </div>
                 <div className="p-2.5 sm:p-4 rounded-xl sm:rounded-2xl bg-[#07080C] border border-emerald-500/30 text-center">
-                  <div className="text-[9px] sm:text-[10px] font-mono text-white/40 uppercase mb-0.5 sm:mb-1">JS Payload</div>
+                  <div className="text-[9px] sm:text-[10px] font-mono text-white/55 uppercase mb-0.5 sm:mb-1">JS Payload</div>
                   <div className="text-lg sm:text-2xl font-extrabold text-emerald-400 font-mono">{activeStudy.after.bundle}</div>
                 </div>
               </div>
 
               {/* Results list */}
               <div className="space-y-2 sm:space-y-2.5">
-                <div className="text-xs font-mono uppercase tracking-wider text-white/40 mb-2.5 sm:mb-3">
+                <div className="text-xs font-mono uppercase tracking-wider text-white/55 mb-2.5 sm:mb-3">
                   Verified Production Outcomes
                 </div>
                 {activeStudy.after.results.map((res) => (

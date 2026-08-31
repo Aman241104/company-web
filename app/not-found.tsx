@@ -42,7 +42,7 @@ export default function NotFound() {
         </div>
 
         <div className="glass-panel rounded-2xl p-6 sm:p-8 text-left">
-          <div className="text-xs font-mono uppercase tracking-wider text-white/40 mb-3">
+          <div className="text-xs font-mono uppercase tracking-wider text-white/55 mb-3">
             Looking for something specific?
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-sm">

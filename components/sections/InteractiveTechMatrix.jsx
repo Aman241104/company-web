@@ -150,7 +150,7 @@ export default function InteractiveTechMatrix() {
               </div>
 
               <div className="pt-4 border-t border-white/[0.06] flex items-center justify-between">
-                <span className="text-[11px] font-mono text-white/40">
+                <span className="text-[11px] font-mono text-white/55">
                   {tech.spec.split('·')[0]}
                 </span>
                 <span className="text-xs font-semibold text-blue-400 flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">

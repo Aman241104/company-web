@@ -118,7 +118,7 @@ export default function Footer() {
           <div className="lg:col-span-8 grid grid-cols-2 sm:grid-cols-4 gap-8">
             {cols.map((col) => (
               <div key={col.title}>
-                <h4 className="text-xs font-mono uppercase tracking-wider text-white/40 mb-4">
+                <h4 className="text-xs font-mono uppercase tracking-wider text-white/55 mb-4">
                   {col.title}
                 </h4>
                 <ul className="space-y-2.5">
@@ -140,7 +140,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/40">
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/55">
           <div>
             © {new Date().getFullYear()} Mehta Technologies. All rights reserved.
           </div>

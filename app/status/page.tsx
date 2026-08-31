@@ -2,28 +2,21 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Navbar from '@/components/sections/Navbar'
 import Footer from '@/components/sections/Footer'
-import { CheckCircle2, ShieldCheck, Activity, Server, Zap, Globe, Clock, ArrowLeft, ArrowUpRight } from 'lucide-react'
+import { CheckCircle2, ShieldCheck, Clock, ArrowLeft, ArrowUpRight } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: "Live System & SLA Status",
+  title: "Engineering & SLA Standards",
   description:
-    "Real-time operational status, uptime metrics, global edge latency, and SLA health across all Mehta Technologies production systems and client infrastructure clusters.",
+    "The uptime targets, latency budgets, and infrastructure standards Mehta Technologies builds and contracts to for client production systems.",
   alternates: { canonical: "https://mehtatechnologies.com/status" },
 }
 
 const systems = [
-  { name: 'Core Web Platform & Edge SSR', status: 'Operational', uptime: '100%', latency: '14ms', region: 'Global Edge (300+ POPs)' },
-  { name: 'Vibo ERP Multi-Tenant SaaS Cluster', status: 'Operational', uptime: '99.99%', latency: '18ms', region: 'AWS Mumbai (ap-south-1)' },
-  { name: 'PostgreSQL Database & pgBouncer Pool', status: 'Operational', uptime: '99.99%', latency: '12ms', region: 'Multi-AZ Read Replicas' },
-  { name: 'Redis Global Distributed Cache', status: 'Operational', uptime: '100%', latency: '4ms', region: 'Edge In-Memory Cluster' },
-  { name: 'Stripe & Razorpay Webhook Ingestion', status: 'Operational', uptime: '100%', latency: '22ms', region: 'Serverless Edge Queue' },
-  { name: 'Client Staging & Automated CI/CD Deployments', status: 'Operational', uptime: '100%', latency: '16ms', region: 'GitHub Actions & Docker Runner' },
-]
-
-const recentIncidents = [
-  { date: 'August 2026', title: 'Routine PostgreSQL 16 Kernel Upgrade & Read Pool Expansion', status: 'Completed (Zero Downtime)', duration: '14 mins' },
-  { date: 'July 2026', title: 'Global Edge CDN Cache Invalidation Optimization (Tier 1)', status: 'Completed', duration: '8 mins' },
-  { date: 'June 2026', title: 'Added 4 New APAC Edge Node Clusters for Sub-20ms Routing', status: 'Completed', duration: '25 mins' },
+  { name: 'Web Platform & Edge SSR', target: '100% Uptime', latency: '< 50ms TTFB target', region: 'Global Edge Network' },
+  { name: 'Multi-Tenant SaaS / ERP Workloads', target: '99.99% Uptime SLA', latency: '< 25ms P95 query target', region: 'AWS Mumbai (ap-south-1)' },
+  { name: 'PostgreSQL Database & Connection Pooling', target: '99.99% Uptime SLA', latency: '< 20ms P95 target', region: 'Multi-AZ Read Replicas' },
+  { name: 'Payment Webhook Ingestion (Stripe/Razorpay)', target: '100% Delivery SLA', latency: '< 30ms target', region: 'Serverless Edge Queue' },
+  { name: 'Staging & Automated CI/CD Deployments', target: 'Zero-downtime deploys', latency: 'Automated rollback on failure', region: 'GitHub Actions & Docker' },
 ]
 
 export default function StatusPage() {
@@ -50,34 +43,31 @@ export default function StatusPage() {
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
             <div className="space-y-2">
               <div className="flex items-center gap-2">
-                <span className="relative flex h-3 w-3">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                  <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500" />
-                </span>
+                <ShieldCheck size={14} className="text-emerald-400" />
                 <span className="text-xs font-mono font-bold uppercase tracking-wider text-emerald-400">
-                  All Production Systems Operational
+                  Contracted SLA Standard
                 </span>
               </div>
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight">
-                99.99% Guaranteed Cloud SLA
+                99.99% Uptime SLA Commitment
               </h1>
               <p className="text-xs sm:text-sm text-white/60 font-normal">
-                Continuous telemetry across client applications, multi-tenant database clusters, and global edge CDNs.
+                The uptime, latency, and reliability targets we design to and contractually commit to for client applications, database clusters, and global edge delivery.
               </p>
             </div>
 
             <div className="p-4 rounded-2xl bg-black/40 border border-white/10 text-center shrink-0">
-              <div className="text-[10px] font-mono text-white/40 uppercase mb-1">Global Latency</div>
-              <div className="text-3xl font-extrabold text-emerald-400 font-mono">14 ms</div>
-              <div className="text-[11px] text-white/50">Average Round-Trip</div>
+              <div className="text-[10px] font-mono text-white/55 uppercase mb-1">Latency Target</div>
+              <div className="text-3xl font-extrabold text-emerald-400 font-mono">&lt; 50ms</div>
+              <div className="text-[11px] text-white/50">Edge TTFB Budget</div>
             </div>
           </div>
         </div>
 
         {/* System Component Breakdown */}
         <div className="space-y-4 mb-16">
-          <div className="text-xs font-mono uppercase tracking-wider text-white/40 mb-2">
-            Active Infrastructure Clusters
+          <div className="text-xs font-mono uppercase tracking-wider text-white/55 mb-2">
+            SLA Targets by Infrastructure Component
           </div>
 
           <div className="grid grid-cols-1 gap-3">
@@ -91,16 +81,16 @@ export default function StatusPage() {
                     <CheckCircle2 size={15} className="text-emerald-400 shrink-0" />
                     <span>{s.name}</span>
                   </div>
-                  <div className="text-xs text-white/40 font-mono pl-6">{s.region}</div>
+                  <div className="text-xs text-white/55 font-mono pl-6">{s.region}</div>
                 </div>
 
                 <div className="flex items-center gap-4 text-xs font-mono pl-6 sm:pl-0">
                   <div className="text-right">
-                    <span className="text-white/40">Latency: </span>
+                    <span className="text-white/55">Target: </span>
                     <span className="text-emerald-400 font-bold">{s.latency}</span>
                   </div>
                   <span className="px-2.5 py-1 rounded-md bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 font-semibold">
-                    {s.status} ({s.uptime})
+                    {s.target}
                   </span>
                 </div>
               </div>
@@ -108,22 +98,16 @@ export default function StatusPage() {
           </div>
         </div>
 
-        {/* Maintenance & Incident History */}
+        {/* Change Management */}
         <div className="rounded-3xl bg-white/[0.02] border border-white/[0.08] p-8 sm:p-10 mb-16">
           <h2 className="text-xl font-bold tracking-tight mb-6 flex items-center gap-2">
-            <Clock size={18} className="text-blue-400" /> Maintenance & Deployment Log
+            <Clock size={18} className="text-blue-400" /> How We Handle Maintenance & Deployments
           </h2>
 
-          <div className="space-y-4">
-            {recentIncidents.map((inc, i) => (
-              <div key={i} className="p-4 rounded-xl bg-white/[0.015] border border-white/[0.06] flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
-                <div>
-                  <span className="font-bold text-white">{inc.title}</span>
-                  <div className="text-white/40 text-[11px] font-mono mt-0.5">{inc.date} · Duration: {inc.duration}</div>
-                </div>
-                <span className="text-emerald-400 font-semibold">{inc.status}</span>
-              </div>
-            ))}
+          <div className="space-y-4 text-xs sm:text-sm text-white/60 leading-relaxed">
+            <p>Every production deployment ships through automated CI/CD with staged rollouts and automatic rollback on failed health checks — no manual, high-risk deploys.</p>
+            <p>Database migrations and infrastructure upgrades are scheduled in low-traffic windows and designed to be zero-downtime by default (rolling replicas, connection draining).</p>
+            <p>Enterprise SLA clients get a dedicated incident channel with contractual response-time commitments, detailed under Request Enterprise SLA Specs below.</p>
           </div>
         </div>
 

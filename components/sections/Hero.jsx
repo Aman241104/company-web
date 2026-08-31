@@ -15,18 +15,40 @@ const trustStats = [
 function HeroLeadForm() {
   const [form, setForm] = useState({ name: '', phone: '', company_website: '' })
   const [sent, setSent] = useState(false)
+  const [delivered, setDelivered] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
 
   const handleChange = (e) => setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     if (form.company_website) return // honeypot — bots fill hidden fields
     if (!form.name || !form.phone) return
+
+    setSubmitting(true)
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: form.name, phone: form.phone, subjectPrefix: 'Free Quote Request' }),
+      })
+      if (res.ok) {
+        setDelivered(true)
+        setSent(true)
+        return
+      }
+    } catch {
+      // fall through to mailto fallback
+    } finally {
+      setSubmitting(false)
+    }
+
     const subject = encodeURIComponent(`Free Quote Request — ${form.name}`)
     const body = encodeURIComponent(
       `Name: ${form.name}\nPhone: ${form.phone}\n\nRequesting a free project quote from the homepage.`
     )
     window.location.href = `mailto:hello@mehtatechnologies.com?subject=${subject}&body=${body}`
+    setDelivered(false)
     setSent(true)
   }
 
@@ -34,7 +56,11 @@ function HeroLeadForm() {
     return (
       <div className="flex items-center gap-2.5 text-sm text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 rounded-xl px-4 py-3 max-w-md">
         <CheckCircle2 size={16} className="shrink-0" />
-        <span>Opening your email app to send this to our team — or <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer" className="underline font-semibold hover:text-emerald-300">WhatsApp us</a> for a faster reply.</span>
+        {delivered ? (
+          <span>Got it — our team will reach out shortly. Need a faster reply? <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer" className="underline font-semibold hover:text-emerald-300">WhatsApp us</a>.</span>
+        ) : (
+          <span>Opening your email app to send this to our team — or <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer" className="underline font-semibold hover:text-emerald-300">WhatsApp us</a> for a faster reply.</span>
+        )}
       </div>
     )
   }
@@ -71,9 +97,10 @@ function HeroLeadForm() {
       />
       <button
         type="submit"
-        className="inline-flex items-center justify-center gap-1.5 px-5 py-3 rounded-xl text-xs sm:text-sm font-semibold bg-white text-black hover:bg-white/90 active:scale-[0.98] transition-all whitespace-nowrap"
+        disabled={submitting}
+        className="inline-flex items-center justify-center gap-1.5 px-5 py-3 rounded-xl text-xs sm:text-sm font-semibold bg-white text-black hover:bg-white/90 active:scale-[0.98] transition-all whitespace-nowrap disabled:opacity-60 disabled:cursor-not-allowed"
       >
-        Get Free Quote <ArrowRight size={14} />
+        {submitting ? 'Sending…' : <>Get Free Quote <ArrowRight size={14} /></>}
       </button>
     </form>
   )
@@ -154,7 +181,7 @@ export default function Hero() {
               transition={{ duration: 0.55, delay: 0.35 }}
               className="pt-1"
             >
-              <p className="text-xs text-white/40 mb-2.5">Get a free quote — takes under a minute, a real strategist replies.</p>
+              <p className="text-xs text-white/55 mb-2.5">Get a free quote — takes under a minute, a real strategist replies.</p>
               <HeroLeadForm />
             </motion.div>
 

@@ -29,7 +29,7 @@ const projects = [
     subtitle: 'Organic Spices & Dry Fruits Storefront',
     desc: 'Authentic Indian spices, masalas and dry fruits e-commerce storefront featuring 252+ live SKUs, Supabase media CDN, and streamlined WhatsApp checkout pipeline.',
     tags: ['Next.js 15', 'Supabase CDN', '252+ SKUs', 'WhatsApp Checkout'],
-    image: '/assets/silver_spoon_mockup.jpg',
+    image: '/prihaanfin.png',
     url: 'https://www.prihaanspices.in',
     year: '2025',
     result: '+185% WhatsApp Orders',
@@ -41,7 +41,7 @@ const projects = [
     subtitle: 'Luxury Silver Artifacts & Gifting',
     desc: 'Bespoke high-converting storefront with custom 3D configurator and live silver bullion rate ticker. +280% online luxury sales in Q1.',
     tags: ['Shopify Plus', 'Next.js SSR', 'Custom 3D Configurator', 'Stripe'],
-    image: '/assets/silver_spoon_mockup.jpg',
+    image: '/silverspoon-screenshot.png',
     url: 'https://www.silverspoonbyacj.com',
     year: '2024',
     result: '+280% Sales Growth',
@@ -65,7 +65,7 @@ const projects = [
     subtitle: 'Healthcare Clinical Appointment Engine',
     desc: 'Digital patient appointment portal, smile makeover simulator, and multi-specialty clinical workflow engine.',
     tags: ['Next.js', 'Clinical Telehealth', 'Appointment Engine', 'SEO'],
-    image: '/eyehospital.png',
+    image: '/chahana.png',
     url: 'https://chahanadentalstudio.com',
     year: '2024',
     result: '#1 Local Google Rank',
@@ -125,7 +125,7 @@ const projects = [
     subtitle: 'Property Title & Legal Deed Automation',
     desc: 'Online property title deed transfer, municipal registry documentation, and legal name change workflow portal.',
     tags: ['Next.js', 'Gov Registry', 'Automated Intake', 'Document Engine'],
-    image: '/assets/vibo_erp_mockup.jpg',
+    image: '/advocate.png',
     url: 'https://www.naamtransfer.com',
     year: '2025',
     result: '100% Automated Intake',
@@ -161,7 +161,7 @@ const projects = [
     subtitle: 'Clean Energy & Battery Systems Supply',
     desc: 'Industrial rechargeable battery packs, renewable energy storage systems, and lithium-ion power solutions storefront.',
     tags: ['Next.js', 'Lithium Storage', 'B2B Catalog', 'Clean Energy'],
-    image: '/assets/fintech_mockup.jpg',
+    image: '/inventory.png',
     url: 'https://www.risingrechargeable.com',
     year: '2025',
     result: 'Clean Energy Supply',
@@ -173,7 +173,7 @@ const projects = [
     subtitle: 'Industrial FRP Composites Manufacturing',
     desc: 'Industrial fiberglass reinforced plastics (FRP) manufacturing, chemical process equipment, and custom composite storage tanks.',
     tags: ['Next.js', 'FRP Composites', 'Industrial Tanks', 'Chemical Engineering'],
-    image: '/assets/stylux_mockup.jpg',
+    image: '/chemical.png',
     url: 'https://fgpind.com',
     year: '2024',
     result: 'Heavy Industrial Specs',
@@ -197,7 +197,7 @@ const projects = [
     subtitle: 'Turnkey Architectural Interior Design',
     desc: 'Turnkey architectural interior design studio delivering modern residential homes, luxury villas, and modular kitchens.',
     tags: ['Next.js', 'Turnkey Interiors', 'Modular Kitchens', 'Ahmedabad'],
-    image: '/assets/stylux_mockup.jpg',
+    image: '/interior.png',
     url: 'https://www.sidecor.in',
     year: '2024',
     result: '75+ Delivered Homes',
@@ -209,7 +209,7 @@ const projects = [
     subtitle: 'Corporate & Luxury Global Travel',
     desc: 'Corporate travel management and international holiday planner offering customized luxury tours, flight bookings, and visa services.',
     tags: ['Next.js', 'Corporate Travel', 'International Tours', 'Visa Booking'],
-    image: '/destination.png',
+    image: '/luxeliving.png',
     url: 'https://www.jadetravels.co.in',
     year: '2024',
     result: '120+ Corporate Accounts',
@@ -234,6 +234,7 @@ function ProjectCard({ project, index }) {
               src={project.image}
               alt={project.name}
               fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
               className="object-cover object-top group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100"
             />
           ) : (
@@ -265,7 +266,7 @@ function ProjectCard({ project, index }) {
             <h3 className="text-xl font-bold text-white tracking-tight group-hover:text-blue-400 transition-colors">
               {project.name}
             </h3>
-            <span className="text-xs font-mono text-white/40">{project.year}</span>
+            <span className="text-xs font-mono text-white/55">{project.year}</span>
           </div>
 
           <p className="text-xs text-blue-400 font-medium mb-3">
@@ -310,7 +311,7 @@ function ProjectCard({ project, index }) {
             Visit Live Project <ArrowUpRight size={13} />
           </a>
         ) : (
-          <div className="w-full py-2.5 rounded-full text-xs font-medium text-white/40 border border-white/[0.06] text-center">
+          <div className="w-full py-2.5 rounded-full text-xs font-medium text-white/55 border border-white/[0.06] text-center">
             Enterprise Client IP Protected
           </div>
         )}

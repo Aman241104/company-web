@@ -63,7 +63,7 @@ function FAQItem({ item, isOpen, onToggle, index }) {
         <span className={`text-base sm:text-lg font-bold tracking-tight transition-colors ${isOpen ? 'text-blue-400' : 'text-white group-hover:text-white/90'}`}>
           {item.q}
         </span>
-        <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 ml-4 transition-all ${isOpen ? 'bg-blue-600/20 text-blue-400 border border-blue-500/30' : 'bg-white/[0.04] text-white/40 group-hover:text-white group-hover:bg-white/[0.08]'}`}>
+        <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 ml-4 transition-all ${isOpen ? 'bg-blue-600/20 text-blue-400 border border-blue-500/30' : 'bg-white/[0.04] text-white/55 group-hover:text-white group-hover:bg-white/[0.08]'}`}>
           {isOpen ? <Minus size={14} /> : <Plus size={14} />}
         </div>
       </button>
@@ -137,7 +137,7 @@ export default function FAQ() {
 
       {/* Still Have Questions CTA */}
       <div className="mt-8 text-center">
-        <p className="text-xs sm:text-sm text-white/40 mb-3">
+        <p className="text-xs sm:text-sm text-white/55 mb-3">
           Have a unique technical question or custom scope?
         </p>
         <Link

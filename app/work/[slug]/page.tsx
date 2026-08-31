@@ -53,7 +53,7 @@ const caseStudiesData: Record<string, {
     client: 'Prihaan Spices & Agro Foods',
     category: 'Spices & Agro E-Commerce',
     year: '2025',
-    heroImage: '/assets/silver_spoon_mockup.jpg',
+    heroImage: '/prihaanfin.png',
     liveUrl: 'https://www.prihaanspices.in',
     headline: 'Scaling 252+ organic spice SKUs with Supabase storage CDN & instant WhatsApp checkout.',
     summary: 'An authentic Indian spices and dry fruits e-commerce storefront featuring instant multi-category filtering, Supabase media hosting, and streamlined zero-friction WhatsApp ordering.',
@@ -78,7 +78,7 @@ const caseStudiesData: Record<string, {
     client: 'ACJ Luxury Gifting Ltd.',
     category: 'Luxury E-Commerce',
     year: '2024',
-    heroImage: '/assets/silver_spoon_mockup.jpg',
+    heroImage: '/silverspoon-screenshot.png',
     liveUrl: 'https://www.silverspoonbyacj.com',
     headline: 'Scaling a heritage silver gifting brand to +280% online sales with headless Next.js.',
     summary: 'A bespoke luxury e-commerce platform built to replace a legacy Shopify theme with an ultra-fast headless Next.js storefront, 3D gift configurator, and sub-second checkout.',
@@ -128,7 +128,7 @@ const caseStudiesData: Record<string, {
     client: 'Chahana Dental Care Pvt Ltd',
     category: 'Healthcare & Clinical',
     year: '2024',
-    heroImage: '/eyehospital.png',
+    heroImage: '/chahana.png',
     liveUrl: 'https://chahanadentalstudio.com',
     headline: 'Ranked #1 on Google for 12 local keywords with technical SEO & sub-second patient booking.',
     summary: 'A clinical presence engineered with structured JSON-LD medical schema, accessible patient booking flows, and 100/100 Core Web Vitals.',
@@ -253,7 +253,7 @@ const caseStudiesData: Record<string, {
     client: 'Naam Transfer Legal Tech',
     category: 'Legal Property Documentation',
     year: '2025',
-    heroImage: '/assets/vibo_erp_mockup.jpg',
+    heroImage: '/advocate.png',
     liveUrl: 'https://www.naamtransfer.com',
     headline: 'Property title deed transfer, municipal registry documentation & legal name change portal.',
     summary: 'A specialized legal workflow platform streamlining property name transfers, electricity bill name changes, and municipal property tax transfers.',
@@ -328,7 +328,7 @@ const caseStudiesData: Record<string, {
     client: 'Rising Rechargeable Power Systems',
     category: 'Clean Energy & Battery Systems Supply',
     year: '2025',
-    heroImage: '/assets/fintech_mockup.jpg',
+    heroImage: '/inventory.png',
     liveUrl: 'https://www.risingrechargeable.com',
     headline: 'Industrial rechargeable battery packs, renewable energy storage & lithium-ion solutions.',
     summary: 'An industrial B2B storefront showcasing rechargeable lithium battery packs, solar energy storage units, and custom power bank assemblies.',
@@ -353,7 +353,7 @@ const caseStudiesData: Record<string, {
     client: 'FGP Industries Manufacturing',
     category: 'Industrial FRP Composites Manufacturing',
     year: '2024',
-    heroImage: '/assets/stylux_mockup.jpg',
+    heroImage: '/chemical.png',
     liveUrl: 'https://fgpind.com',
     headline: 'Industrial fiberglass reinforced plastics (FRP) manufacturing & chemical process equipment.',
     summary: 'An engineering and manufacturing catalog showcasing heavy-duty industrial FRP storage tanks, ducting systems, scrubbers, and composite equipment.',
@@ -403,7 +403,7 @@ const caseStudiesData: Record<string, {
     client: 'SI Decor Design Studio',
     category: 'Turnkey Architectural Interior Design',
     year: '2024',
-    heroImage: '/assets/stylux_mockup.jpg',
+    heroImage: '/interior.png',
     liveUrl: 'https://www.sidecor.in',
     headline: 'Modern architectural interiors, turnkey residential styling & bespoke modular kitchens.',
     summary: 'A contemporary interior design portfolio showcasing high-end residential apartments, bungalows, and modular kitchen installations across Ahmedabad.',
@@ -428,7 +428,7 @@ const caseStudiesData: Record<string, {
     client: 'Jade Travels International',
     category: 'Corporate & Luxury Global Travel',
     year: '2024',
-    heroImage: '/destination.png',
+    heroImage: '/luxeliving.png',
     liveUrl: 'https://www.jadetravels.co.in',
     headline: 'Corporate travel management, international holiday packages & customized luxury travel itineraries.',
     summary: 'A comprehensive travel platform offering corporate booking solutions, curated international holiday itineraries, and visa assistance services.',
@@ -455,6 +455,8 @@ export async function generateStaticParams() {
   return Object.keys(caseStudiesData).map((slug) => ({ slug }))
 }
 
+const base = 'https://mehtatechnologies.com'
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params
   const study = caseStudiesData[slug]
@@ -463,7 +465,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: `${study.name} — Case Study`,
     description: study.summary,
+    alternates: { canonical: `${base}/work/${study.slug}` },
     openGraph: {
+      url: `${base}/work/${study.slug}`,
       title: `${study.name} — Case Study`,
       description: study.summary,
       images: [{ url: study.heroImage }],
@@ -497,9 +501,9 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             <span className="px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/10 border border-blue-500/20 text-blue-400">
               {study.category}
             </span>
-            <span className="text-xs font-mono text-white/40">{study.year}</span>
-            <span className="text-xs font-mono text-white/40">·</span>
-            <span className="text-xs font-mono text-white/40">{study.client}</span>
+            <span className="text-xs font-mono text-white/55">{study.year}</span>
+            <span className="text-xs font-mono text-white/55">·</span>
+            <span className="text-xs font-mono text-white/55">{study.client}</span>
           </div>
 
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.1]">
@@ -531,6 +535,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             alt={study.name}
             fill
             priority
+            sizes="(max-width: 1200px) 100vw, 1200px"
             className="object-cover object-top"
           />
         </div>
@@ -539,7 +544,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-16 sm:mb-20">
           {study.metrics.map((m) => (
             <div key={m.label} className="p-4 sm:p-6 rounded-2xl bg-white/[0.02] border border-white/[0.08] space-y-1">
-              <div className="text-[10px] sm:text-xs font-mono uppercase text-white/40">{m.label}</div>
+              <div className="text-[10px] sm:text-xs font-mono uppercase text-white/55">{m.label}</div>
               <div className="text-2xl sm:text-3xl font-extrabold text-emerald-400 font-mono">{m.value}</div>
               <div className="text-xs text-white/50">{m.detail}</div>
             </div>
@@ -592,7 +597,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             </p>
             <div>
               <div className="text-sm font-bold text-blue-300">{study.quote.author}</div>
-              <div className="text-xs text-white/40">{study.quote.role}</div>
+              <div className="text-xs text-white/55">{study.quote.role}</div>
             </div>
           </div>
         </div>

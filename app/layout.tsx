@@ -6,6 +6,7 @@ import SmoothScroll from "@/components/SmoothScroll";
 import CustomCursor from "@/components/CustomCursor";
 import MobileDock from "@/components/MobileDock";
 import FloatingWhatsApp from "@/components/ui/FloatingWhatsApp";
+import MotionProvider from "@/components/MotionProvider";
 
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
 const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID;
@@ -137,10 +138,12 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
         />
-        <CustomCursor />
-        <SmoothScroll>{children}</SmoothScroll>
-        <MobileDock />
-        <FloatingWhatsApp />
+        <MotionProvider>
+          <CustomCursor />
+          <SmoothScroll>{children}</SmoothScroll>
+          <MobileDock />
+          <FloatingWhatsApp />
+        </MotionProvider>
       </body>
     </html>
   );

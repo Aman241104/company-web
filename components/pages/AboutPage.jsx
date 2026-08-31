@@ -90,7 +90,7 @@ function StatCard({ stat, index }) {
         {count}{stat.suffix}
       </div>
       <div className="text-sm font-bold text-white mb-1">{stat.label}</div>
-      <div className="text-xs text-white/40">{stat.desc}</div>
+      <div className="text-xs text-white/55">{stat.desc}</div>
     </motion.div>
   )
 }
@@ -134,7 +134,7 @@ export default function AboutPage() {
 
           <div className="lg:col-span-5">
             <div className="rounded-3xl bg-white/[0.02] border border-white/[0.08] p-5 sm:p-8 md:p-10 shadow-2xl shadow-black/60 relative overflow-hidden">
-              <div className="text-xs font-mono uppercase tracking-wider text-white/40 mb-6">
+              <div className="text-xs font-mono uppercase tracking-wider text-white/55 mb-6">
                 Company Snapshot
               </div>
               <div className="grid grid-cols-2 gap-6 mb-8">
@@ -216,7 +216,7 @@ export default function AboutPage() {
       {/* Interactive Project Showcase Loop */}
       <section className="py-12 border-y border-white/[0.06] mb-28 overflow-hidden bg-white/[0.01]">
         <div className="max-w-[1360px] mx-auto px-6 md:px-8 mb-6">
-          <div className="text-xs font-mono uppercase tracking-wider text-white/40">
+          <div className="text-xs font-mono uppercase tracking-wider text-white/55">
             150+ Successfully Deployed Systems & Digital Experiences
           </div>
         </div>
@@ -228,6 +228,7 @@ export default function AboutPage() {
                   src={src}
                   alt={label}
                   fill
+                  sizes="224px"
                   className="object-cover object-top opacity-80 hover:opacity-100 transition-opacity"
                 />
               </div>
@@ -248,7 +249,7 @@ export default function AboutPage() {
             Our Journey
           </span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            Six years of relentless{' '}
+            Seven years of relentless{' '}
             <span className="text-gradient-accent">product engineering.</span>
           </h2>
         </div>

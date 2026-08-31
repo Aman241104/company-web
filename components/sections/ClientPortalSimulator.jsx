@@ -141,7 +141,7 @@ export default function ClientPortalSimulator() {
                 className="space-y-4"
               >
                 <div className="flex items-center justify-between pb-2">
-                  <div className="text-xs font-mono uppercase tracking-wider text-white/40">
+                  <div className="text-xs font-mono uppercase tracking-wider text-white/55">
                     Active Sprint 4 Deliverables (Target: Oct 30)
                   </div>
                   <span className="text-xs font-mono font-bold text-blue-400">82% Completed</span>
@@ -202,7 +202,7 @@ export default function ClientPortalSimulator() {
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                   {stagingMetrics.map((m) => (
                     <div key={m.label} className="p-5 rounded-2xl bg-white/[0.02] border border-white/[0.08] text-center space-y-1">
-                      <div className="text-[10px] font-mono uppercase text-white/40">{m.label}</div>
+                      <div className="text-[10px] font-mono uppercase text-white/55">{m.label}</div>
                       <div className="text-2xl font-extrabold text-emerald-400 font-mono">{m.value}</div>
                       <div className="text-[11px] font-semibold text-emerald-300/80">{m.status}</div>
                     </div>
@@ -223,17 +223,17 @@ export default function ClientPortalSimulator() {
               >
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div className="p-5 rounded-2xl bg-white/[0.02] border border-white/[0.08] space-y-1">
-                    <div className="text-xs font-mono uppercase text-white/40">Global Edge Latency</div>
+                    <div className="text-xs font-mono uppercase text-white/55">Global Edge Latency</div>
                     <div className="text-3xl font-extrabold text-white font-mono">{ping} ms</div>
                     <div className="text-xs text-emerald-400">99.99% Cloud Uptime SLA</div>
                   </div>
                   <div className="p-5 rounded-2xl bg-white/[0.02] border border-white/[0.08] space-y-1">
-                    <div className="text-xs font-mono uppercase text-white/40">Database Connection Pool</div>
+                    <div className="text-xs font-mono uppercase text-white/55">Database Connection Pool</div>
                     <div className="text-3xl font-extrabold text-white font-mono">14 / 200</div>
                     <div className="text-xs text-blue-400">pgBouncer Distributed Cluster</div>
                   </div>
                   <div className="p-5 rounded-2xl bg-white/[0.02] border border-white/[0.08] space-y-1">
-                    <div className="text-xs font-mono uppercase text-white/40">Production Error Rate</div>
+                    <div className="text-xs font-mono uppercase text-white/55">Production Error Rate</div>
                     <div className="text-3xl font-extrabold text-emerald-400 font-mono">0.000%</div>
                     <div className="text-xs text-white/50">Zero unhandled exceptions</div>
                   </div>
@@ -267,7 +267,7 @@ export default function ClientPortalSimulator() {
                 transition={{ duration: 0.25 }}
                 className="space-y-4"
               >
-                <div className="text-xs font-mono uppercase tracking-wider text-white/40 pb-2">
+                <div className="text-xs font-mono uppercase tracking-wider text-white/55 pb-2">
                   Direct Technical Architecture Channel (#acme-production-sprint)
                 </div>
 

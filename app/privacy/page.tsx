@@ -31,7 +31,7 @@ export default function PrivacyPage() {
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
             Privacy Policy
           </h1>
-          <p className="text-xs sm:text-sm text-white/40 font-mono">
+          <p className="text-xs sm:text-sm text-white/55 font-mono">
             Last Updated: August 2025 · Effective Date: January 1, 2024
           </p>
         </div>

@@ -115,7 +115,7 @@ export default function Featured() {
                     : 'text-white/60 hover:text-white hover:bg-white/[0.04]'
                 }`}
               >
-                <Icon size={14} className={isActive ? 'text-blue-600' : 'text-white/40'} />
+                <Icon size={14} className={isActive ? 'text-blue-600' : 'text-white/55'} />
                 <span>{seg.tabName}</span>
               </button>
             )
@@ -183,7 +183,7 @@ export default function Featured() {
             <div className="lg:col-span-5">
               <div className="rounded-2xl bg-[#0B0D14]/90 border border-white/10 p-6 sm:p-8 backdrop-blur-2xl shadow-xl space-y-6">
                 <div className="flex items-center justify-between pb-4 border-b border-white/[0.08]">
-                  <span className="text-xs font-mono uppercase tracking-wider text-white/40">Engagement Benchmark</span>
+                  <span className="text-xs font-mono uppercase tracking-wider text-white/55">Engagement Benchmark</span>
                   <span className="text-xs font-medium px-2.5 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20">
                     {activeSegment.highlightTag}
                   </span>
@@ -194,7 +194,7 @@ export default function Featured() {
                     <div key={s.label} className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06] flex items-center justify-between">
                       <div>
                         <div className="text-2xl font-bold text-white tracking-tight">{s.val}</div>
-                        <div className="text-xs text-white/40 mt-0.5">{s.label}</div>
+                        <div className="text-xs text-white/55 mt-0.5">{s.label}</div>
                       </div>
                       <div className="w-8 h-8 rounded-lg bg-white/[0.04] border border-white/[0.08] flex items-center justify-center text-blue-400">
                         <CheckCircle2 size={14} />
@@ -204,7 +204,7 @@ export default function Featured() {
                 </div>
 
                 <div className="pt-4 border-t border-white/[0.08] text-center">
-                  <span className="text-xs text-white/40">
+                  <span className="text-xs text-white/55">
                     Transparent milestone billing · Written timeline commitments
                   </span>
                 </div>

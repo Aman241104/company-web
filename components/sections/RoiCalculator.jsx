@@ -135,7 +135,7 @@ export default function RoiCalculator() {
             </div>
           </div>
 
-          <div className="pt-4 border-t border-white/[0.06] text-xs text-white/40 space-y-1.5 font-mono">
+          <div className="pt-4 border-t border-white/[0.06] text-xs text-white/55 space-y-1.5 font-mono">
             <div className="flex items-center gap-2">
               <Check size={13} className="text-emerald-400 shrink-0" /> Includes recruitment fee & onboarding latency calculation
             </div>
@@ -150,7 +150,7 @@ export default function RoiCalculator() {
           <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-blue-500 via-indigo-500 to-transparent" />
 
           <div>
-            <div className="text-xs font-mono uppercase tracking-wider text-white/40 mb-2">
+            <div className="text-xs font-mono uppercase tracking-wider text-white/55 mb-2">
               Estimated Total Economic Impact
             </div>
 
@@ -171,7 +171,7 @@ export default function RoiCalculator() {
                 <div className="text-lg sm:text-2xl font-bold text-white font-mono">
                   {formatCurrency(totalInHouseCost)}
                 </div>
-                <div className="text-[11px] text-white/40">
+                <div className="text-[11px] text-white/55">
                   {projectMonths} mos + ~3 mos hiring ramp
                 </div>
               </div>

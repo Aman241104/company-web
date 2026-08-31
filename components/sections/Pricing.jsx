@@ -174,7 +174,7 @@ export default function Pricing() {
 
               <div>
                 <div className="flex items-center justify-between gap-2 mb-4">
-                  <span className="text-xs font-mono uppercase tracking-wider text-white/40">
+                  <span className="text-xs font-mono uppercase tracking-wider text-white/55">
                     {plan.name}
                   </span>
                   <span className="text-xs font-medium text-blue-400 bg-blue-500/10 px-2.5 py-0.5 rounded-full border border-blue-500/20">
@@ -186,7 +186,7 @@ export default function Pricing() {
                   <span className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">
                     {plan.price}
                   </span>
-                  <span className="text-xs text-white/40 font-medium">
+                  <span className="text-xs text-white/55 font-medium">
                     {plan.unit}
                   </span>
                 </div>
@@ -260,7 +260,7 @@ export default function Pricing() {
               {/* Left Configuration Column */}
               <div className="lg:col-span-7 space-y-6">
                 <div>
-                  <label className="text-xs font-mono uppercase tracking-wider text-white/40 block mb-3">
+                  <label className="text-xs font-mono uppercase tracking-wider text-white/55 block mb-3">
                     1. Select Core Product Type
                   </label>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -277,7 +277,7 @@ export default function Pricing() {
                           }`}
                         >
                           <div className="text-xs font-bold text-white mb-1">{pt.label}</div>
-                          <div className="text-[11px] text-white/40">From ₹{pt.base.toLocaleString()} · {pt.time}</div>
+                          <div className="text-[11px] text-white/55">From ₹{pt.base.toLocaleString()} · {pt.time}</div>
                         </button>
                       )
                     })}
@@ -285,7 +285,7 @@ export default function Pricing() {
                 </div>
 
                 <div>
-                  <label className="text-xs font-mono uppercase tracking-wider text-white/40 block mb-3">
+                  <label className="text-xs font-mono uppercase tracking-wider text-white/55 block mb-3">
                     2. Select Optional Add-ons & Integrations
                   </label>
                   <div className="space-y-2">
@@ -313,7 +313,7 @@ export default function Pricing() {
               {/* Right Calculation Summary Card */}
               <div className="lg:col-span-5 rounded-2xl bg-[#0B0D14] border border-white/10 p-6 sm:p-8 flex flex-col justify-between">
                 <div>
-                  <div className="text-xs font-mono uppercase tracking-wider text-white/40 mb-2">
+                  <div className="text-xs font-mono uppercase tracking-wider text-white/55 mb-2">
                     Estimated Project Investment
                   </div>
                   <div className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-2">
@@ -379,7 +379,7 @@ export default function Pricing() {
         </motion.div>
 
         {/* Footnote guarantee */}
-        <div className="mt-8 text-center text-xs text-white/40">
+        <div className="mt-8 text-center text-xs text-white/55">
           All projects billed in INR (International in USD). Includes 100% intellectual property transfer upon final delivery.
         </div>
 

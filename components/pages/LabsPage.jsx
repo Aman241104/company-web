@@ -207,7 +207,7 @@ export async function POST(req: Request) {
                 />
               </div>
 
-              <div className="pt-4 border-t border-white/[0.06] text-xs text-white/40 space-y-1 font-mono">
+              <div className="pt-4 border-t border-white/[0.06] text-xs text-white/55 space-y-1 font-mono">
                 <div>✔ Zod schema runtime validation</div>
                 <div>✔ Auth session check</div>
                 <div>✔ Next.js 15 Server Cache invalidation</div>
@@ -258,7 +258,7 @@ export async function POST(req: Request) {
                 />
               </div>
 
-              <div className="pt-4 border-t border-white/[0.06] text-xs text-white/40 space-y-1 font-mono">
+              <div className="pt-4 border-t border-white/[0.06] text-xs text-white/55 space-y-1 font-mono">
                 <div>✔ Strict JWT claims isolation</div>
                 <div>✔ Multi-tenant data leakage prevention</div>
                 <div>✔ Supabase & Vanilla PostgreSQL compatible</div>
@@ -293,7 +293,7 @@ export async function POST(req: Request) {
               <p className="text-xs text-white/60 leading-relaxed">
                 Production-grade Next.js 15 App Router Route Handler with raw body verification, cryptographic HMAC signature matching, and database idempotency upserts.
               </p>
-              <div className="pt-4 border-t border-white/[0.06] text-xs text-white/40 space-y-1 font-mono">
+              <div className="pt-4 border-t border-white/[0.06] text-xs text-white/55 space-y-1 font-mono">
                 <div>✔ Signature verification</div>
                 <div>✔ Zero duplicate billing events</div>
                 <div>✔ Type-safe Stripe TypeScript SDK</div>

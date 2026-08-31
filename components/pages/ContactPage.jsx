@@ -140,26 +140,43 @@ function ContactForm() {
     company_website: '',
   })
   const [sent, setSent] = useState(false)
+  const [delivered, setDelivered] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
   const nameRowRef = useRef(null)
   const emailRowRef = useRef(null)
   const serviceRowRef = useRef(null)
   const requirementsRowRef = useRef(null)
   useMobileDockClearance(nameRowRef, emailRowRef, serviceRowRef, requirementsRowRef)
 
-  useEffect(() => {
-    if (initialService) setForm((prev) => ({ ...prev, service: initialService }))
-    if (initialBudget) setForm((prev) => ({ ...prev, budget: initialBudget }))
-  }, [initialService, initialBudget])
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     if (form.company_website) return // honeypot — bots fill hidden fields
     if (!form.email) return
+
+    setSubmitting(true)
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...form, subjectPrefix: 'Project Brief' }),
+      })
+      if (res.ok) {
+        setDelivered(true)
+        setSent(true)
+        return
+      }
+    } catch {
+      // fall through to mailto fallback
+    } finally {
+      setSubmitting(false)
+    }
+
     const subject = encodeURIComponent(`Project Brief — ${form.service || 'General'} from ${form.name || 'Website'}`)
     const body = encodeURIComponent(
       `Client Name: ${form.name}\nCompany: ${form.company}\nEmail: ${form.email}\nPhone: ${form.phone}\nService Category: ${form.service}\nBudget Range: ${form.budget}\n\nProject Scope & Details:\n${form.project}`
     )
     window.location.href = `mailto:hello@mehtatechnologies.com?subject=${subject}&body=${body}`
+    setDelivered(false)
     setSent(true)
   }
 
@@ -172,12 +189,28 @@ function ContactForm() {
           <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto">
             <CheckCircle2 size={32} />
           </div>
-          <h3 className="text-2xl font-bold text-white tracking-tight">
-            Brief Sent Successfully!
-          </h3>
-          <p className="text-sm text-white/50 max-w-sm mx-auto">
-            Our engineering team has received your details and will review them before our discovery call.
-          </p>
+          {delivered ? (
+            <>
+              <h3 className="text-2xl font-bold text-white tracking-tight">
+                Brief Sent Successfully!
+              </h3>
+              <p className="text-sm text-white/50 max-w-sm mx-auto">
+                Our engineering team has received your details and will review them before our discovery call.
+              </p>
+            </>
+          ) : (
+            <>
+              <h3 className="text-2xl font-bold text-white tracking-tight">
+                Almost there — one more step
+              </h3>
+              <p className="text-sm text-white/50 max-w-sm mx-auto">
+                We opened your email app with your brief pre-filled. Hit send there to reach our team — if nothing opened, email us directly at{' '}
+                <a href="mailto:hello@mehtatechnologies.com" className="text-blue-400 hover:text-blue-300">hello@mehtatechnologies.com</a>
+                {' '}or{' '}
+                <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300">message us on WhatsApp</a>.
+              </p>
+            </>
+          )}
           <button
             onClick={() => setSent(false)}
             className="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-400 hover:text-blue-300 pt-4"
@@ -208,7 +241,7 @@ function ContactForm() {
 
           <div ref={nameRowRef} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label htmlFor="contact-name" className="block text-xs font-mono uppercase tracking-wider text-white/40 mb-1.5">
+              <label htmlFor="contact-name" className="block text-xs font-mono uppercase tracking-wider text-white/55 mb-1.5">
                 Your Name <span className="text-blue-400">*</span>
               </label>
               <input
@@ -223,7 +256,7 @@ function ContactForm() {
               />
             </div>
             <div>
-              <label htmlFor="contact-company" className="block text-xs font-mono uppercase tracking-wider text-white/40 mb-1.5">
+              <label htmlFor="contact-company" className="block text-xs font-mono uppercase tracking-wider text-white/55 mb-1.5">
                 Company / Organization
               </label>
               <input
@@ -240,7 +273,7 @@ function ContactForm() {
 
           <div ref={emailRowRef} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label htmlFor="contact-email" className="block text-xs font-mono uppercase tracking-wider text-white/40 mb-1.5">
+              <label htmlFor="contact-email" className="block text-xs font-mono uppercase tracking-wider text-white/55 mb-1.5">
                 Work Email <span className="text-blue-400">*</span>
               </label>
               <input
@@ -255,7 +288,7 @@ function ContactForm() {
               />
             </div>
             <div>
-              <label htmlFor="contact-phone" className="block text-xs font-mono uppercase tracking-wider text-white/40 mb-1.5">
+              <label htmlFor="contact-phone" className="block text-xs font-mono uppercase tracking-wider text-white/55 mb-1.5">
                 Phone / WhatsApp
               </label>
               <input
@@ -272,7 +305,7 @@ function ContactForm() {
 
           <div ref={serviceRowRef} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label htmlFor="contact-service" className="block text-xs font-mono uppercase tracking-wider text-white/40 mb-1.5">
+              <label htmlFor="contact-service" className="block text-xs font-mono uppercase tracking-wider text-white/55 mb-1.5">
                 Service Focus
               </label>
               <select
@@ -291,7 +324,7 @@ function ContactForm() {
               </select>
             </div>
             <div>
-              <label htmlFor="contact-budget" className="block text-xs font-mono uppercase tracking-wider text-white/40 mb-1.5">
+              <label htmlFor="contact-budget" className="block text-xs font-mono uppercase tracking-wider text-white/55 mb-1.5">
                 Estimated Budget
               </label>
               <select
@@ -312,7 +345,7 @@ function ContactForm() {
           </div>
 
           <div ref={requirementsRowRef}>
-            <label htmlFor="contact-requirements" className="block text-xs font-mono uppercase tracking-wider text-white/40 mb-1.5">
+            <label htmlFor="contact-requirements" className="block text-xs font-mono uppercase tracking-wider text-white/55 mb-1.5">
               Project Architecture & Requirements
             </label>
             <textarea
@@ -328,12 +361,13 @@ function ContactForm() {
 
           <button
             type="submit"
-            className="w-full py-4 rounded-full text-xs sm:text-sm font-semibold bg-white text-black hover:bg-white/90 shadow-xl shadow-white/10 transition-all flex items-center justify-center gap-2 active:scale-[0.98]"
+            disabled={submitting}
+            className="w-full py-4 rounded-full text-xs sm:text-sm font-semibold bg-white text-black hover:bg-white/90 shadow-xl shadow-white/10 transition-all flex items-center justify-center gap-2 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed"
           >
-            Submit Project Brief <ArrowRight size={15} />
+            {submitting ? 'Sending…' : <>Submit Project Brief <ArrowRight size={15} /></>}
           </button>
 
-          <p className="text-center text-xs text-white/40 font-mono">
+          <p className="text-center text-xs text-white/55 font-mono">
             Direct NDA Protected · 24h Turnaround · Zero Spam Guaranteed
           </p>
         </form>
@@ -389,7 +423,7 @@ export default function ContactPage() {
                       <Icon size={18} />
                     </div>
                     <div>
-                      <div className="text-[11px] font-mono uppercase tracking-wider text-white/40">
+                      <div className="text-[11px] font-mono uppercase tracking-wider text-white/55">
                         {info.label}
                       </div>
                       <div className="text-sm font-semibold text-white group-hover:text-blue-400 transition-colors">
@@ -410,7 +444,7 @@ export default function ContactPage() {
 
             {/* What Happens Next Card */}
             <div className="rounded-3xl bg-white/[0.02] border border-white/[0.08] p-6 sm:p-7 space-y-4">
-              <div className="text-xs font-mono uppercase tracking-wider text-white/40">
+              <div className="text-xs font-mono uppercase tracking-wider text-white/55">
                 What Happens Next
               </div>
               <div className="space-y-4">

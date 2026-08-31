@@ -104,7 +104,7 @@ export default function MobileDock() {
                   
                   <Icon size={17} className={`relative z-10 ${isActive ? 'text-blue-400' : ''}`} />
                   
-                  <span className={`relative z-10 text-[10px] font-medium tracking-tight mt-0.5 ${isActive ? 'text-white font-semibold' : 'text-white/45'}`}>
+                  <span className={`relative z-10 text-[10px] font-medium tracking-tight mt-0.5 ${isActive ? 'text-white font-semibold' : 'text-white/55'}`}>
                     {item.label}
                   </span>
 

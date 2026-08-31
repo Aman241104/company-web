@@ -133,7 +133,7 @@ export default function HeroInteractiveShowcase() {
                     transition={{ type: 'spring', stiffness: 450, damping: 35 }}
                   />
                 )}
-                <Icon size={14} className={`relative z-10 ${isActive ? 'text-white' : 'text-white/40'}`} />
+                <Icon size={14} className={`relative z-10 ${isActive ? 'text-white' : 'text-white/55'}`} />
                 <span className="relative z-10">{arch.label}</span>
               </button>
             )
@@ -200,6 +200,7 @@ export default function HeroInteractiveShowcase() {
                 alt={activeTab.title}
                 fill
                 priority
+                sizes="(max-width: 1024px) 100vw, 60vw"
                 className="object-cover object-top transition-transform duration-700 group-hover:scale-[1.02]"
               />
 
@@ -225,7 +226,7 @@ export default function HeroInteractiveShowcase() {
                         <div className={`text-xs sm:text-sm font-extrabold font-mono ${m.highlight ? 'text-blue-400' : 'text-white'}`}>
                           {m.val}
                         </div>
-                        <div className="text-[10px] text-white/45 font-medium tracking-tight">
+                        <div className="text-[10px] text-white/55 font-medium tracking-tight">
                           {m.label}
                         </div>
                       </div>
@@ -253,7 +254,7 @@ export default function HeroInteractiveShowcase() {
                     <div className={`text-xs font-extrabold font-mono ${m.highlight ? 'text-blue-400' : 'text-white'}`}>
                       {m.val}
                     </div>
-                    <div className="text-[9px] text-white/45 font-medium">
+                    <div className="text-[9px] text-white/55 font-medium">
                       {m.label}
                     </div>
                   </div>

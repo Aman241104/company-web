@@ -199,7 +199,7 @@ export default function EngineeringLab() {
                     transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                   />
                 )}
-                <Icon size={14} className={`relative z-10 ${isActive ? 'text-white' : 'text-white/40'}`} />
+                <Icon size={14} className={`relative z-10 ${isActive ? 'text-white' : 'text-white/55'}`} />
                 <span className="relative z-10">{tab.label}</span>
               </button>
             )
@@ -244,13 +244,13 @@ export default function EngineeringLab() {
                     >
                       <div className="flex items-center gap-3">
                         <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${
-                          isSelected ? 'bg-blue-500/20 text-blue-400' : 'bg-white/5 text-white/40'
+                          isSelected ? 'bg-blue-500/20 text-blue-400' : 'bg-white/5 text-white/55'
                         }`}>
                           <Icon size={16} />
                         </div>
                         <div>
                           <div className="text-xs font-bold text-white">{bp.title}</div>
-                          <div className="text-[10px] text-white/45">{bp.timeline}</div>
+                          <div className="text-[10px] text-white/55">{bp.timeline}</div>
                         </div>
                       </div>
                       {isSelected && <CheckCircle2 size={14} className="text-blue-400 shrink-0" />}
@@ -271,11 +271,11 @@ export default function EngineeringLab() {
                   </div>
                   <div className="flex items-center gap-4 self-start sm:self-auto shrink-0 pt-2 sm:pt-0">
                     <div className="text-left sm:text-right">
-                      <div className="text-[10px] text-white/40 font-mono">TIMELINE</div>
+                      <div className="text-[10px] text-white/55 font-mono">TIMELINE</div>
                       <div className="text-xs sm:text-sm font-bold text-white">{selectedBlueprint.timeline}</div>
                     </div>
                     <div className="text-left sm:text-right">
-                      <div className="text-[10px] text-white/40 font-mono">ESTIMATION</div>
+                      <div className="text-[10px] text-white/55 font-mono">ESTIMATION</div>
                       <div className="text-xs sm:text-sm font-bold text-emerald-400">{selectedBlueprint.estimatedCost}</div>
                     </div>
                   </div>
@@ -283,26 +283,26 @@ export default function EngineeringLab() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                   <div className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                    <div className="text-[10px] font-mono text-white/40 uppercase mb-1.5">Frontend & UI</div>
+                    <div className="text-[10px] font-mono text-white/55 uppercase mb-1.5">Frontend & UI</div>
                     <div className="text-xs font-semibold text-white/90">{selectedBlueprint.stack.frontend}</div>
                   </div>
                   <div className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                    <div className="text-[10px] font-mono text-white/40 uppercase mb-1.5">Backend & API</div>
+                    <div className="text-[10px] font-mono text-white/55 uppercase mb-1.5">Backend & API</div>
                     <div className="text-xs font-semibold text-white/90">{selectedBlueprint.stack.backend}</div>
                   </div>
                   <div className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                    <div className="text-[10px] font-mono text-white/40 uppercase mb-1.5">Database & Cache</div>
+                    <div className="text-[10px] font-mono text-white/55 uppercase mb-1.5">Database & Cache</div>
                     <div className="text-xs font-semibold text-white/90">{selectedBlueprint.stack.database}</div>
                   </div>
                   <div className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                    <div className="text-[10px] font-mono text-white/40 uppercase mb-1.5">Infrastructure & Edge</div>
+                    <div className="text-[10px] font-mono text-white/55 uppercase mb-1.5">Infrastructure & Edge</div>
                     <div className="text-xs font-semibold text-white/90">{selectedBlueprint.stack.infra}</div>
                   </div>
                 </div>
 
                 <div className="flex items-center justify-between flex-wrap gap-4 pt-2">
                   <div className="flex items-center gap-1.5 flex-wrap">
-                    <span className="text-[11px] text-white/40 mr-2 font-mono">Core Schemas:</span>
+                    <span className="text-[11px] text-white/55 mr-2 font-mono">Core Schemas:</span>
                     {selectedBlueprint.schema.map((s) => (
                       <span key={s} className="px-2 py-0.5 rounded-md bg-white/[0.04] border border-white/[0.06] font-mono text-[11px] text-white/60">
                         {s}
@@ -359,7 +359,7 @@ export default function EngineeringLab() {
                         <span className="px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 font-mono text-[10px] font-bold">
                           {t.id}
                         </span>
-                        <span className="text-[10px] font-mono text-white/40">{t.time}</span>
+                        <span className="text-[10px] font-mono text-white/55">{t.time}</span>
                       </div>
                       <div className="text-xs font-semibold text-white/90 leading-snug">{t.title}</div>
                     </div>

@@ -165,7 +165,7 @@ export default function FastTrackDrawer() {
                         <div className="text-[11px] text-white/50">+91 98765 43210</div>
                       </div>
                     </div>
-                    <ArrowRight size={14} className="text-white/40 group-hover:text-white transition-colors" />
+                    <ArrowRight size={14} className="text-white/55 group-hover:text-white transition-colors" />
                   </a>
                 </div>
 
@@ -205,7 +205,7 @@ export default function FastTrackDrawer() {
               </div>
 
               {/* Footer Guarantees */}
-              <div className="pt-6 border-t border-white/[0.08] space-y-2 text-[11px] text-white/40 font-mono">
+              <div className="pt-6 border-t border-white/[0.08] space-y-2 text-[11px] text-white/55 font-mono">
                 <div className="flex items-center gap-2">
                   <Clock size={12} className="text-blue-400" /> Guaranteed 24h brief response
                 </div>

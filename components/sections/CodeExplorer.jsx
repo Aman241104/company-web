@@ -213,7 +213,7 @@ export default function CodeExplorer() {
                 className={`px-3 sm:px-4 py-2 sm:py-2.5 rounded-t-xl text-xs font-mono font-medium transition-all whitespace-nowrap cursor-pointer ${
                   isActive
                     ? 'bg-blue-600/10 text-blue-400 border-t-2 border-blue-500 border-x border-white/[0.08]'
-                    : 'text-white/40 hover:text-white/70 hover:bg-white/[0.02]'
+                    : 'text-white/55 hover:text-white/70 hover:bg-white/[0.02]'
                 }`}
               >
                 {s.title}
@@ -230,7 +230,7 @@ export default function CodeExplorer() {
         </div>
 
         {/* Terminal Status Bar */}
-        <div className="px-6 py-3 bg-black/40 border-t border-white/[0.06] flex items-center justify-between text-[11px] font-mono text-white/40">
+        <div className="px-6 py-3 bg-black/40 border-t border-white/[0.06] flex items-center justify-between text-[11px] font-mono text-white/55">
           <div className="flex items-center gap-2 text-emerald-400">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
             <span>Typecheck: Passed (0 errors)</span>

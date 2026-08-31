@@ -80,7 +80,7 @@ export default function GlobalNetwork() {
               <h3 className="text-lg sm:text-xl font-bold text-white tracking-tight mb-1">
                 {hub.city}
               </h3>
-              <p className="text-xs text-white/40 mb-4">{hub.label}</p>
+              <p className="text-xs text-white/55 mb-4">{hub.label}</p>
             </div>
 
             <div className="pt-3.5 sm:pt-4 border-t border-white/[0.06] flex items-center justify-between flex-wrap gap-2">

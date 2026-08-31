@@ -73,6 +73,7 @@ function TeamCard({ member, index }) {
                 src={member.image}
                 alt={member.name}
                 fill
+                sizes="56px"
                 className="object-cover object-top group-hover:scale-105 transition-transform duration-300"
               />
             ) : (

@@ -183,7 +183,7 @@ export default function BlueprintGenerator() {
                   <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-blue-500/10 text-blue-400 border border-blue-500/20">
                     Production Architecture
                   </span>
-                  <span className="text-xs text-white/40 font-mono">100% IP Transfer</span>
+                  <span className="text-xs text-white/55 font-mono">100% IP Transfer</span>
                 </div>
                 <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mb-3">
                   {activeBlueprint.title}
@@ -195,24 +195,24 @@ export default function BlueprintGenerator() {
 
               {/* Recommended Stack Matrix */}
               <div className="space-y-3 pt-4 border-t border-white/[0.08]">
-                <div className="text-xs font-mono uppercase tracking-wider text-white/40">
+                <div className="text-xs font-mono uppercase tracking-wider text-white/55">
                   Recommended Core Stack
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
                   <div className="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                    <div className="text-[10px] font-mono text-white/40 uppercase mb-0.5">Frontend & UI</div>
+                    <div className="text-[10px] font-mono text-white/55 uppercase mb-0.5">Frontend & UI</div>
                     <div className="font-semibold text-white">{activeBlueprint.stack.frontend}</div>
                   </div>
                   <div className="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                    <div className="text-[10px] font-mono text-white/40 uppercase mb-0.5">Backend & API</div>
+                    <div className="text-[10px] font-mono text-white/55 uppercase mb-0.5">Backend & API</div>
                     <div className="font-semibold text-white">{activeBlueprint.stack.backend}</div>
                   </div>
                   <div className="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                    <div className="text-[10px] font-mono text-white/40 uppercase mb-0.5">Database & Cache</div>
+                    <div className="text-[10px] font-mono text-white/55 uppercase mb-0.5">Database & Cache</div>
                     <div className="font-semibold text-white">{activeBlueprint.stack.database}</div>
                   </div>
                   <div className="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                    <div className="text-[10px] font-mono text-white/40 uppercase mb-0.5">Infra & CI/CD</div>
+                    <div className="text-[10px] font-mono text-white/55 uppercase mb-0.5">Infra & CI/CD</div>
                     <div className="font-semibold text-white">{activeBlueprint.stack.infra}</div>
                   </div>
                 </div>
@@ -220,7 +220,7 @@ export default function BlueprintGenerator() {
 
               {/* Database Entities */}
               <div className="pt-2">
-                <div className="text-xs font-mono uppercase tracking-wider text-white/40 mb-2">
+                <div className="text-xs font-mono uppercase tracking-wider text-white/55 mb-2">
                   Key Relational Schemas
                 </div>
                 <div className="flex flex-wrap gap-1.5 font-mono text-xs">
@@ -240,16 +240,16 @@ export default function BlueprintGenerator() {
             <div className="lg:col-span-5 rounded-2xl bg-white/[0.02] border border-white/[0.08] p-6 sm:p-7 flex flex-col justify-between space-y-6">
               <div>
                 <div className="flex items-center justify-between pb-3 border-b border-white/[0.06] mb-4">
-                  <span className="text-xs font-mono uppercase text-white/40">Sprint Horizon</span>
+                  <span className="text-xs font-mono uppercase text-white/55">Sprint Horizon</span>
                   <span className="text-xs font-bold text-white">{activeBlueprint.timeline}</span>
                 </div>
                 <div className="flex items-center justify-between pb-3 border-b border-white/[0.06] mb-6">
-                  <span className="text-xs font-mono uppercase text-white/40">Fixed Milestone Pricing</span>
+                  <span className="text-xs font-mono uppercase text-white/55">Fixed Milestone Pricing</span>
                   <span className="text-xs font-bold text-blue-400 font-mono">{activeBlueprint.estimatedCost}</span>
                 </div>
 
                 <div className="space-y-3 mb-6">
-                  <div className="text-xs font-mono uppercase tracking-wider text-white/40">
+                  <div className="text-xs font-mono uppercase tracking-wider text-white/55">
                     Execution Schedule
                   </div>
                   {activeBlueprint.milestones.map((m, idx) => (

@@ -16,6 +16,7 @@ const SS = (src, alt) => function ScreenshotMockup() {
         src={src}
         alt={alt}
         fill
+        sizes="(max-width: 1024px) 100vw, 50vw"
         className="object-cover object-top group-hover:scale-[1.03] transition-transform duration-500"
       />
     </div>
@@ -51,7 +52,7 @@ export const projects = [
     accent: '#D97706',
     mockupType: 'browser',
     mockupUrl: 'prihaanspices.in',
-    MockupContent: SS('/assets/silver_spoon_mockup.jpg', 'Prihaan Spices E-Commerce'),
+    MockupContent: SS('/prihaanfin.png', 'Prihaan Spices E-Commerce'),
     link: 'https://www.prihaanspices.in',
     desc: 'Authentic Indian spices, masalas and dry fruits e-commerce storefront featuring 252+ live SKUs, Supabase media CDN, and streamlined WhatsApp checkout pipeline.',
   },
@@ -67,7 +68,7 @@ export const projects = [
     accent: '#60A5FA',
     mockupType: 'browser',
     mockupUrl: 'silverspoonbyacj.com',
-    MockupContent: SS('/assets/silver_spoon_mockup.jpg', 'The Silver Spoon E-Commerce'),
+    MockupContent: SS('/silverspoon-screenshot.png', 'The Silver Spoon E-Commerce'),
     link: 'https://www.silverspoonbyacj.com',
     desc: 'Ultra-luxury silver gifting and silverware e-commerce storefront with live silver rate ticker and custom engraving.',
   },
@@ -99,7 +100,7 @@ export const projects = [
     accent: '#10B981',
     mockupType: 'browser',
     mockupUrl: 'chahanadentalstudio.com',
-    MockupContent: SS('/eyehospital.png', 'Chahana Dental Clinic'),
+    MockupContent: SS('/chahana.png', 'Chahana Dental Clinic'),
     link: 'https://chahanadentalstudio.com',
     desc: 'Digital patient appointment portal, smile makeover simulator, and multi-specialty clinical workflow engine.',
   },
@@ -179,7 +180,7 @@ export const projects = [
     accent: '#0284C7',
     mockupType: 'browser',
     mockupUrl: 'naamtransfer.com',
-    MockupContent: SS('/assets/vibo_erp_mockup.jpg', 'Naam Transfer Portal'),
+    MockupContent: SS('/advocate.png', 'Naam Transfer Portal'),
     link: 'https://www.naamtransfer.com',
     desc: 'Online property title deed transfer, municipal registry documentation, and legal name change workflow portal.',
   },
@@ -227,7 +228,7 @@ export const projects = [
     accent: '#EAB308',
     mockupType: 'browser',
     mockupUrl: 'risingrechargeable.com',
-    MockupContent: SS('/assets/fintech_mockup.jpg', 'Rising Rechargeable Energy'),
+    MockupContent: SS('/inventory.png', 'Rising Rechargeable Energy'),
     link: 'https://www.risingrechargeable.com',
     desc: 'Industrial rechargeable battery packs, renewable energy storage systems, and lithium-ion power solutions storefront.',
   },
@@ -243,7 +244,7 @@ export const projects = [
     accent: '#64748B',
     mockupType: 'browser',
     mockupUrl: 'fgpind.com',
-    MockupContent: SS('/assets/stylux_mockup.jpg', 'FGP Industries FRP'),
+    MockupContent: SS('/chemical.png', 'FGP Industries FRP'),
     link: 'https://fgpind.com',
     desc: 'Industrial fiberglass reinforced plastics (FRP) manufacturing, chemical process equipment, and custom composite storage tanks.',
   },
@@ -274,7 +275,7 @@ export const projects = [
     type: 'Client Project',
     accent: '#14B8A6',
     mockupUrl: 'sidecor.in',
-    MockupContent: SS('/assets/stylux_mockup.jpg', 'SI Decor & Interiors Studio'),
+    MockupContent: SS('/interior.png', 'SI Decor & Interiors Studio'),
     link: 'https://www.sidecor.in',
     desc: 'Turnkey architectural interior design studio delivering modern residential homes, luxury villas, and modular kitchens.',
   },
@@ -289,7 +290,7 @@ export const projects = [
     type: 'Client Project',
     accent: '#06B6D4',
     mockupUrl: 'jadetravels.co.in',
-    MockupContent: SS('/destination.png', 'Jade Travels International'),
+    MockupContent: SS('/luxeliving.png', 'Jade Travels International'),
     link: 'https://www.jadetravels.co.in',
     desc: 'Corporate travel management and international holiday planner offering customized luxury tours, flight bookings, and visa services.',
   },
@@ -366,7 +367,7 @@ export default function Work() {
                   <div className="p-3.5 sm:p-6 bg-gradient-to-b from-white/[0.03] to-transparent border-b border-white/[0.06]">
                     <div className="rounded-xl border border-white/10 overflow-hidden bg-[#0B0D14] shadow-2xl">
                       {/* Browser header */}
-                      <div className="flex items-center justify-between px-3.5 py-2 bg-black/40 border-b border-white/[0.06] text-[11px] text-white/40">
+                      <div className="flex items-center justify-between px-3.5 py-2 bg-black/40 border-b border-white/[0.06] text-[11px] text-white/55">
                         <div className="flex gap-1.5">
                           <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-red-500/60" />
                           <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-yellow-500/60" />

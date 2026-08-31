@@ -35,7 +35,7 @@ export default function Stats() {
               <div className="text-sm font-semibold text-white/80 mb-0.5">
                 {stat.label}
               </div>
-              <div className="text-xs text-white/40">
+              <div className="text-xs text-white/55">
                 {stat.desc}
               </div>
             </div>

@@ -59,6 +59,14 @@ const localBusinessSchema = {
   },
   aggregateRating: { "@type": "AggregateRating", ratingValue: "4.9", reviewCount: "80" },
   serviceArea: { "@type": "Country", name: "India" },
+  sameAs: [
+    "https://linkedin.com/company/mehta-technologies",
+    "https://instagram.com/mehtatechnologies",
+  ],
+  knowsAbout: [
+    "Web Development", "Mobile App Development", "SaaS Platforms", "Custom ERP Systems",
+    "Technical SEO", "Performance Marketing", "AI Integration", "Cloud & DevOps",
+  ],
 }
 
 const faqSchema = {
@@ -94,7 +102,39 @@ const faqSchema = {
       name: "How is pricing structured?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "We operate strictly on fixed-price milestone contracts or dedicated monthly engineering retainers. No unexpected billable hours. Starter websites begin at ₹20,000; full-stack web/mobile MVPs from ₹75,000; enterprise systems are custom scoped with transparent line items.",
+        text: "We operate strictly on fixed-price milestone contracts or dedicated monthly engineering retainers. No unexpected billable hours. Single-page campaign sites start at ₹9,999; starter brand websites from ₹19,999; full business websites from ₹32,999; full-stack web/mobile MVPs from ₹75,000; enterprise systems are custom scoped with transparent line items.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "WordPress vs a custom-built website — which should I choose?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "WordPress is faster to launch and fine for a simple content site you'll edit yourself constantly. A custom-built Next.js site costs more upfront but loads faster, is harder to hack, and won't slow down as you add plugins over time. We'll tell you honestly which fits your case in a free scoping call.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What is server-side rendering and why does it matter for SEO?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Server-side rendering (SSR) generates a fully-formed HTML page on the server before sending it to the browser, so search engines and users see complete content immediately instead of waiting on client-side JavaScript. This improves crawlability, Core Web Vitals, and page speed — all Google ranking factors. Every site we build on Next.js uses SSR or static generation by default.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "How do you keep a website secure during and after development?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "We follow OWASP-aligned practices throughout: input validation and sanitization, parameterized queries, HTTPS everywhere, dependency vulnerability scanning, and rate-limited auth endpoints. Post-launch, every plan includes security patches and dependency updates for the duration of the SLA support window.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Can you work with or upgrade our existing codebase?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes. We frequently audit and refactor existing React, Node.js, Next.js, Django, Laravel, and Python backends. If a strategic rewrite is more cost-effective in the long run than patching legacy technical debt, we provide an honest architectural evaluation.",
       },
     },
     {

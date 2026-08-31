@@ -137,6 +137,7 @@ function ContactForm() {
     service: initialService,
     budget: initialBudget,
     project: '',
+    company_website: '',
   })
   const [sent, setSent] = useState(false)
   const nameRowRef = useRef(null)
@@ -152,6 +153,7 @@ function ContactForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    if (form.company_website) return // honeypot — bots fill hidden fields
     if (!form.email) return
     const subject = encodeURIComponent(`Project Brief — ${form.service || 'General'} from ${form.name || 'Website'}`)
     const body = encodeURIComponent(
@@ -185,6 +187,16 @@ function ContactForm() {
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="space-y-5">
+          <input
+            type="text"
+            name="company_website"
+            value={form.company_website}
+            onChange={(e) => setForm({ ...form, company_website: e.target.value })}
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+            className="absolute left-[-9999px] w-px h-px opacity-0"
+          />
           <div>
             <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight mb-1">
               Submit Your Project Brief

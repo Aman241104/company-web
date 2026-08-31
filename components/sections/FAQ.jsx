@@ -19,7 +19,19 @@ const faqs = [
   },
   {
     q: 'How is pricing structured?',
-    a: 'We operate strictly on fixed-price milestone contracts or dedicated monthly engineering retainers. No unexpected billable hours. Starter websites begin at ₹20,000; full-stack web/mobile MVPs from ₹75,000; enterprise systems are custom scoped with transparent line items.',
+    a: 'We operate strictly on fixed-price milestone contracts or dedicated monthly engineering retainers. No unexpected billable hours. Single-page campaign sites start at ₹9,999; starter brand websites from ₹19,999; full business websites from ₹32,999; full-stack web/mobile MVPs from ₹75,000; enterprise systems are custom scoped with transparent line items.',
+  },
+  {
+    q: 'WordPress vs a custom-built website — which should I choose?',
+    a: "WordPress is faster to launch and fine for a simple content site you'll edit yourself constantly. A custom-built Next.js site costs more upfront but loads faster, is harder to hack, and won't slow down as you add plugins over time — the right call depends on how much you value speed and security versus initial cost. We'll tell you honestly which fits your case in a free scoping call.",
+  },
+  {
+    q: 'What is server-side rendering and why does it matter for SEO?',
+    a: 'Server-side rendering (SSR) generates a fully-formed HTML page on the server before sending it to the browser, so search engines and users see complete content immediately instead of waiting on client-side JavaScript to build the page. This directly improves crawlability, Core Web Vitals, and page speed — all of which are Google ranking factors. Every site we build on Next.js uses SSR or static generation by default.',
+  },
+  {
+    q: 'How do you keep a website secure during and after development?',
+    a: 'We follow OWASP-aligned practices throughout: input validation and sanitization, parameterized queries, HTTPS everywhere, dependency vulnerability scanning, and rate-limited auth endpoints. Post-launch, every plan includes security patches and dependency updates for the duration of the SLA support window.',
   },
   {
     q: 'Can you work with or upgrade our existing codebase?',

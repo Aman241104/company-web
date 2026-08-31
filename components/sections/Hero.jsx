@@ -1,8 +1,83 @@
 'use client'
+import { useState } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, CheckCircle2, Star, Zap, Clock } from 'lucide-react'
 import HeroDashboardShowcase from '@/components/ui/HeroDashboardShowcase'
+
+const trustStats = [
+  { icon: CheckCircle2, label: '150+ Projects Delivered' },
+  { icon: Star, label: '4.9/5 Client Rating' },
+  { icon: Clock, label: 'Fixed-Price Proposal in 24 Hrs' },
+  { icon: Zap, label: '99.9% Uptime SLA' },
+]
+
+function HeroLeadForm() {
+  const [form, setForm] = useState({ name: '', phone: '', company_website: '' })
+  const [sent, setSent] = useState(false)
+
+  const handleChange = (e) => setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    if (form.company_website) return // honeypot — bots fill hidden fields
+    if (!form.name || !form.phone) return
+    const subject = encodeURIComponent(`Free Quote Request — ${form.name}`)
+    const body = encodeURIComponent(
+      `Name: ${form.name}\nPhone: ${form.phone}\n\nRequesting a free project quote from the homepage.`
+    )
+    window.location.href = `mailto:hello@mehtatechnologies.com?subject=${subject}&body=${body}`
+    setSent(true)
+  }
+
+  if (sent) {
+    return (
+      <div className="flex items-center gap-2.5 text-sm text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 rounded-xl px-4 py-3 max-w-md">
+        <CheckCircle2 size={16} className="shrink-0" />
+        <span>Opening your email app to send this to our team — or <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer" className="underline font-semibold hover:text-emerald-300">WhatsApp us</a> for a faster reply.</span>
+      </div>
+    )
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-2.5 max-w-md">
+      <input
+        type="text"
+        name="company_website"
+        value={form.company_website}
+        onChange={handleChange}
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="absolute left-[-9999px] w-px h-px opacity-0"
+      />
+      <input
+        required
+        type="text"
+        name="name"
+        placeholder="Your name"
+        value={form.name}
+        onChange={handleChange}
+        className="w-full sm:w-36 px-4 py-3 rounded-xl text-sm bg-white/[0.04] border border-white/10 text-white placeholder:text-white/35 focus:outline-none focus:border-blue-500/50 transition-colors"
+      />
+      <input
+        required
+        type="tel"
+        name="phone"
+        placeholder="Phone number"
+        value={form.phone}
+        onChange={handleChange}
+        className="w-full sm:w-36 px-4 py-3 rounded-xl text-sm bg-white/[0.04] border border-white/10 text-white placeholder:text-white/35 focus:outline-none focus:border-blue-500/50 transition-colors"
+      />
+      <button
+        type="submit"
+        className="inline-flex items-center justify-center gap-1.5 px-5 py-3 rounded-xl text-xs sm:text-sm font-semibold bg-white text-black hover:bg-white/90 active:scale-[0.98] transition-all whitespace-nowrap"
+      >
+        Get Free Quote <ArrowRight size={14} />
+      </button>
+    </form>
+  )
+}
 
 export default function Hero() {
   return (
@@ -70,6 +145,35 @@ export default function Hero() {
               >
                 Explore Our Products
               </Link>
+            </motion.div>
+
+            {/* Inline Lead Capture */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55, delay: 0.35 }}
+              className="pt-1"
+            >
+              <p className="text-xs text-white/40 mb-2.5">Get a free quote — takes under a minute, a real strategist replies.</p>
+              <HeroLeadForm />
+            </motion.div>
+
+            {/* Trust Bar */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55, delay: 0.4 }}
+              className="flex flex-wrap items-center gap-x-6 gap-y-3 pt-4 border-t border-white/[0.08]"
+            >
+              {trustStats.map((stat) => {
+                const Icon = stat.icon
+                return (
+                  <div key={stat.label} className="flex items-center gap-1.5 text-xs text-white/50">
+                    <Icon size={13} className="text-blue-400 shrink-0" />
+                    <span>{stat.label}</span>
+                  </div>
+                )
+              })}
             </motion.div>
 
           </div>

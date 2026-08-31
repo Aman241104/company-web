@@ -2,6 +2,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowUpRight, Mail, Phone, MapPin, Heart } from 'lucide-react'
+import { locations } from '@/lib/locations'
 
 const cols = [
   {
@@ -34,6 +35,13 @@ const cols = [
       { label: 'Live System Status', href: '/status' },
       { label: 'Leadership & Team', href: '/about#team' },
       { label: 'Careers & Hiring', href: 'mailto:careers@mehtatechnologies.com' },
+    ],
+  },
+  {
+    title: 'Locations',
+    links: [
+      ...locations.map((loc) => ({ label: loc.city, href: `/locations/${loc.slug}` })),
+      { label: 'All Locations', href: '/locations' },
     ],
   },
 ]
@@ -71,6 +79,12 @@ export default function Footer() {
                   hello@mehtatechnologies.com
                 </a>
               </div>
+              <div className="flex items-center gap-2">
+                <Phone size={13} className="text-blue-400" />
+                <a href="tel:+919876543210" className="hover:text-white transition-colors">
+                  +91 98765 43210
+                </a>
+              </div>
             </div>
 
             {/* Social Icons */}
@@ -101,7 +115,7 @@ export default function Footer() {
           </div>
 
           {/* Navigation Columns */}
-          <div className="lg:col-span-8 grid grid-cols-2 sm:grid-cols-3 gap-8">
+          <div className="lg:col-span-8 grid grid-cols-2 sm:grid-cols-4 gap-8">
             {cols.map((col) => (
               <div key={col.title}>
                 <h4 className="text-xs font-mono uppercase tracking-wider text-white/40 mb-4">

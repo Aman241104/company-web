@@ -6,11 +6,28 @@ import { Check, ArrowRight, Sparkles, Calculator, ShieldCheck, Zap, HelpCircle }
 
 const plans = [
   {
+    name: 'Landing Page',
+    price: '₹9,999',
+    unit: '/ project',
+    badge: null,
+    desc: 'A single page built to convert one campaign — perfect for a paid ads launch or a product announcement.',
+    features: [
+      '1 custom responsive page',
+      'Next.js 15 App Router & sub-second LCP',
+      'Lead form with email & WhatsApp routing',
+      'Conversion tracking wired in (GTM/Pixel)',
+      '2 weeks post-launch SLA support',
+    ],
+    cta: 'Start Your Landing Page',
+    highlight: false,
+    timeline: '3–5 Days',
+  },
+  {
     name: 'Starter & Brand Site',
-    price: '₹20,000',
+    price: '₹19,999',
     unit: '/ project',
     badge: 'Fast-Track',
-    desc: 'High-converting Next.js marketing websites, landing pages, and portfolio showcases for modern brands.',
+    desc: 'High-converting Next.js marketing websites and portfolio showcases for modern brands.',
     features: [
       'Up to 8 custom responsive pages',
       'Next.js 15 App Router & sub-second LCP',
@@ -21,13 +38,31 @@ const plans = [
     ],
     cta: 'Start Your Website',
     highlight: false,
+    timeline: '1–2 Weeks',
+  },
+  {
+    name: 'Business Website',
+    price: '₹32,999',
+    unit: '/ project',
+    badge: 'Popular',
+    desc: 'Custom UI design, advanced analytics, and enhanced functionality for growing companies.',
+    features: [
+      'Up to 15 custom responsive pages',
+      'Custom UI design (no templates)',
+      'Advanced analytics & conversion tracking',
+      'Headless CMS integration (Sanity/Strapi)',
+      'Technical SEO architecture & schema markup',
+      '2 months post-launch SLA support & warranty',
+    ],
+    cta: 'Build Your Business Site',
+    highlight: true,
     timeline: '2–3 Weeks',
   },
   {
     name: 'Growth MVP & Full-Stack',
     price: '₹75,000',
     unit: '/ project',
-    badge: 'Most Popular',
+    badge: null,
     desc: 'Custom web applications, cross-platform mobile apps, and launch-ready MVPs built for scale.',
     features: [
       'Full-stack Next.js web app or React Native mobile app',
@@ -38,31 +73,27 @@ const plans = [
       '3 months post-launch dedicated SLA support',
     ],
     cta: 'Build Your MVP',
-    highlight: true,
-    timeline: '4–8 Weeks',
-  },
-  {
-    name: 'Enterprise & SaaS',
-    price: 'Custom',
-    unit: 'tailored quote',
-    badge: 'Enterprise SLA',
-    desc: 'Custom ERPs, multi-tenant cloud platforms, microservices, and dedicated engineering pods.',
-    features: [
-      'Multi-tenant cloud architecture & microservices',
-      'Dedicated senior engineering team',
-      'Multi-warehouse ERP, HRMS & automated billing',
-      '99.9% uptime SLA with 24/7 priority support',
-      'Security penetration hardening & compliance',
-      '12 months comprehensive warranty & DevOps',
-    ],
-    cta: 'Talk to Enterprise Team',
     highlight: false,
-    timeline: '8–16 Weeks',
+    timeline: '4–8 Weeks',
   },
 ]
 
+const enterprisePlan = {
+  name: 'Enterprise & SaaS',
+  desc: 'Custom ERPs, multi-tenant cloud platforms, microservices, and dedicated engineering pods — tailored quote, transparent line items.',
+  features: [
+    'Multi-tenant cloud architecture & microservices',
+    'Dedicated senior engineering team',
+    '99.9% uptime SLA with 24/7 priority support',
+    '12 months comprehensive warranty & DevOps',
+  ],
+  timeline: '8–16 Weeks',
+}
+
 const projectTypes = [
-  { label: 'Marketing Website', base: 20000, time: '2-3 wks' },
+  { label: 'Landing / Campaign Page', base: 9999, time: '3-5 days' },
+  { label: 'Marketing Website', base: 19999, time: '1-2 wks' },
+  { label: 'Business Website', base: 32999, time: '2-3 wks' },
   { label: 'Shopify / E-Commerce Store', base: 45000, time: '3-4 wks' },
   { label: 'Full-Stack Web App / MVP', base: 75000, time: '5-7 wks' },
   { label: 'Mobile App (iOS + Android)', base: 85000, time: '6-8 wks' },
@@ -120,8 +151,8 @@ export default function Pricing() {
           </motion.div>
         </div>
 
-        {/* 3-Column Modern Pricing Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 items-stretch mb-12 sm:mb-16">
+        {/* Pricing Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 items-stretch mb-12 sm:mb-16">
           {plans.map((plan, i) => (
             <motion.div
               key={plan.name}
@@ -129,7 +160,7 @@ export default function Pricing() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-150px" }}
               transition={{ duration: 0.45, delay: i * 0.08 }}
-              className={`rounded-3xl p-6 sm:p-8 md:p-9 flex flex-col justify-between relative transition-all duration-300 ${
+              className={`rounded-3xl p-6 sm:p-7 flex flex-col justify-between relative transition-all duration-300 ${
                 plan.highlight
                   ? 'bg-gradient-to-b from-blue-600/15 via-white/[0.03] to-white/[0.01] border-2 border-blue-500/40 shadow-2xl shadow-blue-900/20'
                   : 'bg-white/[0.02] border border-white/[0.08] hover:border-white/[0.18]'
@@ -318,8 +349,37 @@ export default function Pricing() {
           )}
         </motion.div>
 
+        {/* Enterprise CTA Banner */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-150px" }}
+          transition={{ duration: 0.5 }}
+          className="mt-6 p-6 sm:p-10 rounded-2xl bg-white/[0.02] border border-white/[0.08] flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left"
+        >
+          <div>
+            <div className="flex items-center gap-2 justify-center md:justify-start mb-2">
+              <span className="text-xs font-mono uppercase tracking-wider text-blue-400 bg-blue-500/10 px-2.5 py-0.5 rounded-full border border-blue-500/20">
+                {enterprisePlan.timeline}
+              </span>
+              <h3 className="text-lg sm:text-xl font-bold text-white tracking-tight">
+                {enterprisePlan.name}
+              </h3>
+            </div>
+            <p className="text-sm text-white/50 max-w-xl">
+              {enterprisePlan.desc}
+            </p>
+          </div>
+          <Link
+            href="/contact"
+            className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full text-xs font-semibold bg-white text-black hover:bg-white/90 active:scale-[0.98] transition-all whitespace-nowrap shadow-lg shadow-white/10 shrink-0"
+          >
+            Talk to Enterprise Team <ArrowRight size={14} />
+          </Link>
+        </motion.div>
+
         {/* Footnote guarantee */}
-        <div className="mt-12 text-center text-xs text-white/40">
+        <div className="mt-8 text-center text-xs text-white/40">
           All projects billed in INR (International in USD). Includes 100% intellectual property transfer upon final delivery.
         </div>
 

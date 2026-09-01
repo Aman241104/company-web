@@ -82,6 +82,7 @@ function HeroLeadForm() {
         type="text"
         name="name"
         placeholder="Your name"
+        aria-label="Your name"
         value={form.name}
         onChange={handleChange}
         className="w-full sm:w-36 px-4 py-3 rounded-xl text-sm bg-white/[0.04] border border-white/10 text-white placeholder:text-white/45 focus:outline-none focus:border-blue-500/50 transition-colors"
@@ -91,6 +92,7 @@ function HeroLeadForm() {
         type="tel"
         name="phone"
         placeholder="Phone number"
+        aria-label="Phone number"
         value={form.phone}
         onChange={handleChange}
         className="w-full sm:w-36 px-4 py-3 rounded-xl text-sm bg-white/[0.04] border border-white/10 text-white placeholder:text-white/45 focus:outline-none focus:border-blue-500/50 transition-colors"

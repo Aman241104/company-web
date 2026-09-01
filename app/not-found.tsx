@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <main id="main-content" className="bg-[#07080C] min-h-screen text-white">
+    <main id="main-content" tabIndex={-1} className="bg-[#07080C] min-h-screen text-white">
       <Navbar />
 
       <div className="pt-40 pb-32 max-w-[900px] mx-auto px-6 md:px-8 text-center">

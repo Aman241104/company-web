@@ -69,7 +69,7 @@ export default async function LocationDetail({ params }: { params: Promise<{ cit
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
-      <main id="main-content" className="bg-transparent">
+      <main id="main-content" tabIndex={-1} className="bg-transparent">
         <Navbar />
         <LocationPage location={location} />
         <Footer />

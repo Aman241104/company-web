@@ -128,10 +128,21 @@ const nextSteps = [
   { n: '4', title: 'Sprint Kickoff', text: 'We begin development with live GitHub staging access within 5 days.' },
 ]
 
+function budgetToBucket(rawBudget) {
+  if (!rawBudget) return ''
+  if (budgets.includes(rawBudget)) return rawBudget
+  const numeric = Number(rawBudget.replace(/[^0-9]/g, ''))
+  if (!numeric) return ''
+  if (numeric <= 50000) return budgets[0]
+  if (numeric <= 150000) return budgets[1]
+  if (numeric <= 500000) return budgets[2]
+  return budgets[3]
+}
+
 function ContactForm() {
   const searchParams = useSearchParams()
   const initialService = searchParams.get('service') || ''
-  const initialBudget = searchParams.get('budget') || ''
+  const initialBudget = budgetToBucket(searchParams.get('budget') || '')
 
   const [form, setForm] = useState({
     name: '',

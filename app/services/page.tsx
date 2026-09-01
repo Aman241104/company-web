@@ -45,7 +45,7 @@ export default function Services() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
-      <main id="main-content" className="bg-transparent">
+      <main id="main-content" tabIndex={-1} className="bg-transparent">
         <Navbar />
         <ServicesPage />
         <Footer />

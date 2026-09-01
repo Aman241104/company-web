@@ -110,6 +110,22 @@ export default function Navbar() {
 
   return (
     <>
+      {/* Mobile menu backdrop — rendered outside the fixed header so its
+          `fixed inset-0` resolves against the viewport, not the header's
+          own (fixed, thus containing-block-forming) box. */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            onClick={() => setOpen(false)}
+            className="md:hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-40"
+          />
+        )}
+      </AnimatePresence>
+
       <motion.header
         initial={{ opacity: 0, y: -12 }}
         animate={{ opacity: 1, y: 0 }}
@@ -165,20 +181,6 @@ export default function Navbar() {
             </button>
           </div>
         </div>
-
-        {/* Mobile menu backdrop */}
-        <AnimatePresence>
-          {open && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              onClick={() => setOpen(false)}
-              className="md:hidden fixed inset-0 top-[60px] bg-black/60 backdrop-blur-sm z-40"
-            />
-          )}
-        </AnimatePresence>
 
         {/* Mobile menu dropdown */}
         <AnimatePresence>

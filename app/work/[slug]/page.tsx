@@ -103,13 +103,12 @@ const caseStudiesData: Record<string, {
     year: '2024',
     heroImage: '/chahana.png',
     liveUrl: 'https://chahanadentalstudio.com',
-    headline: 'Ranked #1 on Google for 12 local keywords with technical SEO & sub-second patient booking.',
+    headline: 'A clinical presence built on technical SEO and sub-second patient booking.',
     summary: 'A clinical presence engineered with structured JSON-LD medical schema, accessible patient booking flows, and 100/100 Core Web Vitals.',
-    challenge: 'The dental studio was buried on Page 4 of Google for critical local search queries, generating less than 4 patient inquiries per month from digital channels.',
+    challenge: 'The dental studio had low visibility on Google for the local search queries that matter most to a growing clinic.',
     solution: 'Designed a clinical semantic portal using Next.js 15 static generation, structured medical schema, local entity clustering, and automated appointment routing.',
     architecture: ['Next.js 15 Static Export', 'JSON-LD Healthcare Schema', 'Tailwind CSS v4', 'WhatsApp Business API', 'Google Cloud CDN'],
     metrics: [
-      { label: 'Google Search Ranking', value: '#1', detail: 'For 12 high-intent dental keywords' },
       { label: 'Mobile Page Load Time', value: '0.55s', detail: 'Sub-second first contentful paint' },
     ],
   },
@@ -199,7 +198,7 @@ const caseStudiesData: Record<string, {
     architecture: ['Next.js 15', 'Tailwind CSS', 'Encrypted Intake Pipeline', 'Vercel Edge'],
     metrics: [
       { label: 'Automated Intake Rate', value: '100%', detail: 'Fully digitized documentation pipeline' },
-      { label: 'Mobile Ease of Use', value: '100 / 100', detail: 'Accessible for all age demographics' },
+      { label: 'Mobile Accessibility Score', value: '100 / 100', detail: 'Google Lighthouse audit' },
     ],
   },
   'nexsphere-global': {

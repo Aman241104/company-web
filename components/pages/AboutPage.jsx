@@ -217,7 +217,7 @@ export default function AboutPage() {
       <section className="py-12 border-y border-white/[0.06] mb-28 overflow-hidden bg-white/[0.01]">
         <div className="max-w-[1360px] mx-auto px-6 md:px-8 mb-6">
           <div className="text-xs font-mono uppercase tracking-wider text-white/55">
-            150+ Successfully Deployed Systems & Digital Experiences
+            A Sample of Real Websites We&apos;ve Built
           </div>
         </div>
         <LogoLoop

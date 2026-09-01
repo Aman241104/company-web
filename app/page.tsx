@@ -83,7 +83,7 @@ const faqSchema = {
       name: "How long does a typical project take?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "A custom Next.js landing page or marketing site takes 2–3 weeks. A full-stack web or mobile app takes 4–8 weeks depending on scope and integrations. Enterprise ERP and SaaS platforms take 8–16 weeks. We provide a milestone-guaranteed schedule before kicking off.",
+        text: "A custom Next.js landing page or marketing site takes 2–3 weeks. A full business website or e-commerce store takes 4–8 weeks depending on scope and integrations. Custom software projects take 8–16 weeks. We provide a milestone-guaranteed schedule before kicking off.",
       },
     },
     {
@@ -91,7 +91,7 @@ const faqSchema = {
       name: "Do you work with international clients?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Yes. Over 35% of our client base is located across the US, UK, UAE, and Europe. We run overlapping hours, operate on asynchronous documentation pipelines, and bill seamlessly in USD or EUR.",
+        text: "Yes. Alongside clients across India, we work with businesses abroad too. We run overlapping hours, operate on asynchronous documentation pipelines, and bill seamlessly in USD or EUR.",
       },
     },
     {
@@ -147,7 +147,7 @@ const faqSchema = {
       name: "What does post-launch support look like?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Every project includes 1 to 12 months of dedicated post-launch SLA warranty support covering bug fixes, performance monitoring, server maintenance, and security patches. We also offer ongoing monthly retainer partnerships.",
+        text: "Every project includes 2 weeks to 12 months of post-launch SLA warranty support (depending on plan) covering bug fixes, performance monitoring, server maintenance, and security patches. We also offer ongoing monthly retainer partnerships.",
       },
     },
   ],

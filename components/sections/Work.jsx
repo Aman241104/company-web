@@ -103,7 +103,7 @@ export const projects = [
     category: 'Healthcare & Clinical Systems',
     categoryFilter: 'Web',
     tags: ['Next.js', 'Clinical Telehealth', 'Appointment Engine', 'SEO'],
-    result: '#1 Local Google Rank',
+    result: 'Technical SEO & Booking Flow',
     year: '2024',
     type: 'Client Project',
     accent: '#10B981',

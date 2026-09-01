@@ -71,7 +71,7 @@ export default function TermsPage() {
               4. Post-Launch Warranty & Support SLA
             </h2>
             <p className="text-white/60 text-xs sm:text-sm">
-              Projects include a standard 30 to 365-day SLA warranty (dependent on contracted tier) covering defect resolution, regression patches, and server stability monitoring. Ongoing feature development and scaling maintenance are supported via monthly engineering retainers.
+              Projects include a standard 2-week to 12-month SLA warranty (dependent on contracted tier) covering defect resolution, regression patches, and server stability monitoring. Ongoing feature development and scaling maintenance are supported via monthly engineering retainers.
             </p>
           </section>
 

@@ -43,7 +43,7 @@ const faqs = [
   },
   {
     q: 'What does post-launch support look like?',
-    a: 'Every project includes 1 to 12 months of dedicated post-launch SLA warranty support covering bug fixes, performance monitoring, server maintenance, and security patches. We also offer ongoing monthly retainer partnerships.',
+    a: 'Every project includes 2 weeks to 12 months of post-launch SLA warranty support (depending on plan) covering bug fixes, performance monitoring, server maintenance, and security patches. We also offer ongoing monthly retainer partnerships.',
   },
 ]
 

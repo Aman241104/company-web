@@ -44,7 +44,7 @@ const services = [
     timeline: '6–14 weeks',
     pricing: 'Custom Quote',
     tags: ['Node.js', 'PostgreSQL', 'Docker', 'GraphQL'],
-    caseStudy: { title: 'FruitManager', result: 'Custom inventory & order management system' },
+    caseStudy: null,
   },
   {
     num: '03',
@@ -106,7 +106,7 @@ const services = [
     timeline: '2-week sprint setup',
     pricing: 'From ₹30,000/mo',
     tags: ['Google Ads', 'Meta Ads', 'CAPI Tracking', 'CRO Funnels'],
-    caseStudy: { title: 'LuxeLiving Residences', result: 'Google & Meta ad campaign management' },
+    caseStudy: null,
   },
   {
     num: '06',
@@ -125,7 +125,7 @@ const services = [
     timeline: 'Ongoing partnership',
     pricing: 'From ₹25,000/mo',
     tags: ['Technical SEO', 'Schema Markup', 'Keyword Silos', 'PageSpeed'],
-    caseStudy: { title: 'Chahana Dental Clinic', result: '#1 Google ranking for 12 core keywords' },
+    caseStudy: { title: 'Chahana Dental Clinic', result: '0.55s mobile page load' },
   },
 ]
 
@@ -206,7 +206,7 @@ function ServiceCard({ svc, index }) {
             </div>
             {svc.caseStudy && (
               <div className="p-3 rounded-xl bg-blue-500/10 border border-blue-500/20">
-                <div className="text-[10px] font-mono uppercase tracking-wider text-blue-400/80 mb-0.5">Verified Result</div>
+                <div className="text-[10px] font-mono uppercase tracking-wider text-blue-400/80 mb-0.5">Related Work</div>
                 <div className="text-xs font-bold text-white">{svc.caseStudy.title}</div>
                 <div className="text-xs text-blue-300">{svc.caseStudy.result}</div>
               </div>

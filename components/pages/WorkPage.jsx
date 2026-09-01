@@ -69,7 +69,7 @@ const projects = [
     image: '/chahana.png',
     url: 'https://chahanadentalstudio.com',
     year: '2024',
-    result: '#1 Local Google Rank',
+    result: 'Technical SEO & Booking Flow',
   },
   {
     name: 'Destination Anywhere',

@@ -41,8 +41,10 @@ export default function FastTrackDrawer() {
 
   useEffect(() => {
     if (isOpen) {
+      const main = document.getElementById('main-content')
       lastFocusedRef.current = document.activeElement
       document.body.style.overflow = 'hidden'
+      main?.setAttribute('aria-hidden', 'true')
       closeButtonRef.current?.focus()
 
       const handleTab = (e) => {
@@ -65,6 +67,7 @@ export default function FastTrackDrawer() {
       return () => {
         window.removeEventListener('keydown', handleTab)
         document.body.style.overflow = ''
+        main?.removeAttribute('aria-hidden')
         ;(lastFocusedRef.current || triggerButtonRef.current)?.focus()
       }
     }

@@ -43,12 +43,12 @@ export default function HeroDashboardShowcase() {
           <div className="rounded-[1.4rem] border-[3px] border-[#1C1E26] bg-[#0B0D14] shadow-[0_25px_45px_rgba(0,0,0,0.6)] overflow-hidden">
             <div className="relative aspect-[9/19]">
               <Image
-                src="/assets/prihaan-spices-live.jpg"
-                alt="Prihaan Spices — an e-commerce website built by Mehta Technologies"
+                src="/assets/prihaan-spices-mobile.jpg"
+                alt="Prihaan Spices — the mobile version of an e-commerce website built by Mehta Technologies"
                 fill
                 loading="eager"
                 sizes="180px"
-                className="object-cover object-[92%_18%] select-none"
+                className="object-cover object-top select-none"
               />
             </div>
           </div>

@@ -6,7 +6,7 @@ import ContactPage from '@/components/pages/ContactPage'
 export const metadata: Metadata = {
   title: "Contact Us — Free Consultation, No Commitment",
   description:
-    "Get in touch with Mehta Technologies. Free 30-min discovery call, reply within 24 hours. Project enquiries, partnerships & ViboERP demos. Mumbai & Bengaluru.",
+    "Get in touch with Mehta Technologies. Free consultation, reply within 24 hours. Project enquiries, partnerships & Vibo ERP demos. Ahmedabad, India.",
   alternates: { canonical: "https://mehtatechnologies.com/contact" },
   openGraph: {
     url: "https://mehtatechnologies.com/contact",

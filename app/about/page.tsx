@@ -6,13 +6,13 @@ import AboutPage from '@/components/pages/AboutPage'
 export const metadata: Metadata = {
   title: "About Us — Our Team, Story & Values",
   description:
-    "Meet the team behind Mehta Technologies — 18 engineers, designers & strategists in Mumbai & Bengaluru. Founded 2019. 150+ projects. 99% client retention. Learn our story.",
+    "Meet the team behind Mehta Technologies — an Ahmedabad-based web development agency. Founded 2019. 150+ projects delivered. Learn our story.",
   alternates: { canonical: "https://mehtatechnologies.com/about" },
   openGraph: {
     url: "https://mehtatechnologies.com/about",
     title: "About Mehta Technologies — Team, Story & Values",
     description:
-      "18-member team of engineers, designers & strategists. Founded 2019. 150+ projects shipped, 99% client retention. Based in Mumbai & Bengaluru.",
+      "Ahmedabad-based web development agency. Founded 2019. 150+ projects shipped for clients across India.",
     images: [{ url: "/og.png", width: 1200, height: 630, alt: "Mehta Technologies — Digital Agency India" }],
   },
 }

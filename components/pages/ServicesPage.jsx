@@ -7,7 +7,7 @@ const services = [
   {
     num: '01',
     icon: Globe,
-    title: 'High-Converting Web Applications',
+    title: 'Website Development',
     subtitle: 'Next.js 15 architectures built for sub-second LCP and high search authority.',
     features: [
       'Next.js 15 App Router with <1s Largest Contentful Paint',
@@ -44,12 +44,12 @@ const services = [
     timeline: '6–14 weeks',
     pricing: 'Custom Quote',
     tags: ['Node.js', 'PostgreSQL', 'Docker', 'GraphQL'],
-    caseStudy: { title: 'FruitManager ERP', result: '3M+ daily queries at 99.99% uptime' },
+    caseStudy: { title: 'FruitManager', result: 'Custom inventory & order management system' },
   },
   {
     num: '03',
     icon: Smartphone,
-    title: 'Cross-Platform Mobile Apps',
+    title: 'Mobile App Development',
     subtitle: 'iOS & Android applications with native 60fps performance and offline-first data sync.',
     features: [
       'React Native & Flutter cross-platform mobile engineering',
@@ -70,7 +70,7 @@ const services = [
   {
     num: '04',
     icon: Package,
-    title: 'Custom SaaS & Cloud ERP Platforms',
+    title: 'Custom Software Development',
     subtitle: 'End-to-end multi-tenant SaaS engines built to scale from launch to 50,000+ users.',
     features: [
       'Multi-tenant cloud architecture with isolated tenant schemas',
@@ -86,12 +86,12 @@ const services = [
     timeline: '8–16 weeks',
     pricing: 'Custom Quote',
     tags: ['Multi-Tenant', 'Stripe', 'ERP Suite', 'Cloud Infra'],
-    caseStudy: { title: 'Vibo ERP', result: 'Our proprietary suite — 2,400+ active users' },
+    caseStudy: { title: 'Vibo ERP', result: 'Built & used in-house at Mehta Technologies' },
   },
   {
     num: '05',
     icon: TrendingUp,
-    title: 'Performance Marketing & Growth Funnels',
+    title: 'Performance Marketing',
     subtitle: 'Paid acquisition campaigns engineered around profitable unit economics and ROAS.',
     features: [
       'Google Search, Performance Max & Shopping campaign architecture',
@@ -111,7 +111,7 @@ const services = [
   {
     num: '06',
     icon: Search,
-    title: 'Technical SEO & Search Dominance',
+    title: 'Technical SEO',
     subtitle: 'High-intent search engine rankings that drive qualified commercial demand.',
     features: [
       'Deep architectural SEO audits and Core Web Vitals remediation',

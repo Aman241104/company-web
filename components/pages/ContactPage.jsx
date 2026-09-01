@@ -105,8 +105,8 @@ const contactInfo = [
   },
   {
     icon: MapPin,
-    label: 'Engineering Hubs',
-    value: 'Mumbai & Bengaluru, India',
+    label: 'Our Office',
+    value: 'Ahmedabad, Gujarat, India',
     href: null,
   },
   {

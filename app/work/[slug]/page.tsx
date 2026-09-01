@@ -205,9 +205,7 @@ const caseStudiesData: Record<string, {
     architecture: ['Next.js 15', 'Tailwind CSS', 'PostgreSQL', 'Vercel Deployment'],
     metrics: [
       { label: 'Executive Members', value: '500+', detail: 'Active across multiple business chapters' },
-      { label: 'Referral Pipeline', value: '₹25Cr+', detail: 'Annual tracked business value' },
       { label: 'Directory Lookup Speed', value: '0.2s', detail: 'Instant member filtering' },
-      { label: 'Platform Availability', value: '99.99%', detail: 'Zero member portal downtime' },
     ],
     quote: {
       text: 'The Ares portal has completely streamlined how our members collaborate and pass business referrals.',
@@ -327,7 +325,6 @@ const caseStudiesData: Record<string, {
       { label: 'Energy Solutions Catalog', value: '80+ Battery SKUs', detail: 'Across consumer, EV & industrial storage' },
       { label: 'B2B Quote Submissions', value: '+175%', detail: 'In bulk distributor inquiries' },
       { label: 'Page Load Speed', value: '0.48s', detail: 'Sub-second technical catalog' },
-      { label: 'Uptime SLA', value: '99.99%', detail: 'Always accessible for global buyers' },
     ],
     quote: {
       text: 'The product catalog makes it straightforward for industrial distributors to find exact battery specs and request volume quotes.',

@@ -87,20 +87,20 @@ export const locations: Location[] = [
     city: 'Mumbai',
     region: 'Maharashtra',
     keywordLabel: 'Website Development Agency in Mumbai',
-    tagline: 'Enterprise SaaS, fintech & high-traffic platforms — where we\'re based.',
+    tagline: 'Websites, e-commerce & custom software for Mumbai businesses — built remotely, no compromise on quality.',
     intro:
-      "Mumbai is home base for Mehta Technologies. We work with founders and enterprises who need more than a marketing site — multi-tenant SaaS platforms, financial compliance tooling, and systems that have to hold up under real production load and security scrutiny.",
+      "We're based in Ahmedabad and work with businesses in Mumbai remotely — websites, e-commerce stores, and custom software for founders and companies who need more than a marketing site, delivered with the same clear communication and fixed-price process as our local clients.",
     focusPoints: [
-      { title: 'Enterprise-grade architecture', desc: 'Multi-tenant systems, RBAC, and audit-ready logging built for regulated and high-stakes environments.' },
-      { title: 'In-person + remote delivery', desc: 'Based in Mumbai, so on-site discovery sessions and stakeholder workshops are on the table when they help.' },
+      { title: 'Remote-first, zero friction', desc: 'Video calls, shared staging links, and regular updates — you always know where your project stands.' },
+      { title: 'Built to scale with you', desc: 'From a fast marketing site to custom software, we build for where your business is headed next.' },
       { title: 'Performance marketing tie-in', desc: 'We build the platform and can also run the acquisition campaigns driving traffic to it.' },
     ],
     caseStudies: [
-      { slug: 'vibo-erp', name: 'Vibo ERP Suite', category: 'Multi-Tenant Enterprise SaaS' },
+      { slug: 'vibo-erp', name: 'Vibo ERP', category: 'Our Own Product' },
       { slug: 'nexsphere-global', name: 'NexSphere Global', category: 'Financial Compliance Platform' },
     ],
     faqs: [
-      { question: 'Can we meet in person in Mumbai?', answer: 'Yes — we\'re based in Mumbai and happy to do in-person discovery sessions for larger engagements.' },
+      { question: 'Do you work with Mumbai clients remotely?', answer: 'Yes — we\'re based in Ahmedabad and work with clients across India, including Mumbai, entirely remotely via video calls and shared staging links.' },
       { question: 'Do you handle both the platform and the marketing?', answer: 'Yes, we build the product and can also run performance marketing campaigns to drive qualified traffic to it.' },
     ],
   },

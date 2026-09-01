@@ -32,38 +32,38 @@ const values = [
   {
     num: '01',
     title: 'Outcomes Over Activity',
-    desc: 'We measure engineering success by your business conversion, latency, and uptime metrics — never by billable hours.',
+    desc: 'We measure success by your enquiries, conversions, and business growth — never by billable hours.',
   },
   {
     num: '02',
     title: 'Radical Transparency',
-    desc: 'Weekly milestone demos, live staging URLs on GitHub, and crystal clear scope contracts. Zero hidden surprises.',
+    desc: 'Regular progress updates, live staging links to preview your site, and crystal clear scope contracts. Zero hidden surprises.',
   },
   {
     num: '03',
-    title: 'Future-Proof Architecture',
-    desc: 'We build for 10x scale. Next.js 15, PostgreSQL, and containerized microservices designed to endure years without rewrites.',
+    title: 'Built to Grow With You',
+    desc: 'We build on modern, well-supported tools designed to hold up as your business — and your requirements — grow.',
   },
   {
     num: '04',
-    title: 'Speed Without Technical Debt',
-    desc: 'Senior-only engineering pods move with fast 48-hour velocity without ever compromising security or test coverage.',
+    title: 'Speed Without Cutting Corners',
+    desc: 'Small, senior team means fast turnaround without ever compromising quality or attention to detail.',
   },
 ]
 
 const timeline = [
-  { year: '2019', event: 'Founded in Mumbai as a specialized digital engineering studio. Onboarded our first 3 enterprise clients in the first quarter.' },
-  { year: '2021', event: 'Launched Vibo ERP — our proprietary cloud multi-tenant enterprise suite now serving 2,400+ businesses.' },
-  { year: '2023', event: 'Expanded engineering operations to Bengaluru. Cross-border delivery team grew to serve US, UK, and UAE clients.' },
-  { year: '2024', event: 'Passed 150+ successfully shipped web applications, e-commerce stores, and enterprise microservices.' },
-  { year: '2025–2026', event: 'Launched AI copilots, enterprise search agents, and Next.js full-stack accelerator frameworks.' },
+  { year: '2019', event: 'Founded in Ahmedabad as a web development studio, building websites for local businesses.' },
+  { year: '2021', event: 'Started building Vibo ERP — our own in-house business management software — to run our own operations better.' },
+  { year: '2023', event: 'Grew to serve clients across India, and started taking on custom software and mobile app projects.' },
+  { year: '2024', event: 'Passed 150+ successfully shipped websites, e-commerce stores, and custom software projects.' },
+  { year: '2025–2026', event: 'Continuing to grow — more clients, better processes, and made Vibo ERP available beyond our own team.' },
 ]
 
 const stats = [
-  { value: 150, suffix: '+', label: 'Projects Delivered', desc: 'Across 12+ Global Industries' },
-  { value: 80, suffix: '+', label: 'Enterprise Clients', desc: 'India, US, UK, UAE' },
-  { value: 99.9, suffix: '%', label: 'SLA Uptime', desc: 'Production Cloud Reliability' },
-  { value: 98, suffix: '%', label: 'Client Retention', desc: 'Long-term Growth Retainers' },
+  { value: 150, suffix: '+', label: 'Projects Delivered', desc: 'Across India & globally' },
+  { value: 100, suffix: '+', label: 'Happy Clients', desc: 'Across industries' },
+  { value: 4.9, suffix: '/5', label: 'Client Satisfaction', desc: 'Rated by real clients' },
+  { value: 7, suffix: '+', label: 'Years in Business', desc: 'Building since 2019' },
 ]
 
 function StatCard({ stat, index }) {
@@ -87,7 +87,7 @@ function StatCard({ stat, index }) {
       className="p-6 sm:p-8 rounded-2xl bg-white/[0.02] border border-white/[0.08] text-center relative overflow-hidden"
     >
       <div className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight mb-2">
-        {count}{stat.suffix}
+        {Number.isInteger(stat.value) ? count : (inView ? stat.value : 0)}{stat.suffix}
       </div>
       <div className="text-sm font-bold text-white mb-1">{stat.label}</div>
       <div className="text-xs text-white/55">{stat.desc}</div>
@@ -113,7 +113,7 @@ export default function AboutPage() {
             </h1>
 
             <p className="text-base sm:text-lg text-white/60 leading-relaxed max-w-2xl font-normal">
-              Mehta Technologies was founded on a singular conviction: modern businesses deserve software that combines aesthetic luxury with enterprise-grade engineering rigor. We build fast, scalable web apps, mobile apps, and SaaS platforms that scale without breaking.
+              Mehta Technologies was founded on a singular conviction: every business deserves a website that builds trust and actually brings in enquiries. We build fast, SEO-ready websites, e-commerce stores, and custom software for growing businesses.
             </p>
 
             <div className="flex flex-wrap gap-4 pt-4">
@@ -144,7 +144,7 @@ export default function AboutPage() {
                 </div>
                 <div>
                   <div className="text-3xl font-extrabold text-white tracking-tight mb-1">2019</div>
-                  <div className="text-xs text-white/50">Founded in Mumbai</div>
+                  <div className="text-xs text-white/50">Founded in Ahmedabad</div>
                 </div>
                 <div>
                   <div className="text-3xl font-extrabold text-white tracking-tight mb-1">4.9/5</div>

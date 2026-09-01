@@ -79,13 +79,13 @@ const plans = [
 ]
 
 const enterprisePlan = {
-  name: 'Enterprise & SaaS',
-  desc: 'Custom ERPs, multi-tenant cloud platforms, microservices, and dedicated engineering pods — tailored quote, transparent line items.',
+  name: 'Custom Software & ERP',
+  desc: 'Custom business software, ERP systems, and larger platforms — tailored quote, transparent line items.',
   features: [
-    'Multi-tenant cloud architecture & microservices',
+    'Custom architecture scoped to your workflows',
     'Dedicated senior engineering team',
-    '99.9% uptime SLA with 24/7 priority support',
-    '12 months comprehensive warranty & DevOps',
+    'Priority support during and after launch',
+    '12 months warranty on bug fixes',
   ],
   timeline: '8–16 Weeks',
 }

@@ -48,7 +48,7 @@ export default function HeroDashboardShowcase() {
                 fill
                 loading="eager"
                 sizes="180px"
-                className="object-cover object-top select-none"
+                className="object-cover object-[92%_18%] select-none"
               />
             </div>
           </div>

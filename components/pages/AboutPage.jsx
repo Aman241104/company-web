@@ -12,7 +12,7 @@ const projectScreenshots = [
   { src: '/silverspoon-screenshot.png', label: 'Silver Spoon by ACJ' },
   { src: '/interior.png', label: 'Stylux Interiors' },
   { src: '/jjfilms.png', label: 'JJ Films' },
-  { src: '/assets/saas_hero_visual.jpg', label: 'Cloud & AI Platform' },
+  { src: '/assets/saas_hero_mockup.png', label: 'Vibo ERP' },
   { src: '/zingbliss.png', label: 'ZingBliss' },
   { src: '/sweet.png', label: 'Gourmettazone' },
   { src: '/luxeliving.png', label: 'LuxeLiving' },
@@ -151,8 +151,8 @@ export default function AboutPage() {
                   <div className="text-xs text-white/50">Client Rating</div>
                 </div>
                 <div>
-                  <div className="text-3xl font-extrabold text-white tracking-tight mb-1">99.9%</div>
-                  <div className="text-xs text-white/50">SLA Guarantee</div>
+                  <div className="text-3xl font-extrabold text-white tracking-tight mb-1">Ongoing</div>
+                  <div className="text-xs text-white/50">Support & Maintenance</div>
                 </div>
               </div>
 

@@ -7,7 +7,7 @@ import HeroDashboardShowcase from '@/components/ui/HeroDashboardShowcase'
 
 const trustStats = [
   { icon: CheckCircle2, label: '150+ Projects Delivered' },
-  { icon: Star, label: '4.9/5 Client Rating', href: '#testimonials' },
+  { icon: Star, label: '4.9/5 Client Rating' },
   { icon: Clock, label: 'Fixed-Price Proposal in 24 Hrs' },
   { icon: Zap, label: 'SEO-Ready From Day One' },
 ]

@@ -32,19 +32,19 @@ const projects = [
     image: '/assets/prihaan-spices-live.jpg',
     url: 'https://www.prihaanspices.in',
     year: '2025',
-    result: '+185% WhatsApp Orders',
+    result: '252+ SKU E-Commerce Catalog',
   },
   {
     name: 'The Silver Spoon / Argentum',
     slug: 'silver-spoon',
     category: 'E-Commerce',
     subtitle: 'Luxury Silver Artifacts & Gifting',
-    desc: 'Bespoke high-converting storefront with custom 3D configurator and live silver bullion rate ticker. +280% online luxury sales in Q1.',
+    desc: 'Bespoke high-converting storefront with custom 3D configurator and live silver bullion rate ticker.',
     tags: ['Shopify Plus', 'Next.js SSR', 'Custom 3D Configurator', 'Stripe'],
     image: '/silverspoon-screenshot.png',
     url: 'https://www.silverspoonbyacj.com',
     year: '2024',
-    result: '+280% Sales Growth',
+    result: 'Headless Next.js Storefront',
   },
   {
     name: 'Vibo ERP',
@@ -93,7 +93,7 @@ const projects = [
     image: '/zingbliss.png',
     url: 'https://www.zingblissevents.com',
     year: '2024',
-    result: '3.8x Inquiry Rate',
+    result: 'Luxury Event Portfolio Site',
   },
   {
     name: 'Ares Business League',
@@ -105,7 +105,7 @@ const projects = [
     image: '/assets/ares-business-league-live.jpg',
     url: 'https://www.aresbusinessleague.com',
     year: '2025',
-    result: '500+ Executive Members',
+    result: 'Executive Member Directory',
   },
   {
     name: 'CMJ Events',
@@ -153,7 +153,7 @@ const projects = [
     image: '/assets/jukebox-media-live.jpg',
     url: 'https://www.jukeboxmedia.in',
     year: '2025',
-    result: '4.8x Average ROAS',
+    result: 'Marketing & Creator Showcase',
   },
   {
     name: 'Rising Rechargeable',
@@ -201,7 +201,7 @@ const projects = [
     image: '/interior.png',
     url: 'https://www.sidecor.in',
     year: '2024',
-    result: '75+ Delivered Homes',
+    result: 'Turnkey Interior Portfolio',
   },
   {
     name: 'Jade Travels',

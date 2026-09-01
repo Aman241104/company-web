@@ -23,7 +23,7 @@ const services = [
     timeline: '3–6 weeks',
     pricing: 'From ₹20,000',
     tags: ['Next.js', 'React', 'Tailwind', 'TypeScript'],
-    caseStudy: { title: 'Silver Spoon by ACJ', result: '+280% online luxury sales' },
+    caseStudy: { title: 'Silver Spoon by ACJ', result: 'Headless Next.js storefront rebuild' },
   },
   {
     num: '02',
@@ -106,7 +106,7 @@ const services = [
     timeline: '2-week sprint setup',
     pricing: 'From ₹30,000/mo',
     tags: ['Google Ads', 'Meta Ads', 'CAPI Tracking', 'CRO Funnels'],
-    caseStudy: { title: 'LuxeLiving Residences', result: '4.4x verified campaign ROAS' },
+    caseStudy: { title: 'LuxeLiving Residences', result: 'Google & Meta ad campaign management' },
   },
   {
     num: '06',

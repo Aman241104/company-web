@@ -40,14 +40,7 @@ const caseStudiesData: Record<string, {
     metrics: [
       { label: 'Google Lighthouse Performance', value: '100 / 100', detail: 'Across all mobile & desktop audits' },
       { label: 'Mobile Page Load Speed', value: '0.62s', detail: 'Sub-second first contentful paint' },
-      { label: 'Qualified Lead Inquiries', value: '+380%', detail: 'In direct project discovery requests' },
-      { label: 'Bounce Rate Reduction', value: '-42%', detail: 'High engagement across portfolio' },
     ],
-    quote: {
-      text: 'Mehta Technologies captured the exact soul of our studio. Our clients frequently mention how crisp and fast the website feels.',
-      author: 'Simran Vatyani',
-      role: 'Founder, SV Space Designs',
-    },
   },
   'prihaan-spices': {
     slug: 'prihaan-spices',
@@ -65,14 +58,8 @@ const caseStudiesData: Record<string, {
     metrics: [
       { label: 'Live Catalog SKUs', value: '252+', detail: 'Across 10 distinct food categories' },
       { label: 'WhatsApp Checkout Speed', value: '2.4s', detail: 'From cart to verified WhatsApp message' },
-      { label: 'Direct Online Orders', value: '+185%', detail: 'Growth in weekly direct retail orders' },
       { label: 'Image Asset Optimization', value: '-78%', detail: 'Bandwidth savings via edge WebP' },
     ],
-    quote: {
-      text: 'Our customers love how easily they can browse all 250+ spices and dry fruits and order on WhatsApp directly.',
-      author: 'Prihaan Management Team',
-      role: 'Prihaan Spices & Agro Foods',
-    },
   },
   'silver-spoon': {
     slug: 'silver-spoon',
@@ -82,22 +69,15 @@ const caseStudiesData: Record<string, {
     year: '2024',
     heroImage: '/silverspoon-screenshot.png',
     liveUrl: 'https://www.silverspoonbyacj.com',
-    headline: 'Scaling a heritage silver gifting brand to +280% online sales with headless Next.js.',
+    headline: 'A fast, headless Next.js storefront for a heritage silver gifting brand.',
     summary: 'A bespoke luxury e-commerce platform built to replace a legacy Shopify theme with an ultra-fast headless Next.js storefront, 3D gift configurator, and sub-second checkout.',
     challenge: 'The client experienced high bounce rates on mobile due to 4.8s page load times, heavy unoptimized assets, and a fragmented checkout dropoff rate exceeding 68%.',
     solution: 'We engineered a headless Next.js 15 storefront using Shopify Storefront GraphQL APIs, edge cached with Vercel and Cloudflare. Added custom responsive image preloading and 60fps micro-interactions.',
     architecture: ['Next.js 15 App Router', 'Shopify Storefront GraphQL', 'Tailwind CSS v4', 'Framer Motion', 'Cloudflare Edge CDN', 'Razorpay & Stripe International'],
     metrics: [
-      { label: 'Online Sales Growth', value: '+280%', detail: 'In the first 90 days post-launch' },
       { label: 'Largest Contentful Paint', value: '0.68s', detail: 'From 4.8s legacy benchmark' },
-      { label: 'Mobile Conversion Rate', value: '4.6%', detail: 'Up from 1.2% previous baseline' },
       { label: 'Core Web Vitals', value: '100 / 100', detail: 'Across all Google Lighthouse audits' },
     ],
-    quote: {
-      text: 'Mehta Technologies understood our luxury brand aesthetic completely. Our conversion rate tripled within 60 days of deploying the new storefront.',
-      author: 'Anand C. Jhaveri',
-      role: 'Managing Director, Silver Spoon by ACJ',
-    },
   },
   'vibo-erp': {
     slug: 'vibo-erp',
@@ -130,15 +110,8 @@ const caseStudiesData: Record<string, {
     architecture: ['Next.js 15 Static Export', 'JSON-LD Healthcare Schema', 'Tailwind CSS v4', 'WhatsApp Business API', 'Google Cloud CDN'],
     metrics: [
       { label: 'Google Search Ranking', value: '#1', detail: 'For 12 high-intent dental keywords' },
-      { label: 'Weekly Patient Inquiries', value: '3.8x', detail: 'Increase in booked appointments' },
       { label: 'Mobile Page Load Time', value: '0.55s', detail: 'Sub-second first contentful paint' },
-      { label: 'Patient Trust Score', value: '99.8%', detail: 'Verified patient feedback rating' },
     ],
-    quote: {
-      text: 'Within 3 months of launch, we reached the #1 position on Google for dental implants in our area. Our appointment schedule is full weeks in advance.',
-      author: 'Dr. Chahana Patel',
-      role: 'Chief Dental Surgeon',
-    },
   },
   'destination-anywhere': {
     slug: 'destination-anywhere',
@@ -155,15 +128,8 @@ const caseStudiesData: Record<string, {
     architecture: ['Next.js App Router', 'Tailwind CSS', 'Framer Motion', 'Edge CDN Delivery'],
     metrics: [
       { label: 'Global Destinations', value: '40+ Countries', detail: 'Curated international luxury tours' },
-      { label: 'Direct Booking Growth', value: '+190%', detail: 'In qualified consultation calls' },
       { label: 'Image Load Latency', value: '0.45s', detail: 'Edge-optimized responsive gallery' },
-      { label: 'Client Satisfaction', value: '100%', detail: 'Zero unfulfilled itineraries' },
     ],
-    quote: {
-      text: 'The platform gives our high-net-worth clients the exact bespoke luxury feeling they expect from our journeys.',
-      author: 'Travel Leadership',
-      role: 'Destination Anywhere',
-    },
   },
   'zingbliss-events': {
     slug: 'zingbliss-events',
@@ -179,16 +145,8 @@ const caseStudiesData: Record<string, {
     solution: 'Designed an editorial visual portfolio with smooth motion aesthetics, destination package calculator, and instant VIP consultation scheduling.',
     architecture: ['Next.js App Router', 'Tailwind CSS', 'Framer Motion', 'Vercel Global Edge'],
     metrics: [
-      { label: 'Inquiry Conversion', value: '3.8x', detail: 'Growth in confirmed destination bookings' },
-      { label: 'Average Contract Value', value: '+45%', detail: 'Higher tier package selection' },
       { label: 'Mobile Performance', value: '99 / 100', detail: 'Smooth animations across devices' },
-      { label: 'Client Trust Rating', value: '5.0 / 5.0', detail: 'Flawless production feedback' },
     ],
-    quote: {
-      text: 'Our inbound leads skyrocketed immediately after deploying the new site. The visual presentation is unmatched.',
-      author: 'ZingBliss Team',
-      role: 'Creative Directors',
-    },
   },
   'ares-business-league': {
     slug: 'ares-business-league',
@@ -200,18 +158,12 @@ const caseStudiesData: Record<string, {
     liveUrl: 'https://www.aresbusinessleague.com',
     headline: 'Executive business networking league, member directory & chapter referral tracking portal.',
     summary: 'A private business league portal unifying executive member directories, chapter attendance tracking, and cross-company business referral telemetry.',
-    challenge: 'Managing hundreds of executive members and tracking millions in business referrals required a robust, secure B2B platform.',
+    challenge: 'Managing a growing base of executive members and their business referrals required a robust, secure B2B platform.',
     solution: 'Developed a custom Next.js portal with role-based member dashboards, chapter directories, and automated referral logging.',
     architecture: ['Next.js 15', 'Tailwind CSS', 'PostgreSQL', 'Vercel Deployment'],
     metrics: [
-      { label: 'Executive Members', value: '500+', detail: 'Active across multiple business chapters' },
       { label: 'Directory Lookup Speed', value: '0.2s', detail: 'Instant member filtering' },
     ],
-    quote: {
-      text: 'The Ares portal has completely streamlined how our members collaborate and pass business referrals.',
-      author: 'Executive Committee',
-      role: 'Ares Business League',
-    },
   },
   'club-mj-events': {
     slug: 'club-mj-events',
@@ -227,10 +179,9 @@ const caseStudiesData: Record<string, {
     solution: 'Built a Next.js gallery and inquiry experience with optimized image delivery for a large real-event photo library, structured service pages by celebration type, and a direct WhatsApp/consultation funnel.',
     architecture: ['Next.js App Router', 'Tailwind CSS', 'Framer Motion', 'Vercel Edge'],
     metrics: [
-      { label: 'Events Delivered', value: '250+', detail: 'Weddings, corporate productions & private celebrations' },
-      { label: 'Client Satisfaction', value: '98%', detail: 'Self-reported across delivered events' },
-      { label: 'Industry Recognition', value: 'EMF Global Ace Awards 2026', detail: 'Best Wedding of the Year & Best Mehndi Function of the Year' },
-      { label: 'Reach', value: '15+ Cities', detail: 'Domestic & destination celebrations, India and worldwide' },
+      { label: 'Events Delivered', value: '250+', detail: 'As stated by CMJ Events' },
+      { label: 'Client Satisfaction', value: '98%', detail: 'Self-reported by CMJ Events' },
+      { label: 'Industry Recognition', value: 'EMF Global Ace Awards 2026', detail: 'Best Wedding of the Year & Best Mehndi Function of the Year, as claimed by CMJ Events' },
     ],
   },
   'naam-transfer': {
@@ -248,15 +199,8 @@ const caseStudiesData: Record<string, {
     architecture: ['Next.js 15', 'Tailwind CSS', 'Encrypted Intake Pipeline', 'Vercel Edge'],
     metrics: [
       { label: 'Automated Intake Rate', value: '100%', detail: 'Fully digitized documentation pipeline' },
-      { label: 'Turnaround Time Reduction', value: '-65%', detail: 'Faster processing for clients' },
-      { label: 'Client Reviews', value: '5.0 / 5', detail: 'High trust in legal filings' },
       { label: 'Mobile Ease of Use', value: '100 / 100', detail: 'Accessible for all age demographics' },
     ],
-    quote: {
-      text: 'Property owners now complete their legal transfer paperwork in minutes instead of weeks of running to government offices.',
-      author: 'Legal Operations',
-      role: 'Naam Transfer',
-    },
   },
   'nexsphere-global': {
     slug: 'nexsphere-global',
@@ -273,15 +217,7 @@ const caseStudiesData: Record<string, {
     architecture: ['Next.js App Router', 'Tailwind CSS', 'Interactive Calculators', 'Vercel Edge'],
     metrics: [
       { label: 'Jurisdictions Covered', value: '25+ Countries', detail: 'International corporate compliance' },
-      { label: 'Inbound Inquiries', value: '+240%', detail: 'In cross-border advisory mandates' },
-      { label: 'Calculator Engagements', value: '12K+ Monthly', detail: 'High user retention' },
-      { label: 'Security & Compliance', value: 'Bank-Grade', detail: 'Encrypted lead communications' },
     ],
-    quote: {
-      text: 'The advisory portal immediately established our credibility with multinational founders expanding overseas.',
-      author: 'Managing Partner',
-      role: 'NexSphere Global',
-    },
   },
   'jukebox-media': {
     slug: 'jukebox-media',
@@ -296,17 +232,7 @@ const caseStudiesData: Record<string, {
     challenge: 'Demonstrating measurable performance marketing ROI to consumer brands in a crowded digital agency landscape.',
     solution: 'Engineered an interactive case study gallery with dynamic metric counters, video embeds, and live client campaign results.',
     architecture: ['Next.js 15', 'Tailwind CSS', 'Framer Motion', 'Vercel Deployment'],
-    metrics: [
-      { label: 'Average Client ROAS', value: '4.8x', detail: 'Across paid performance campaigns' },
-      { label: 'Organic Impressions', value: '12M+', detail: 'Generated for partner consumer brands' },
-      { label: 'Creator Roster', value: '100+', detail: 'Exclusive talent partnerships' },
-      { label: 'Inbound Client Growth', value: '+210%', detail: 'In direct retainer agreements' },
-    ],
-    quote: {
-      text: 'Our website serves as our ultimate pitch deck. Clients see our real campaign data and convert immediately.',
-      author: 'Creative Leadership',
-      role: 'Jukebox Media',
-    },
+    metrics: [],
   },
   'rising-rechargeable': {
     slug: 'rising-rechargeable',
@@ -323,14 +249,8 @@ const caseStudiesData: Record<string, {
     architecture: ['Next.js App Router', 'Tailwind CSS', 'B2B RFQ Calculator', 'Vercel Edge'],
     metrics: [
       { label: 'Energy Solutions Catalog', value: '80+ Battery SKUs', detail: 'Across consumer, EV & industrial storage' },
-      { label: 'B2B Quote Submissions', value: '+175%', detail: 'In bulk distributor inquiries' },
       { label: 'Page Load Speed', value: '0.48s', detail: 'Sub-second technical catalog' },
     ],
-    quote: {
-      text: 'The product catalog makes it straightforward for industrial distributors to find exact battery specs and request volume quotes.',
-      author: 'Management',
-      role: 'Rising Rechargeable',
-    },
   },
   'fgp-industries': {
     slug: 'fgp-industries',
@@ -346,16 +266,8 @@ const caseStudiesData: Record<string, {
     solution: 'Designed an industrial specification explorer with 3D product diagrams, engineering standards breakdowns, and direct technical quoting.',
     architecture: ['Next.js 15', 'Tailwind CSS', 'Industrial Spec Sheets', 'Vercel Deployment'],
     metrics: [
-      { label: 'Industrial Projects Delivered', value: '250+', detail: 'To major chemical & pharma plants' },
       { label: 'Specification Download Time', value: '0.38s', detail: 'Instant engineering datasheets' },
-      { label: 'Enterprise RFQs', value: '+140%', detail: 'Growth in turnkey manufacturing bids' },
-      { label: 'Quality Certification', value: 'ISO 9001:2015', detail: 'Stringent industrial compliance' },
     ],
-    quote: {
-      text: 'Our technical capabilities are presented with the engineering precision our industrial clients demand.',
-      author: 'Technical Director',
-      role: 'FGP Industries',
-    },
   },
   'aangan-boutique': {
     slug: 'aangan-boutique',
@@ -370,17 +282,7 @@ const caseStudiesData: Record<string, {
     challenge: 'Reaching high-spending Indian diaspora brides in the USA, UK, and Canada with a trustworthy luxury digital experience.',
     solution: 'Built an editorial bridal lookbook with multi-currency conversion, video appointment booking, and WhatsApp concierge styling.',
     architecture: ['Shopify Plus', 'Next.js Frontend', 'Tailwind CSS', 'Currency Localization'],
-    metrics: [
-      { label: 'International Sales Reach', value: '12+ Countries', detail: 'Worldwide bridal couture shipments' },
-      { label: 'Virtual Bridal Appointments', value: '4.2x', detail: 'Increase in scheduled video consultations' },
-      { label: 'Average Order Value', value: '₹1.8L+', detail: 'In bespoke custom bridal lehengas' },
-      { label: 'Mobile Conversion', value: '4.8%', detail: 'Optimized for mobile shoppers' },
-    ],
-    quote: {
-      text: 'Brides from across the globe book video calls with us directly through the website. It has transformed our boutique.',
-      author: 'Design Lead',
-      role: 'Aangan Boutique',
-    },
+    metrics: [],
   },
   'si-decor': {
     slug: 'si-decor',
@@ -396,16 +298,8 @@ const caseStudiesData: Record<string, {
     solution: 'Created an aesthetic portfolio gallery with before/after comparisons, room-by-room walkthroughs, and direct project estimates.',
     architecture: ['Next.js App Router', 'Tailwind CSS', 'Framer Motion', 'Vercel Edge'],
     metrics: [
-      { label: 'Turnkey Residences Delivered', value: '75+', detail: 'Completed on-time and within budget' },
-      { label: 'Consultation Inquiries', value: '+220%', detail: 'In direct interior design consultations' },
-      { label: 'Client Rating', value: '4.9 / 5', detail: 'Across residential homeowners' },
       { label: 'Mobile Speed', value: '100 / 100', detail: 'Fast photo gallery rendering' },
     ],
-    quote: {
-      text: 'Homeowners love the clean aesthetic and how effortlessly they can view our completed projects.',
-      author: 'Founder & Principal Designer',
-      role: 'SI Decor & Interiors',
-    },
   },
   'jade-travels': {
     slug: 'jade-travels',

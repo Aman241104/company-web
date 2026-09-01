@@ -45,7 +45,11 @@ function useMobileDockClearance(row0Ref, row1Ref, row2Ref, row3Ref) {
         const el = ref.current
         if (!el) return
         const rect = el.getBoundingClientRect()
-        const wouldBeCoveredOnLoad = rect.top < window.innerHeight && rect.bottom > dangerZoneTop
+        // Require a meaningful overlap (not a sub-pixel graze) before
+        // correcting — a fraction-of-a-pixel touch of the danger zone
+        // shouldn't trigger a full push-past-the-viewport correction.
+        const overlap = Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, dangerZoneTop)
+        const wouldBeCoveredOnLoad = rect.top < window.innerHeight && overlap > 16
         if (wouldBeCoveredOnLoad) {
           // Push this row (and everything after it, via normal flow) just
           // past the bottom of the viewport — clear of the dock, reachable

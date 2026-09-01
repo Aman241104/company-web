@@ -101,7 +101,11 @@ export default function Navbar() {
       if (e.key === 'Escape') setOpen(false)
     }
     window.addEventListener('keydown', handleEsc)
-    return () => window.removeEventListener('keydown', handleEsc)
+    document.body.style.overflow = 'hidden'
+    return () => {
+      window.removeEventListener('keydown', handleEsc)
+      document.body.style.overflow = ''
+    }
   }, [open])
 
   return (
@@ -162,6 +166,20 @@ export default function Navbar() {
           </div>
         </div>
 
+        {/* Mobile menu backdrop */}
+        <AnimatePresence>
+          {open && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              onClick={() => setOpen(false)}
+              className="md:hidden fixed inset-0 top-[60px] bg-black/60 backdrop-blur-sm z-40"
+            />
+          )}
+        </AnimatePresence>
+
         {/* Mobile menu dropdown */}
         <AnimatePresence>
           {open && (
@@ -170,7 +188,7 @@ export default function Navbar() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.2 }}
-              className="md:hidden mx-4 mb-4 p-3 rounded-2xl bg-[#0B0D14] backdrop-blur-2xl border border-white/10 shadow-2xl"
+              className="md:hidden relative z-50 mx-4 mb-4 p-3 rounded-2xl bg-[#0B0D14] backdrop-blur-2xl border border-white/10 shadow-2xl"
             >
               {links.map((l) => (
                 <Link

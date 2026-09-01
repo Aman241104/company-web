@@ -349,7 +349,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
   if (!study) notFound()
 
   return (
-    <main className="bg-transparent min-h-screen">
+    <main id="main-content" className="bg-transparent min-h-screen">
       <Navbar />
 
       <div className="pt-32 pb-24 max-w-[1200px] mx-auto px-6 md:px-8">

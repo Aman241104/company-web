@@ -50,6 +50,7 @@ const projects = [
     name: 'Vibo ERP',
     slug: 'vibo-erp',
     category: 'Our Own Product',
+    categoryFilter: 'SaaS',
     subtitle: 'In-House Business Management Software',
     desc: 'Our own product — sales, inventory, billing and customers, built and refined through everyday use in our own operations.',
     tags: ['Next.js 15', 'Sales', 'Inventory', 'Billing'],
@@ -339,7 +340,7 @@ export default function WorkPage() {
   const filtered =
     activeCategory === 'All'
       ? projects
-      : projects.filter((p) => p.category === activeCategory)
+      : projects.filter((p) => (p.categoryFilter || p.category) === activeCategory)
 
   return (
     <div className="pt-32 pb-24 overflow-hidden">
@@ -372,7 +373,7 @@ export default function WorkPage() {
             const count =
               cat === 'All'
                 ? projects.length
-                : projects.filter((p) => p.category === cat).length
+                : projects.filter((p) => (p.categoryFilter || p.category) === cat).length
             return (
               <button
                 key={cat}

@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function TermsPage() {
   return (
-    <main className="bg-transparent relative overflow-x-hidden min-h-screen">
+    <main id="main-content" className="bg-transparent relative overflow-x-hidden min-h-screen">
       <Navbar />
       
       <div className="pt-32 pb-24 max-w-[900px] mx-auto px-6 md:px-8">

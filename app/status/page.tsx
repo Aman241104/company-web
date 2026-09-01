@@ -20,8 +20,9 @@ const commitments = [
 
 export default function StatusPage() {
   return (
+    <>
+    <Navbar />
     <main id="main-content" tabIndex={-1} className="bg-[#07080C] min-h-screen text-white">
-      <Navbar />
 
       <div className="pt-32 pb-24 max-w-[1200px] mx-auto px-6 md:px-8">
 
@@ -118,5 +119,6 @@ export default function StatusPage() {
 
       <Footer />
     </main>
+    </>
   )
 }

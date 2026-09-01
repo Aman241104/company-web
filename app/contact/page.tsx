@@ -53,8 +53,8 @@ export default function Contact() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(contactSchema) }} />
+      <Navbar />
       <main id="main-content" tabIndex={-1} className="bg-transparent">
-        <Navbar />
         <ContactPage />
         <Footer />
       </main>

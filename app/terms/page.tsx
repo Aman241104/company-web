@@ -12,8 +12,9 @@ export const metadata: Metadata = {
 
 export default function TermsPage() {
   return (
+    <>
+    <Navbar />
     <main id="main-content" tabIndex={-1} className="bg-transparent relative overflow-x-hidden min-h-screen">
-      <Navbar />
       
       <div className="pt-32 pb-24 max-w-[900px] mx-auto px-6 md:px-8">
         <Link
@@ -101,5 +102,6 @@ export default function TermsPage() {
 
       <Footer />
     </main>
+    </>
   )
 }

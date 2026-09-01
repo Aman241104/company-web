@@ -12,10 +12,12 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <main id="main-content" tabIndex={-1} className="bg-[#07080C] min-h-screen text-white">
+    <>
       <Navbar />
-      <LabsPage />
-      <Footer />
-    </main>
+      <main id="main-content" tabIndex={-1} className="bg-[#07080C] min-h-screen text-white">
+        <LabsPage />
+        <Footer />
+      </main>
+    </>
   )
 }

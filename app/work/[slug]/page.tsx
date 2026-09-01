@@ -349,8 +349,9 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
   if (!study) notFound()
 
   return (
+    <>
+    <Navbar />
     <main id="main-content" tabIndex={-1} className="bg-transparent min-h-screen">
-      <Navbar />
 
       <div className="pt-32 pb-24 max-w-[1200px] mx-auto px-6 md:px-8">
         {/* Back navigation */}
@@ -503,5 +504,6 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
       <Footer />
     </main>
+    </>
   )
 }

@@ -30,8 +30,8 @@ export default function Solutions() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <Navbar />
       <main id="main-content" tabIndex={-1} className="bg-transparent">
-        <Navbar />
         <SolutionsPage />
         <Footer />
       </main>

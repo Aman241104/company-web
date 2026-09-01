@@ -10,8 +10,9 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
+    <>
+    <Navbar />
     <main id="main-content" tabIndex={-1} className="bg-[#07080C] min-h-screen text-white">
-      <Navbar />
 
       <div className="pt-40 pb-32 max-w-[900px] mx-auto px-6 md:px-8 text-center">
         <span className="glow-pill inline-flex items-center gap-2 mb-6">
@@ -56,5 +57,6 @@ export default function NotFound() {
 
       <Footer />
     </main>
+    </>
   )
 }

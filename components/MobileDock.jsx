@@ -19,7 +19,14 @@ export default function MobileDock() {
   const pathname = usePathname()
   const [visible, setVisible] = useState(true)
   const [lastY, setLastY] = useState(0)
+  const [navMenuOpen, setNavMenuOpen] = useState(false)
   const navRef = useRef(null)
+
+  useEffect(() => {
+    const handleNavToggle = (e) => setNavMenuOpen(!!e.detail?.open)
+    window.addEventListener('mobile-nav-toggle', handleNavToggle)
+    return () => window.removeEventListener('mobile-nav-toggle', handleNavToggle)
+  }, [])
 
   // Publish the dock's real rendered footprint (height + its fixed offset
   // from the viewport bottom, plus a safety buffer) as a CSS custom property
@@ -70,7 +77,7 @@ export default function MobileDock() {
 
   return (
     <AnimatePresence>
-      {visible && (
+      {visible && !navMenuOpen && (
         <motion.nav
           ref={navRef}
           initial={{ y: 70, opacity: 0 }}

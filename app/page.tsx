@@ -86,8 +86,8 @@ export default function Home() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <Navbar />
       <main id="main-content" tabIndex={-1} className="bg-transparent relative overflow-x-hidden w-full max-w-[100vw]">
-        <Navbar />
         <Hero />
         <ClientMarquee />
         <Stats />

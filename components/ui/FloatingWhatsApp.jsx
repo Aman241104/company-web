@@ -1,10 +1,21 @@
 'use client'
+import { useEffect, useState } from 'react'
 
 const WHATSAPP_NUMBER = '919876543210'
 const WHATSAPP_MESSAGE = 'Hi Mehta Technologies, I would like to know more about your services.'
 const WHATSAPP_HREF = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`
 
 export default function FloatingWhatsApp() {
+  const [navMenuOpen, setNavMenuOpen] = useState(false)
+
+  useEffect(() => {
+    const handleNavToggle = (e) => setNavMenuOpen(!!e.detail?.open)
+    window.addEventListener('mobile-nav-toggle', handleNavToggle)
+    return () => window.removeEventListener('mobile-nav-toggle', handleNavToggle)
+  }, [])
+
+  if (navMenuOpen) return null
+
   return (
     <a
       href={WHATSAPP_HREF}

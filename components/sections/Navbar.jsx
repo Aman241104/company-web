@@ -96,6 +96,13 @@ export default function Navbar() {
   }, [])
 
   useEffect(() => {
+    // Let other fixed-position elements (bottom mobile dock, floating
+    // WhatsApp button) know to get out of the way while this menu is
+    // open, so nothing stacks on top of it or stays reachable behind it.
+    window.dispatchEvent(new CustomEvent('mobile-nav-toggle', { detail: { open } }))
+  }, [open])
+
+  useEffect(() => {
     if (!open) return
     const handleEsc = (e) => {
       if (e.key === 'Escape') setOpen(false)

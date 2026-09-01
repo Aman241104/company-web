@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -88,6 +88,9 @@ function NavLink({ href, children, dropdown }) {
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+  const mobileMenuRef = useRef(null)
+  const mobileToggleRef = useRef(null)
+  const lastFocusedRef = useRef(null)
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 20)
@@ -104,14 +107,47 @@ export default function Navbar() {
 
   useEffect(() => {
     if (!open) return
+
+    const main = document.getElementById('main-content')
+    lastFocusedRef.current = document.activeElement
+    document.body.style.overflow = 'hidden'
+    main?.setAttribute('aria-hidden', 'true')
+    mobileMenuRef.current?.querySelector('a, button')?.focus()
+
     const handleEsc = (e) => {
       if (e.key === 'Escape') setOpen(false)
     }
+    const handleTab = (e) => {
+      if (e.key !== 'Tab' || !mobileMenuRef.current) return
+      // The toggle button lives in the header row, outside the dropdown
+      // panel itself — include it explicitly so the trap loop covers the
+      // whole interactive surface of the open menu, not just the panel.
+      const panelFocusable = mobileMenuRef.current.querySelectorAll(
+        'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      )
+      const focusable = mobileToggleRef.current
+        ? [mobileToggleRef.current, ...panelFocusable]
+        : [...panelFocusable]
+      if (focusable.length === 0) return
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault()
+        last.focus()
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault()
+        first.focus()
+      }
+    }
+
     window.addEventListener('keydown', handleEsc)
-    document.body.style.overflow = 'hidden'
+    window.addEventListener('keydown', handleTab)
     return () => {
       window.removeEventListener('keydown', handleEsc)
+      window.removeEventListener('keydown', handleTab)
       document.body.style.overflow = ''
+      main?.removeAttribute('aria-hidden')
+      ;(lastFocusedRef.current || mobileToggleRef.current)?.focus()
     }
   }, [open])
 
@@ -179,6 +215,7 @@ export default function Navbar() {
           {/* Mobile menu toggle */}
           <div className="flex md:hidden items-center gap-2">
             <button
+              ref={mobileToggleRef}
               onClick={() => setOpen(!open)}
               aria-label={open ? 'Close menu' : 'Open menu'}
               aria-expanded={open}
@@ -193,6 +230,10 @@ export default function Navbar() {
         <AnimatePresence>
           {open && (
             <motion.div
+              ref={mobileMenuRef}
+              role="dialog"
+              aria-modal="true"
+              aria-label="Mobile menu"
               initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}

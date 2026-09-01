@@ -13,7 +13,7 @@ export default function HeroDashboardShowcase() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.15 }}
-        className="relative w-[112%] -mx-[6%] sm:w-[104%] sm:-mx-[2%] lg:w-[118%] lg:-ml-[9%] xl:w-[122%] xl:-ml-[11%] pb-10 sm:pb-14"
+        className="relative w-[104%] -mx-[2%] sm:w-[104%] sm:-mx-[2%] lg:w-[118%] lg:-ml-[9%] xl:w-[122%] xl:-ml-[11%] pb-10 sm:pb-14"
       >
         {/* Laptop: a premium business website */}
         <div className="relative w-full">
@@ -39,7 +39,7 @@ export default function HeroDashboardShowcase() {
         </div>
 
         {/* Phone: an e-commerce website */}
-        <div className="absolute -bottom-2 -right-2 sm:-right-4 w-[30%] max-w-[150px]">
+        <div className="absolute -bottom-2 right-0 sm:-right-4 w-[30%] max-w-[150px]">
           <div className="rounded-[1.4rem] border-[3px] border-[#1C1E26] bg-[#0B0D14] shadow-[0_25px_45px_rgba(0,0,0,0.6)] overflow-hidden">
             <div className="relative aspect-[9/19]">
               <Image

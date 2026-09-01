@@ -34,7 +34,7 @@ const cols = [
       { label: 'Leadership & Team', href: '/about#team' },
       { label: 'Careers', href: 'mailto:careers@mehtatechnologies.com' },
       { label: 'Engineering Labs', href: '/labs' },
-      { label: 'System Status', href: '/status' },
+      { label: 'Support Standards', href: '/status' },
       { label: 'Privacy Policy', href: '/privacy' },
       { label: 'Terms & Conditions', href: '/terms' },
     ],

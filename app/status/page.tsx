@@ -5,18 +5,17 @@ import Footer from '@/components/sections/Footer'
 import { CheckCircle2, ShieldCheck, Clock, ArrowLeft, ArrowUpRight } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: "Engineering & SLA Standards",
+  title: "Support & Maintenance Standards",
   description:
-    "The uptime targets, latency budgets, and infrastructure standards Mehta Technologies builds and contracts to for client production systems.",
+    "How Mehta Technologies handles deployments, maintenance, and ongoing support for client websites and software.",
   alternates: { canonical: "https://mehtatechnologies.com/status" },
 }
 
-const systems = [
-  { name: 'Web Platform & Edge SSR', target: '100% Uptime', latency: '< 50ms TTFB target', region: 'Global Edge Network' },
-  { name: 'Multi-Tenant SaaS / ERP Workloads', target: '99.99% Uptime SLA', latency: '< 25ms P95 query target', region: 'AWS Mumbai (ap-south-1)' },
-  { name: 'PostgreSQL Database & Connection Pooling', target: '99.99% Uptime SLA', latency: '< 20ms P95 target', region: 'Multi-AZ Read Replicas' },
-  { name: 'Payment Webhook Ingestion (Stripe/Razorpay)', target: '100% Delivery SLA', latency: '< 30ms target', region: 'Serverless Edge Queue' },
-  { name: 'Staging & Automated CI/CD Deployments', target: 'Zero-downtime deploys', latency: 'Automated rollback on failure', region: 'GitHub Actions & Docker' },
+const commitments = [
+  { name: 'Website & Hosting Uptime', target: 'Reliable, monitored hosting', detail: 'Built on modern, well-supported infrastructure' },
+  { name: 'Bug Fixes & Support', target: 'Prompt response', detail: 'Covered under your post-launch support window' },
+  { name: 'Deployments & Updates', target: 'Scheduled, low-risk rollouts', detail: 'Tested before going live, with rollback if something breaks' },
+  { name: 'Security & Backups', target: 'Regular patching', detail: 'Dependency updates and backups on an ongoing basis' },
 ]
 
 export default function StatusPage() {
@@ -25,7 +24,7 @@ export default function StatusPage() {
       <Navbar />
 
       <div className="pt-32 pb-24 max-w-[1200px] mx-auto px-6 md:px-8">
-        
+
         {/* Back link */}
         <div className="mb-8">
           <Link
@@ -36,42 +35,34 @@ export default function StatusPage() {
           </Link>
         </div>
 
-        {/* Status Header Banner */}
+        {/* Header Banner */}
         <div className="p-8 sm:p-12 rounded-3xl bg-emerald-950/[0.15] border border-emerald-500/30 mb-12 shadow-2xl shadow-emerald-950/30 relative overflow-hidden">
           <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-emerald-400 via-teal-300 to-transparent" />
-          
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
-            <div className="space-y-2">
-              <div className="flex items-center gap-2">
-                <ShieldCheck size={14} className="text-emerald-400" />
-                <span className="text-xs font-mono font-bold uppercase tracking-wider text-emerald-400">
-                  Contracted SLA Standard
-                </span>
-              </div>
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight">
-                99.99% Uptime SLA Commitment
-              </h1>
-              <p className="text-xs sm:text-sm text-white/60 font-normal">
-                The uptime, latency, and reliability targets we design to and contractually commit to for client applications, database clusters, and global edge delivery.
-              </p>
-            </div>
 
-            <div className="p-4 rounded-2xl bg-black/40 border border-white/10 text-center shrink-0">
-              <div className="text-[10px] font-mono text-white/55 uppercase mb-1">Latency Target</div>
-              <div className="text-3xl font-extrabold text-emerald-400 font-mono">&lt; 50ms</div>
-              <div className="text-[11px] text-white/50">Edge TTFB Budget</div>
+          <div className="space-y-2">
+            <div className="flex items-center gap-2">
+              <ShieldCheck size={14} className="text-emerald-400" />
+              <span className="text-xs font-mono font-bold uppercase tracking-wider text-emerald-400">
+                Support Standards
+              </span>
             </div>
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight">
+              Support & Maintenance Standards
+            </h1>
+            <p className="text-xs sm:text-sm text-white/60 font-normal max-w-2xl">
+              How we handle deployments, maintenance, and support for the websites and software we build — plain commitments, no fine print.
+            </p>
           </div>
         </div>
 
-        {/* System Component Breakdown */}
+        {/* Commitments Breakdown */}
         <div className="space-y-4 mb-16">
           <div className="text-xs font-mono uppercase tracking-wider text-white/55 mb-2">
-            SLA Targets by Infrastructure Component
+            What You Can Expect
           </div>
 
           <div className="grid grid-cols-1 gap-3">
-            {systems.map((s) => (
+            {commitments.map((s) => (
               <div
                 key={s.name}
                 className="p-5 rounded-2xl bg-white/[0.02] border border-white/[0.08] hover:border-white/15 transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-4"
@@ -81,18 +72,12 @@ export default function StatusPage() {
                     <CheckCircle2 size={15} className="text-emerald-400 shrink-0" />
                     <span>{s.name}</span>
                   </div>
-                  <div className="text-xs text-white/55 font-mono pl-6">{s.region}</div>
+                  <div className="text-xs text-white/55 pl-6">{s.detail}</div>
                 </div>
 
-                <div className="flex items-center gap-4 text-xs font-mono pl-6 sm:pl-0">
-                  <div className="text-right">
-                    <span className="text-white/55">Target: </span>
-                    <span className="text-emerald-400 font-bold">{s.latency}</span>
-                  </div>
-                  <span className="px-2.5 py-1 rounded-md bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 font-semibold">
-                    {s.target}
-                  </span>
-                </div>
+                <span className="ml-6 sm:ml-0 px-2.5 py-1 rounded-md bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 font-semibold text-xs shrink-0 w-fit">
+                  {s.target}
+                </span>
               </div>
             ))}
           </div>
@@ -105,27 +90,27 @@ export default function StatusPage() {
           </h2>
 
           <div className="space-y-4 text-xs sm:text-sm text-white/60 leading-relaxed">
-            <p>Every production deployment ships through automated CI/CD with staged rollouts and automatic rollback on failed health checks — no manual, high-risk deploys.</p>
-            <p>Database migrations and infrastructure upgrades are scheduled in low-traffic windows and designed to be zero-downtime by default (rolling replicas, connection draining).</p>
-            <p>Enterprise SLA clients get a dedicated incident channel with contractual response-time commitments, detailed under Request Enterprise SLA Specs below.</p>
+            <p>Every update is tested before it goes live, with a plan to roll back quickly if something doesn&apos;t work as expected — no risky, untested changes to a live site.</p>
+            <p>Bigger changes and maintenance windows are scheduled at low-traffic times to minimize any disruption to your visitors.</p>
+            <p>Every project includes a post-launch support window (see your project plan) covering bug fixes and minor updates. Ongoing monthly retainers are available after that.</p>
           </div>
         </div>
 
-        {/* Need Dedicated SLA Support? */}
+        {/* Need Ongoing Support? */}
         <div className="p-8 sm:p-10 rounded-3xl bg-white/[0.02] border border-white/[0.08] flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
           <div>
             <h3 className="text-xl font-bold text-white tracking-tight mb-1">
-              Need custom 24/7 SLA infrastructure for your enterprise?
+              Need ongoing support for your website?
             </h3>
             <p className="text-xs sm:text-sm text-white/50">
-              We manage dedicated multi-region AWS/Cloudflare clusters with contractual 99.99% uptime guarantees.
+              Ask us about monthly maintenance and support retainers.
             </p>
           </div>
           <Link
             href="/contact"
             className="px-6 py-3.5 rounded-full text-xs font-semibold bg-white text-black hover:bg-white/90 transition-all shadow-xl shadow-white/10 whitespace-nowrap"
           >
-            Request Enterprise SLA Specs <ArrowUpRight size={13} className="inline ml-1" />
+            Get in Touch <ArrowUpRight size={13} className="inline ml-1" />
           </Link>
         </div>
 

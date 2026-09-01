@@ -110,7 +110,7 @@ export default function Process() {
       >
         <div>
           <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight mb-2">
-            Ready to grow your business online?
+            Not sure where to start?
           </h3>
           <p className="text-sm text-white/50">
             Book a free, no-pressure consultation to talk through your website or project needs.

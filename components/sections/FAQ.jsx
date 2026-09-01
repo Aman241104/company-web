@@ -7,15 +7,15 @@ import { Plus, Minus, HelpCircle, ArrowRight } from 'lucide-react'
 const faqs = [
   {
     q: 'What types of projects do you work on?',
-    a: 'Everything from high-converting marketing websites and custom Shopify stores to multi-tenant SaaS platforms, cross-platform mobile apps (React Native/Flutter), and custom ERP systems. Our core focus is full-stack digital products where engineering precision, security, and UI design matter equally.',
+    a: 'Our core focus is website development — high-converting marketing websites, business websites, and e-commerce stores. We also build custom software, mobile apps, and our own product, Vibo ERP, for businesses that need more than a website.',
   },
   {
     q: 'How long does a typical project take?',
-    a: 'A custom Next.js landing page or marketing site takes 2–3 weeks. A full-stack web or mobile app takes 4–8 weeks depending on scope and integrations. Enterprise ERP and SaaS platforms take 8–16 weeks. We provide a milestone-guaranteed schedule before kicking off.',
+    a: 'A custom Next.js landing page or marketing site takes 2–3 weeks. A full business website or e-commerce store takes 4–8 weeks depending on scope and integrations. Custom software projects take 8–16 weeks. We provide a milestone-guaranteed schedule before kicking off.',
   },
   {
     q: 'Do you work with international clients?',
-    a: 'Yes. Over 35% of our client base is located across the US, UK, UAE, and Europe. We run overlapping hours, operate on asynchronous documentation pipelines, and bill seamlessly in USD or EUR.',
+    a: 'Yes. Alongside clients across India, we work with businesses abroad too. We run overlapping hours, operate on asynchronous documentation pipelines, and bill seamlessly in USD or EUR.',
   },
   {
     q: 'How is pricing structured?',

@@ -1,12 +1,12 @@
 'use client'
 import { motion } from 'framer-motion'
-import { Rocket, Package, ShieldCheck, Headphones } from 'lucide-react'
+import { Rocket, Users, Star, Headphones } from 'lucide-react'
 
 const stats = [
-  { icon: Rocket, value: '150+', label: 'Projects Delivered', desc: 'Across India, UAE, and US' },
-  { icon: Package, value: '10+', label: 'Proprietary Products', desc: 'In active production' },
-  { icon: ShieldCheck, value: '99.9%', label: 'Uptime & Reliability', desc: 'Enterprise SLAs guaranteed' },
-  { icon: Headphones, value: '24/7', label: 'Engineering Support', desc: 'Direct slack & phone access' },
+  { icon: Rocket, value: '150+', label: 'Projects Delivered', desc: 'Across India & globally' },
+  { icon: Users, value: '100+', label: 'Happy Clients', desc: 'Across industries' },
+  { icon: Star, value: '4.9/5', label: 'Client Satisfaction', desc: 'Rated by real clients' },
+  { icon: Headphones, value: 'Ongoing', label: 'Support & Maintenance', desc: 'Even after launch' },
 ]
 
 export default function Stats() {

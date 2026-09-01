@@ -28,11 +28,11 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL("https://mehtatechnologies.com"),
   title: {
-    default: "Mehta Technologies — Web, App & SaaS Development Agency India",
+    default: "Mehta Technologies — Website & E-Commerce Development Agency, Ahmedabad",
     template: "%s | Mehta Technologies",
   },
   description:
-    "Mehta Technologies is a full-stack digital agency in Mumbai & Bengaluru. We build high-performance websites, mobile apps, SaaS platforms, and run performance marketing campaigns that drive measurable business growth.",
+    "Mehta Technologies is an Ahmedabad-based web development agency. We design and build modern, fast, SEO-ready websites and e-commerce stores that help businesses build credibility, generate enquiries, and grow online.",
   authors: [{ name: "Mehta Technologies", url: "https://mehtatechnologies.com" }],
   creator: "Mehta Technologies",
   publisher: "Mehta Technologies",
@@ -47,16 +47,16 @@ export const metadata: Metadata = {
     locale: "en_IN",
     url: "https://mehtatechnologies.com",
     siteName: "Mehta Technologies",
-    title: "Mehta Technologies — Web, App & SaaS Development Agency India",
+    title: "Mehta Technologies — Website & E-Commerce Development Agency, Ahmedabad",
     description:
-      "Full-stack digital agency in Mumbai & Bengaluru. We build websites, mobile apps, SaaS platforms & run performance marketing campaigns.",
-    images: [{ url: "/og.png", width: 1200, height: 630, alt: "Mehta Technologies — Digital Agency India" }],
+      "Ahmedabad-based web development agency. We build websites, e-commerce stores, custom software & run performance marketing campaigns.",
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: "Mehta Technologies — Web Development Agency, Ahmedabad" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Mehta Technologies — Web, App & SaaS Development Agency India",
+    title: "Mehta Technologies — Website & E-Commerce Development Agency, Ahmedabad",
     description:
-      "Full-stack digital agency in Mumbai & Bengaluru. Websites, mobile apps, SaaS & performance marketing.",
+      "Ahmedabad-based web development agency. Websites, e-commerce, custom software & performance marketing.",
     images: ["/og.png"],
     creator: "@mehtatechnologies",
     site: "@mehtatechnologies",
@@ -81,12 +81,11 @@ const organizationSchema = {
   url: "https://mehtatechnologies.com",
   logo: "https://mehtatechnologies.com/brand/mehta-logo-icon-light.png",
   description:
-    "Full-stack digital agency in Mumbai & Bengaluru specialising in web development, mobile apps, SaaS platforms, and performance marketing.",
+    "Ahmedabad-based web development agency specialising in websites, e-commerce stores, custom software, and performance marketing.",
   email: "hello@mehtatechnologies.com",
   telephone: "+91-98765-43210",
   address: [
-    { "@type": "PostalAddress", addressLocality: "Mumbai", addressRegion: "MH", addressCountry: "IN" },
-    { "@type": "PostalAddress", addressLocality: "Bengaluru", addressRegion: "KA", addressCountry: "IN" },
+    { "@type": "PostalAddress", addressLocality: "Ahmedabad", addressRegion: "GJ", addressCountry: "IN" },
   ],
   sameAs: [
     "https://linkedin.com/company/mehta-technologies",

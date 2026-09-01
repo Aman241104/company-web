@@ -132,7 +132,7 @@ export default function Testimonials() {
             <span className="text-gradient-accent">Backed by results.</span>
           </h2>
           <p className="text-base sm:text-lg text-white/50 leading-relaxed max-w-2xl mx-auto">
-            150+ shipped projects and an average 4.9/5 satisfaction rating across India, the US, UK, and UAE.
+            150+ shipped projects and an average 4.9/5 satisfaction rating from businesses across India.
           </p>
         </motion.div>
       </div>

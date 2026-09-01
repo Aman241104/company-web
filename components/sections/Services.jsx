@@ -1,49 +1,49 @@
 'use client'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { Monitor, Code2, Smartphone, TrendingUp, Search, Cloud, ArrowRight, Check } from 'lucide-react'
+import { Monitor, Code2, Smartphone, TrendingUp, Search, ShoppingCart, ArrowRight, Check } from 'lucide-react'
 
 const services = [
   {
     icon: Monitor,
-    title: 'Web Platforms & Stores',
-    desc: 'High-performance Next.js web applications, headless commerce & Shopify stores engineered for conversion and sub-second load times.',
-    tags: ['Next.js 15', 'Tailwind', 'Headless CMS', 'Shopify Plus'],
+    title: 'Website Development',
+    desc: 'Modern, responsive and SEO-friendly websites designed to build trust, showcase your business, and generate enquiries.',
+    tags: ['Business Websites', 'Landing Pages', 'SEO-Ready', 'Fast & Mobile-First'],
     href: '/services',
   },
   {
-    icon: Smartphone,
-    title: 'Mobile App Engineering',
-    desc: 'Cross-platform iOS and Android apps with fluid native feel, offline syncing, real-time push notifications, and App Store submission.',
-    tags: ['React Native', 'Flutter', 'iOS & Android', 'Push & Auth'],
+    icon: ShoppingCart,
+    title: 'E-Commerce Development',
+    desc: 'Online stores that make it easy for customers to browse, order and pay — built to sell, not just look good.',
+    tags: ['Shopify', 'Custom Storefronts', 'Payments', 'Inventory'],
     href: '/services',
   },
   {
     icon: Code2,
-    title: 'Custom Software & APIs',
-    desc: 'Bespoke backend architectures, microservices, secure REST/GraphQL APIs, and enterprise cloud integrations built for 99.9% uptime.',
-    tags: ['Node.js', 'PostgreSQL', 'Microservices', 'AWS / GCP'],
-    href: '/services',
-  },
-  {
-    icon: Cloud,
-    title: 'SaaS Platforms & ERP',
-    desc: 'Multi-tenant cloud platforms, automated billing with Stripe/Razorpay, role-based access, and enterprise workflow engines.',
-    tags: ['Multi-Tenant', 'Stripe Billing', 'RBAC', 'ViboERP'],
+    title: 'Custom Software Development',
+    desc: 'Web applications and business software built around your specific workflows, when off-the-shelf tools stop being enough.',
+    tags: ['Web Apps', 'Dashboards', 'Integrations', 'ERP'],
     href: '/services',
   },
   {
     icon: TrendingUp,
     title: 'Performance Marketing',
-    desc: 'Data-driven Meta and Google ad campaigns managed with relentless focus on ROAS, CAC reduction, and full-funnel attribution.',
+    desc: 'Google and Meta ad campaigns focused on bringing in the right traffic and turning it into real enquiries.',
     tags: ['Google Ads', 'Meta Ads', 'Funnel UX', 'ROAS Tracking'],
     href: '/services',
   },
   {
+    icon: Smartphone,
+    title: 'Mobile App Development',
+    desc: 'Cross-platform iOS and Android apps for businesses that need a native mobile presence alongside their website.',
+    tags: ['React Native', 'Flutter', 'iOS & Android'],
+    href: '/services',
+  },
+  {
     icon: Search,
-    title: 'Technical SEO & Speed',
-    desc: 'Architecture audits, keyword clustering, and Core Web Vitals optimization to win high-intent search rankings that compound into revenue.',
-    tags: ['Core Web Vitals', 'Schema Data', 'Technical SEO', 'Indexation'],
+    title: 'Technical SEO',
+    desc: 'Site structure, speed, and search fundamentals handled from day one so your website actually gets found.',
+    tags: ['Core Web Vitals', 'On-Page SEO', 'Schema Data'],
     href: '/services',
   },
 ]
@@ -67,14 +67,14 @@ export default function Services() {
           transition={{ duration: 0.5 }}
         >
           <span className="mb-4 inline-block text-xs font-bold tracking-widest uppercase text-blue-600">
-            Capabilities & Disciplines
+            What We Do
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-neutral-900 tracking-tight leading-tight mb-4">
-            One accountable team.{' '}
-            <span className="text-gradient-accent">Every layer.</span>
+            Complete digital solutions{' '}
+            <span className="text-gradient-accent">for your business.</span>
           </h2>
           <p className="text-sm sm:text-base lg:text-lg text-neutral-500 leading-relaxed">
-            Six interconnected disciplines under one roof. No fragmented agencies or unaccountable handoffs — we own the outcome end to end.
+            From building your online presence to developing custom digital solutions, we help businesses use technology to grow and operate better.
           </p>
         </motion.div>
       </div>
@@ -120,7 +120,7 @@ export default function Services() {
                   href={service.href}
                   className="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-600 group-hover:text-blue-700 transition-colors"
                 >
-                  Explore Capabilities <ArrowRight size={13} className="transition-transform group-hover:translate-x-1" />
+                  Explore More <ArrowRight size={13} className="transition-transform group-hover:translate-x-1" />
                 </Link>
               </div>
             </motion.div>

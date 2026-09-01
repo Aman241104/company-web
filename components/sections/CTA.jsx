@@ -19,18 +19,18 @@ export default function CTA() {
         >
           {/* Header pill */}
           <span className="glow-pill mb-6 inline-flex">
-            Ready to Build?
+            Get Started
           </span>
 
           {/* Main Title */}
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.08] mb-6">
-            Your vision deserves{' '}
-            <span className="text-gradient-accent">an elite launch.</span>
+            Ready to grow{' '}
+            <span className="text-gradient-accent">your business online?</span>
           </h2>
 
           {/* Description */}
           <p className="text-base sm:text-lg text-white/50 leading-relaxed max-w-xl mx-auto mb-10 font-normal">
-            Book a 30-minute discovery session with our engineering leads. We will review your architecture, define milestones, and provide a fixed-price proposal in 24 hours.
+            Let&apos;s discuss your business and build a website that helps you make a stronger impression and reach more customers.
           </p>
 
           {/* CTAs */}
@@ -39,13 +39,15 @@ export default function CTA() {
               href="/contact"
               className="w-full sm:w-auto px-8 py-4 rounded-full text-sm font-semibold bg-white text-black hover:bg-white/90 shadow-xl shadow-white/10 transition-all flex items-center justify-center gap-2 active:scale-98"
             >
-              Schedule Free Discovery Call <ArrowRight size={15} />
+              Get a Free Consultation <ArrowRight size={15} />
             </Link>
             <a
-              href="mailto:hello@mehtatechnologies.com"
+              href="https://wa.me/919876543210"
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-full sm:w-auto px-8 py-4 rounded-full text-sm font-semibold bg-white/[0.04] hover:bg-white/[0.08] text-white border border-white/10 hover:border-white/20 transition-all flex items-center justify-center gap-2"
             >
-              Email Brief Directly
+              WhatsApp Us
             </a>
           </div>
 
@@ -53,11 +55,11 @@ export default function CTA() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-10 border-t border-white/[0.08] max-w-2xl mx-auto text-xs text-white/50">
             <div className="flex items-center justify-center gap-2">
               <Clock size={14} className="text-blue-400" />
-              <span>24-Hour Scope Turnaround</span>
+              <span>Fixed-Price Proposal in 24 Hrs</span>
             </div>
             <div className="flex items-center justify-center gap-2">
               <ShieldCheck size={14} className="text-blue-400" />
-              <span>Mutual NDA Guaranteed</span>
+              <span>Mutual NDA on Request</span>
             </div>
             <div className="flex items-center justify-center gap-2">
               <Sparkles size={14} className="text-blue-400" />

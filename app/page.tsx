@@ -5,7 +5,6 @@ import ClientMarquee from '@/components/sections/ClientMarquee'
 import Services from '@/components/sections/Services'
 import Products from '@/components/sections/Products'
 import Stats from '@/components/sections/Stats'
-import EngineeringLab from '@/components/sections/EngineeringLab'
 import Process from '@/components/sections/Process'
 import Work from '@/components/sections/Work'
 import Testimonials from '@/components/sections/Testimonials'
@@ -17,14 +16,14 @@ import FastTrackDrawer from '@/components/ui/FastTrackDrawer'
 
 export const metadata: Metadata = {
   description:
-    "Mehta Technologies builds high-performance websites, mobile apps, SaaS platforms & runs performance marketing in Mumbai & Bengaluru. 150+ projects shipped. Talk to us today.",
+    "Mehta Technologies builds modern, fast, SEO-ready websites and e-commerce stores for businesses in Ahmedabad and across India. 150+ projects delivered. Get a free consultation today.",
   alternates: { canonical: "https://mehtatechnologies.com" },
   openGraph: {
     url: "https://mehtatechnologies.com",
-    title: "Mehta Technologies — Web, App & SaaS Development Agency India",
+    title: "Mehta Technologies — Website & E-Commerce Development Agency, Ahmedabad",
     description:
-      "150+ digital products shipped. We build websites, apps, SaaS platforms, and run marketing campaigns that deliver real business growth.",
-    images: [{ url: "/og.png", width: 1200, height: 630, alt: "Mehta Technologies — Digital Agency India" }],
+      "150+ websites & e-commerce stores shipped. We build sites that build trust, generate enquiries, and grow your business online.",
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: "Mehta Technologies — Web Development Agency, Ahmedabad" }],
   },
 }
 
@@ -49,8 +48,8 @@ const localBusinessSchema = {
   telephone: "+91-98765-43210",
   email: "hello@mehtatechnologies.com",
   priceRange: "₹₹₹",
-  address: { "@type": "PostalAddress", addressLocality: "Mumbai", addressRegion: "MH", postalCode: "400001", addressCountry: "IN" },
-  geo: { "@type": "GeoCoordinates", latitude: 19.076, longitude: 72.8777 },
+  address: { "@type": "PostalAddress", addressLocality: "Ahmedabad", addressRegion: "GJ", postalCode: "380001", addressCountry: "IN" },
+  geo: { "@type": "GeoCoordinates", latitude: 23.0225, longitude: 72.5714 },
   openingHoursSpecification: {
     "@type": "OpeningHoursSpecification",
     dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
@@ -63,8 +62,8 @@ const localBusinessSchema = {
     "https://instagram.com/mehtatechnologies",
   ],
   knowsAbout: [
-    "Web Development", "Mobile App Development", "SaaS Platforms", "Custom ERP Systems",
-    "Technical SEO", "Performance Marketing", "AI Integration", "Cloud & DevOps",
+    "Web Development", "E-Commerce Development", "Custom Software Development",
+    "Technical SEO", "Performance Marketing", "Custom ERP Systems",
   ],
 }
 
@@ -77,7 +76,7 @@ const faqSchema = {
       name: "What types of projects do you work on?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Everything from high-converting marketing websites and custom Shopify stores to multi-tenant SaaS platforms, cross-platform mobile apps (React Native/Flutter), and custom ERP systems. Our core focus is full-stack digital products where engineering precision, security, and UI design matter equally.",
+        text: "Our core focus is website development — high-converting marketing websites, business websites, and e-commerce stores. We also build custom software, mobile apps, and our own product, Vibo ERP, for businesses that need more than a website.",
       },
     },
     {
@@ -165,12 +164,11 @@ export default function Home() {
         <Navbar />
         <Hero />
         <ClientMarquee />
-        <Services />
-        <Products />
         <Stats />
-        <EngineeringLab />
+        <Services />
         <Work />
         <Process />
+        <Products />
         <Testimonials />
         <Pricing />
         <FAQ />

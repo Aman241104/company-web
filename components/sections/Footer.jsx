@@ -6,35 +6,37 @@ import { locations } from '@/lib/locations'
 
 const cols = [
   {
-    title: 'Products & Platforms',
+    title: 'Quick Links',
     links: [
-      { label: 'Vibo ERP Suite', href: '/#products' },
-      { label: 'Mehta Tech Labs', href: '/labs' },
-      { label: 'Inventory Matrix', href: '/#products' },
-      { label: 'HRMS & Automated Payroll', href: '/#products' },
-      { label: 'AI Search & Analytics', href: '/#products' },
+      { label: 'Home', href: '/' },
+      { label: 'About Us', href: '/about' },
+      { label: 'Our Work', href: '/work' },
+      { label: 'Vibo ERP', href: '/#products' },
+      { label: 'Contact', href: '/contact' },
     ],
   },
   {
     title: 'Services',
     links: [
-      { label: 'Web Applications (Next.js)', href: '/services' },
-      { label: 'Mobile Apps (iOS & Android)', href: '/services' },
-      { label: 'Custom Enterprise ERP', href: '/services' },
-      { label: 'AI Integration & Workflows', href: '/services' },
-      { label: 'Technical SEO & Performance', href: '/services' },
+      { label: 'Website Development', href: '/services#service-01' },
+      { label: 'E-Commerce Development', href: '/services#service-01' },
+      { label: 'Custom Software Development', href: '/services#service-04' },
+      { label: 'Mobile App Development', href: '/services#service-03' },
+      { label: 'Performance Marketing', href: '/services#service-05' },
+      { label: 'Technical SEO', href: '/services#service-06' },
     ],
   },
   {
-    title: 'Company',
+    title: 'Other Links',
     links: [
-      { label: 'About Mehta Tech', href: '/about' },
-      { label: 'Portfolio & Case Studies', href: '/work' },
       { label: 'Industries & Solutions', href: '/solutions' },
-      { label: 'Interactive Pricing Matrix', href: '/#pricing' },
-      { label: 'Live System Status', href: '/status' },
+      { label: 'Pricing', href: '/#pricing' },
       { label: 'Leadership & Team', href: '/about#team' },
-      { label: 'Careers & Hiring', href: 'mailto:careers@mehtatechnologies.com' },
+      { label: 'Careers', href: 'mailto:careers@mehtatechnologies.com' },
+      { label: 'Engineering Labs', href: '/labs' },
+      { label: 'System Status', href: '/status' },
+      { label: 'Privacy Policy', href: '/privacy' },
+      { label: 'Terms & Conditions', href: '/terms' },
     ],
   },
   {
@@ -65,13 +67,13 @@ export default function Footer() {
             </Link>
 
             <p className="text-xs sm:text-sm text-white/50 leading-relaxed max-w-sm font-normal">
-              High-performance digital engineering studio. We build production-ready web applications, mobile apps, and scalable SaaS platforms for visionary founders and global enterprises.
+              We build websites, e-commerce stores, and digital solutions that help businesses build their online presence and grow.
             </p>
 
             <div className="space-y-2 text-xs text-white/50">
               <div className="flex items-center gap-2">
                 <MapPin size={13} className="text-blue-400" />
-                <span>Mumbai, India · Working Globally</span>
+                <span>Ahmedabad, Gujarat, India · Serving Clients Globally</span>
               </div>
               <div className="flex items-center gap-2">
                 <Mail size={13} className="text-blue-400" />

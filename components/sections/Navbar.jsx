@@ -10,19 +10,18 @@ const WHATSAPP_MESSAGE = "Hi Mehta Technologies, I'd like to talk about a projec
 const WHATSAPP_HREF = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`
 
 const links = [
-  { label: 'Products', href: '/#products' },
   {
     label: 'Services',
     href: '/services',
     dropdown: [
-      { label: 'Web & Platforms', href: '/services#service-01' },
-      { label: 'Mobile Applications', href: '/services#service-03' },
-      { label: 'Custom Software & ERP', href: '/services#service-04' },
-      { label: 'Growth & SEO', href: '/services#service-05' },
+      { label: 'Website Development', href: '/services#service-01' },
+      { label: 'Custom Software Development', href: '/services#service-04' },
+      { label: 'Mobile App Development', href: '/services#service-03' },
+      { label: 'Performance Marketing', href: '/services#service-05' },
     ],
   },
-  { label: 'Solutions', href: '/solutions' },
-  { label: 'Case Studies', href: '/work' },
+  { label: 'Our Work', href: '/work' },
+  { label: 'Vibo ERP', href: '/#products' },
   { label: 'About Us', href: '/about' },
   { label: 'Careers', href: 'mailto:careers@mehtatechnologies.com' },
 ]

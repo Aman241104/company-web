@@ -1,44 +1,44 @@
 'use client'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { Search, ClipboardList, Lightbulb, Code2, Rocket, LifeBuoy, ArrowRight } from 'lucide-react'
+import { Target, Smartphone, Zap, Layers, MessageSquare, LifeBuoy, ArrowRight } from 'lucide-react'
 
 const processSteps = [
   {
     id: '01',
-    title: 'Discovery & Scoping',
-    icon: Search,
-    desc: 'We analyze your business architecture, unit economics, and user flows to define fixed deliverables, milestone schedules, and technical requirements.',
+    title: 'Business Focused',
+    icon: Target,
+    desc: 'We build solutions around your business goals, not just around design trends.',
   },
   {
     id: '02',
-    title: 'Architecture & UX',
-    icon: Lightbulb,
-    desc: 'Interactive Figma design systems and database schemas you can test before writing a single line of production code.',
+    title: 'Mobile First',
+    icon: Smartphone,
+    desc: 'Every website is designed to work perfectly across mobile, tablet and desktop.',
   },
   {
     id: '03',
-    title: 'Agile Engineering',
-    icon: Code2,
-    desc: 'Two-week sprint cycles with live staging URLs, automated GitHub CI/CD pipelines, and direct Slack communications with your engineers.',
+    title: 'Fast & SEO Ready',
+    icon: Zap,
+    desc: 'Built with speed, performance and search engine fundamentals in mind.',
   },
   {
     id: '04',
-    title: 'QA & Security Hardening',
-    icon: ClipboardList,
-    desc: 'End-to-end regression testing, Core Web Vitals profiling, load tests, and security penetration checks before rollout.',
+    title: 'Custom & Scalable',
+    icon: Layers,
+    desc: 'Your website is designed around your business and can grow as your requirements grow.',
   },
   {
     id: '05',
-    title: 'Production Deployment',
-    icon: Rocket,
-    desc: 'Zero-downtime DNS propagation, automated backup verification, analytics integration, and real-time error logging.',
+    title: 'Clear Communication',
+    icon: MessageSquare,
+    desc: 'Simple discussions, regular updates and a transparent development process.',
   },
   {
     id: '06',
-    title: 'SLA Support & Scale',
+    title: 'Ongoing Support',
     icon: LifeBuoy,
-    desc: 'Guaranteed 99.9% uptime maintenance, feature enhancements, and continuous performance tuning as your user base expands.',
+    desc: 'We continue to support you even after your website goes live.',
   },
 ]
 
@@ -54,14 +54,14 @@ export default function Process() {
           transition={{ duration: 0.5 }}
         >
           <span className="glow-pill mb-4 inline-flex">
-            Engineering Methodology
+            Why Choose Us
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight mb-4">
-            Predictable sprints.{' '}
-            <span className="text-gradient-accent">Zero guesswork.</span>
+            Why businesses choose{' '}
+            <span className="text-gradient-accent">Mehta Technologies.</span>
           </h2>
           <p className="text-sm sm:text-base lg:text-lg text-white/50 leading-relaxed">
-            No endless delays or scope surprises. We operate with strict milestone accountability, weekly staging deployments, and fixed pricing.
+            No endless delays or scope surprises. Clear communication, fixed pricing, and a website built around your business — not a template.
           </p>
         </motion.div>
       </div>
@@ -85,7 +85,7 @@ export default function Process() {
                     <Icon size={18} />
                   </div>
                   <span className="text-xs font-mono font-bold text-white/30 tracking-wider">
-                    STEP {step.id}
+                    {step.id}
                   </span>
                 </div>
                 <h3 className="text-lg sm:text-xl font-bold text-white tracking-tight mb-2 sm:mb-3">
@@ -110,17 +110,17 @@ export default function Process() {
       >
         <div>
           <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight mb-2">
-            Ready to scope your project with an engineer?
+            Ready to grow your business online?
           </h3>
           <p className="text-sm text-white/50">
-            Book a complimentary 30-minute architecture discovery session. No sales pressure — strictly technical review.
+            Book a free, no-pressure consultation to talk through your website or project needs.
           </p>
         </div>
         <Link
           href="/contact"
           className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full text-xs font-semibold bg-white text-black hover:bg-white/90 active:scale-[0.98] transition-all whitespace-nowrap shadow-lg shadow-white/10"
         >
-          Book Architecture Session <ArrowRight size={14} />
+          Get a Free Consultation <ArrowRight size={14} />
         </Link>
       </motion.div>
     </section>

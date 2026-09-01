@@ -9,7 +9,7 @@ const trustStats = [
   { icon: CheckCircle2, label: '150+ Projects Delivered' },
   { icon: Star, label: '4.9/5 Client Rating', href: '#testimonials' },
   { icon: Clock, label: 'Fixed-Price Proposal in 24 Hrs' },
-  { icon: Zap, label: '99.9% Uptime SLA' },
+  { icon: Zap, label: 'SEO-Ready From Day One' },
 ]
 
 function HeroLeadForm() {
@@ -126,7 +126,7 @@ export default function Hero() {
             >
               <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.1] text-xs font-medium text-white/80 backdrop-blur-md">
                 <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse shadow-[0_0_8px_#3b82f6]" />
-                <span>Software. Products. Growth.</span>
+                <span>Websites. E-Commerce. Growth.</span>
               </span>
             </motion.div>
 
@@ -137,9 +137,9 @@ export default function Hero() {
               transition={{ duration: 0.55, delay: 0.1 }}
               className="text-4xl sm:text-5xl lg:text-[58px] font-extrabold text-white leading-[1.08] tracking-tight"
             >
-              Building software <br className="hidden sm:block" />
-              that moves <br className="hidden sm:block" />
-              businesses <span className="text-[#60A5FA] drop-shadow-[0_0_25px_rgba(96,165,250,0.35)]">forward.</span>
+              We build websites <br className="hidden sm:block" />
+              that help <br className="hidden sm:block" />
+              businesses <span className="text-[#60A5FA] drop-shadow-[0_0_25px_rgba(96,165,250,0.35)]">grow.</span>
             </motion.h1>
 
             {/* Subtitle */}
@@ -149,7 +149,7 @@ export default function Hero() {
               transition={{ duration: 0.55, delay: 0.2 }}
               className="text-sm sm:text-base lg:text-lg text-white/60 leading-relaxed max-w-xl font-normal"
             >
-              We build digital products, web and mobile applications, AI solutions and SaaS platforms that help businesses grow, scale and lead.
+              We design and develop modern, fast and SEO-ready websites and e-commerce stores that help businesses build credibility, generate enquiries and grow online.
             </motion.p>
 
             {/* Action Buttons */}
@@ -163,14 +163,14 @@ export default function Hero() {
                 href="/contact"
                 className="inline-flex items-center gap-2 px-6 sm:px-7 py-3 sm:py-3.5 rounded-xl text-xs sm:text-sm font-semibold bg-[#2563EB] hover:bg-[#1D4ED8] text-white shadow-xl shadow-blue-600/30 active:scale-[0.98] transition-all"
               >
-                Schedule a Call <ArrowRight size={15} />
+                Get a Free Consultation <ArrowRight size={15} />
               </Link>
 
               <Link
-                href="/#products"
+                href="/work"
                 className="inline-flex items-center gap-2 px-6 sm:px-7 py-3 sm:py-3.5 rounded-xl text-xs sm:text-sm font-semibold text-white/90 bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-white/20 transition-all"
               >
-                Explore Our Products
+                View Our Work
               </Link>
             </motion.div>
 

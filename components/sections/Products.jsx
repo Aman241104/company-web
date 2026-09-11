@@ -1,7 +1,6 @@
 'use client'
 import Image from 'next/image'
 import Link from 'next/link'
-import { motion } from 'framer-motion'
 import { CheckCircle2, ArrowUpRight, ShoppingBag, Boxes, Receipt, Users2, Package, BarChart3, ArrowRight } from 'lucide-react'
 import BorderBeam from '@/components/ui/BorderBeam'
 import SpotlightCard from '@/components/ui/SpotlightCard'
@@ -21,8 +20,6 @@ export default function Products() {
       {/* Soft accent glows */}
       <div className="pointer-events-none absolute -top-24 -left-24 w-96 h-96 rounded-full bg-purple-200/20 blur-[100px] z-0" />
       <div className="pointer-events-none absolute top-1/3 -right-24 w-[28rem] h-[28rem] rounded-full bg-blue-200/25 blur-[100px] z-0" />
-      {/* Blend into the dark stats band below */}
-      <div className="pointer-events-none absolute bottom-0 inset-x-0 h-16 sm:h-20 bg-gradient-to-b from-white to-[#07080C] z-0" />
 
       <div className="relative z-10 py-16 sm:py-24 md:py-32 max-w-[1360px] mx-auto px-5 sm:px-6 md:px-8">
       {/* Header */}
@@ -74,7 +71,7 @@ export default function Products() {
             </p>
 
             {/* Visual SaaS snapshot banner */}
-            <div className="relative aspect-[16/9] rounded-2xl overflow-hidden border border-neutral-200 mb-6 group bg-[#0B0D14] p-6 sm:p-8">
+            <div className="relative aspect-[16/9] rounded-2xl overflow-hidden border border-neutral-200 mb-6 group bg-neutral-900 p-6 sm:p-8">
               <Image
                 src="/assets/saas_hero_mockup.png"
                 alt="Vibo ERP Platform View"
@@ -82,7 +79,7 @@ export default function Products() {
                 sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-contain object-center group-hover:scale-[1.03] transition-transform duration-700"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#07080C] via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-transparent to-transparent" />
             </div>
 
             {/* Key Benefits */}
@@ -117,7 +114,7 @@ export default function Products() {
 
         {/* Module Grid */}
         <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {modules.map((p, index) => {
+          {modules.map((p) => {
             const Icon = p.icon
             return (
               <SpotlightCard

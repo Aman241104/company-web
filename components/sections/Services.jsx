@@ -1,7 +1,7 @@
 'use client'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { Monitor, Code2, Smartphone, TrendingUp, Search, ShoppingCart, ArrowRight, Check } from 'lucide-react'
+import { Monitor, Code2, TrendingUp, ShoppingCart, ArrowRight } from 'lucide-react'
 
 const services = [
   {
@@ -32,27 +32,11 @@ const services = [
     tags: ['Google Ads', 'Meta Ads', 'Funnel UX', 'ROAS Tracking'],
     href: '/services',
   },
-  {
-    icon: Smartphone,
-    title: 'Mobile App Development',
-    desc: 'Cross-platform iOS and Android apps for businesses that need a native mobile presence alongside their website.',
-    tags: ['React Native', 'Flutter', 'iOS & Android'],
-    href: '/services',
-  },
-  {
-    icon: Search,
-    title: 'Technical SEO',
-    desc: 'Site structure, speed, and search fundamentals handled from day one so your website actually gets found.',
-    tags: ['Core Web Vitals', 'On-Page SEO', 'Schema Data'],
-    href: '/services',
-  },
 ]
 
 export default function Services() {
   return (
-    <section id="services" className="relative bg-white overflow-hidden">
-      {/* Blend into the dark hero above */}
-      <div className="pointer-events-none absolute top-0 inset-x-0 h-16 sm:h-20 bg-gradient-to-b from-[#07080C] to-white z-0" />
+    <section id="services" className="relative bg-neutral-50 overflow-hidden">
       {/* Soft accent glows */}
       <div className="pointer-events-none absolute -top-20 -right-20 w-[28rem] h-[28rem] rounded-full bg-blue-200/25 blur-[100px] z-0" />
       <div className="pointer-events-none absolute bottom-0 -left-24 w-96 h-96 rounded-full bg-purple-200/20 blur-[100px] z-0" />
@@ -70,8 +54,8 @@ export default function Services() {
             What We Do
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-neutral-900 tracking-tight leading-tight mb-4">
-            Complete digital solutions{' '}
-            <span className="text-gradient-accent">for your business.</span>
+            Complete Digital Solutions{' '}
+            <span className="text-gradient-accent">For Your Business</span>
           </h2>
           <p className="text-sm sm:text-base lg:text-lg text-neutral-500 leading-relaxed">
             From building your online presence to developing custom digital solutions, we help businesses use technology to grow and operate better.
@@ -79,8 +63,8 @@ export default function Services() {
         </motion.div>
       </div>
 
-      {/* 3-Column Modern Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+      {/* Modern Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
         {services.map((service, index) => {
           const Icon = service.icon
           return (
@@ -120,7 +104,7 @@ export default function Services() {
                   href={service.href}
                   className="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-600 group-hover:text-blue-700 transition-colors"
                 >
-                  Explore More <ArrowRight size={13} className="transition-transform group-hover:translate-x-1" />
+                  Learn More <ArrowRight size={13} className="transition-transform group-hover:translate-x-1" />
                 </Link>
               </div>
             </motion.div>

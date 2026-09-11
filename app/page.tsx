@@ -1,15 +1,11 @@
 import type { Metadata } from 'next'
 import Navbar from '@/components/sections/Navbar'
 import Hero from '@/components/sections/Hero'
-import ClientMarquee from '@/components/sections/ClientMarquee'
-import Services from '@/components/sections/Services'
-import Products from '@/components/sections/Products'
 import Stats from '@/components/sections/Stats'
-import Process from '@/components/sections/Process'
-import Work from '@/components/sections/Work'
-import Pricing from '@/components/sections/Pricing'
-import FAQ from '@/components/sections/FAQ'
-import { faqs } from '@/lib/faqs'
+import Services from '@/components/sections/Services'
+import Portfolio from '@/components/sections/Portfolio'
+import WhyUs from '@/components/sections/WhyUs'
+import Products from '@/components/sections/Products'
 import CTA from '@/components/sections/CTA'
 import Footer from '@/components/sections/Footer'
 import FastTrackDrawer from '@/components/ui/FastTrackDrawer'
@@ -67,36 +63,22 @@ const localBusinessSchema = {
   ],
 }
 
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: faqs.map((item) => ({
-    "@type": "Question",
-    name: item.q,
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: item.a,
-    },
-  })),
-}
-
 export default function Home() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-      <Navbar />
-      <main id="main-content" tabIndex={-1} className="bg-transparent relative overflow-x-hidden w-full max-w-[100vw]">
+      <Navbar theme="light" />
+      <main id="main-content" tabIndex={-1} className="home-light bg-white relative overflow-x-hidden w-full max-w-[100vw]">
         <Hero />
-        <ClientMarquee />
         <Stats />
         <Services />
-        <Work />
-        <Process />
+        <Portfolio />
+        <WhyUs />
         <Products />
-        <Pricing />
-        <FAQ />
+        {/* Testimonials section (components/sections/Testimonials.jsx) is built and
+            ready but intentionally not rendered — it only has placeholder quotes.
+            Wire it back in once real client testimonials are available. */}
         <CTA />
         <Footer />
         <FastTrackDrawer />

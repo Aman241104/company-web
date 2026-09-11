@@ -1,7 +1,7 @@
 'use client'
 import Link from 'next/link'
 import Image from 'next/image'
-import { ArrowUpRight, Mail, Phone, MapPin, Heart } from 'lucide-react'
+import { Mail, Phone, MapPin } from 'lucide-react'
 import { locations } from '@/lib/locations'
 
 const cols = [
@@ -30,7 +30,6 @@ const cols = [
     title: 'Other Links',
     links: [
       { label: 'Industries & Solutions', href: '/solutions' },
-      { label: 'Pricing', href: '/#pricing' },
       { label: 'Leadership & Team', href: '/about#team' },
       { label: 'Careers', href: 'mailto:careers@mehtatechnologies.com' },
       { label: 'Engineering Labs', href: '/labs' },

@@ -120,6 +120,32 @@ body::before {
   }
 }
 
+/* Light-theme homepage. Scoped via :has() rather than changed globally,
+   since every other route is still the dark theme sharing this stylesheet. */
+:root:has(#main-content.home-light) {
+  color-scheme: light;
+}
+
+body:has(#main-content.home-light) {
+  background: #FFFFFF;
+  color: #0A0A0A;
+}
+
+body:has(#main-content.home-light) ::selection {
+  background: rgba(37, 99, 235, 0.15);
+  color: #0A0A0A;
+}
+
+body:has(#main-content.home-light)::-webkit-scrollbar-track {
+  background: #FFFFFF;
+}
+body:has(#main-content.home-light)::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+}
+body:has(#main-content.home-light)::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.28);
+}
+
 ::selection {
   background: rgba(37, 99, 235, 0.4);
   color: #FFFFFF;

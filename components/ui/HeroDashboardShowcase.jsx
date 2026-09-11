@@ -24,7 +24,7 @@ export default function HeroDashboardShowcase() {
             <div className="relative aspect-[16/10] rounded-md overflow-hidden bg-[#0B0D14]">
               <Image
                 src="/assets/sv-space-designs-live.jpg"
-                alt="SV Space Designs — a business website built by Mehta Technologies"
+                alt="SV Space Designs, a business website built by Mehta Technologies"
                 fill
                 loading="eager"
                 fetchPriority="high"
@@ -44,7 +44,7 @@ export default function HeroDashboardShowcase() {
             <div className="relative aspect-[9/19]">
               <Image
                 src="/assets/prihaan-spices-mobile.jpg"
-                alt="Prihaan Spices — the mobile version of an e-commerce website built by Mehta Technologies"
+                alt="Prihaan Spices, the mobile version of an e-commerce website built by Mehta Technologies"
                 fill
                 loading="eager"
                 sizes="180px"

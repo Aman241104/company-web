@@ -16,10 +16,10 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://mehtatechnologies.com" },
   openGraph: {
     url: "https://mehtatechnologies.com",
-    title: "Mehta Technologies — Website & E-Commerce Development Agency, Ahmedabad",
+    title: "Mehta Technologies: Website & E-Commerce Development Agency, Ahmedabad",
     description:
       "150+ websites & e-commerce stores shipped. We build sites that build trust, generate enquiries, and grow your business online.",
-    images: [{ url: "/og.png", width: 1200, height: 630, alt: "Mehta Technologies — Web Development Agency, Ahmedabad" }],
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: "Mehta Technologies, Web Development Agency, Ahmedabad" }],
   },
 }
 

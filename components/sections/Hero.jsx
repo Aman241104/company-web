@@ -41,7 +41,7 @@ function HeroLeadForm() {
       setSubmitting(false)
     }
 
-    const subject = encodeURIComponent(`Free Quote Request — ${form.name}`)
+    const subject = encodeURIComponent(`Free Quote Request from ${form.name}`)
     const body = encodeURIComponent(
       `Name: ${form.name}\nPhone: ${form.phone}\n\nRequesting a free project quote from the homepage.`
     )
@@ -55,9 +55,9 @@ function HeroLeadForm() {
       <div className="flex items-center gap-2.5 text-sm text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-xl px-4 py-3 max-w-md">
         <CheckCircle2 size={16} className="shrink-0" />
         {delivered ? (
-          <span>Got it — our team will reach out shortly. Need a faster reply? <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer" className="underline font-semibold hover:text-emerald-900">WhatsApp us</a>.</span>
+          <span>Got it. Our team will reach out shortly. Need a faster reply? <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer" className="underline font-semibold hover:text-emerald-900">WhatsApp us</a>.</span>
         ) : (
-          <span>Opening your email app to send this to our team — or <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer" className="underline font-semibold hover:text-emerald-900">WhatsApp us</a> for a faster reply.</span>
+          <span>Opening your email app to send this to our team, or <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer" className="underline font-semibold hover:text-emerald-900">WhatsApp us</a> for a faster reply.</span>
         )}
       </div>
     )
@@ -125,7 +125,7 @@ export default function Hero() {
               transition={{ duration: 0.5 }}
             >
               <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-50 border border-neutral-200 text-xs font-bold tracking-widest uppercase text-neutral-500">
-                Ideas · Websites · Real Growth
+                Full-Service Web & Software Partner
               </span>
             </motion.div>
 
@@ -138,7 +138,7 @@ export default function Hero() {
             >
               Websites That Turn <br className="hidden sm:block" />
               Visitors Into <br className="hidden sm:block" />
-              <span className="text-gradient-accent">Customers.</span>
+              <span className="text-blue-600">Customers.</span>
             </motion.h1>
 
             {/* Subtitle */}

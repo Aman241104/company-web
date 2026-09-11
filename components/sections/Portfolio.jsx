@@ -37,12 +37,9 @@ export default function Portfolio() {
       <div className="max-w-[1360px] mx-auto px-5 sm:px-6 md:px-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-16">
           <div className="max-w-xl">
-            <span className="mb-4 inline-block text-xs font-bold tracking-widest uppercase text-blue-600">
-              Our Work
-            </span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-neutral-900 tracking-tight leading-tight">
               Websites We&apos;ve Built{' '}
-              <span className="text-gradient-accent">For Amazing Businesses.</span>
+              <span className="text-blue-600">For Amazing Businesses.</span>
             </h2>
           </div>
           <Link

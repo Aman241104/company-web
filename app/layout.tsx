@@ -28,7 +28,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL("https://mehtatechnologies.com"),
   title: {
-    default: "Mehta Technologies — Website & E-Commerce Development Agency, Ahmedabad",
+    default: "Mehta Technologies: Website & E-Commerce Development Agency, Ahmedabad",
     template: "%s | Mehta Technologies",
   },
   description:
@@ -47,14 +47,14 @@ export const metadata: Metadata = {
     locale: "en_IN",
     url: "https://mehtatechnologies.com",
     siteName: "Mehta Technologies",
-    title: "Mehta Technologies — Website & E-Commerce Development Agency, Ahmedabad",
+    title: "Mehta Technologies: Website & E-Commerce Development Agency, Ahmedabad",
     description:
       "Ahmedabad-based web development agency. We build websites, e-commerce stores, custom software & run performance marketing campaigns.",
-    images: [{ url: "/og.png", width: 1200, height: 630, alt: "Mehta Technologies — Web Development Agency, Ahmedabad" }],
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: "Mehta Technologies, Web Development Agency, Ahmedabad" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Mehta Technologies — Website & E-Commerce Development Agency, Ahmedabad",
+    title: "Mehta Technologies: Website & E-Commerce Development Agency, Ahmedabad",
     description:
       "Ahmedabad-based web development agency. Websites, e-commerce, custom software & performance marketing.",
     images: ["/og.png"],

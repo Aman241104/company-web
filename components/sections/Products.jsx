@@ -17,20 +17,13 @@ const modules = [
 export default function Products() {
   return (
     <section id="products" className="relative bg-white overflow-hidden">
-      {/* Soft accent glows */}
-      <div className="pointer-events-none absolute -top-24 -left-24 w-96 h-96 rounded-full bg-purple-200/20 blur-[100px] z-0" />
-      <div className="pointer-events-none absolute top-1/3 -right-24 w-[28rem] h-[28rem] rounded-full bg-blue-200/25 blur-[100px] z-0" />
-
       <div className="relative z-10 py-16 sm:py-24 md:py-32 max-w-[1360px] mx-auto px-5 sm:px-6 md:px-8">
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-16">
         <div>
-          <span className="mb-4 inline-block text-xs font-bold tracking-widest uppercase text-blue-600">
-            Our Product
-          </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-neutral-900 tracking-tight leading-tight">
-            Vibo ERP —{' '}
-            <span className="text-gradient-accent">Our Own Product.</span>
+            Vibo ERP,{' '}
+            <span className="text-blue-600">Our Own Product.</span>
           </h2>
         </div>
         <div>
@@ -67,7 +60,7 @@ export default function Products() {
               Vibo ERP
             </h3>
             <p className="text-sm sm:text-base text-neutral-500 leading-relaxed max-w-xl mb-6 font-normal">
-              Vibo ERP is our in-house business management software, designed to help businesses manage their operations — sales, inventory, billing and more — from one place.
+              Vibo ERP is our in-house business management software, designed to help businesses manage their operations (sales, inventory, billing and more) from one place.
             </p>
 
             {/* Visual SaaS snapshot banner */}

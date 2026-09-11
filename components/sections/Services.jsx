@@ -14,7 +14,7 @@ const services = [
   {
     icon: ShoppingCart,
     title: 'E-Commerce Development',
-    desc: 'Online stores that make it easy for customers to browse, order and pay — built to sell, not just look good.',
+    desc: 'Online stores that make it easy for customers to browse, order and pay: built to sell, not just look good.',
     tags: ['Shopify', 'Custom Storefronts', 'Payments', 'Inventory'],
     href: '/services',
   },
@@ -37,10 +37,6 @@ const services = [
 export default function Services() {
   return (
     <section id="services" className="relative bg-neutral-50 overflow-hidden">
-      {/* Soft accent glows */}
-      <div className="pointer-events-none absolute -top-20 -right-20 w-[28rem] h-[28rem] rounded-full bg-blue-200/25 blur-[100px] z-0" />
-      <div className="pointer-events-none absolute bottom-0 -left-24 w-96 h-96 rounded-full bg-purple-200/20 blur-[100px] z-0" />
-
       <div className="relative z-10 py-16 sm:py-24 md:py-32 max-w-[1360px] mx-auto px-5 sm:px-6 md:px-8">
       {/* Section Header */}
       <div className="max-w-2xl mx-auto text-center mb-12 sm:mb-16 md:mb-20">
@@ -50,12 +46,9 @@ export default function Services() {
           viewport={{ once: true, margin: "-150px" }}
           transition={{ duration: 0.5 }}
         >
-          <span className="mb-4 inline-block text-xs font-bold tracking-widest uppercase text-blue-600">
-            What We Do
-          </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-neutral-900 tracking-tight leading-tight mb-4">
             Complete Digital Solutions{' '}
-            <span className="text-gradient-accent">For Your Business</span>
+            <span className="text-blue-600">For Your Business</span>
           </h2>
           <p className="text-sm sm:text-base lg:text-lg text-neutral-500 leading-relaxed">
             From building your online presence to developing custom digital solutions, we help businesses use technology to grow and operate better.

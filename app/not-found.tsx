@@ -11,26 +11,26 @@ export const metadata: Metadata = {
 export default function NotFound() {
   return (
     <>
-    <Navbar />
-    <main id="main-content" tabIndex={-1} className="bg-[#07080C] min-h-screen text-white">
+    <Navbar theme="light" />
+    <main id="main-content" tabIndex={-1} className="home-light bg-white min-h-screen">
 
       <div className="pt-40 pb-32 max-w-[900px] mx-auto px-6 md:px-8 text-center">
         <span className="glow-pill inline-flex items-center gap-2 mb-6">
-          <Compass size={13} className="text-blue-400" />
+          <Compass size={13} className="text-blue-600" />
           <span>404 — Page Not Found</span>
         </span>
 
         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mb-4">
           This page doesn&apos;t exist.
         </h1>
-        <p className="text-sm sm:text-base text-white/50 max-w-lg mx-auto mb-10 leading-relaxed">
+        <p className="text-sm sm:text-base text-neutral-500 max-w-lg mx-auto mb-10 leading-relaxed">
           The page you&apos;re looking for may have been moved, renamed, or never existed. Let&apos;s get you back on track.
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full text-sm font-semibold bg-white text-black hover:bg-white/90 transition-all shadow-xl shadow-white/10 w-full sm:w-auto justify-center"
+            className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full text-sm font-semibold bg-neutral-950 text-white hover:bg-neutral-800 transition-all shadow-xl shadow-neutral-950/10 w-full sm:w-auto justify-center"
           >
             <ArrowLeft size={15} /> Back to Home
           </Link>
@@ -43,14 +43,14 @@ export default function NotFound() {
         </div>
 
         <div className="glass-panel rounded-2xl p-6 sm:p-8 text-left">
-          <div className="text-xs font-mono uppercase tracking-wider text-white/55 mb-3">
+          <div className="text-xs font-mono uppercase tracking-wider text-neutral-500 mb-3">
             Looking for something specific?
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-sm">
-            <Link href="/services" className="text-white/70 hover:text-white transition-colors">Services</Link>
-            <Link href="/solutions" className="text-white/70 hover:text-white transition-colors">Solutions</Link>
-            <Link href="/about" className="text-white/70 hover:text-white transition-colors">About Us</Link>
-            <Link href="/contact" className="text-white/70 hover:text-white transition-colors">Contact</Link>
+            <Link href="/services" className="text-neutral-600 hover:text-neutral-950 transition-colors">Services</Link>
+            <Link href="/solutions" className="text-neutral-600 hover:text-neutral-950 transition-colors">Solutions</Link>
+            <Link href="/about" className="text-neutral-600 hover:text-neutral-950 transition-colors">About Us</Link>
+            <Link href="/contact" className="text-neutral-600 hover:text-neutral-950 transition-colors">Contact</Link>
           </div>
         </div>
       </div>

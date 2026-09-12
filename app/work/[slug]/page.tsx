@@ -177,11 +177,7 @@ const caseStudiesData: Record<string, {
     challenge: 'A portfolio-driven business needed a fast, gallery-heavy site that lets prospective clients browse hundreds of real celebrations without sacrificing load speed, while routing high-intent inquiries straight into a consultation funnel.',
     solution: 'Built a Next.js gallery and inquiry experience with optimized image delivery for a large real-event photo library, structured service pages by celebration type, and a direct WhatsApp/consultation funnel.',
     architecture: ['Next.js App Router', 'Tailwind CSS', 'Framer Motion', 'Vercel Edge'],
-    metrics: [
-      { label: 'Events Delivered', value: '250+', detail: 'As stated by CMJ Events' },
-      { label: 'Client Satisfaction', value: '98%', detail: 'Self-reported by CMJ Events' },
-      { label: 'Industry Recognition', value: 'EMF Global Ace Awards 2026', detail: 'Best Wedding of the Year & Best Mehndi Function of the Year, as claimed by CMJ Events' },
-    ],
+    metrics: [],
   },
   'naam-transfer': {
     slug: 'naam-transfer',
@@ -350,15 +346,15 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
   return (
     <>
-    <Navbar />
-    <main id="main-content" tabIndex={-1} className="bg-transparent min-h-screen">
+    <Navbar theme="light" />
+    <main id="main-content" tabIndex={-1} className="home-light bg-white min-h-screen">
 
       <div className="pt-32 pb-24 max-w-[1200px] mx-auto px-6 md:px-8">
         {/* Back navigation */}
         <div className="mb-8">
           <Link
             href="/work"
-            className="inline-flex items-center gap-2 text-xs font-semibold text-white/50 hover:text-white transition-colors"
+            className="inline-flex items-center gap-2 text-xs font-semibold text-neutral-500 hover:text-neutral-950 transition-colors"
           >
             <ArrowLeft size={14} /> Back to All Case Studies
           </Link>
@@ -367,19 +363,19 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
         {/* Hero Header */}
         <div className="space-y-6 mb-12">
           <div className="flex flex-wrap items-center gap-3">
-            <span className="px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/10 border border-blue-500/20 text-blue-400">
+            <span className="px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 border border-blue-100 text-blue-600">
               {study.category}
             </span>
-            <span className="text-xs font-mono text-white/55">{study.year}</span>
-            <span className="text-xs font-mono text-white/55">·</span>
-            <span className="text-xs font-mono text-white/55">{study.client}</span>
+            <span className="text-xs font-mono text-neutral-400">{study.year}</span>
+            <span className="text-xs font-mono text-neutral-400">·</span>
+            <span className="text-xs font-mono text-neutral-400">{study.client}</span>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.1]">
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-neutral-950 tracking-tight leading-[1.1]">
             {study.headline}
           </h1>
 
-          <p className="text-base sm:text-lg text-white/60 leading-relaxed max-w-3xl">
+          <p className="text-base sm:text-lg text-neutral-500 leading-relaxed max-w-3xl">
             {study.summary}
           </p>
 
@@ -389,7 +385,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                 href={study.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-xs font-semibold bg-white text-black hover:bg-white/90 transition-all shadow-xl shadow-white/10"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-xs font-semibold bg-neutral-950 text-white hover:bg-neutral-800 transition-all shadow-xl shadow-neutral-950/10"
               >
                 Visit Live Production Site <ArrowUpRight size={13} />
               </a>
@@ -398,7 +394,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
         </div>
 
         {/* Hero Cover Image */}
-        <div className={`relative aspect-[16/9] rounded-3xl overflow-hidden border border-white/10 mb-16 shadow-2xl bg-[#0B0D14] ${study.heroImageFit === 'contain' ? 'p-10 sm:p-16' : ''}`}>
+        <div className={`relative aspect-[16/9] rounded-3xl overflow-hidden border border-neutral-200 mb-16 shadow-sm bg-neutral-100 ${study.heroImageFit === 'contain' ? 'p-10 sm:p-16' : ''}`}>
           {study.heroImage ? (
             <Image
               src={study.heroImage}
@@ -411,9 +407,9 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             />
           ) : (
             <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 text-center px-6">
-              <Clock size={28} className="text-blue-400" />
-              <div className="text-sm font-semibold text-white/70">Build in progress</div>
-              <div className="text-xs text-white/50 max-w-sm">This case study will be updated with a live preview and real results once the project ships.</div>
+              <Clock size={28} className="text-blue-600" />
+              <div className="text-sm font-semibold text-neutral-700">Build in progress</div>
+              <div className="text-xs text-neutral-500 max-w-sm">This case study will be updated with a live preview and real results once the project ships.</div>
             </div>
           )}
         </div>
@@ -422,10 +418,10 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
         {study.metrics.length > 0 && (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-16 sm:mb-20">
             {study.metrics.map((m) => (
-              <div key={m.label} className="p-4 sm:p-6 rounded-2xl bg-white/[0.02] border border-white/[0.08] space-y-1">
-                <div className="text-[10px] sm:text-xs font-mono uppercase text-white/55">{m.label}</div>
-                <div className="text-2xl sm:text-3xl font-extrabold text-emerald-400 font-mono">{m.value}</div>
-                <div className="text-xs text-white/50">{m.detail}</div>
+              <div key={m.label} className="p-4 sm:p-6 rounded-2xl bg-white border border-neutral-200 shadow-sm space-y-1">
+                <div className="text-[10px] sm:text-xs font-mono uppercase text-neutral-500">{m.label}</div>
+                <div className="text-2xl sm:text-3xl font-extrabold text-emerald-600 font-mono">{m.value}</div>
+                <div className="text-xs text-neutral-500">{m.detail}</div>
               </div>
             ))}
           </div>
@@ -434,34 +430,34 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
         {/* Narrative: Challenge & Solution */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-20">
           <div className="lg:col-span-6 space-y-4">
-            <h2 className="text-2xl font-bold text-white tracking-tight">
+            <h2 className="text-2xl font-bold text-neutral-950 tracking-tight">
               The Challenge
             </h2>
-            <p className="text-sm sm:text-base text-white/60 leading-relaxed font-normal">
+            <p className="text-sm sm:text-base text-neutral-500 leading-relaxed font-normal">
               {study.challenge}
             </p>
           </div>
 
           <div className="lg:col-span-6 space-y-4">
-            <h2 className="text-2xl font-bold text-white tracking-tight">
+            <h2 className="text-2xl font-bold text-neutral-950 tracking-tight">
               The Engineering Solution
             </h2>
-            <p className="text-sm sm:text-base text-white/60 leading-relaxed font-normal">
+            <p className="text-sm sm:text-base text-neutral-500 leading-relaxed font-normal">
               {study.solution}
             </p>
           </div>
         </div>
 
         {/* Architecture Stack */}
-        <div className="p-8 rounded-3xl bg-white/[0.02] border border-white/[0.08] mb-20 space-y-4">
-          <h3 className="text-lg font-bold text-white tracking-tight">
+        <div className="p-8 rounded-3xl bg-neutral-50 border border-neutral-200 mb-20 space-y-4">
+          <h3 className="text-lg font-bold text-neutral-950 tracking-tight">
             Production Architecture & Stack
           </h3>
           <div className="flex flex-wrap gap-2">
             {study.architecture.map((item) => (
               <span
                 key={item}
-                className="px-3.5 py-1.5 rounded-xl bg-white/[0.04] text-white/80 border border-white/10 text-xs font-mono font-medium"
+                className="px-3.5 py-1.5 rounded-xl bg-white text-neutral-700 border border-neutral-200 text-xs font-mono font-medium"
               >
                 {item}
               </span>
@@ -471,30 +467,30 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
         {/* Client Quote */}
         {study.quote && (
-          <div className="p-8 sm:p-12 rounded-3xl bg-blue-600/[0.08] border border-blue-500/25 mb-20 text-center relative overflow-hidden">
+          <div className="p-8 sm:p-12 rounded-3xl bg-blue-50 border border-blue-100 mb-20 text-center relative overflow-hidden">
             <div className="max-w-2xl mx-auto space-y-4">
-              <p className="text-lg sm:text-xl text-white font-medium italic leading-relaxed">
+              <p className="text-lg sm:text-xl text-neutral-950 font-medium italic leading-relaxed">
                 &ldquo;{study.quote.text}&rdquo;
               </p>
               <div>
-                <div className="text-sm font-bold text-blue-300">{study.quote.author}</div>
-                <div className="text-xs text-white/55">{study.quote.role}</div>
+                <div className="text-sm font-bold text-blue-600">{study.quote.author}</div>
+                <div className="text-xs text-neutral-500">{study.quote.role}</div>
               </div>
             </div>
           </div>
         )}
 
         {/* Bottom Call to Action */}
-        <div className="text-center p-10 rounded-3xl bg-white/[0.02] border border-white/[0.08]">
-          <h3 className="text-2xl font-bold text-white mb-2">
+        <div className="text-center p-10 rounded-3xl bg-neutral-50 border border-neutral-200">
+          <h3 className="text-2xl font-bold text-neutral-950 mb-2">
             Ready for similar measurable outcomes?
           </h3>
-          <p className="text-sm text-white/50 mb-6">
+          <p className="text-sm text-neutral-500 mb-6">
             Let us engineer a high-performance system for your roadmap.
           </p>
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-xs sm:text-sm font-semibold bg-white text-black hover:bg-white/90 transition-all shadow-xl shadow-white/10"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-xs sm:text-sm font-semibold bg-neutral-950 text-white hover:bg-neutral-800 transition-all shadow-xl shadow-neutral-950/10"
           >
             Start Your Project <ArrowUpRight size={14} />
           </Link>

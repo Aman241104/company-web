@@ -84,13 +84,13 @@ function StatCard({ stat, index }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.08 }}
-      className="p-6 sm:p-8 rounded-2xl bg-white/[0.02] border border-white/[0.08] text-center relative overflow-hidden"
+      className="p-6 sm:p-8 rounded-2xl bg-white border border-neutral-200 shadow-sm text-center relative overflow-hidden"
     >
-      <div className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight mb-2">
+      <div className="text-4xl sm:text-5xl font-extrabold text-neutral-950 tracking-tight mb-2">
         {Number.isInteger(stat.value) ? count : (inView ? stat.value : 0)}{stat.suffix}
       </div>
-      <div className="text-sm font-bold text-white mb-1">{stat.label}</div>
-      <div className="text-xs text-white/55">{stat.desc}</div>
+      <div className="text-sm font-bold text-neutral-900 mb-1">{stat.label}</div>
+      <div className="text-xs text-neutral-500">{stat.desc}</div>
     </motion.div>
   )
 }
@@ -107,25 +107,25 @@ export default function AboutPage() {
               About Mehta Technologies
             </span>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.08]">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-neutral-950 tracking-tight leading-[1.08]">
               Engineering digital products{' '}
               <span className="text-gradient-accent">built for real impact.</span>
             </h1>
 
-            <p className="text-base sm:text-lg text-white/60 leading-relaxed max-w-2xl font-normal">
+            <p className="text-base sm:text-lg text-neutral-500 leading-relaxed max-w-2xl font-normal">
               Mehta Technologies was founded on a singular conviction: every business deserves a website that builds trust and actually brings in enquiries. We build fast, SEO-ready websites, e-commerce stores, and custom software for growing businesses.
             </p>
 
             <div className="flex flex-wrap gap-4 pt-4">
               <Link
                 href="/contact"
-                className="px-6 py-3.5 rounded-full text-xs sm:text-sm font-semibold bg-white text-black hover:bg-white/90 shadow-lg shadow-white/10 transition-all flex items-center gap-2"
+                className="px-6 py-3.5 rounded-full text-xs sm:text-sm font-semibold bg-neutral-950 text-white hover:bg-neutral-800 shadow-xl shadow-neutral-950/10 transition-all flex items-center gap-2"
               >
                 Work With Us <ArrowRight size={14} />
               </Link>
               <Link
                 href="/work"
-                className="px-6 py-3.5 rounded-full text-xs sm:text-sm font-semibold bg-white/[0.04] hover:bg-white/[0.08] text-white border border-white/10 transition-all"
+                className="px-6 py-3.5 rounded-full text-xs sm:text-sm font-semibold bg-white hover:bg-neutral-50 text-neutral-800 border border-neutral-200 hover:border-neutral-300 transition-all"
               >
                 Explore Portfolio
               </Link>
@@ -133,31 +133,31 @@ export default function AboutPage() {
           </div>
 
           <div className="lg:col-span-5">
-            <div className="rounded-3xl bg-white/[0.02] border border-white/[0.08] p-5 sm:p-8 md:p-10 shadow-2xl shadow-black/60 relative overflow-hidden">
-              <div className="text-xs font-mono uppercase tracking-wider text-white/55 mb-6">
+            <div className="rounded-3xl bg-white border border-neutral-200 p-5 sm:p-8 md:p-10 shadow-xl shadow-neutral-950/5 relative overflow-hidden">
+              <div className="text-xs font-mono uppercase tracking-wider text-neutral-500 mb-6">
                 Company Snapshot
               </div>
               <div className="grid grid-cols-2 gap-6 mb-8">
                 <div>
-                  <div className="text-3xl font-extrabold text-white tracking-tight mb-1">150+</div>
-                  <div className="text-xs text-white/50">Shipped Projects</div>
+                  <div className="text-3xl font-extrabold text-neutral-950 tracking-tight mb-1">150+</div>
+                  <div className="text-xs text-neutral-500">Shipped Projects</div>
                 </div>
                 <div>
-                  <div className="text-3xl font-extrabold text-white tracking-tight mb-1">2019</div>
-                  <div className="text-xs text-white/50">Founded in Ahmedabad</div>
+                  <div className="text-3xl font-extrabold text-neutral-950 tracking-tight mb-1">2019</div>
+                  <div className="text-xs text-neutral-500">Founded in Ahmedabad</div>
                 </div>
                 <div>
-                  <div className="text-3xl font-extrabold text-white tracking-tight mb-1">4.9/5</div>
-                  <div className="text-xs text-white/50">Client Rating</div>
+                  <div className="text-3xl font-extrabold text-neutral-950 tracking-tight mb-1">4.9/5</div>
+                  <div className="text-xs text-neutral-500">Client Rating</div>
                 </div>
                 <div>
-                  <div className="text-3xl font-extrabold text-white tracking-tight mb-1">Ongoing</div>
-                  <div className="text-xs text-white/50">Support & Maintenance</div>
+                  <div className="text-3xl font-extrabold text-neutral-950 tracking-tight mb-1">Ongoing</div>
+                  <div className="text-xs text-neutral-500">Support & Maintenance</div>
                 </div>
               </div>
 
-              <div className="pt-6 border-t border-white/[0.08] flex items-center gap-2 text-xs text-emerald-400 font-medium">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <div className="pt-6 border-t border-neutral-200 flex items-center gap-2 text-xs text-emerald-600 font-medium">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                 <span>Currently onboarding Q1/Q2 partner projects</span>
               </div>
             </div>
@@ -181,7 +181,7 @@ export default function AboutPage() {
           <span className="glow-pill mb-4 inline-flex">
             Core Principles
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-neutral-950 tracking-tight">
             How we engineer.{' '}
             <span className="text-gradient-accent">How we deliver.</span>
           </h2>
@@ -195,16 +195,16 @@ export default function AboutPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.45, delay: i * 0.08 }}
-              className="p-7 rounded-2xl bg-white/[0.02] border border-white/[0.08] hover:border-blue-500/30 hover:bg-white/[0.04] transition-all flex flex-col justify-between"
+              className="p-7 rounded-2xl bg-white border border-neutral-200 shadow-sm hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between"
             >
               <div>
-                <div className="w-9 h-9 rounded-lg bg-blue-500/10 border border-blue-500/20 text-blue-400 font-mono font-bold text-xs flex items-center justify-center mb-5">
+                <div className="w-9 h-9 rounded-lg bg-blue-50 border border-blue-100 text-blue-600 font-mono font-bold text-xs flex items-center justify-center mb-5">
                   {v.num}
                 </div>
-                <h3 className="text-base font-bold text-white tracking-tight mb-2">
+                <h3 className="text-base font-bold text-neutral-900 tracking-tight mb-2">
                   {v.title}
                 </h3>
-                <p className="text-xs sm:text-sm text-white/50 leading-relaxed font-normal">
+                <p className="text-xs sm:text-sm text-neutral-500 leading-relaxed font-normal">
                   {v.desc}
                 </p>
               </div>
@@ -214,16 +214,16 @@ export default function AboutPage() {
       </section>
 
       {/* Interactive Project Showcase Loop */}
-      <section className="py-12 border-y border-white/[0.06] mb-28 overflow-hidden bg-white/[0.01]">
+      <section className="py-12 border-y border-neutral-200 mb-28 overflow-hidden bg-neutral-50">
         <div className="max-w-[1360px] mx-auto px-6 md:px-8 mb-6">
-          <div className="text-xs font-mono uppercase tracking-wider text-white/55">
+          <div className="text-xs font-mono uppercase tracking-wider text-neutral-500">
             A Sample of Real Websites We&apos;ve Built
           </div>
         </div>
         <LogoLoop
           logos={[...projectScreenshots, ...projectScreenshots].map(({ src, label }, i) => ({
             node: (
-              <div key={i} className="w-56 h-32 rounded-xl border border-white/10 overflow-hidden shrink-0 relative bg-black">
+              <div key={i} className="w-56 h-32 rounded-xl border border-neutral-200 overflow-hidden shrink-0 relative bg-neutral-100">
                 <Image
                   src={src}
                   alt={label}
@@ -248,7 +248,7 @@ export default function AboutPage() {
           <span className="glow-pill mb-4 inline-flex">
             Our Journey
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-neutral-950 tracking-tight">
             Seven years of relentless{' '}
             <span className="text-gradient-accent">product engineering.</span>
           </h2>
@@ -262,12 +262,12 @@ export default function AboutPage() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.06 }}
-              className="flex items-start gap-3.5 sm:gap-6 p-4 sm:p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06]"
+              className="flex items-start gap-3.5 sm:gap-6 p-4 sm:p-6 rounded-2xl bg-white border border-neutral-200 shadow-sm"
             >
-              <div className="px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-blue-500/10 border border-blue-500/20 text-blue-400 font-mono font-bold text-[11px] sm:text-xs shrink-0">
+              <div className="px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-blue-50 border border-blue-100 text-blue-600 font-mono font-bold text-[11px] sm:text-xs shrink-0">
                 {item.year}
               </div>
-              <p className="text-xs sm:text-sm text-white/70 leading-relaxed font-normal pt-0.5">
+              <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed font-normal pt-0.5">
                 {item.event}
               </p>
             </motion.div>
@@ -280,16 +280,16 @@ export default function AboutPage() {
 
       {/* Bottom Conversion CTA */}
       <section className="max-w-[1360px] mx-auto px-6 md:px-8 mt-24 text-center">
-        <div className="max-w-2xl mx-auto rounded-3xl bg-white/[0.02] border border-white/[0.08] p-10 sm:p-14">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-4">
+        <div className="max-w-2xl mx-auto rounded-3xl bg-neutral-50 border border-neutral-200 p-10 sm:p-14">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-neutral-950 tracking-tight mb-4">
             Ready to build your next milestone?
           </h2>
-          <p className="text-sm sm:text-base text-white/50 mb-8 max-w-md mx-auto">
+          <p className="text-sm sm:text-base text-neutral-500 mb-8 max-w-md mx-auto">
             Book a 30-minute discovery session with our founding engineering team.
           </p>
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-xs sm:text-sm font-semibold bg-white text-black hover:bg-white/90 shadow-xl shadow-white/10 transition-all"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-xs sm:text-sm font-semibold bg-neutral-950 text-white hover:bg-neutral-800 shadow-xl shadow-neutral-950/10 transition-all"
           >
             Start Your Conversation <ArrowRight size={14} />
           </Link>

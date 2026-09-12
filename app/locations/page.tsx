@@ -30,8 +30,8 @@ export default function Locations() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
-      <Navbar />
-      <main id="main-content" tabIndex={-1} className="bg-transparent">
+      <Navbar theme="light" />
+      <main id="main-content" tabIndex={-1} className="home-light bg-white">
         <LocationsIndexPage />
         <Footer />
       </main>

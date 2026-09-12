@@ -62,19 +62,19 @@ function IndustryCard({ industry, index }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.4, delay: index * 0.05 }}
-      className="p-6 sm:p-8 rounded-2xl bg-white/[0.02] border border-white/[0.08] hover:border-blue-500/30 hover:bg-white/[0.035] transition-all flex flex-col justify-between"
+      className="p-6 sm:p-8 rounded-2xl bg-white border border-neutral-200 hover:border-blue-200 hover:shadow-md transition-all flex flex-col justify-between shadow-sm"
     >
       <div>
-        <div className="w-11 h-11 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center mb-5 text-blue-400">
+        <div className="w-11 h-11 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center mb-5 text-blue-600">
           <Icon size={20} />
         </div>
-        <h3 className="text-lg font-bold text-white tracking-tight mb-2">{industry.title}</h3>
-        <p className="text-sm text-white/55 leading-relaxed mb-5">{industry.desc}</p>
+        <h3 className="text-lg font-bold text-neutral-950 tracking-tight mb-2">{industry.title}</h3>
+        <p className="text-sm text-neutral-500 leading-relaxed mb-5">{industry.desc}</p>
       </div>
-      <ul className="space-y-2 pt-4 border-t border-white/[0.06]">
+      <ul className="space-y-2 pt-4 border-t border-neutral-100">
         {industry.points.map((p) => (
-          <li key={p} className="flex items-start gap-2 text-xs text-white/60">
-            <CheckCircle2 size={13} className="text-blue-400 shrink-0 mt-0.5" />
+          <li key={p} className="flex items-start gap-2 text-xs text-neutral-500">
+            <CheckCircle2 size={13} className="text-blue-600 shrink-0 mt-0.5" />
             <span>{p}</span>
           </li>
         ))}
@@ -97,11 +97,11 @@ export default function SolutionsPage() {
           <span className="glow-pill mb-4 inline-flex">
             Domain Expertise
           </span>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.08] mb-6">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-neutral-950 tracking-tight leading-[1.08] mb-6">
             Tailored solutions for{' '}
             <span className="text-gradient-accent">critical industries.</span>
           </h1>
-          <p className="text-base sm:text-lg text-white/50 leading-relaxed">
+          <p className="text-base sm:text-lg text-neutral-500 leading-relaxed">
             From regulated clinical workflows to high-volume e-commerce and multi-tier industrial ERPs — we understand the domain nuances that generic agencies miss.
           </p>
         </motion.div>
@@ -118,16 +118,16 @@ export default function SolutionsPage() {
 
       {/* Bottom CTA */}
       <section className="max-w-[1360px] mx-auto px-6 md:px-8 text-center">
-        <div className="max-w-2xl mx-auto rounded-3xl bg-white/[0.02] border border-white/[0.08] p-10 sm:p-14">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-4">
+        <div className="max-w-2xl mx-auto rounded-3xl bg-neutral-50 border border-neutral-200 p-10 sm:p-14">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-neutral-950 tracking-tight mb-4">
             Don&apos;t see your industry listed?
           </h2>
-          <p className="text-sm sm:text-base text-white/50 mb-8 max-w-md mx-auto">
+          <p className="text-sm sm:text-base text-neutral-500 mb-8 max-w-md mx-auto">
             We&apos;ve shipped 150+ projects across a dozen more verticals. Talk to us about your specific domain.
           </p>
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-xs sm:text-sm font-semibold bg-white text-black hover:bg-white/90 shadow-xl shadow-white/10 transition-all"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-xs sm:text-sm font-semibold bg-neutral-950 text-white hover:bg-neutral-800 shadow-xl shadow-neutral-950/10 transition-all"
           >
             Book Free Discovery Session <ArrowRight size={14} />
           </Link>

@@ -56,12 +56,12 @@ function TeamCard({ member, index }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.45, delay: index * 0.06 }}
-      className="rounded-2xl bg-white/[0.02] border border-white/[0.08] hover:border-blue-500/30 hover:bg-white/[0.035] p-6 sm:p-7 flex flex-col justify-between shadow-xl shadow-black/40 transition-all duration-300 group"
+      className="rounded-2xl bg-white border border-neutral-200 hover:border-blue-300 hover:shadow-md p-6 sm:p-7 flex flex-col justify-between shadow-sm transition-all duration-300 group"
     >
       <div>
         {/* Avatar & Header */}
         <div className="flex items-center gap-4 mb-5">
-          <div className="relative w-14 h-14 rounded-full overflow-hidden border border-white/15 bg-blue-600/20 shrink-0 shadow-md">
+          <div className="relative w-14 h-14 rounded-full overflow-hidden border border-neutral-200 bg-blue-50 shrink-0 shadow-sm">
             {member.image ? (
               <Image
                 src={member.image}
@@ -71,19 +71,19 @@ function TeamCard({ member, index }) {
                 className="object-cover object-top group-hover:scale-105 transition-transform duration-300"
               />
             ) : (
-              <div className="w-full h-full flex items-center justify-center font-bold text-sm text-blue-400 bg-blue-500/10">
+              <div className="w-full h-full flex items-center justify-center font-bold text-sm text-blue-600 bg-blue-50">
                 {member.init}
               </div>
             )}
           </div>
           <div>
-            <h3 className="text-base font-bold text-white tracking-tight">{member.name}</h3>
-            <p className="text-xs text-blue-400 font-medium">{member.role}</p>
+            <h3 className="text-base font-bold text-neutral-950 tracking-tight">{member.name}</h3>
+            <p className="text-xs text-blue-600 font-medium">{member.role}</p>
           </div>
         </div>
 
         {/* Bio */}
-        <p className="text-xs sm:text-sm text-white/55 leading-relaxed mb-6 font-normal">
+        <p className="text-xs sm:text-sm text-neutral-500 leading-relaxed mb-6 font-normal">
           {member.bio}
         </p>
 
@@ -92,7 +92,7 @@ function TeamCard({ member, index }) {
           {member.skills.map((s) => (
             <span
               key={s}
-              className="text-[11px] font-medium px-2.5 py-0.5 rounded-md bg-white/[0.04] text-white/60 border border-white/[0.06]"
+              className="text-[11px] font-medium px-2.5 py-0.5 rounded-md bg-neutral-50 text-neutral-600 border border-neutral-200"
             >
               {s}
             </span>
@@ -100,8 +100,8 @@ function TeamCard({ member, index }) {
         </div>
       </div>
 
-      <div className="pt-4 border-t border-white/[0.06]">
-        <span className="text-xs text-white/35 font-mono">Mehta Tech Core</span>
+      <div className="pt-4 border-t border-neutral-100">
+        <span className="text-xs text-neutral-400 font-mono">Mehta Tech Core</span>
       </div>
     </motion.div>
   )
@@ -109,7 +109,7 @@ function TeamCard({ member, index }) {
 
 export default function Team() {
   return (
-    <section id="team" className="py-24 md:py-32 max-w-[1360px] mx-auto px-6 md:px-8 border-t border-white/[0.06]">
+    <section id="team" className="py-24 md:py-32 max-w-[1360px] mx-auto px-6 md:px-8 border-t border-neutral-200">
       {/* Section Header */}
       <div className="max-w-2xl mx-auto text-center mb-16 md:mb-20">
         <motion.div
@@ -121,11 +121,11 @@ export default function Team() {
           <span className="glow-pill mb-4 inline-flex">
             Leadership & Core Engineers
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-neutral-950 tracking-tight leading-tight mb-4">
             Meet the engineers{' '}
             <span className="text-gradient-accent">behind your product.</span>
           </h2>
-          <p className="text-base sm:text-lg text-white/50 leading-relaxed">
+          <p className="text-base sm:text-lg text-neutral-500 leading-relaxed">
             A small, high-leverage team of senior specialists across architecture, UI/UX, cloud infrastructure, and growth.
           </p>
         </motion.div>
@@ -144,19 +144,19 @@ export default function Team() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
-        className="p-6 sm:p-8 rounded-2xl bg-white/[0.02] border border-white/[0.08] flex flex-col sm:flex-row items-center justify-between gap-6"
+        className="p-6 sm:p-8 rounded-2xl bg-neutral-50 border border-neutral-200 flex flex-col sm:flex-row items-center justify-between gap-6"
       >
         <div>
-          <h3 className="text-base sm:text-lg font-bold text-white tracking-tight mb-1">
+          <h3 className="text-base sm:text-lg font-bold text-neutral-950 tracking-tight mb-1">
             We are always looking for senior builders.
           </h3>
-          <p className="text-xs sm:text-sm text-white/50">
+          <p className="text-xs sm:text-sm text-neutral-500">
             Open roles in Next.js, distributed backend systems, and performance marketing.
           </p>
         </div>
         <a
           href="mailto:careers@mehtatechnologies.com"
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold bg-white/[0.06] hover:bg-white/[0.12] text-white border border-white/10 transition-all whitespace-nowrap"
+          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold bg-white hover:bg-neutral-100 text-neutral-800 border border-neutral-200 transition-all whitespace-nowrap"
         >
           Explore Careers <ArrowRight size={13} />
         </a>

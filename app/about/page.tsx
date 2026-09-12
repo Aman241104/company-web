@@ -30,8 +30,8 @@ export default function About() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
-      <Navbar />
-      <main id="main-content" tabIndex={-1} className="bg-transparent">
+      <Navbar theme="light" />
+      <main id="main-content" tabIndex={-1} className="home-light bg-white relative overflow-x-hidden w-full max-w-[100vw]">
         <AboutPage />
         <Footer />
       </main>

@@ -5,7 +5,6 @@ import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowRight, ExternalLink, ArrowUpRight, Sparkles, Filter } from 'lucide-react'
 import SpotlightCard from '@/components/ui/SpotlightCard'
-import ShinyText from '@/components/ui/ShinyText'
 
 const categories = ['All', 'Web', 'E-Commerce', 'SaaS', 'Media']
 
@@ -227,11 +226,11 @@ function ProjectCard({ project, index }) {
       enableTilt={false}
       spotlightColor="rgba(59, 130, 246, 0.15)"
       borderColor="rgba(59, 130, 246, 0.3)"
-      className="group rounded-3xl bg-white/[0.02] border border-white/[0.08] hover:border-blue-500/30 overflow-hidden flex flex-col justify-between transition-all duration-300 shadow-xl shadow-black/40"
+      className="group rounded-3xl !bg-white !border !border-neutral-200 hover:!border-blue-300 overflow-hidden flex flex-col justify-between transition-all duration-300 shadow-sm"
     >
       <div>
         {/* Visual Cover */}
-        <div className={`relative aspect-[16/10] bg-[#07080C] overflow-hidden ${project.imageFit === 'contain' ? 'p-6' : ''}`}>
+        <div className={`relative aspect-[16/10] bg-neutral-100 overflow-hidden ${project.imageFit === 'contain' ? 'p-6' : ''}`}>
           {project.image ? (
             <Image
               src={project.image}
@@ -243,19 +242,19 @@ function ProjectCard({ project, index }) {
                 : 'object-cover object-top group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100'}
             />
           ) : project.inProgress ? (
-            <div className="w-full h-full flex flex-col items-center justify-center gap-1.5 bg-blue-600/10 text-center px-4">
-              <span className="text-[10px] font-mono uppercase tracking-wider text-blue-400/70">Build In Progress</span>
-              <span className="text-xs text-white/40">Preview coming at launch</span>
+            <div className="w-full h-full flex flex-col items-center justify-center gap-1.5 bg-blue-50 text-center px-4">
+              <span className="text-[10px] font-mono uppercase tracking-wider text-blue-600/70">Build In Progress</span>
+              <span className="text-xs text-neutral-400">Preview coming at launch</span>
             </div>
           ) : (
-            <div className="w-full h-full flex items-center justify-center font-bold text-2xl text-blue-400/40 bg-blue-600/10">
+            <div className="w-full h-full flex items-center justify-center font-bold text-2xl text-blue-600/40 bg-blue-50">
               {project.name.slice(0, 2).toUpperCase()}
             </div>
           )}
 
-          {/* Category Pill */}
+          {/* Category Pill — dark chip overlaid on the photo, intentionally stays dark */}
           <div className="absolute top-3 sm:top-4 left-3 sm:left-4">
-            <span className="px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-[11px] font-semibold bg-black/70 backdrop-blur-md text-blue-400 border border-white/10">
+            <span className="px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-[11px] font-semibold bg-neutral-950/80 backdrop-blur-md text-blue-300 border border-white/10">
               {project.category}
             </span>
           </div>
@@ -273,26 +272,26 @@ function ProjectCard({ project, index }) {
         {/* Content Body */}
         <div className="p-6 sm:p-7">
           <div className="flex items-center justify-between gap-2 mb-2">
-            <h3 className="text-xl font-bold text-white tracking-tight group-hover:text-blue-400 transition-colors">
+            <h3 className="text-xl font-bold text-neutral-950 tracking-tight group-hover:text-blue-600 transition-colors">
               {project.name}
             </h3>
-            <span className="text-xs font-mono text-white/55">{project.year}</span>
+            <span className="text-xs font-mono text-neutral-400">{project.year}</span>
           </div>
 
-          <p className="text-xs text-blue-400 font-medium mb-3">
+          <p className="text-xs text-blue-600 font-medium mb-3">
             {project.subtitle}
           </p>
 
-          <p className="text-xs sm:text-sm text-white/55 leading-relaxed font-normal mb-6">
+          <p className="text-xs sm:text-sm text-neutral-500 leading-relaxed font-normal mb-6">
             {project.desc}
           </p>
 
           {/* Tech tags */}
-          <div className="flex flex-wrap gap-1.5 pt-4 border-t border-white/[0.06]">
+          <div className="flex flex-wrap gap-1.5 pt-4 border-t border-neutral-100">
             {project.tags.map((t) => (
               <span
                 key={t}
-                className="text-[11px] font-medium px-2 py-0.5 rounded-md bg-white/[0.04] text-white/60 border border-white/[0.06]"
+                className="text-[11px] font-medium px-2 py-0.5 rounded-md bg-neutral-50 text-neutral-600 border border-neutral-200"
               >
                 {t}
               </span>
@@ -306,13 +305,13 @@ function ProjectCard({ project, index }) {
         {project.slug && (
           <Link
             href={`/work/${project.slug}`}
-            className="w-full py-2.5 rounded-full text-xs font-semibold bg-blue-600/10 hover:bg-blue-600/20 text-blue-300 border border-blue-500/20 transition-all flex items-center justify-center gap-1.5"
+            className="w-full py-2.5 rounded-full text-xs font-semibold bg-blue-50 hover:bg-blue-100 text-blue-600 border border-blue-100 transition-all flex items-center justify-center gap-1.5"
           >
             Read Case Study Deep-Dive <ArrowRight size={12} />
           </Link>
         )}
         {project.inProgress ? (
-          <div className="w-full py-2.5 rounded-full text-xs font-medium text-blue-400/70 border border-blue-500/20 text-center">
+          <div className="w-full py-2.5 rounded-full text-xs font-medium text-blue-600/70 border border-blue-100 text-center">
             Build In Progress
           </div>
         ) : project.url ? (
@@ -320,12 +319,12 @@ function ProjectCard({ project, index }) {
             href={project.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full py-2.5 rounded-full text-xs font-semibold bg-white/[0.04] hover:bg-white text-white hover:text-black border border-white/10 transition-all flex items-center justify-center gap-1.5"
+            className="w-full py-2.5 rounded-full text-xs font-semibold bg-neutral-950 hover:bg-neutral-800 text-white transition-all flex items-center justify-center gap-1.5"
           >
             Visit Live Project <ArrowUpRight size={13} />
           </a>
         ) : (
-          <div className="w-full py-2.5 rounded-full text-xs font-medium text-white/55 border border-white/[0.06] text-center">
+          <div className="w-full py-2.5 rounded-full text-xs font-medium text-neutral-400 border border-neutral-200 text-center">
             Enterprise Client IP Protected
           </div>
         )}
@@ -355,11 +354,11 @@ export default function WorkPage() {
           <span className="glow-pill mb-4 inline-flex">
             Portfolio & Case Studies
           </span>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.08] mb-6">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-neutral-950 tracking-tight leading-[1.08] mb-6">
             Engineering that drives{' '}
-            <ShinyText>measurable outcomes.</ShinyText>
+            <span className="text-blue-600">measurable outcomes.</span>
           </h1>
-          <p className="text-base sm:text-lg text-white/50 leading-relaxed">
+          <p className="text-base sm:text-lg text-neutral-500 leading-relaxed">
             150+ shipped production applications, luxury e-commerce storefronts, and cloud SaaS platforms.
           </p>
         </motion.div>
@@ -381,7 +380,7 @@ export default function WorkPage() {
                 className={`px-4 py-2 rounded-full text-xs font-semibold transition-all flex items-center gap-2 ${
                   isSelected
                     ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/30'
-                    : 'bg-white/[0.04] text-white/60 hover:text-white hover:bg-white/[0.08] border border-white/10'
+                    : 'bg-neutral-50 text-neutral-600 hover:text-neutral-950 hover:bg-neutral-100 border border-neutral-200'
                 }`}
               >
                 <span>{cat}</span>
@@ -405,16 +404,16 @@ export default function WorkPage() {
 
       {/* Bottom CTA */}
       <section className="max-w-[1360px] mx-auto px-6 md:px-8 text-center">
-        <div className="max-w-2xl mx-auto rounded-3xl bg-white/[0.02] border border-white/[0.08] p-10 sm:p-14">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-4">
+        <div className="max-w-2xl mx-auto rounded-3xl bg-neutral-50 border border-neutral-200 p-10 sm:p-14">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-neutral-950 tracking-tight mb-4">
             Have a project in mind?
           </h2>
-          <p className="text-sm sm:text-base text-white/50 mb-8 max-w-md mx-auto">
+          <p className="text-sm sm:text-base text-neutral-500 mb-8 max-w-md mx-auto">
             Let us engineer a custom high-performance solution tailored to your roadmap.
           </p>
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-xs sm:text-sm font-semibold bg-white text-black hover:bg-white/90 shadow-xl shadow-white/10 transition-all"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-xs sm:text-sm font-semibold bg-neutral-950 text-white hover:bg-neutral-800 shadow-xl shadow-neutral-950/10 transition-all"
           >
             Start a Conversation <ArrowRight size={14} />
           </Link>

@@ -99,7 +99,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${sora.variable} ${inter.variable}`} style={{ colorScheme: 'dark' }} suppressHydrationWarning>
+    <html lang="en" className={`${sora.variable} ${inter.variable}`} suppressHydrationWarning>
       <body className="bg-[#07080C] text-white selection:bg-blue-600/30 selection:text-white">
         <a
           href="#main-content"

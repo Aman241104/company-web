@@ -19,13 +19,13 @@ export default function LocationPage({ location }) {
           <span className="glow-pill mb-4 inline-flex items-center gap-1.5">
             <MapPin size={12} /> {region}
           </span>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.08] mb-6">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-neutral-950 tracking-tight leading-[1.08] mb-6">
             {keywordLabel.replace('Website Development Agency in', '')}
             <br />
             <span className="text-gradient-accent">Website Development Agency.</span>
           </h1>
-          <p className="text-base sm:text-lg text-white/50 leading-relaxed mb-3">{tagline}</p>
-          <p className="text-sm sm:text-base text-white/55 leading-relaxed max-w-2xl mx-auto">{intro}</p>
+          <p className="text-base sm:text-lg text-neutral-500 leading-relaxed mb-3">{tagline}</p>
+          <p className="text-sm sm:text-base text-neutral-500 leading-relaxed max-w-2xl mx-auto">{intro}</p>
         </motion.div>
       </section>
 
@@ -39,13 +39,13 @@ export default function LocationPage({ location }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.05 }}
-              className="p-6 sm:p-8 rounded-2xl bg-white/[0.02] border border-white/[0.08] hover:border-blue-500/30 hover:bg-white/[0.035] transition-all"
+              className="p-6 sm:p-8 rounded-2xl bg-white border border-neutral-200 shadow-sm hover:border-blue-300 hover:shadow-md transition-all"
             >
-              <div className="w-9 h-9 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center mb-4 text-blue-400">
+              <div className="w-9 h-9 rounded-lg bg-blue-50 border border-blue-100 flex items-center justify-center mb-4 text-blue-600">
                 <CheckCircle2 size={16} />
               </div>
-              <h3 className="text-base font-bold text-white tracking-tight mb-2">{point.title}</h3>
-              <p className="text-sm text-white/55 leading-relaxed">{point.desc}</p>
+              <h3 className="text-base font-bold text-neutral-950 tracking-tight mb-2">{point.title}</h3>
+              <p className="text-sm text-neutral-500 leading-relaxed">{point.desc}</p>
             </motion.div>
           ))}
         </div>
@@ -54,7 +54,7 @@ export default function LocationPage({ location }) {
       {/* Case Studies */}
       {caseStudies.length > 0 && (
         <section className="max-w-[1360px] mx-auto px-6 md:px-8 mb-24">
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mb-8">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-neutral-950 tracking-tight mb-8">
             Relevant work
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
@@ -62,13 +62,13 @@ export default function LocationPage({ location }) {
               <Link
                 key={cs.slug}
                 href={`/work/${cs.slug}`}
-                className="group p-6 sm:p-8 rounded-2xl bg-white/[0.02] border border-white/[0.08] hover:border-blue-500/30 hover:bg-white/[0.035] transition-all flex items-center justify-between"
+                className="group p-6 sm:p-8 rounded-2xl bg-white border border-neutral-200 shadow-sm hover:border-blue-300 hover:shadow-md transition-all flex items-center justify-between"
               >
                 <div>
-                  <p className="text-[11px] font-mono uppercase tracking-wider text-blue-400 mb-1.5">{cs.category}</p>
-                  <h3 className="text-lg font-bold text-white tracking-tight">{cs.name}</h3>
+                  <p className="text-[11px] font-mono uppercase tracking-wider text-blue-600 mb-1.5">{cs.category}</p>
+                  <h3 className="text-lg font-bold text-neutral-950 tracking-tight">{cs.name}</h3>
                 </div>
-                <ArrowUpRight size={18} className="text-white/55 group-hover:text-white transition-colors shrink-0" />
+                <ArrowUpRight size={18} className="text-neutral-400 group-hover:text-neutral-900 transition-colors shrink-0" />
               </Link>
             ))}
           </div>
@@ -77,14 +77,14 @@ export default function LocationPage({ location }) {
 
       {/* FAQs */}
       <section className="max-w-[1360px] mx-auto px-6 md:px-8 mb-24">
-        <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mb-8">
+        <h2 className="text-2xl sm:text-3xl font-extrabold text-neutral-950 tracking-tight mb-8">
           Common questions
         </h2>
         <div className="max-w-3xl space-y-4">
           {faqs.map((faq) => (
-            <div key={faq.question} className="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.08]">
-              <h3 className="text-sm sm:text-base font-semibold text-white mb-2">{faq.question}</h3>
-              <p className="text-sm text-white/55 leading-relaxed">{faq.answer}</p>
+            <div key={faq.question} className="p-6 rounded-2xl bg-white border border-neutral-200 shadow-sm">
+              <h3 className="text-sm sm:text-base font-semibold text-neutral-900 mb-2">{faq.question}</h3>
+              <p className="text-sm text-neutral-500 leading-relaxed">{faq.answer}</p>
             </div>
           ))}
         </div>
@@ -92,16 +92,16 @@ export default function LocationPage({ location }) {
 
       {/* Bottom CTA */}
       <section className="max-w-[1360px] mx-auto px-6 md:px-8 text-center">
-        <div className="max-w-2xl mx-auto rounded-3xl bg-white/[0.02] border border-white/[0.08] p-10 sm:p-14">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-4">
+        <div className="max-w-2xl mx-auto rounded-3xl bg-neutral-50 border border-neutral-200 p-10 sm:p-14">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-neutral-950 tracking-tight mb-4">
             Ready to talk about your {city} project?
           </h2>
-          <p className="text-sm sm:text-base text-white/50 mb-8 max-w-md mx-auto">
+          <p className="text-sm sm:text-base text-neutral-500 mb-8 max-w-md mx-auto">
             Book a free discovery call and we&apos;ll scope it honestly — including telling you if you don&apos;t need everything you think you do.
           </p>
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-xs sm:text-sm font-semibold bg-white text-black hover:bg-white/90 shadow-xl shadow-white/10 transition-all"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-xs sm:text-sm font-semibold bg-neutral-950 text-white hover:bg-neutral-800 shadow-xl shadow-neutral-950/10 transition-all"
           >
             Book Free Discovery Session <ArrowRight size={14} />
           </Link>

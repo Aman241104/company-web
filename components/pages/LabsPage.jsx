@@ -138,11 +138,11 @@ export async function POST(req: Request) {
         <span className="glow-pill mb-4 inline-flex">
           Mehta Tech Open-Source Labs
         </span>
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.08] mb-4">
+        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-neutral-950 tracking-tight leading-[1.08] mb-4">
           Free production tools for{' '}
           <span className="text-gradient-accent">engineers & founders.</span>
         </h1>
-        <p className="text-base sm:text-lg text-white/50 leading-relaxed">
+        <p className="text-base sm:text-lg text-neutral-500 leading-relaxed">
           Open-source boilerplates, code scaffolders, and security builders engineered by our team to accelerate your product development.
         </p>
       </div>
@@ -159,7 +159,7 @@ export async function POST(req: Request) {
               className={`px-5 py-3 rounded-full text-xs font-semibold transition-all flex items-center gap-2 ${
                 isSelected
                   ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/30'
-                  : 'bg-white/[0.03] text-white/60 hover:text-white hover:bg-white/[0.08] border border-white/10'
+                  : 'bg-neutral-50 text-neutral-600 hover:text-neutral-950 hover:bg-neutral-100 border border-neutral-200'
               }`}
             >
               <Icon size={14} />
@@ -169,45 +169,45 @@ export async function POST(req: Request) {
         })}
       </div>
 
-      {/* Interactive Tool Playground Container */}
-      <div className="rounded-3xl bg-[#090B12] border border-white/[0.1] p-6 sm:p-10 shadow-2xl shadow-black/80">
+      {/* Interactive Tool Playground Container — light outer frame; the code/terminal panels inside stay dark by design */}
+      <div className="rounded-3xl bg-neutral-50 border border-neutral-200 p-6 sm:p-10 shadow-sm">
         
         {/* TOOL 1: Server Action Scaffolder */}
         {activeTool === 'server-action' && (
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             <div className="lg:col-span-4 space-y-4">
-              <div className="text-xs font-mono uppercase tracking-wider text-blue-400 font-bold">
+              <div className="text-xs font-mono uppercase tracking-wider text-blue-600 font-bold">
                 Configure Action Parameters
               </div>
               <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-white">Action Function Name</label>
+                <label className="text-xs font-semibold text-neutral-700">Action Function Name</label>
                 <input
                   type="text"
                   value={actionName}
                   onChange={(e) => setActionName(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-white/[0.04] border border-white/10 text-white font-mono text-xs focus:outline-none focus:border-blue-500"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-neutral-300 text-neutral-900 font-mono text-xs focus:outline-none focus:border-blue-400"
                 />
               </div>
               <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-white">Prisma / Drizzle Model Name</label>
+                <label className="text-xs font-semibold text-neutral-700">Prisma / Drizzle Model Name</label>
                 <input
                   type="text"
                   value={modelName}
                   onChange={(e) => setModelName(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-white/[0.04] border border-white/10 text-white font-mono text-xs focus:outline-none focus:border-blue-500"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-neutral-300 text-neutral-900 font-mono text-xs focus:outline-none focus:border-blue-400"
                 />
               </div>
               <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-white">Cache Revalidation Tag</label>
+                <label className="text-xs font-semibold text-neutral-700">Cache Revalidation Tag</label>
                 <input
                   type="text"
                   value={tagToRevalidate}
                   onChange={(e) => setTagToRevalidate(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-white/[0.04] border border-white/10 text-white font-mono text-xs focus:outline-none focus:border-blue-500"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-neutral-300 text-neutral-900 font-mono text-xs focus:outline-none focus:border-blue-400"
                 />
               </div>
 
-              <div className="pt-4 border-t border-white/[0.06] text-xs text-white/55 space-y-1 font-mono">
+              <div className="pt-4 border-t border-neutral-200 text-xs text-neutral-500 space-y-1 font-mono">
                 <div>✔ Zod schema runtime validation</div>
                 <div>✔ Auth session check</div>
                 <div>✔ Next.js 15 Server Cache invalidation</div>
@@ -236,29 +236,29 @@ export async function POST(req: Request) {
         {activeTool === 'postgres-rls' && (
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             <div className="lg:col-span-4 space-y-4">
-              <div className="text-xs font-mono uppercase tracking-wider text-blue-400 font-bold">
+              <div className="text-xs font-mono uppercase tracking-wider text-blue-600 font-bold">
                 Configure RLS Parameters
               </div>
               <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-white">Target Database Table</label>
+                <label className="text-xs font-semibold text-neutral-700">Target Database Table</label>
                 <input
                   type="text"
                   value={tableName}
                   onChange={(e) => setTableName(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-white/[0.04] border border-white/10 text-white font-mono text-xs focus:outline-none focus:border-blue-500"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-neutral-300 text-neutral-900 font-mono text-xs focus:outline-none focus:border-blue-400"
                 />
               </div>
               <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-white">Tenant ID Column</label>
+                <label className="text-xs font-semibold text-neutral-700">Tenant ID Column</label>
                 <input
                   type="text"
                   value={tenantColumn}
                   onChange={(e) => setTenantColumn(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-white/[0.04] border border-white/10 text-white font-mono text-xs focus:outline-none focus:border-blue-500"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-neutral-300 text-neutral-900 font-mono text-xs focus:outline-none focus:border-blue-400"
                 />
               </div>
 
-              <div className="pt-4 border-t border-white/[0.06] text-xs text-white/55 space-y-1 font-mono">
+              <div className="pt-4 border-t border-neutral-200 text-xs text-neutral-500 space-y-1 font-mono">
                 <div>✔ Strict JWT claims isolation</div>
                 <div>✔ Multi-tenant data leakage prevention</div>
                 <div>✔ Supabase & Vanilla PostgreSQL compatible</div>
@@ -287,13 +287,13 @@ export async function POST(req: Request) {
         {activeTool === 'stripe-webhook' && (
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             <div className="lg:col-span-4 space-y-4">
-              <div className="text-xs font-mono uppercase tracking-wider text-blue-400 font-bold">
+              <div className="text-xs font-mono uppercase tracking-wider text-blue-600 font-bold">
                 Webhook Architecture Specs
               </div>
-              <p className="text-xs text-white/60 leading-relaxed">
-                Production-grade Next.js 15 App Router Route Handler with raw body verification, cryptographic HMAC signature matching, and database idempotency upserts.
+              <p className="text-xs text-neutral-500 leading-relaxed">
+                Production-grade Next.js App Router Route Handler with raw body verification, cryptographic HMAC signature matching, and database idempotency upserts.
               </p>
-              <div className="pt-4 border-t border-white/[0.06] text-xs text-white/55 space-y-1 font-mono">
+              <div className="pt-4 border-t border-neutral-200 text-xs text-neutral-500 space-y-1 font-mono">
                 <div>✔ Signature verification</div>
                 <div>✔ Zero duplicate billing events</div>
                 <div>✔ Type-safe Stripe TypeScript SDK</div>
@@ -321,16 +321,16 @@ export async function POST(req: Request) {
       </div>
 
       {/* Need Dedicated Engineering? */}
-      <div className="mt-16 text-center p-10 rounded-3xl bg-white/[0.02] border border-white/[0.08]">
-        <h2 className="text-2xl font-bold text-white mb-2">
+      <div className="mt-16 text-center p-10 rounded-3xl bg-neutral-50 border border-neutral-200">
+        <h2 className="text-2xl font-bold text-neutral-950 mb-2">
           Want our team to build your complete production platform?
         </h2>
-        <p className="text-xs sm:text-sm text-white/50 mb-6 max-w-lg mx-auto">
+        <p className="text-xs sm:text-sm text-neutral-500 mb-6 max-w-lg mx-auto">
           We engineer full-stack web platforms, mobile apps, and SaaS platforms with fixed timelines.
         </p>
         <Link
           href="/contact"
-          className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full text-xs font-semibold bg-white text-black hover:bg-white/90 shadow-xl shadow-white/10 transition-all"
+          className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full text-xs font-semibold bg-neutral-950 text-white hover:bg-neutral-800 shadow-xl shadow-neutral-950/10 transition-all"
         >
           Book Architecture Discovery <ArrowRight size={13} />
         </Link>

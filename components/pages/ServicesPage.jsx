@@ -8,9 +8,9 @@ const services = [
     num: '01',
     icon: Globe,
     title: 'Website Development',
-    subtitle: 'Next.js 15 architectures built for sub-second LCP and high search authority.',
+    subtitle: 'Next.js architectures built for sub-second LCP and high search authority.',
     features: [
-      'Next.js 15 App Router with <1s Largest Contentful Paint',
+      'Next.js App Router with <1s Largest Contentful Paint',
       'Conversion-optimized UX & automated A/B testing architecture',
       'Headless CMS integration (Sanity, Strapi, Contentful)',
       '100/100 Core Web Vitals performance benchmarks',
@@ -138,7 +138,7 @@ function ServiceCard({ svc, index }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.06 }}
-      className="rounded-3xl bg-white/[0.02] border border-white/[0.08] hover:border-blue-500/30 p-8 sm:p-10 transition-all duration-300 shadow-2xl shadow-black/40 relative overflow-hidden scroll-mt-28"
+      className="rounded-3xl bg-white border border-neutral-200 hover:border-blue-200 p-8 sm:p-10 transition-all duration-300 shadow-sm relative overflow-hidden scroll-mt-28"
     >
       {/* Top Accent Line */}
       <div className="absolute top-0 left-1/4 right-1/4 h-[1px] bg-gradient-to-r from-transparent via-blue-500/50 to-transparent" />
@@ -146,14 +146,14 @@ function ServiceCard({ svc, index }) {
       {/* Card Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
         <div className="flex items-center gap-4">
-          <div className="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 shrink-0">
+          <div className="w-12 h-12 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600 shrink-0">
             <Icon size={22} />
           </div>
           <div>
-            <div className="text-xs font-mono uppercase tracking-wider text-blue-400 mb-0.5">
+            <div className="text-xs font-mono uppercase tracking-wider text-blue-600 mb-0.5">
               Service {svc.num}
             </div>
-            <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+            <h3 className="text-2xl sm:text-3xl font-extrabold text-neutral-950 tracking-tight">
               {svc.title}
             </h3>
           </div>
@@ -163,7 +163,7 @@ function ServiceCard({ svc, index }) {
           {svc.tags.map((t) => (
             <span
               key={t}
-              className="px-2.5 py-1 rounded-md text-xs font-medium bg-white/[0.04] text-white/70 border border-white/[0.08]"
+              className="px-2.5 py-1 rounded-md text-xs font-medium bg-neutral-100 text-neutral-600 border border-neutral-200"
             >
               {t}
             </span>
@@ -171,22 +171,22 @@ function ServiceCard({ svc, index }) {
         </div>
       </div>
 
-      <p className="text-sm sm:text-base text-white/60 leading-relaxed font-normal mb-8 max-w-2xl">
+      <p className="text-sm sm:text-base text-neutral-600 leading-relaxed font-normal mb-8 max-w-2xl">
         {svc.subtitle}
       </p>
 
       {/* Grid: Included Features & Sidebar */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-6 border-t border-white/[0.08]">
-        
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-6 border-t border-neutral-200">
+
         {/* Features List */}
         <div className="lg:col-span-8 space-y-3">
-          <div className="text-xs font-mono uppercase tracking-wider text-white/55 mb-4">
+          <div className="text-xs font-mono uppercase tracking-wider text-neutral-500 mb-4">
             Key Architecture & Capabilities
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {svc.features.map((f) => (
-              <div key={f} className="flex items-start gap-2.5 text-xs sm:text-sm text-white/75 font-normal">
-                <Check size={14} className="text-blue-400 shrink-0 mt-1" />
+              <div key={f} className="flex items-start gap-2.5 text-xs sm:text-sm text-neutral-700 font-normal">
+                <Check size={14} className="text-blue-600 shrink-0 mt-1" />
                 <span className="leading-relaxed">{f}</span>
               </div>
             ))}
@@ -194,28 +194,28 @@ function ServiceCard({ svc, index }) {
         </div>
 
         {/* Sidebar Summary */}
-        <div className="lg:col-span-4 rounded-2xl bg-[#0B0D14] border border-white/[0.08] p-6 flex flex-col justify-between space-y-6">
+        <div className="lg:col-span-4 rounded-2xl bg-neutral-50 border border-neutral-200 p-6 flex flex-col justify-between space-y-6">
           <div className="space-y-4">
-            <div className="flex items-center justify-between pb-3 border-b border-white/[0.06]">
-              <span className="text-xs text-white/55 font-mono uppercase">Timeline</span>
-              <span className="text-xs font-bold text-white">{svc.timeline}</span>
+            <div className="flex items-center justify-between pb-3 border-b border-neutral-200">
+              <span className="text-xs text-neutral-500 font-mono uppercase">Timeline</span>
+              <span className="text-xs font-bold text-neutral-950">{svc.timeline}</span>
             </div>
-            <div className="flex items-center justify-between pb-3 border-b border-white/[0.06]">
-              <span className="text-xs text-white/55 font-mono uppercase">Investment</span>
-              <span className="text-xs font-bold text-blue-400 font-mono">{svc.pricing}</span>
+            <div className="flex items-center justify-between pb-3 border-b border-neutral-200">
+              <span className="text-xs text-neutral-500 font-mono uppercase">Investment</span>
+              <span className="text-xs font-bold text-blue-600 font-mono">{svc.pricing}</span>
             </div>
             {svc.caseStudy && (
-              <div className="p-3 rounded-xl bg-blue-500/10 border border-blue-500/20">
-                <div className="text-[10px] font-mono uppercase tracking-wider text-blue-400/80 mb-0.5">Related Work</div>
-                <div className="text-xs font-bold text-white">{svc.caseStudy.title}</div>
-                <div className="text-xs text-blue-300">{svc.caseStudy.result}</div>
+              <div className="p-3 rounded-xl bg-blue-50 border border-blue-100">
+                <div className="text-[10px] font-mono uppercase tracking-wider text-blue-600/80 mb-0.5">Related Work</div>
+                <div className="text-xs font-bold text-neutral-950">{svc.caseStudy.title}</div>
+                <div className="text-xs text-blue-600">{svc.caseStudy.result}</div>
               </div>
             )}
           </div>
 
           <Link
             href={`/contact?service=${encodeURIComponent(svc.title)}`}
-            className="w-full py-3 rounded-full text-xs font-semibold bg-white text-black hover:bg-white/90 text-center transition-all flex items-center justify-center gap-2 shadow-lg shadow-white/10"
+            className="w-full py-3 rounded-full text-xs font-semibold bg-neutral-950 text-white hover:bg-neutral-800 text-center transition-all flex items-center justify-center gap-2 shadow-lg shadow-neutral-950/10"
           >
             Request Proposal <ArrowRight size={13} />
           </Link>
@@ -240,11 +240,11 @@ export default function ServicesPage() {
           <span className="glow-pill mb-4 inline-flex">
             Full-Stack Engineering & Growth
           </span>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.08] mb-6">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-neutral-950 tracking-tight leading-[1.08] mb-6">
             End-to-end digital services.{' '}
             <span className="text-gradient-accent">Built for longevity.</span>
           </h1>
-          <p className="text-base sm:text-lg text-white/50 leading-relaxed">
+          <p className="text-base sm:text-lg text-neutral-500 leading-relaxed">
             Six multidisciplinary practice areas. One senior engineering studio. No junior handoffs or broken promises.
           </p>
         </motion.div>
@@ -259,16 +259,16 @@ export default function ServicesPage() {
 
       {/* Bottom CTA */}
       <section className="max-w-[1360px] mx-auto px-6 md:px-8 text-center">
-        <div className="max-w-2xl mx-auto rounded-3xl bg-white/[0.02] border border-white/[0.08] p-10 sm:p-14">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-4">
+        <div className="max-w-2xl mx-auto rounded-3xl bg-neutral-50 border border-neutral-200 p-10 sm:p-14">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-neutral-950 tracking-tight mb-4">
             Unsure which service architecture fits your roadmap?
           </h2>
-          <p className="text-sm sm:text-base text-white/50 mb-8 max-w-md mx-auto">
+          <p className="text-sm sm:text-base text-neutral-500 mb-8 max-w-md mx-auto">
             Schedule a free 30-minute technical discovery call with our solutions architects.
           </p>
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-xs sm:text-sm font-semibold bg-white text-black hover:bg-white/90 shadow-xl shadow-white/10 transition-all"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-xs sm:text-sm font-semibold bg-neutral-950 text-white hover:bg-neutral-800 shadow-xl shadow-neutral-950/10 transition-all"
           >
             Book Free Discovery Session <ArrowRight size={14} />
           </Link>

@@ -15,10 +15,10 @@ export default function LocationsIndexPage() {
           className="max-w-3xl mx-auto"
         >
           <span className="glow-pill mb-4 inline-flex">Where We Work</span>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.08] mb-6">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-neutral-950 tracking-tight leading-[1.08] mb-6">
             Website development, <span className="text-gradient-accent">wherever you are.</span>
           </h1>
-          <p className="text-base sm:text-lg text-white/50 leading-relaxed">
+          <p className="text-base sm:text-lg text-neutral-500 leading-relaxed">
             Remote-first delivery with active client work across Gujarat and Maharashtra. Pick your city for specific case studies and focus areas.
           </p>
         </motion.div>
@@ -36,14 +36,14 @@ export default function LocationsIndexPage() {
             >
               <Link
                 href={`/locations/${loc.slug}`}
-                className="group block h-full p-6 sm:p-8 rounded-2xl bg-white/[0.02] border border-white/[0.08] hover:border-blue-500/30 hover:bg-white/[0.035] transition-all"
+                className="group block h-full p-6 sm:p-8 rounded-2xl bg-white border border-neutral-200 shadow-sm hover:border-blue-300 hover:shadow-md transition-all"
               >
-                <div className="w-9 h-9 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center mb-4 text-blue-400">
+                <div className="w-9 h-9 rounded-lg bg-blue-50 border border-blue-100 flex items-center justify-center mb-4 text-blue-600">
                   <MapPin size={16} />
                 </div>
-                <h2 className="text-lg font-bold text-white tracking-tight mb-2">{loc.city}</h2>
-                <p className="text-sm text-white/55 leading-relaxed mb-5">{loc.tagline}</p>
-                <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-white/70 group-hover:text-white transition-colors">
+                <h2 className="text-lg font-bold text-neutral-950 tracking-tight mb-2">{loc.city}</h2>
+                <p className="text-sm text-neutral-500 leading-relaxed mb-5">{loc.tagline}</p>
+                <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-neutral-700 group-hover:text-neutral-950 transition-colors">
                   View {loc.city} page <ArrowRight size={13} />
                 </span>
               </Link>

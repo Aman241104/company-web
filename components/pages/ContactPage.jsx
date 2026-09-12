@@ -196,39 +196,39 @@ function ContactForm() {
   }
 
   return (
-    <div className="rounded-3xl bg-white/[0.02] border border-white/[0.08] p-8 sm:p-10 shadow-2xl shadow-black/40 relative overflow-hidden">
-      <div className="absolute top-0 left-1/4 right-1/4 h-[1px] bg-gradient-to-r from-transparent via-blue-500/50 to-transparent" />
+    <div className="rounded-3xl bg-white border border-neutral-200 p-8 sm:p-10 shadow-xl shadow-neutral-950/5 relative overflow-hidden">
+      <div className="absolute top-0 left-1/4 right-1/4 h-[1px] bg-gradient-to-r from-transparent via-blue-400/50 to-transparent" />
 
       {sent ? (
         <div className="py-16 text-center space-y-4">
-          <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto">
+          <div className="w-16 h-16 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-600 flex items-center justify-center mx-auto">
             <CheckCircle2 size={32} />
           </div>
           {delivered ? (
             <>
-              <h3 className="text-2xl font-bold text-white tracking-tight">
+              <h3 className="text-2xl font-bold text-neutral-950 tracking-tight">
                 Brief Sent Successfully!
               </h3>
-              <p className="text-sm text-white/50 max-w-sm mx-auto">
+              <p className="text-sm text-neutral-500 max-w-sm mx-auto">
                 Our engineering team has received your details and will review them before our discovery call.
               </p>
             </>
           ) : (
             <>
-              <h3 className="text-2xl font-bold text-white tracking-tight">
+              <h3 className="text-2xl font-bold text-neutral-950 tracking-tight">
                 Almost there — one more step
               </h3>
-              <p className="text-sm text-white/50 max-w-sm mx-auto">
+              <p className="text-sm text-neutral-500 max-w-sm mx-auto">
                 We opened your email app with your brief pre-filled. Hit send there to reach our team — if nothing opened, email us directly at{' '}
-                <a href="mailto:hello@mehtatechnologies.com" className="text-blue-400 hover:text-blue-300">hello@mehtatechnologies.com</a>
+                <a href="mailto:hello@mehtatechnologies.com" className="text-blue-600 hover:text-blue-700">hello@mehtatechnologies.com</a>
                 {' '}or{' '}
-                <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300">message us on WhatsApp</a>.
+                <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700">message us on WhatsApp</a>.
               </p>
             </>
           )}
           <button
             onClick={() => setSent(false)}
-            className="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-400 hover:text-blue-300 pt-4"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-600 hover:text-blue-700 pt-4"
           >
             Submit Another Inquiry →
           </button>
@@ -246,18 +246,18 @@ function ContactForm() {
             className="absolute left-[-9999px] w-px h-px opacity-0"
           />
           <div>
-            <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight mb-1">
+            <h3 className="text-xl sm:text-2xl font-bold text-neutral-950 tracking-tight mb-1">
               Submit Your Project Brief
             </h3>
-            <p className="text-xs sm:text-sm text-white/50">
+            <p className="text-xs sm:text-sm text-neutral-500">
               Fill in your specifications for an accurate milestone timeline and cost breakdown.
             </p>
           </div>
 
           <div ref={nameRowRef} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label htmlFor="contact-name" className="block text-xs font-mono uppercase tracking-wider text-white/55 mb-1.5">
-                Your Name <span className="text-blue-400">*</span>
+              <label htmlFor="contact-name" className="block text-xs font-mono uppercase tracking-wider text-neutral-500 mb-1.5">
+                Your Name <span className="text-blue-600">*</span>
               </label>
               <input
                 id="contact-name"
@@ -267,11 +267,11 @@ function ContactForm() {
                 placeholder="Gaurav Mehta"
                 value={form.name}
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
-                className="w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder-white/45 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all"
+                className="w-full px-4 py-3 rounded-xl bg-white border border-neutral-300 text-neutral-900 placeholder:text-neutral-500 text-sm focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 transition-all"
               />
             </div>
             <div>
-              <label htmlFor="contact-company" className="block text-xs font-mono uppercase tracking-wider text-white/55 mb-1.5">
+              <label htmlFor="contact-company" className="block text-xs font-mono uppercase tracking-wider text-neutral-500 mb-1.5">
                 Company / Organization
               </label>
               <input
@@ -281,15 +281,15 @@ function ContactForm() {
                 placeholder="Acme Corp"
                 value={form.company}
                 onChange={(e) => setForm({ ...form, company: e.target.value })}
-                className="w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder-white/45 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all"
+                className="w-full px-4 py-3 rounded-xl bg-white border border-neutral-300 text-neutral-900 placeholder:text-neutral-500 text-sm focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 transition-all"
               />
             </div>
           </div>
 
           <div ref={emailRowRef} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label htmlFor="contact-email" className="block text-xs font-mono uppercase tracking-wider text-white/55 mb-1.5">
-                Work Email <span className="text-blue-400">*</span>
+              <label htmlFor="contact-email" className="block text-xs font-mono uppercase tracking-wider text-neutral-500 mb-1.5">
+                Work Email <span className="text-blue-600">*</span>
               </label>
               <input
                 id="contact-email"
@@ -299,11 +299,11 @@ function ContactForm() {
                 placeholder="name@company.com"
                 value={form.email}
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
-                className="w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder-white/45 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all"
+                className="w-full px-4 py-3 rounded-xl bg-white border border-neutral-300 text-neutral-900 placeholder:text-neutral-500 text-sm focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 transition-all"
               />
             </div>
             <div>
-              <label htmlFor="contact-phone" className="block text-xs font-mono uppercase tracking-wider text-white/55 mb-1.5">
+              <label htmlFor="contact-phone" className="block text-xs font-mono uppercase tracking-wider text-neutral-500 mb-1.5">
                 Phone / WhatsApp
               </label>
               <input
@@ -313,14 +313,14 @@ function ContactForm() {
                 placeholder="+91 98765 43210"
                 value={form.phone}
                 onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                className="w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder-white/45 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all"
+                className="w-full px-4 py-3 rounded-xl bg-white border border-neutral-300 text-neutral-900 placeholder:text-neutral-500 text-sm focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 transition-all"
               />
             </div>
           </div>
 
           <div ref={serviceRowRef} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label htmlFor="contact-service" className="block text-xs font-mono uppercase tracking-wider text-white/55 mb-1.5">
+              <label htmlFor="contact-service" className="block text-xs font-mono uppercase tracking-wider text-neutral-500 mb-1.5">
                 Service Focus
               </label>
               <select
@@ -328,7 +328,7 @@ function ContactForm() {
                 name="serviceFocus"
                 value={form.service}
                 onChange={(e) => setForm({ ...form, service: e.target.value })}
-                className="w-full px-4 py-3 rounded-xl bg-[#0B0D14] border border-white/10 text-white text-sm focus:outline-none focus:border-blue-500 transition-all cursor-pointer"
+                className="w-full px-4 py-3 rounded-xl bg-white border border-neutral-300 text-neutral-900 text-sm focus:outline-none focus:border-blue-400 transition-all cursor-pointer"
               >
                 <option value="">Select a service category</option>
                 {services.map((s) => (
@@ -339,7 +339,7 @@ function ContactForm() {
               </select>
             </div>
             <div>
-              <label htmlFor="contact-budget" className="block text-xs font-mono uppercase tracking-wider text-white/55 mb-1.5">
+              <label htmlFor="contact-budget" className="block text-xs font-mono uppercase tracking-wider text-neutral-500 mb-1.5">
                 Estimated Budget
               </label>
               <select
@@ -347,7 +347,7 @@ function ContactForm() {
                 name="budget"
                 value={form.budget}
                 onChange={(e) => setForm({ ...form, budget: e.target.value })}
-                className="w-full px-4 py-3 rounded-xl bg-[#0B0D14] border border-white/10 text-white text-sm focus:outline-none focus:border-blue-500 transition-all cursor-pointer"
+                className="w-full px-4 py-3 rounded-xl bg-white border border-neutral-300 text-neutral-900 text-sm focus:outline-none focus:border-blue-400 transition-all cursor-pointer"
               >
                 <option value="">Select budget range</option>
                 {budgets.map((b) => (
@@ -360,7 +360,7 @@ function ContactForm() {
           </div>
 
           <div ref={requirementsRowRef}>
-            <label htmlFor="contact-requirements" className="block text-xs font-mono uppercase tracking-wider text-white/55 mb-1.5">
+            <label htmlFor="contact-requirements" className="block text-xs font-mono uppercase tracking-wider text-neutral-500 mb-1.5">
               Project Architecture & Requirements
             </label>
             <textarea
@@ -370,19 +370,19 @@ function ContactForm() {
               placeholder="Describe your current system, objectives, target launch date, and key features..."
               value={form.project}
               onChange={(e) => setForm({ ...form, project: e.target.value })}
-              className="w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder-white/45 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all resize-none"
+              className="w-full px-4 py-3 rounded-xl bg-white border border-neutral-300 text-neutral-900 placeholder:text-neutral-500 text-sm focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 transition-all resize-none"
             />
           </div>
 
           <button
             type="submit"
             disabled={submitting}
-            className="w-full py-4 rounded-full text-xs sm:text-sm font-semibold bg-white text-black hover:bg-white/90 shadow-xl shadow-white/10 transition-all flex items-center justify-center gap-2 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed"
+            className="w-full py-4 rounded-full text-xs sm:text-sm font-semibold bg-neutral-950 text-white hover:bg-neutral-800 shadow-xl shadow-neutral-950/10 transition-all flex items-center justify-center gap-2 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed"
           >
             {submitting ? 'Sending…' : <>Submit Project Brief <ArrowRight size={15} /></>}
           </button>
 
-          <p className="text-center text-xs text-white/55 font-mono">
+          <p className="text-center text-xs text-neutral-500 font-mono">
             Direct NDA Protected · 24h Turnaround · Zero Spam Guaranteed
           </p>
         </form>
@@ -405,11 +405,11 @@ export default function ContactPage() {
           <span className="glow-pill mb-4 inline-flex">
             Get In Touch
           </span>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.08] mb-6">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-neutral-950 tracking-tight leading-[1.08] mb-6">
             Let&apos;s build something{' '}
             <span className="text-gradient-accent">exceptional together.</span>
           </h1>
-          <p className="text-base sm:text-lg text-white/50 leading-relaxed">
+          <p className="text-base sm:text-lg text-neutral-500 leading-relaxed">
             Have a project in mind? Book a 30-minute discovery consultation with our founding team.
           </p>
         </motion.div>
@@ -421,7 +421,7 @@ export default function ContactPage() {
           
           {/* Left Column: Contact Form */}
           <div className="lg:col-span-7">
-            <Suspense fallback={<div className="h-96 rounded-3xl bg-white/[0.02] animate-pulse" />}>
+            <Suspense fallback={<div className="h-96 rounded-3xl bg-neutral-100 animate-pulse" />}>
               <ContactForm />
             </Suspense>
           </div>
@@ -433,15 +433,15 @@ export default function ContactPage() {
               {contactInfo.map((info) => {
                 const Icon = info.icon
                 const content = (
-                  <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.08] hover:border-blue-500/30 transition-all flex items-center gap-4 group">
-                    <div className="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 shrink-0 group-hover:scale-105 transition-transform">
+                  <div className="p-4 rounded-2xl bg-white border border-neutral-200 shadow-sm hover:border-blue-300 transition-all flex items-center gap-4 group">
+                    <div className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600 shrink-0 group-hover:scale-105 transition-transform">
                       <Icon size={18} />
                     </div>
                     <div>
-                      <div className="text-[11px] font-mono uppercase tracking-wider text-white/55">
+                      <div className="text-[11px] font-mono uppercase tracking-wider text-neutral-500">
                         {info.label}
                       </div>
-                      <div className="text-sm font-semibold text-white group-hover:text-blue-400 transition-colors">
+                      <div className="text-sm font-semibold text-neutral-950 group-hover:text-blue-600 transition-colors">
                         {info.value}
                       </div>
                     </div>
@@ -458,19 +458,19 @@ export default function ContactPage() {
             </div>
 
             {/* What Happens Next Card */}
-            <div className="rounded-3xl bg-white/[0.02] border border-white/[0.08] p-6 sm:p-7 space-y-4">
-              <div className="text-xs font-mono uppercase tracking-wider text-white/55">
+            <div className="rounded-3xl bg-white border border-neutral-200 shadow-sm p-6 sm:p-7 space-y-4">
+              <div className="text-xs font-mono uppercase tracking-wider text-neutral-500">
                 What Happens Next
               </div>
               <div className="space-y-4">
                 {nextSteps.map((step) => (
                   <div key={step.n} className="flex items-start gap-3.5">
-                    <div className="w-6 h-6 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-mono font-bold flex items-center justify-center shrink-0 mt-0.5">
+                    <div className="w-6 h-6 rounded-full bg-blue-50 border border-blue-100 text-blue-600 text-xs font-mono font-bold flex items-center justify-center shrink-0 mt-0.5">
                       {step.n}
                     </div>
                     <div>
-                      <div className="text-xs font-bold text-white mb-0.5">{step.title}</div>
-                      <div className="text-xs text-white/50 leading-relaxed">{step.text}</div>
+                      <div className="text-xs font-bold text-neutral-900 mb-0.5">{step.title}</div>
+                      <div className="text-xs text-neutral-500 leading-relaxed">{step.text}</div>
                     </div>
                   </div>
                 ))}
@@ -478,8 +478,8 @@ export default function ContactPage() {
             </div>
 
             {/* Live Availability Badge */}
-            <div className="p-4 rounded-2xl bg-emerald-500/5 border border-emerald-500/15 flex items-center gap-3 text-xs text-emerald-400">
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+            <div className="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center gap-3 text-xs text-emerald-700">
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
               <span>Available for new Q1/Q2 sprint kickoffs immediately</span>
             </div>
 

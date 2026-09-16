@@ -1,19 +1,14 @@
 'use client'
 import { useState } from 'react'
 import Link from 'next/link'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import {
   Code2,
   Database,
   Terminal,
-  Zap,
   Copy,
   Check,
-  Sparkles,
   ArrowRight,
-  ShieldCheck,
-  ExternalLink,
-  Layers,
 } from 'lucide-react'
 
 const tools = [
@@ -133,40 +128,56 @@ export async function POST(req: Request) {
 
   return (
     <div className="pt-32 pb-24 max-w-[1360px] mx-auto px-6 md:px-8">
-      {/* Header */}
-      <div className="max-w-3xl mx-auto text-center mb-16">
-        <span className="glow-pill mb-4 inline-flex">
-          Mehta Tech Open-Source Labs
-        </span>
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-neutral-950 tracking-tight leading-[1.08] mb-4">
-          Free production tools for{' '}
-          <span className="text-gradient-accent">engineers & founders.</span>
-        </h1>
-        <p className="text-base sm:text-lg text-neutral-500 leading-relaxed">
-          Open-source boilerplates, code scaffolders, and security builders engineered by our team to accelerate your product development.
-        </p>
-      </div>
+      {/* Header + tool selector, left-aligned and compact — the interactive
+          playground below is the hook, so this gets out of its own way
+          instead of running a full centered pill/H1/subtext announcement
+          first. Mirrors the asymmetric split WorkPage already established
+          (headline left, functional control right), scaled down for a
+          secondary/tool page. */}
+      <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-10">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="max-w-xl"
+        >
+          <span className="glow-pill mb-4 inline-flex">
+            Mehta Tech Open-Source Labs
+          </span>
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-neutral-950 tracking-tight leading-[1.1] mb-3">
+            Free tools for <span className="text-blue-600">engineers & founders.</span>
+          </h1>
+          <p className="text-sm sm:text-base text-neutral-500 leading-relaxed">
+            Open-source scaffolders and security builders, engineered by our team. Pick one below and configure it live.
+          </p>
+        </motion.div>
 
-      {/* Tool Selector */}
-      <div className="flex items-center justify-center gap-2 flex-wrap mb-12">
-        {tools.map((t) => {
-          const Icon = t.icon
-          const isSelected = t.id === activeTool
-          return (
-            <button
-              key={t.id}
-              onClick={() => setActiveTool(t.id)}
-              className={`px-5 py-3 rounded-full text-xs font-semibold transition-all flex items-center gap-2 ${
-                isSelected
-                  ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/30'
-                  : 'bg-neutral-50 text-neutral-600 hover:text-neutral-950 hover:bg-neutral-100 border border-neutral-200'
-              }`}
-            >
-              <Icon size={14} />
-              <span>{t.name}</span>
-            </button>
-          )
-        })}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="flex items-center gap-2 flex-wrap lg:justify-end"
+        >
+          {tools.map((t) => {
+            const Icon = t.icon
+            const isSelected = t.id === activeTool
+            return (
+              <button
+                key={t.id}
+                onClick={() => setActiveTool(t.id)}
+                aria-pressed={isSelected}
+                className={`px-5 py-3 rounded-full text-xs font-semibold transition-all flex items-center gap-2 ${
+                  isSelected
+                    ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/30'
+                    : 'bg-neutral-50 text-neutral-600 hover:text-neutral-950 hover:bg-neutral-100 border border-neutral-200'
+                }`}
+              >
+                <Icon size={14} />
+                <span>{t.name}</span>
+              </button>
+            )
+          })}
+        </motion.div>
       </div>
 
       {/* Interactive Tool Playground Container — light outer frame; the code/terminal panels inside stay dark by design */}

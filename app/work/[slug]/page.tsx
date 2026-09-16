@@ -366,9 +366,9 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             <span className="px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 border border-blue-100 text-blue-600">
               {study.category}
             </span>
-            <span className="text-xs font-mono text-neutral-400">{study.year}</span>
-            <span className="text-xs font-mono text-neutral-400">·</span>
-            <span className="text-xs font-mono text-neutral-400">{study.client}</span>
+            <span className="text-xs font-mono text-neutral-500">{study.year}</span>
+            <span className="text-xs font-mono text-neutral-500">·</span>
+            <span className="text-xs font-mono text-neutral-500">{study.client}</span>
           </div>
 
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-neutral-950 tracking-tight leading-[1.1]">

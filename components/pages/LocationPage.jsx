@@ -22,7 +22,7 @@ export default function LocationPage({ location }) {
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-neutral-950 tracking-tight leading-[1.08] mb-6">
             {keywordLabel.replace('Website Development Agency in', '')}
             <br />
-            <span className="text-gradient-accent">Website Development Agency.</span>
+            <span className="text-blue-600">Website Development Agency.</span>
           </h1>
           <p className="text-base sm:text-lg text-neutral-500 leading-relaxed mb-3">{tagline}</p>
           <p className="text-sm sm:text-base text-neutral-500 leading-relaxed max-w-2xl mx-auto">{intro}</p>

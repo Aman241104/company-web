@@ -6,12 +6,12 @@ import BorderBeam from '@/components/ui/BorderBeam'
 import SpotlightCard from '@/components/ui/SpotlightCard'
 
 const modules = [
-  { icon: ShoppingBag, title: 'Sales', desc: 'Track orders and manage your sales pipeline in one place.' },
-  { icon: Boxes, title: 'Inventory', desc: 'Real-time stock levels across your products and locations.' },
-  { icon: Receipt, title: 'Billing', desc: 'Fast, compliant invoicing without spreadsheets.' },
-  { icon: Users2, title: 'Customers', desc: 'A single record of every customer and their order history.' },
-  { icon: Package, title: 'Purchases', desc: 'Manage suppliers and purchase orders end to end.' },
-  { icon: BarChart3, title: 'Business Reports', desc: 'Clear reporting on how your business is actually performing.' },
+  { n: '01', icon: ShoppingBag, title: 'Sales', desc: 'Track orders and manage your sales pipeline in one place.' },
+  { n: '02', icon: Boxes, title: 'Inventory', desc: 'Real-time stock levels across your products and locations.' },
+  { n: '03', icon: Receipt, title: 'Billing', desc: 'Fast, compliant invoicing without spreadsheets.' },
+  { n: '04', icon: Users2, title: 'Customers', desc: 'A single record of every customer and their order history.' },
+  { n: '05', icon: Package, title: 'Purchases', desc: 'Manage suppliers and purchase orders end to end.' },
+  { n: '06', icon: BarChart3, title: 'Business Reports', desc: 'Clear reporting on how your business is actually performing.' },
 ]
 
 export default function Products() {
@@ -115,12 +115,15 @@ export default function Products() {
                 enableTilt={true}
                 spotlightColor="rgba(59, 130, 246, 0.1)"
                 borderColor="rgba(59, 130, 246, 0.25)"
-                className="!bg-white !border-neutral-200 p-5 rounded-2xl shadow-sm hover:!border-blue-200 hover:shadow-md transition-all flex flex-col justify-between"
+                className="!bg-white !border-neutral-200 p-5 rounded-2xl shadow-sm hover:!border-blue-200 hover:shadow-md transition-all flex flex-col justify-between relative overflow-hidden"
               >
-                <div>
-                  <div className="w-9 h-9 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600 mb-3.5">
-                    <Icon size={16} />
-                  </div>
+                {/* Large watermark index — distinguishes module tiles from
+                    the icon-in-a-square treatment used for Services/Stats */}
+                <span className="absolute -top-1 right-2 font-mono font-extrabold text-4xl text-blue-50 select-none" aria-hidden="true">
+                  {p.n}
+                </span>
+                <div className="relative">
+                  <Icon size={20} className="text-blue-600 mb-3.5" />
                   <h4 className="text-sm font-bold text-neutral-900 mb-1.5">{p.title}</h4>
                   <p className="text-xs text-neutral-500 leading-relaxed">{p.desc}</p>
                 </div>

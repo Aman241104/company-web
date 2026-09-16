@@ -20,7 +20,7 @@ export default function Testimonials() {
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-neutral-900 tracking-tight leading-tight">
             Trusted By Businesses{' '}
-            <span className="text-gradient-accent">Across Industries.</span>
+            <span className="text-blue-600">Across Industries.</span>
           </h2>
         </div>
 

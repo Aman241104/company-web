@@ -97,6 +97,8 @@ function hexToRgb(hex: string): number[] {
   return [(hexInt >> 16) & 255, (hexInt >> 8) & 255, hexInt & 255]
 }
 
+type Circle = { x: number; y: number; translateX: number; translateY: number; size: number; alpha: number; targetAlpha: number; dx: number; dy: number; magnetism: number }
+
 export const Particles: React.FC<ParticlesProps> = ({
   className = "",
   quantity = 30,
@@ -110,26 +112,12 @@ export const Particles: React.FC<ParticlesProps> = ({
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const canvasContainerRef = useRef<HTMLDivElement>(null)
   const context = useRef<CanvasRenderingContext2D | null>(null)
-  const circles = useRef<any[]>([])
+  const circles = useRef<Circle[]>([])
   const mousePosition = useMousePosition()
   const mouse = useRef<{ x: number; y: number }>({ x: 0, y: 0 })
   const canvasSize = useRef<{ w: number; h: number }>({ w: 0, h: 0 })
   const dpr = typeof window !== "undefined" ? window.devicePixelRatio : 1
   const animFrameRef = useRef<number>(0)
-
-  useEffect(() => {
-    if (canvasRef.current) context.current = canvasRef.current.getContext("2d")
-    initCanvas()
-    animFrameRef.current = requestAnimationFrame(animate)
-    window.addEventListener("resize", initCanvas)
-    return () => {
-      window.removeEventListener("resize", initCanvas)
-      cancelAnimationFrame(animFrameRef.current)
-    }
-  }, [])
-
-  useEffect(() => { onMouseMove() }, [mousePosition.x, mousePosition.y])
-  useEffect(() => { initCanvas() }, [refresh])
 
   const initCanvas = () => { resizeCanvas(); drawParticles() }
 
@@ -145,8 +133,6 @@ export const Particles: React.FC<ParticlesProps> = ({
       }
     }
   }
-
-  type Circle = { x: number; y: number; translateX: number; translateY: number; size: number; alpha: number; targetAlpha: number; dx: number; dy: number; magnetism: number }
 
   const resizeCanvas = () => {
     if (canvasContainerRef.current && canvasRef.current && context.current) {
@@ -232,6 +218,25 @@ export const Particles: React.FC<ParticlesProps> = ({
     })
     animFrameRef.current = requestAnimationFrame(animate)
   }
+
+  // Effects are declared after the functions they call (initCanvas,
+  // onMouseMove, animate) rather than before, so the linter can see the
+  // references are to already-initialized values at effect-run time.
+  useEffect(() => {
+    if (canvasRef.current) context.current = canvasRef.current.getContext("2d")
+    initCanvas()
+    animFrameRef.current = requestAnimationFrame(animate)
+    window.addEventListener("resize", initCanvas)
+    return () => {
+      window.removeEventListener("resize", initCanvas)
+      cancelAnimationFrame(animFrameRef.current)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  useEffect(() => { onMouseMove() }, [mousePosition.x, mousePosition.y])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => { initCanvas() }, [refresh])
 
   return (
     <div className={className} ref={canvasContainerRef} aria-hidden="true">

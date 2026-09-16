@@ -1,3 +1,5 @@
+import { pricingSummary } from './pricing'
+
 export const faqs = [
   {
     q: 'What types of projects do you work on?',
@@ -13,7 +15,7 @@ export const faqs = [
   },
   {
     q: 'How is pricing structured?',
-    a: 'We operate strictly on fixed-price milestone contracts or dedicated monthly engineering retainers. No unexpected billable hours. Single-page campaign sites start at ₹9,999; starter brand websites from ₹19,999; full business websites from ₹32,999; full-stack web/mobile MVPs from ₹75,000; enterprise systems are custom scoped with transparent line items.',
+    a: pricingSummary,
   },
   {
     q: 'WordPress vs a custom-built website — which should I choose?',

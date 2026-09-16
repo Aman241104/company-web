@@ -1,12 +1,14 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 const WHATSAPP_NUMBER = '919876543210'
 const WHATSAPP_MESSAGE = 'Hi Mehta Technologies, I would like to know more about your services.'
 const WHATSAPP_HREF = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`
+const CLEARANCE_BUFFER = 12 // cushion so content never sits flush against the bubble
 
 export default function FloatingWhatsApp() {
   const [navMenuOpen, setNavMenuOpen] = useState(false)
+  const linkRef = useRef(null)
 
   useEffect(() => {
     const handleNavToggle = (e) => setNavMenuOpen(!!e.detail?.open)
@@ -14,10 +16,42 @@ export default function FloatingWhatsApp() {
     return () => window.removeEventListener('mobile-nav-toggle', handleNavToggle)
   }, [])
 
+  // Publish the button's real rendered footprint — measured from the
+  // viewport bottom, the same contract MobileDock already publishes as
+  // `--mobile-dock-clearance` — so any content elsewhere on the site (the
+  // homepage quick-quote form, WorkPage's category panel) can reserve
+  // enough space to never render underneath the bubble, instead of a
+  // hardcoded pixel guess tuned to one layout.
+  useEffect(() => {
+    const el = linkRef.current
+    if (!el || navMenuOpen || typeof window === 'undefined') {
+      document.documentElement.style.setProperty('--whatsapp-clearance', '0px')
+      return
+    }
+
+    const publish = () => {
+      const rect = el.getBoundingClientRect()
+      const clearance = Math.max(0, window.innerHeight - rect.top) + CLEARANCE_BUFFER
+      document.documentElement.style.setProperty('--whatsapp-clearance', `${clearance}px`)
+    }
+
+    publish()
+    const ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(publish) : null
+    ro?.observe(el)
+    window.addEventListener('resize', publish)
+    window.addEventListener('orientationchange', publish)
+    return () => {
+      ro?.disconnect()
+      window.removeEventListener('resize', publish)
+      window.removeEventListener('orientationchange', publish)
+    }
+  }, [navMenuOpen])
+
   if (navMenuOpen) return null
 
   return (
     <a
+      ref={linkRef}
       href={WHATSAPP_HREF}
       target="_blank"
       rel="noopener noreferrer"

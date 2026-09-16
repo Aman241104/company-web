@@ -1,7 +1,7 @@
 'use client'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { ArrowRight, Mail, Phone, Clock, ShieldCheck, Sparkles } from 'lucide-react'
+import { ArrowRight, Clock, ShieldCheck, Sparkles } from 'lucide-react'
 
 export default function CTA() {
   return (
@@ -25,7 +25,7 @@ export default function CTA() {
           {/* Main Title */}
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.08] mb-6">
             Ready to grow{' '}
-            <span className="text-gradient-accent">your business online?</span>
+            <span className="text-blue-400">your business online?</span>
           </h2>
 
           {/* Description */}

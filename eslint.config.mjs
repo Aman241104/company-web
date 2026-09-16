@@ -12,6 +12,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Stale local Vercel build output (gitignored, not source) — was being
+    // linted as if it were app code.
+    ".vercel/**",
   ]),
 ]);
 

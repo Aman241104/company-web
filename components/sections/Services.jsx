@@ -2,6 +2,7 @@
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Monitor, Code2, TrendingUp, ShoppingCart, ArrowRight } from 'lucide-react'
+import { cardGridContainer, cardSpringItem } from '@/lib/motionVariants'
 
 const services = [
   {
@@ -9,28 +10,28 @@ const services = [
     title: 'Website Development',
     desc: 'Modern, responsive and SEO-friendly websites designed to build trust, showcase your business, and generate enquiries.',
     tags: ['Business Websites', 'Landing Pages', 'SEO-Ready', 'Fast & Mobile-First'],
-    href: '/services',
+    href: '/services#service-01',
   },
   {
     icon: ShoppingCart,
     title: 'E-Commerce Development',
     desc: 'Online stores that make it easy for customers to browse, order and pay: built to sell, not just look good.',
     tags: ['Shopify', 'Custom Storefronts', 'Payments', 'Inventory'],
-    href: '/services',
+    href: '/services#service-02',
   },
   {
     icon: Code2,
     title: 'Custom Software Development',
     desc: 'Web applications and business software built around your specific workflows, when off-the-shelf tools stop being enough.',
     tags: ['Web Apps', 'Dashboards', 'Integrations', 'ERP'],
-    href: '/services',
+    href: '/services#service-05',
   },
   {
     icon: TrendingUp,
     title: 'Performance Marketing',
     desc: 'Google and Meta ad campaigns focused on bringing in the right traffic and turning it into real enquiries.',
     tags: ['Google Ads', 'Meta Ads', 'Funnel UX', 'ROAS Tracking'],
-    href: '/services',
+    href: '/services#service-06',
   },
 ]
 
@@ -56,17 +57,22 @@ export default function Services() {
         </motion.div>
       </div>
 
-      {/* Modern Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
-        {services.map((service, index) => {
+      {/* Modern Grid — spring pop-in with a light stagger, distinct from the
+          headline tween above: these are independent, browsable cards, not
+          announcement text. */}
+      <motion.div
+        variants={cardGridContainer}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: '-150px' }}
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6"
+      >
+        {services.map((service) => {
           const Icon = service.icon
           return (
             <motion.div
               key={service.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-150px" }}
-              transition={{ duration: 0.45, delay: index * 0.06 }}
+              variants={cardSpringItem}
               className="group p-6 sm:p-8 rounded-2xl bg-white border border-neutral-200 shadow-sm hover:border-blue-300 hover:shadow-md transition-all duration-300 flex flex-col justify-between"
             >
               <div>
@@ -103,7 +109,7 @@ export default function Services() {
             </motion.div>
           )
         })}
-      </div>
+      </motion.div>
       </div>
     </section>
   )

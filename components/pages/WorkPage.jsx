@@ -1,10 +1,12 @@
 'use client'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ArrowRight, ExternalLink, ArrowUpRight, Sparkles, Filter } from 'lucide-react'
+import { ArrowRight, ArrowUpRight } from 'lucide-react'
 import SpotlightCard from '@/components/ui/SpotlightCard'
+import { useClearanceGuard } from '@/lib/useClearanceGuard'
+import { cardGridContainer, cardSpringItem } from '@/lib/motionVariants'
 
 const categories = ['All', 'Web', 'E-Commerce', 'SaaS', 'Media']
 
@@ -220,13 +222,19 @@ const projects = [
 
 
 
-function ProjectCard({ project, index }) {
+function ProjectCard({ project }) {
   return (
+    // Spring pop-in is on this outer wrapper, not SpotlightCard itself —
+    // SpotlightCard's own motion.div already owns an explicit `animate`
+    // object for cursor tilt, which would block variant propagation from a
+    // parent stagger. Keeping the two concerns on separate elements lets
+    // each animate its own transform independently.
+    <motion.div variants={cardSpringItem} className="h-full">
     <SpotlightCard
       enableTilt={false}
       spotlightColor="rgba(59, 130, 246, 0.15)"
       borderColor="rgba(59, 130, 246, 0.3)"
-      className="group rounded-3xl !bg-white !border !border-neutral-200 hover:!border-blue-300 overflow-hidden flex flex-col justify-between transition-all duration-300 shadow-sm"
+      className="group rounded-3xl !bg-white !border !border-neutral-200 hover:!border-blue-300 overflow-hidden flex flex-col justify-between transition-all duration-300 shadow-sm h-full"
     >
       <div>
         {/* Visual Cover */}
@@ -244,7 +252,7 @@ function ProjectCard({ project, index }) {
           ) : project.inProgress ? (
             <div className="w-full h-full flex flex-col items-center justify-center gap-1.5 bg-blue-50 text-center px-4">
               <span className="text-[10px] font-mono uppercase tracking-wider text-blue-600/70">Build In Progress</span>
-              <span className="text-xs text-neutral-400">Preview coming at launch</span>
+              <span className="text-xs text-neutral-500">Preview coming at launch</span>
             </div>
           ) : (
             <div className="w-full h-full flex items-center justify-center font-bold text-2xl text-blue-600/40 bg-blue-50">
@@ -275,7 +283,7 @@ function ProjectCard({ project, index }) {
             <h3 className="text-xl font-bold text-neutral-950 tracking-tight group-hover:text-blue-600 transition-colors">
               {project.name}
             </h3>
-            <span className="text-xs font-mono text-neutral-400">{project.year}</span>
+            <span className="text-xs font-mono text-neutral-500">{project.year}</span>
           </div>
 
           <p className="text-xs text-blue-600 font-medium mb-3">
@@ -330,11 +338,18 @@ function ProjectCard({ project, index }) {
         )}
       </div>
     </SpotlightCard>
+    </motion.div>
   )
 }
 
 export default function WorkPage() {
   const [activeCategory, setActiveCategory] = useState('All')
+  const categoryPanelRef = useRef(null)
+
+  // Guards the category panel from landing under the fixed floating
+  // WhatsApp button on initial mobile load — see `lib/useClearanceGuard.ts`.
+  // Round 1 measured this exact overlap on the "Media" row at 375x800.
+  useClearanceGuard('--whatsapp-clearance', [categoryPanelRef])
 
   const filtered =
     activeCategory === 'All'
@@ -343,63 +358,84 @@ export default function WorkPage() {
 
   return (
     <div className="pt-32 pb-24 overflow-hidden">
-      {/* Page Header */}
-      <section className="max-w-[1360px] mx-auto px-6 md:px-8 mb-16 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="max-w-3xl mx-auto"
-        >
-          <span className="glow-pill mb-4 inline-flex">
-            Portfolio & Case Studies
-          </span>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-neutral-950 tracking-tight leading-[1.08] mb-6">
-            Engineering that drives{' '}
-            <span className="text-blue-600">measurable outcomes.</span>
-          </h1>
-          <p className="text-base sm:text-lg text-neutral-500 leading-relaxed">
-            150+ shipped production applications, luxury e-commerce storefronts, and cloud SaaS platforms.
-          </p>
-        </motion.div>
-      </section>
+      {/* Page Header — the filter bar isn't a separate row below a centered
+          hero, it IS the right half of the hero: an asymmetric split
+          instead of centered-pill-H1-subtext-then-tabs. */}
+      <section className="max-w-[1360px] mx-auto px-6 md:px-8 mb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="lg:col-span-7"
+          >
+            <span className="glow-pill mb-4 inline-flex">
+              Portfolio & Case Studies
+            </span>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-neutral-950 tracking-tight leading-[1.08] mb-6">
+              Engineering that drives{' '}
+              <span className="text-blue-600">measurable outcomes.</span>
+            </h1>
+            <p className="text-base sm:text-lg text-neutral-500 leading-relaxed max-w-lg">
+              150+ shipped production applications, luxury e-commerce storefronts, and cloud SaaS platforms.
+            </p>
+          </motion.div>
 
-      {/* Filter Tabs */}
-      <section className="max-w-[1360px] mx-auto px-6 md:px-8 mb-12">
-        <div className="flex items-center justify-center gap-2 flex-wrap">
-          {categories.map((cat) => {
-            const isSelected = activeCategory === cat
-            const count =
-              cat === 'All'
-                ? projects.length
-                : projects.filter((p) => (p.categoryFilter || p.category) === cat).length
-            return (
-              <button
-                key={cat}
-                onClick={() => setActiveCategory(cat)}
-                className={`px-4 py-2 rounded-full text-xs font-semibold transition-all flex items-center gap-2 ${
-                  isSelected
-                    ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/30'
-                    : 'bg-neutral-50 text-neutral-600 hover:text-neutral-950 hover:bg-neutral-100 border border-neutral-200'
-                }`}
-              >
-                <span>{cat}</span>
-                <span className="text-[10px] opacity-60 font-mono">({count})</span>
-              </button>
-            )
-          })}
+          <motion.div
+            ref={categoryPanelRef}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="lg:col-span-5"
+          >
+            <div className="rounded-2xl bg-white border border-neutral-200 shadow-sm p-2 sm:p-2.5">
+              <div className="px-3.5 pt-2.5 pb-1.5 text-[11px] font-mono uppercase tracking-wider text-neutral-500">
+                Browse by category
+              </div>
+              {categories.map((cat) => {
+                const isSelected = activeCategory === cat
+                const count =
+                  cat === 'All'
+                    ? projects.length
+                    : projects.filter((p) => (p.categoryFilter || p.category) === cat).length
+                return (
+                  <button
+                    key={cat}
+                    onClick={() => setActiveCategory(cat)}
+                    aria-pressed={isSelected}
+                    className={`w-full flex items-center justify-between gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-all ${
+                      isSelected
+                        ? 'bg-blue-50 text-blue-700'
+                        : 'text-neutral-600 hover:bg-neutral-50 hover:text-neutral-950'
+                    }`}
+                  >
+                    <span>{cat}</span>
+                    <span className={`text-xs font-mono px-2 py-0.5 rounded-full ${isSelected ? 'bg-blue-600 text-white' : 'bg-neutral-100 text-neutral-500'}`}>
+                      {count}
+                    </span>
+                  </button>
+                )
+              })}
+            </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Projects Grid */}
       <section className="max-w-[1360px] mx-auto px-6 md:px-8 mb-28">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <motion.div
+          key={activeCategory}
+          variants={cardGridContainer}
+          initial="hidden"
+          animate="show"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
           <AnimatePresence mode="popLayout">
             {filtered.map((p, i) => (
               <ProjectCard key={p.name} project={p} index={i} />
             ))}
           </AnimatePresence>
-        </div>
+        </motion.div>
       </section>
 
       {/* Bottom CTA */}

@@ -1,9 +1,10 @@
 'use client'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { ArrowRight, CheckCircle2, MapPin, Globe2 } from 'lucide-react'
 import HeroDashboardShowcase from '@/components/ui/HeroDashboardShowcase'
+import { useClearanceGuard } from '@/lib/useClearanceGuard'
 
 const locationLine = [
   { icon: MapPin, label: 'Ahmedabad, India' },
@@ -107,6 +108,15 @@ function HeroLeadForm() {
 }
 
 export default function Hero() {
+  // Guards the quick-quote capture block from landing underneath the fixed
+  // floating WhatsApp button on initial mobile load — see
+  // `lib/useClearanceGuard.ts` and `FloatingWhatsApp.jsx`'s
+  // `--whatsapp-clearance` publisher. Measured overlap: at 375x812 the
+  // phone-number input and the WhatsApp bubble genuinely intersected before
+  // this guard existed.
+  const leadCaptureRef = useRef(null)
+  useClearanceGuard('--whatsapp-clearance', [leadCaptureRef])
+
   return (
     <section className="relative pt-32 pb-16 md:pt-40 md:pb-24 overflow-hidden bg-white">
       {/* Background Radial Glow */}
@@ -193,12 +203,13 @@ export default function Hero() {
 
             {/* Inline Lead Capture — de-emphasized secondary option, not a third CTA */}
             <motion.div
+              ref={leadCaptureRef}
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.4 }}
               className="pt-3 border-t border-neutral-100"
             >
-              <p className="text-[11px] text-neutral-400 mb-2">Or get a free quote in under a minute:</p>
+              <p className="text-[11px] text-neutral-500 mb-2">Or get a free quote in under a minute:</p>
               <HeroLeadForm />
             </motion.div>
 

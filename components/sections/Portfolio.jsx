@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
+import { cardGridContainer, cardSpringItem } from '@/lib/motionVariants'
 
 const projects = [
   {
@@ -50,17 +51,20 @@ export default function Portfolio() {
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
-          {projects.map((project, index) => (
+        <motion.div
+          variants={cardGridContainer}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: '-150px' }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6"
+        >
+          {projects.map((project) => (
             <motion.a
               key={project.name}
               href={project.href}
               target="_blank"
               rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-150px' }}
-              transition={{ duration: 0.45, delay: index * 0.06 }}
+              variants={cardSpringItem}
               className="group block rounded-2xl bg-white border border-neutral-200 shadow-sm hover:border-blue-300 hover:shadow-md transition-all duration-300 overflow-hidden"
             >
               <div className="relative aspect-[4/3] overflow-hidden bg-neutral-100">
@@ -80,7 +84,7 @@ export default function Portfolio() {
               </div>
             </motion.a>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   )

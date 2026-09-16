@@ -1,8 +1,8 @@
 'use client'
-import { useEffect, useRef } from 'react'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { ArrowRight, Sparkles } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
+import { cardGridContainer, cardSpringItem } from '@/lib/motionVariants'
 
 const team = [
   {
@@ -49,13 +49,10 @@ const team = [
   },
 ]
 
-function TeamCard({ member, index }) {
+function TeamCard({ member }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.45, delay: index * 0.06 }}
+      variants={cardSpringItem}
       className="rounded-2xl bg-white border border-neutral-200 hover:border-blue-300 hover:shadow-md p-6 sm:p-7 flex flex-col justify-between shadow-sm transition-all duration-300 group"
     >
       <div>
@@ -123,7 +120,7 @@ export default function Team() {
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-neutral-950 tracking-tight leading-tight mb-4">
             Meet the engineers{' '}
-            <span className="text-gradient-accent">behind your product.</span>
+            <span className="text-blue-600">behind your product.</span>
           </h2>
           <p className="text-base sm:text-lg text-neutral-500 leading-relaxed">
             A small, high-leverage team of senior specialists across architecture, UI/UX, cloud infrastructure, and growth.
@@ -132,11 +129,17 @@ export default function Team() {
       </div>
 
       {/* Team Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-        {team.map((member, i) => (
-          <TeamCard key={member.name} member={member} index={i} />
+      <motion.div
+        variants={cardGridContainer}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: '-150px' }}
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12"
+      >
+        {team.map((member) => (
+          <TeamCard key={member.name} member={member} />
         ))}
-      </div>
+      </motion.div>
 
       {/* Careers Hiring Banner */}
       <motion.div

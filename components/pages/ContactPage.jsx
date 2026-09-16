@@ -2,7 +2,8 @@
 import { useState, useEffect, useRef, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { motion } from 'framer-motion'
-import { Mail, Phone, MapPin, Clock, ArrowRight, Send, CheckCircle2, ShieldCheck, Sparkles } from 'lucide-react'
+import { Mail, Phone, MapPin, Clock, ArrowRight, CheckCircle2 } from 'lucide-react'
+import { cheapestTier, pricingTiers } from '@/lib/pricing'
 
 /**
  * Guards a set of stacked elements (mobile-dock "rows" of interest — form field
@@ -77,6 +78,7 @@ function useMobileDockClearance(row0Ref, row1Ref, row2Ref, row3Ref) {
 
 const services = [
   'Website Development',
+  'E-Commerce Development',
   'Software Development & API',
   'Mobile App (iOS & Android)',
   'Custom SaaS / ERP Platform',
@@ -84,10 +86,18 @@ const services = [
   'Technical SEO & Growth',
   'Vibo ERP Demo & Access',
   'Other Custom Architecture',
+  // Tier names from the Pricing section's CTAs (?service=<TierName>) — kept
+  // in sync with lib/pricing.ts so a click-through from a pricing card always
+  // finds a matching <option> and pre-fills correctly, not just a value the
+  // <select> can't display.
+  ...pricingTiers.map((t) => t.name),
 ]
 
+// Lower bound tracks lib/pricing.ts's cheapest published tier so this
+// intake selector never implies a higher minimum spend than the site's
+// own pricing section does.
 const budgets = [
-  '₹20,000 – ₹50,000',
+  `${cheapestTier.priceLabel} – ₹50,000`,
   '₹50,000 – ₹1,50,000',
   '₹1,50,000 – ₹5,00,000',
   '₹5,00,000+',
@@ -278,7 +288,7 @@ function ContactForm() {
                 id="contact-company"
                 name="company"
                 type="text"
-                placeholder="Acme Corp"
+                placeholder="Shah Textiles Pvt. Ltd."
                 value={form.company}
                 onChange={(e) => setForm({ ...form, company: e.target.value })}
                 className="w-full px-4 py-3 rounded-xl bg-white border border-neutral-300 text-neutral-900 placeholder:text-neutral-500 text-sm focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 transition-all"
@@ -394,33 +404,30 @@ function ContactForm() {
 export default function ContactPage() {
   return (
     <div className="pt-32 pb-24 overflow-hidden">
-      {/* Header */}
-      <section className="max-w-[1360px] mx-auto px-6 md:px-8 mb-16 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="max-w-3xl mx-auto"
-        >
-          <span className="glow-pill mb-4 inline-flex">
-            Get In Touch
-          </span>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-neutral-950 tracking-tight leading-[1.08] mb-6">
-            Let&apos;s build something{' '}
-            <span className="text-gradient-accent">exceptional together.</span>
-          </h1>
-          <p className="text-base sm:text-lg text-neutral-500 leading-relaxed">
-            Have a project in mind? Book a 30-minute discovery consultation with our founding team.
-          </p>
-        </motion.div>
-      </section>
-
-      {/* Main Grid: Form + Info / Steps */}
+      {/* No standalone centered hero — the form itself carries the page's
+          identity. A compact, left-aligned intro sits directly above it in
+          the same column, instead of a separate pill/H1/subtext block. */}
       <section className="max-w-[1360px] mx-auto px-6 md:px-8 mb-24">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          
-          {/* Left Column: Contact Form */}
+
+          {/* Left Column: Intro + Contact Form */}
           <div className="lg:col-span-7">
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="mb-6"
+            >
+              <span className="glow-pill mb-4 inline-flex">
+                Get In Touch
+              </span>
+              <h1 className="text-3xl sm:text-4xl font-extrabold text-neutral-950 tracking-tight leading-[1.1] mb-3">
+                Tell us about your project.
+              </h1>
+              <p className="text-sm sm:text-base text-neutral-500 leading-relaxed max-w-lg">
+                Submit a brief below and our founding team replies within 24 business hours — no discovery call required just to get a straight answer.
+              </p>
+            </motion.div>
             <Suspense fallback={<div className="h-96 rounded-3xl bg-neutral-100 animate-pulse" />}>
               <ContactForm />
             </Suspense>

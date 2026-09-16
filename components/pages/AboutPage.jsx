@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { ArrowRight, CheckCircle2, Award, Users, Rocket, ShieldCheck, Sparkles, Building2 } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import Team from '@/components/sections/Team'
 import LogoLoop from '@/components/ui/reactbits/LogoLoop'
 import { useCountUp } from '@/lib/useCountUp'
@@ -109,7 +109,7 @@ export default function AboutPage() {
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-neutral-950 tracking-tight leading-[1.08]">
               Engineering digital products{' '}
-              <span className="text-gradient-accent">built for real impact.</span>
+              <span className="text-blue-600">built for real impact.</span>
             </h1>
 
             <p className="text-base sm:text-lg text-neutral-500 leading-relaxed max-w-2xl font-normal">
@@ -133,30 +133,24 @@ export default function AboutPage() {
           </div>
 
           <div className="lg:col-span-5">
+            {/* Hero opens with the company's actual journey, not a stat
+                tile — the fuller Timeline section further down the page
+                was folded into this one so the story isn't told twice. */}
             <div className="rounded-3xl bg-white border border-neutral-200 p-5 sm:p-8 md:p-10 shadow-xl shadow-neutral-950/5 relative overflow-hidden">
               <div className="text-xs font-mono uppercase tracking-wider text-neutral-500 mb-6">
-                Company Snapshot
+                Our Journey So Far
               </div>
-              <div className="grid grid-cols-2 gap-6 mb-8">
-                <div>
-                  <div className="text-3xl font-extrabold text-neutral-950 tracking-tight mb-1">150+</div>
-                  <div className="text-xs text-neutral-500">Shipped Projects</div>
-                </div>
-                <div>
-                  <div className="text-3xl font-extrabold text-neutral-950 tracking-tight mb-1">2019</div>
-                  <div className="text-xs text-neutral-500">Founded in Ahmedabad</div>
-                </div>
-                <div>
-                  <div className="text-3xl font-extrabold text-neutral-950 tracking-tight mb-1">4.9/5</div>
-                  <div className="text-xs text-neutral-500">Client Rating</div>
-                </div>
-                <div>
-                  <div className="text-3xl font-extrabold text-neutral-950 tracking-tight mb-1">Ongoing</div>
-                  <div className="text-xs text-neutral-500">Support & Maintenance</div>
-                </div>
+              <div className="relative pl-5 space-y-5 before:content-[''] before:absolute before:left-[3px] before:top-1.5 before:bottom-1.5 before:w-px before:bg-neutral-200">
+                {timeline.map((item) => (
+                  <div key={item.year} className="relative">
+                    <span className="absolute -left-5 top-1 w-[7px] h-[7px] rounded-full bg-blue-600 ring-4 ring-blue-50" />
+                    <div className="text-xs font-mono font-bold text-blue-600 mb-0.5">{item.year}</div>
+                    <p className="text-xs sm:text-[13px] text-neutral-600 leading-relaxed">{item.event}</p>
+                  </div>
+                ))}
               </div>
 
-              <div className="pt-6 border-t border-neutral-200 flex items-center gap-2 text-xs text-emerald-600 font-medium">
+              <div className="mt-7 pt-6 border-t border-neutral-200 flex items-center gap-2 text-xs text-emerald-600 font-medium">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                 <span>Currently onboarding Q1/Q2 partner projects</span>
               </div>
@@ -183,7 +177,7 @@ export default function AboutPage() {
           </span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-neutral-950 tracking-tight">
             How we engineer.{' '}
-            <span className="text-gradient-accent">How we deliver.</span>
+            <span className="text-blue-600">How we deliver.</span>
           </h2>
         </div>
 
@@ -240,39 +234,6 @@ export default function AboutPage() {
           gap={16}
           fadeOut
         />
-      </section>
-
-      {/* Timeline Section */}
-      <section className="max-w-[1360px] mx-auto px-6 md:px-8 mb-28">
-        <div className="max-w-2xl mb-16">
-          <span className="glow-pill mb-4 inline-flex">
-            Our Journey
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-neutral-950 tracking-tight">
-            Seven years of relentless{' '}
-            <span className="text-gradient-accent">product engineering.</span>
-          </h2>
-        </div>
-
-        <div className="max-w-3xl space-y-8">
-          {timeline.map((item, i) => (
-            <motion.div
-              key={item.year}
-              initial={{ opacity: 0, x: -16 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.06 }}
-              className="flex items-start gap-3.5 sm:gap-6 p-4 sm:p-6 rounded-2xl bg-white border border-neutral-200 shadow-sm"
-            >
-              <div className="px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-blue-50 border border-blue-100 text-blue-600 font-mono font-bold text-[11px] sm:text-xs shrink-0">
-                {item.year}
-              </div>
-              <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed font-normal pt-0.5">
-                {item.event}
-              </p>
-            </motion.div>
-          ))}
-        </div>
       </section>
 
       {/* Team Section */}

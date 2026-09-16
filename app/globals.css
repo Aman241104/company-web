@@ -212,19 +212,10 @@ body:has(#main-content.home-light) .text-gradient {
   background-clip: text;
 }
 
-.text-gradient-accent {
-  background: linear-gradient(135deg, #60A5FA 0%, #A78BFA 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-body:has(#main-content.home-light) .text-gradient-accent {
-  background: linear-gradient(135deg, #2563EB 0%, #7C3AED 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
+/* Locked sitewide accent: flat blue-600 (light surfaces) / blue-400 (dark
+   surfaces, for contrast) — see research/creative-improvement-round-1.md.
+   The blue->purple gradient headline treatment this project shipped with
+   has been fully retired; do not reintroduce .text-gradient-accent. */
 
 .glow-pill {
   display: inline-flex;
@@ -257,6 +248,14 @@ body:has(#main-content.home-light) .glow-pill {
   background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
                     linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
   background-size: 40px 40px;
+}
+
+/* Light-theme dot texture — used to give Pricing its own backdrop instead of
+   flat white, so the section reads as a distinct surface rather than a 9th
+   instance of the same card-on-white shell. */
+.bg-dot-grid-light {
+  background-image: radial-gradient(rgba(37, 99, 235, 0.14) 1px, transparent 1px);
+  background-size: 22px 22px;
 }
 
 /* Accessibility Focus States */

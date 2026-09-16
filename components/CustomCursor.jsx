@@ -11,6 +11,11 @@ export default function CustomCursor() {
 
   useEffect(() => {
     const hasFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches
+    // Intentionally deferred to the effect (not a useState lazy initializer):
+    // the server and the client's first render both need to start from the
+    // same `true` (cursor hidden) so hydration matches — only after mount
+    // can we safely read the real pointer capability and flip state.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsTouch(!hasFinePointer)
 
     // Defensive fallback for hybrid touchscreen-laptop devices that misreport

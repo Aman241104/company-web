@@ -21,6 +21,11 @@ export default function Preloader() {
 
   useEffect(() => {
     if (reducedMotion || window.sessionStorage.getItem(SESSION_KEY)) {
+      // Intentionally deferred to the effect, not a lazy initializer: server
+      // and the client's first render both start from `true` so hydration
+      // matches — only after mount can sessionStorage/reducedMotion decide
+      // to skip the preloader.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setVisible(false)
       return
     }

@@ -19,11 +19,11 @@ const cols = [
     title: 'Services',
     links: [
       { label: 'Website Development', href: '/services#service-01' },
-      { label: 'E-Commerce Development', href: '/services#service-01' },
-      { label: 'Custom Software Development', href: '/services#service-04' },
-      { label: 'Mobile App Development', href: '/services#service-03' },
-      { label: 'Performance Marketing', href: '/services#service-05' },
-      { label: 'Technical SEO', href: '/services#service-06' },
+      { label: 'E-Commerce Development', href: '/services#service-02' },
+      { label: 'Custom Software Development', href: '/services#service-05' },
+      { label: 'Mobile App Development', href: '/services#service-04' },
+      { label: 'Performance Marketing', href: '/services#service-06' },
+      { label: 'Technical SEO', href: '/services#service-07' },
     ],
   },
   {

@@ -1,7 +1,8 @@
 'use client'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { Globe, Code2, Smartphone, Package, TrendingUp, Search, ArrowRight, Check, Sparkles, Layers, ShieldCheck } from 'lucide-react'
+import { Globe, ShoppingCart, Code2, Smartphone, Package, TrendingUp, Search, ArrowRight, Check } from 'lucide-react'
+import { cheapestTier, flagshipTier, pricingTiers } from '@/lib/pricing'
 
 const services = [
   {
@@ -21,12 +22,38 @@ const services = [
     ],
     deliverables: ['Figma Design System', 'Next.js Production Repo', 'Headless CMS', 'SEO Architecture'],
     timeline: '3–6 weeks',
-    pricing: 'From ₹20,000',
+    // Range, not a single "From" floor: the feature list above spans simple
+    // landing pages up through headless-CMS/A-B-testing builds, which only
+    // the Business Website tier and up actually include — a bare "From
+    // ₹9,999" next to those features would misleadingly imply they're
+    // included at the cheapest tier.
+    pricing: `${cheapestTier.priceLabel} – ${pricingTiers.find((t) => t.id === 'business-website').priceLabel}`,
     tags: ['Next.js', 'React', 'Tailwind', 'TypeScript'],
     caseStudy: { title: 'Silver Spoon by ACJ', result: 'Headless Next.js storefront rebuild' },
   },
   {
     num: '02',
+    icon: ShoppingCart,
+    title: 'E-Commerce Development',
+    subtitle: 'Storefronts built to sell — from Shopify Plus builds to fully headless Next.js commerce.',
+    features: [
+      'Shopify Plus & headless Next.js storefront builds',
+      'Product catalog & SKU management at scale (250+ SKUs shipped)',
+      'WhatsApp and multi-channel checkout flows',
+      'Stripe & Razorpay payment gateway integration',
+      'Live inventory synchronization across channels',
+      'Supabase-backed media CDN for fast product imagery',
+      'Global shipping & multi-currency support for international buyers',
+      'Conversion-optimized storefront UX & product pages',
+    ],
+    deliverables: ['Storefront Build (Shopify or Headless)', 'Product Catalog Setup', 'Payment Gateway Integration', 'Launch & Handover'],
+    timeline: '4–10 weeks',
+    pricing: `${cheapestTier.priceLabel} – ${pricingTiers.find((t) => t.id === 'business-website').priceLabel}`,
+    tags: ['Shopify Plus', 'Next.js', 'Stripe / Razorpay', 'Headless Commerce'],
+    caseStudy: { title: 'Prihaan Spices & Agro', result: '252+ SKU E-Commerce Catalog' },
+  },
+  {
+    num: '03',
     icon: Code2,
     title: 'Backend Systems & API Architecture',
     subtitle: 'Distributed backends, microservices, and PostgreSQL systems built for 10x throughput.',
@@ -47,7 +74,7 @@ const services = [
     caseStudy: null,
   },
   {
-    num: '03',
+    num: '04',
     icon: Smartphone,
     title: 'Mobile App Development',
     subtitle: 'iOS & Android applications with native 60fps performance and offline-first data sync.',
@@ -63,12 +90,12 @@ const services = [
     ],
     deliverables: ['iOS & Android Builds', 'Store Approval Delivery', 'Push Notification Engine', 'Analytics Setup'],
     timeline: '6–12 weeks',
-    pricing: 'From ₹75,000',
+    pricing: `From ${flagshipTier.priceLabel}`,
     tags: ['React Native', 'Flutter', 'iOS', 'Android'],
     caseStudy: null,
   },
   {
-    num: '04',
+    num: '05',
     icon: Package,
     title: 'Custom Software Development',
     subtitle: 'End-to-end multi-tenant SaaS engines built to scale from launch to 50,000+ users.',
@@ -89,7 +116,7 @@ const services = [
     caseStudy: { title: 'Vibo ERP', result: 'Built & used in-house at Mehta Technologies' },
   },
   {
-    num: '05',
+    num: '06',
     icon: TrendingUp,
     title: 'Performance Marketing',
     subtitle: 'Paid acquisition campaigns engineered around profitable unit economics and ROAS.',
@@ -109,7 +136,7 @@ const services = [
     caseStudy: null,
   },
   {
-    num: '06',
+    num: '07',
     icon: Search,
     title: 'Technical SEO',
     subtitle: 'High-intent search engine rankings that drive qualified commercial demand.',
@@ -242,10 +269,10 @@ export default function ServicesPage() {
           </span>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-neutral-950 tracking-tight leading-[1.08] mb-6">
             End-to-end digital services.{' '}
-            <span className="text-gradient-accent">Built for longevity.</span>
+            <span className="text-blue-600">Built for longevity.</span>
           </h1>
           <p className="text-base sm:text-lg text-neutral-500 leading-relaxed">
-            Six multidisciplinary practice areas. One senior engineering studio. No junior handoffs or broken promises.
+            Seven multidisciplinary practice areas. One senior engineering studio. No junior handoffs or broken promises.
           </p>
         </motion.div>
       </section>

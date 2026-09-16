@@ -43,6 +43,13 @@ const team = [
   {
     name: 'Kavya Reddy',
     role: 'Technical SEO Lead',
+    // No published headshot yet — `init` triggers the branded monogram
+    // fallback below instead of a photo. This is a deliberate, documented
+    // pattern for "no photo yet," not a missing asset: every card uses the
+    // same 56px circular frame/border/shadow, and the monogram gets a
+    // brand-gradient fill with equal visual weight to a photo rather than a
+    // pale placeholder tint. Swap in `image: '/team/kavya.jpg'` (and drop
+    // `init`) the moment a real photo exists — never fabricate one.
     init: 'KR',
     bio: 'Technical SEO specialist focused on Core Web Vitals, site structure, and search fundamentals that help clients actually get found.',
     skills: ['Technical SEO', 'Schema Markup', 'Core Web Vitals'],
@@ -68,7 +75,11 @@ function TeamCard({ member }) {
                 className="object-cover object-top group-hover:scale-105 transition-transform duration-300"
               />
             ) : (
-              <div className="w-full h-full flex items-center justify-center font-bold text-sm text-blue-600 bg-blue-50">
+              <div
+                role="img"
+                aria-label={member.name}
+                className="w-full h-full flex items-center justify-center font-bold text-base tracking-wide text-white bg-gradient-to-br from-blue-500 to-indigo-600 group-hover:scale-105 transition-transform duration-300"
+              >
                 {member.init}
               </div>
             )}
@@ -98,7 +109,7 @@ function TeamCard({ member }) {
       </div>
 
       <div className="pt-4 border-t border-neutral-100">
-        <span className="text-xs text-neutral-400 font-mono">Mehta Tech Core</span>
+        <span className="text-xs text-neutral-500 font-mono">Mehta Tech Core</span>
       </div>
     </motion.div>
   )

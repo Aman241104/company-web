@@ -33,7 +33,7 @@ export default function TermsPage() {
             Terms of Service
           </h1>
           <p className="text-xs sm:text-sm text-neutral-500 font-mono">
-            Last Updated: August 2025 · Effective Date: January 1, 2024
+            Last Updated: September 2026 · Effective Date: January 1, 2024
           </p>
         </div>
 

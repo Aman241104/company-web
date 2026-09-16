@@ -1,10 +1,11 @@
 'use client'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowRight, ArrowUpRight, Plus, Minus } from 'lucide-react'
 import { locations } from '@/lib/locations'
 import { clipWipe } from '@/lib/motionVariants'
+import { useClearanceGuard } from '@/lib/useClearanceGuard'
 
 // Rebuilt from the pre-round-1 centered-pill/H1/card-grid template that
 // round 1 left untouched. Instead of a generic hero followed by a 3x2 card
@@ -16,9 +17,20 @@ import { clipWipe } from '@/lib/motionVariants'
 function LocationRow({ location, isOpen, onToggle, index }) {
   const { slug, city, region, tagline, intro, focusPoints } = location
   const previewPoints = focusPoints.slice(0, 2)
+  const rowRef = useRef(null)
+
+  // Guards this row from landing under the fixed floating WhatsApp button
+  // OR the fixed mobile dock nav on mobile — whichever's danger band is
+  // taller — same mechanism as Hero/WorkPage (`lib/useClearanceGuard.ts`),
+  // now scroll-reactive. The first row (Ahmedabad) is open by default, so
+  // this also re-checks on mount with zero interaction, and `isOpen` is
+  // passed as a dep so switching cities re-checks immediately instead of
+  // waiting for the next scroll/resize.
+  useClearanceGuard(['--whatsapp-clearance', '--mobile-dock-clearance'], [rowRef], {}, [isOpen])
 
   return (
     <motion.div
+      ref={rowRef}
       initial={{ opacity: 0, y: 12 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-100px' }}

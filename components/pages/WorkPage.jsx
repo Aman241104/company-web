@@ -332,7 +332,7 @@ function ProjectCard({ project }) {
             Visit Live Project <ArrowUpRight size={13} />
           </a>
         ) : (
-          <div className="w-full py-2.5 rounded-full text-xs font-medium text-neutral-400 border border-neutral-200 text-center">
+          <div className="w-full py-2.5 rounded-full text-xs font-medium text-neutral-500 border border-neutral-200 text-center">
             Enterprise Client IP Protected
           </div>
         )}

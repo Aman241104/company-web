@@ -125,25 +125,19 @@ export default function Hero() {
       <div className="max-w-[1360px] mx-auto px-5 sm:px-6 md:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
 
-          {/* Left Column: Headline, Copy & CTAs */}
+          {/* Left Column: Headline, Copy & CTAs — the H1 leads directly,
+              no standalone pill/badge announcement above it (that was the
+              same opener recipe every other page used before Contact/Labs
+              broke from it). The "who we are" tag is folded further down
+              into the lead-capture block instead, where it earns its place
+              as context for the form rather than a banner above everything. */}
           <div className="lg:col-span-6 space-y-6 sm:space-y-8 text-left">
-
-            {/* Tag Badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-50 border border-neutral-200 text-xs font-bold tracking-widest uppercase text-neutral-500">
-                Full-Service Web & Software Partner
-              </span>
-            </motion.div>
 
             {/* Main Headline */}
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: 0.1 }}
+              transition={{ duration: 0.55 }}
               className="text-4xl sm:text-5xl lg:text-[58px] font-extrabold text-neutral-950 leading-[1.08] tracking-tight"
             >
               Websites That Turn <br className="hidden sm:block" />
@@ -155,7 +149,7 @@ export default function Hero() {
             <motion.p
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: 0.2 }}
+              transition={{ duration: 0.55, delay: 0.1 }}
               className="text-sm sm:text-base lg:text-lg text-neutral-500 leading-relaxed max-w-xl font-normal"
             >
               We design and develop modern, fast and SEO-ready websites that help businesses look credible, get discovered on Google and generate more enquiries.
@@ -165,7 +159,7 @@ export default function Hero() {
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: 0.3 }}
+              transition={{ duration: 0.55, delay: 0.2 }}
               className="flex flex-wrap items-center gap-3.5 sm:gap-4 pt-2"
             >
               <Link
@@ -187,7 +181,7 @@ export default function Hero() {
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: 0.35 }}
+              transition={{ duration: 0.55, delay: 0.25 }}
               className="flex flex-wrap items-center gap-x-6 gap-y-3"
             >
               {locationLine.map((item) => {
@@ -201,14 +195,20 @@ export default function Hero() {
               })}
             </motion.div>
 
-            {/* Inline Lead Capture — de-emphasized secondary option, not a third CTA */}
+            {/* Inline Lead Capture — de-emphasized secondary option, not a
+                third CTA. The former top-of-page pill badge now lives here,
+                as the eyebrow label for this specific block, instead of a
+                standalone announcement above the whole hero. */}
             <motion.div
               ref={leadCaptureRef}
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: 0.4 }}
-              className="pt-3 border-t border-neutral-100"
+              transition={{ duration: 0.55, delay: 0.3 }}
+              className="pt-5 border-t border-neutral-100"
             >
+              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-50 border border-neutral-200 text-[10px] font-bold tracking-widest uppercase text-neutral-500 mb-3">
+                Full-Service Web & Software Partner
+              </span>
               <p className="text-[11px] text-neutral-500 mb-2">Or get a free quote in under a minute:</p>
               <HeroLeadForm />
             </motion.div>

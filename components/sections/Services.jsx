@@ -1,7 +1,7 @@
 'use client'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { Monitor, Code2, TrendingUp, ShoppingCart, ArrowRight } from 'lucide-react'
+import { Monitor, Code2, TrendingUp, ShoppingCart, ArrowRight, Layers } from 'lucide-react'
 import { cardGridContainer, cardSpringItem } from '@/lib/motionVariants'
 
 const services = [
@@ -47,9 +47,14 @@ export default function Services() {
           viewport={{ once: true, margin: "-150px" }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-neutral-900 tracking-tight leading-tight mb-4">
-            Complete Digital Solutions{' '}
-            <span className="text-blue-600">For Your Business</span>
+          <div className="flex items-center justify-center gap-2 mb-3">
+            <Layers size={14} className="text-blue-600" />
+            <span className="text-xs font-mono font-bold uppercase tracking-wider text-blue-600">
+              What We Do
+            </span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-neutral-950 tracking-tight leading-tight mb-4">
+            Complete Digital Solutions For Your Business
           </h2>
           <p className="text-sm sm:text-base lg:text-lg text-neutral-500 leading-relaxed">
             From building your online presence to developing custom digital solutions, we help businesses use technology to grow and operate better.

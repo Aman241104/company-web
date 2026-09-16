@@ -1,6 +1,6 @@
 'use client'
 import { motion } from 'framer-motion'
-import { Target, Smartphone, Zap, Settings2, MessageCircle, Heart } from 'lucide-react'
+import { Target, Smartphone, Zap, Settings2, MessageCircle, Heart, ShieldCheck } from 'lucide-react'
 
 const reasons = [
   { icon: Target, title: 'Business Focused', desc: 'We build solutions that solve real business problems.' },
@@ -17,15 +17,23 @@ export default function WhyUs() {
       <div className="max-w-[1360px] mx-auto px-5 sm:px-6 md:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
           <div className="lg:col-span-4">
-            <motion.h2
+            <motion.div
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-150px' }}
               transition={{ duration: 0.5 }}
-              className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-neutral-900 tracking-tight leading-tight lg:sticky lg:top-32"
+              className="lg:sticky lg:top-32"
             >
-              Why Businesses Choose <span className="text-blue-600">Us.</span>
-            </motion.h2>
+              <div className="flex items-center gap-2 mb-3">
+                <ShieldCheck size={14} className="text-blue-600" />
+                <span className="text-xs font-mono font-bold uppercase tracking-wider text-blue-600">
+                  Why Us
+                </span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-neutral-950 tracking-tight leading-tight">
+                Why Businesses Choose Us.
+              </h2>
+            </motion.div>
           </div>
 
           <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-x-8 border-b border-neutral-200">

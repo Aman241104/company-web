@@ -95,7 +95,6 @@ export default function SolutionsPage() {
             className="lg:col-span-4 border-b lg:border-b-0 lg:border-r border-neutral-200 p-2 sm:p-3 lg:max-h-[560px] lg:overflow-y-auto"
           >
             {industries.map((industry, i) => {
-              const Icon = industry.icon
               const isActive = i === active
               return (
                 <button
@@ -108,7 +107,9 @@ export default function SolutionsPage() {
                       : 'text-neutral-600 hover:bg-neutral-50 hover:text-neutral-950'
                   }`}
                 >
-                  <Icon size={17} className={`shrink-0 ${isActive ? 'text-blue-600' : 'text-neutral-400'}`} />
+                  <span className={`text-xs font-mono font-bold shrink-0 w-6 ${isActive ? 'text-blue-600' : 'text-neutral-400'}`}>
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
                   <span className="text-sm font-semibold flex-1">{industry.title}</span>
                   <ArrowRight
                     size={14}

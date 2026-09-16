@@ -2,7 +2,7 @@
 import { useRef, useState } from 'react'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ArrowRight, ArrowUpRight, Plus, Minus } from 'lucide-react'
+import { ArrowRight, ArrowUpRight, Plus, Minus, MapPin } from 'lucide-react'
 import { locations } from '@/lib/locations'
 import { clipWipe } from '@/lib/motionVariants'
 import { useClearanceGuard } from '@/lib/useClearanceGuard'
@@ -113,9 +113,14 @@ export default function LocationsIndexPage() {
           transition={{ duration: 0.5 }}
           className="max-w-2xl"
         >
-          <span className="glow-pill mb-4 inline-flex">Where We Work</span>
+          <div className="flex items-center gap-2 mb-4">
+            <MapPin size={14} className="text-blue-600" />
+            <span className="text-xs font-mono font-bold uppercase tracking-wider text-blue-600">
+              Where We Work
+            </span>
+          </div>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-neutral-950 tracking-tight leading-[1.1] mb-4">
-            Remote-first delivery, <span className="text-blue-600">real local work.</span>
+            Remote-first delivery, real local work.
           </h1>
           <p className="text-sm sm:text-base text-neutral-500 leading-relaxed">
             Active client work across Gujarat and Maharashtra today. Open a city below for its specific focus areas and case studies.

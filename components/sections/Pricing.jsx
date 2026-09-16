@@ -16,9 +16,14 @@ export default function Pricing() {
             viewport={{ once: true, margin: '-150px' }}
             transition={{ duration: 0.5 }}
           >
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-neutral-900 tracking-tight leading-tight mb-4">
-              Fixed pricing.{' '}
-              <span className="text-blue-600">No surprise invoices.</span>
+            <div className="flex items-center justify-center gap-2 mb-3">
+              <Check size={14} className="text-blue-600" />
+              <span className="text-xs font-mono font-bold uppercase tracking-wider text-blue-600">
+                Pricing
+              </span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-neutral-950 tracking-tight leading-tight mb-4">
+              Fixed pricing. No surprise invoices.
             </h2>
             <p className="text-sm sm:text-base lg:text-lg text-neutral-500 leading-relaxed">
               Every deliverable is written into your milestone contract before work begins. Starting-from prices, not teaser rates.

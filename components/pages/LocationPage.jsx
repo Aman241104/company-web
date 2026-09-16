@@ -1,7 +1,7 @@
 'use client'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { ArrowRight, ArrowUpRight, CheckCircle2, MapPin } from 'lucide-react'
+import { ArrowRight, ArrowUpRight, MapPin } from 'lucide-react'
 
 export default function LocationPage({ location }) {
   const { city, region, keywordLabel, tagline, intro, focusPoints, caseStudies, faqs } = location
@@ -22,7 +22,7 @@ export default function LocationPage({ location }) {
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-neutral-950 tracking-tight leading-[1.08] mb-6">
             {keywordLabel.replace('Website Development Agency in', '')}
             <br />
-            <span className="text-blue-600">Website Development Agency.</span>
+            Website Development <span className="text-blue-600">Agency.</span>
           </h1>
           <p className="text-base sm:text-lg text-neutral-500 leading-relaxed mb-3">{tagline}</p>
           <p className="text-sm sm:text-base text-neutral-500 leading-relaxed max-w-2xl mx-auto">{intro}</p>
@@ -41,8 +41,13 @@ export default function LocationPage({ location }) {
               transition={{ duration: 0.4, delay: i * 0.05 }}
               className="p-6 sm:p-8 rounded-2xl bg-white border border-neutral-200 shadow-sm hover:border-blue-300 hover:shadow-md transition-all"
             >
-              <div className="w-9 h-9 rounded-lg bg-blue-50 border border-blue-100 flex items-center justify-center mb-4 text-blue-600">
-                <CheckCircle2 size={16} />
+              <div className="flex items-center justify-between pb-3 mb-4 border-b border-neutral-200">
+                <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-blue-600">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <span className="text-[11px] font-mono text-neutral-400">
+                  / {String(focusPoints.length).padStart(2, '0')}
+                </span>
               </div>
               <h3 className="text-base font-bold text-neutral-950 tracking-tight mb-2">{point.title}</h3>
               <p className="text-sm text-neutral-500 leading-relaxed">{point.desc}</p>

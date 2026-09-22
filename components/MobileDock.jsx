@@ -88,7 +88,7 @@ export default function MobileDock() {
           className="md:hidden fixed bottom-3 inset-x-0 z-50 flex justify-center px-3 pointer-events-none"
           style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}
         >
-          <div className="pointer-events-auto rounded-full bg-[#080A12]/94 backdrop-blur-2xl border border-white/15 p-1.5 shadow-[0_12px_40px_rgba(0,0,0,0.85),0_0_24px_rgba(37,99,235,0.18)] flex items-center justify-between gap-0.5 max-w-[350px] w-full mx-auto">
+          <div className="pointer-events-auto rounded-full bg-[#13332C]/96 backdrop-blur-2xl border border-white/15 p-1.5 shadow-[0_12px_40px_rgba(0,0,0,0.4),0_0_24px_rgba(255,107,61,0.16)] flex items-center justify-between gap-0.5 max-w-[350px] w-full mx-auto">
             {dockNavItems.map((item) => {
               const isActive = pathname === item.href
               const Icon = item.icon
@@ -109,14 +109,14 @@ export default function MobileDock() {
                     />
                   )}
                   
-                  <Icon size={17} className={`relative z-10 ${isActive ? 'text-blue-400' : ''}`} />
-                  
+                  <Icon size={17} className={`relative z-10 ${isActive ? 'text-[#FF9370]' : ''}`} />
+
                   <span className={`relative z-10 text-[10px] font-medium tracking-tight mt-0.5 ${isActive ? 'text-white font-semibold' : 'text-white/55'}`}>
                     {item.label}
                   </span>
 
                   {isActive && (
-                    <span className="absolute bottom-0.5 w-1 h-1 rounded-full bg-blue-400 z-10 shadow-[0_0_6px_#60a5fa]" />
+                    <span className="absolute bottom-0.5 w-1 h-1 rounded-full bg-[#FF9370] z-10 shadow-[0_0_6px_#FF9370]" />
                   )}
                 </Link>
               )
@@ -126,7 +126,7 @@ export default function MobileDock() {
             <button
               onClick={openFastTrack}
               aria-label="Open Fast-Track Consultation Drawer"
-              className="relative flex items-center justify-center gap-1.5 px-3.5 h-9 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-semibold text-xs shadow-lg shadow-blue-600/35 active:scale-95 transition-all shrink-0 ml-1 cursor-pointer"
+              className="relative flex items-center justify-center gap-1.5 px-3.5 h-9 rounded-full bg-[#FF6B3D] hover:bg-[#E2542A] text-white font-semibold text-xs shadow-lg shadow-[#FF6B3D]/35 active:scale-95 transition-all shrink-0 ml-1 cursor-pointer"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-300 animate-pulse" />
               <span>Consult</span>

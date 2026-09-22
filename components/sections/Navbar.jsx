@@ -23,7 +23,7 @@ const links = [
   { label: 'About Us', href: '/about' },
 ]
 
-function NavLink({ href, children, dropdown, light }) {
+function NavLink({ href, children, dropdown }) {
   const [hovered, setHovered] = useState(false)
   const menuId = dropdown ? `navdropdown-${String(children).toLowerCase().replace(/\s+/g, '-')}` : undefined
 
@@ -38,9 +38,7 @@ function NavLink({ href, children, dropdown, light }) {
         aria-haspopup={dropdown ? 'menu' : undefined}
         aria-expanded={dropdown ? hovered : undefined}
         aria-controls={menuId}
-        className={`inline-flex items-center gap-1.5 py-2 text-[13.5px] font-medium transition-colors ${
-          light ? 'text-neutral-600 hover:text-neutral-950' : 'text-white/70 hover:text-white'
-        }`}
+        className="inline-flex items-center gap-1.5 py-2 text-[13.5px] font-medium text-[#13332C]/65 hover:text-[#13332C] transition-colors"
       >
         {children}
         {dropdown && (
@@ -62,21 +60,13 @@ function NavLink({ href, children, dropdown, light }) {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 4, scale: 0.98 }}
               transition={{ duration: 0.15 }}
-              className={
-                light
-                  ? 'absolute top-full left-0 mt-2 min-w-[220px] p-1.5 rounded-xl bg-white/98 backdrop-blur-2xl border border-neutral-200 shadow-2xl shadow-black/10 z-50'
-                  : 'absolute top-full left-0 mt-2 min-w-[220px] p-1.5 rounded-xl bg-[#0B0D14]/95 backdrop-blur-2xl border border-white/10 shadow-2xl shadow-black/80 z-50'
-              }
+              className="absolute top-full left-0 mt-2 min-w-[220px] p-1.5 rounded-xl bg-white border border-[#13332C]/10 shadow-2xl shadow-black/10 z-50"
             >
               {dropdown.map((d) => (
                 <Link
                   key={d.label}
                   href={d.href}
-                  className={
-                    light
-                      ? 'block px-3 py-2 text-[13px] text-neutral-600 hover:text-neutral-950 hover:bg-neutral-50 rounded-lg transition-colors'
-                      : 'block px-3 py-2 text-[13px] text-white/70 hover:text-white hover:bg-white/[0.06] rounded-lg transition-colors'
-                  }
+                  className="block px-3 py-2 text-[13px] text-[#13332C]/65 hover:text-[#13332C] hover:bg-[#FAF6EE] rounded-lg transition-colors"
                 >
                   {d.label}
                 </Link>
@@ -89,8 +79,7 @@ function NavLink({ href, children, dropdown, light }) {
   )
 }
 
-export default function Navbar({ theme = 'dark' }) {
-  const light = theme === 'light'
+export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
   const mobileMenuRef = useRef(null)
@@ -179,31 +168,27 @@ export default function Navbar({ theme = 'dark' }) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          light
-            ? scrolled
-              ? 'bg-white/90 backdrop-blur-xl border-b border-neutral-200 shadow-sm'
-              : 'bg-white/70 backdrop-blur-md border-b border-transparent'
-            : scrolled
-              ? 'bg-[#07080C]/85 backdrop-blur-xl border-b border-white/[0.08] shadow-lg shadow-black/30'
-              : 'bg-transparent border-b border-transparent'
+          scrolled
+            ? 'bg-white/90 backdrop-blur-xl border-b border-[#13332C]/10 shadow-sm'
+            : 'bg-white/70 backdrop-blur-md border-b border-transparent'
         }`}
       >
         <div className="max-w-[1360px] mx-auto flex items-center justify-between px-6 md:px-8 py-3.5">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5 group shrink-0">
-            <div className={`w-8 h-8 rounded-lg overflow-hidden shadow-sm shadow-blue-500/10 ring-1 ${light ? 'ring-neutral-200' : 'ring-white/10'}`}>
+            <div className="w-8 h-8 rounded-lg overflow-hidden ring-1 ring-[#13332C]/10">
               <Image src="/brand/mehta-logo-icon-dark.png" alt="Mehta Technologies" width={32} height={32} className="w-full h-full object-cover" loading="eager" fetchPriority="high" />
             </div>
             <span className="flex flex-col leading-none">
-              <span className={`font-bold text-[14px] tracking-tight ${light ? 'text-neutral-950' : 'text-white'}`}>MEHTA</span>
-              <span className={`text-[9px] tracking-[0.15em] font-medium ${light ? 'text-neutral-500' : 'text-white/50'}`}>TECHNOLOGIES</span>
+              <span className="font-bold text-[14px] tracking-tight text-[#13332C]">MEHTA</span>
+              <span className="text-[9px] tracking-[0.15em] font-medium text-[#13332C]/50">TECHNOLOGIES</span>
             </span>
           </Link>
 
           {/* Desktop links */}
           <nav className="hidden lg:flex items-center gap-7">
             {links.map((l) => (
-              <NavLink key={l.label} href={l.href} dropdown={l.dropdown} light={light}>
+              <NavLink key={l.label} href={l.href} dropdown={l.dropdown}>
                 {l.label}
               </NavLink>
             ))}
@@ -213,11 +198,7 @@ export default function Navbar({ theme = 'dark' }) {
           <div className="hidden md:flex items-center gap-3">
             <Link
               href="/contact"
-              className={
-                light
-                  ? 'inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold bg-neutral-950 text-white hover:bg-neutral-800 transition-all active:scale-[0.98] shadow-sm'
-                  : 'inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold bg-blue-600 text-white hover:bg-blue-700 transition-all active:scale-[0.98] shadow-sm shadow-blue-600/20'
-              }
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold bg-[#FF6B3D] text-white hover:bg-[#E2542A] transition-all active:scale-[0.98] shadow-sm shadow-[#FF6B3D]/20"
             >
               Get a Free Consultation <ArrowUpRight size={13} />
             </Link>
@@ -230,11 +211,7 @@ export default function Navbar({ theme = 'dark' }) {
               onClick={() => setOpen(!open)}
               aria-label={open ? 'Close menu' : 'Open menu'}
               aria-expanded={open}
-              className={
-                light
-                  ? 'p-2 rounded-lg bg-neutral-100 border border-neutral-200 text-neutral-900 hover:bg-neutral-200 transition-colors'
-                  : 'p-2 rounded-lg bg-white/[0.05] border border-white/10 text-white hover:bg-white/10 transition-colors'
-              }
+              className="p-2 rounded-lg bg-[#FAF6EE] border border-[#13332C]/10 text-[#13332C] hover:bg-[#F1EAD9] transition-colors"
             >
               {open ? <X size={18} /> : <Menu size={18} />}
             </button>
@@ -253,22 +230,14 @@ export default function Navbar({ theme = 'dark' }) {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.2 }}
-              className={
-                light
-                  ? 'md:hidden relative z-50 mx-4 mb-4 p-3 rounded-2xl bg-white backdrop-blur-2xl border border-neutral-200 shadow-2xl shadow-black/10'
-                  : 'md:hidden relative z-50 mx-4 mb-4 p-3 rounded-2xl bg-[#0B0D14] backdrop-blur-2xl border border-white/10 shadow-2xl'
-              }
+              className="md:hidden relative z-50 mx-4 mb-4 p-3 rounded-2xl bg-white border border-[#13332C]/10 shadow-2xl shadow-black/10"
             >
               {links.map((l) => (
                 <Link
                   key={l.label}
                   href={l.href}
                   onClick={() => setOpen(false)}
-                  className={
-                    light
-                      ? 'block px-3 py-2.5 text-sm font-medium text-neutral-700 hover:text-neutral-950 hover:bg-neutral-50 rounded-xl transition-colors'
-                      : 'block px-3 py-2.5 text-sm font-medium text-white/75 hover:text-white hover:bg-white/[0.06] rounded-xl transition-colors'
-                  }
+                  className="block px-3 py-2.5 text-sm font-medium text-[#13332C]/70 hover:text-[#13332C] hover:bg-[#FAF6EE] rounded-xl transition-colors"
                 >
                   {l.label}
                 </Link>
@@ -276,11 +245,7 @@ export default function Navbar({ theme = 'dark' }) {
               <Link
                 href="/contact"
                 onClick={() => setOpen(false)}
-                className={
-                  light
-                    ? 'mt-2 block w-full py-2.5 text-center text-xs font-semibold rounded-xl bg-neutral-950 hover:bg-neutral-800 text-white transition-colors'
-                    : 'mt-2 block w-full py-2.5 text-center text-xs font-semibold rounded-xl bg-blue-600 hover:bg-blue-500 text-white transition-colors'
-                }
+                className="mt-2 block w-full py-2.5 text-center text-xs font-semibold rounded-xl bg-[#FF6B3D] hover:bg-[#E2542A] text-white transition-colors"
               >
                 Get a Free Consultation
               </Link>

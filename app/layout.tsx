@@ -71,7 +71,7 @@ export const metadata: Metadata = {
 export const viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#07080C",
+  themeColor: "#FAF6EE",
 };
 
 const organizationSchema = {
@@ -100,7 +100,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${sora.variable} ${inter.variable}`} suppressHydrationWarning>
-      <body className="bg-[#07080C] text-white selection:bg-blue-600/30 selection:text-white">
+      <body className="bg-white text-[#13332C] selection:bg-[#FF6B3D]/15 selection:text-[#13332C]">
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2.5 focus:rounded-xl focus:bg-white focus:text-black focus:text-sm focus:font-semibold"

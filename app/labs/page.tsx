@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <>
-      <Navbar theme="light" />
+      <Navbar />
       <main id="main-content" tabIndex={-1} className="home-light bg-white min-h-screen">
         <LabsPage />
         <Footer />

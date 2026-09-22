@@ -21,7 +21,7 @@ const commitments = [
 export default function StatusPage() {
   return (
     <>
-    <Navbar theme="light" />
+    <Navbar />
     <main id="main-content" tabIndex={-1} className="home-light bg-white min-h-screen">
 
       <div className="pt-32 pb-24 max-w-[1200px] mx-auto px-6 md:px-8">

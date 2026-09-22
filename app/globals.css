@@ -6,22 +6,33 @@
   --font-syne: var(--font-syne), sans-serif;
   --font-outfit: var(--font-inter), sans-serif;
 
-  --color-black: #050608;
-  --color-bg: #07080C;
-  --color-surface: #0C0E14;
-  --color-surface-hover: #121520;
-  
-  --color-blue: #2563EB;
-  --color-blue-dim: #1D4ED8;
-  --color-blue-light: #60A5FA;
-  --color-blue-accent: #3B82F6;
-  
-  --color-purple: #8B5CF6;
-  --color-green: #10B981;
-  --color-card: rgba(255, 255, 255, 0.025);
-  --color-border: rgba(255, 255, 255, 0.08);
-  --color-border-hover: rgba(255, 255, 255, 0.16);
-  --color-border-blue: rgba(59, 130, 246, 0.3);
+  /* Design system v2 (research/design-system-v2.md) — reference-driven off
+     composite.global. Warm cream base, one forest-green ink color doing
+     double duty as headline text AND dark-section background, one coral
+     accent. Replaces the old dark-mode-by-default (#07080C) + blue-600
+     two-tone-headline system entirely — do not reintroduce --color-blue*
+     as a default accent anywhere in new work. */
+  --color-cream: #FAF6EE;
+  --color-cream-dim: #F1EAD9;
+  --color-bg: #FFFFFF;
+
+  --color-ink: #13332C;
+  --color-ink-dim: #0D2621;
+  --color-ink-soft: rgba(19, 51, 44, 0.64);
+  --color-ink-faint: rgba(19, 51, 44, 0.08);
+
+  --color-accent: #FF6B3D;
+  --color-accent-dim: #E2542A;
+  --color-accent-soft: rgba(255, 107, 61, 0.12);
+
+  --color-warm-500: #8A8172;
+  --color-warm-300: #C9C0AC;
+  --color-warm-200: #DED5C2;
+  --color-warm-100: #EDE7D9;
+
+  --color-card: rgba(19, 51, 44, 0.03);
+  --color-border: rgba(19, 51, 44, 0.1);
+  --color-border-hover: rgba(19, 51, 44, 0.2);
 
   --animate-marquee: marquee 35s linear infinite;
   --animate-marquee-r: marquee-reverse 35s linear infinite;
@@ -79,36 +90,21 @@
 }
 
 html {
-  color-scheme: dark;
+  color-scheme: light;
   scroll-behavior: smooth;
   overflow-x: hidden;
   max-width: 100vw;
 }
 
 body {
-  background: #07080C;
-  color: #FFFFFF;
+  background: var(--color-bg);
+  color: var(--color-ink);
   font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   max-width: 100vw;
   min-height: 100vh;
-}
-
-/* Subtle top spotlight for atmospheric depth */
-body::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100vw;
-  max-width: 1400px;
-  height: 650px;
-  background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(59, 130, 246, 0.08) 0%, rgba(99, 102, 241, 0.03) 45%, transparent 75%);
-  pointer-events: none;
-  z-index: 0;
 }
 
 /* Space for mobile dock nav. --mobile-dock-clearance is published by
@@ -120,147 +116,98 @@ body::before {
   }
 }
 
-/* Light-theme homepage. Scoped via :has() rather than changed globally,
-   since every other route is still the dark theme sharing this stylesheet. */
-:root:has(#main-content.home-light) {
-  color-scheme: light;
-}
-
-body:has(#main-content.home-light) {
-  background: #FFFFFF;
-  color: #0A0A0A;
-}
-
-body:has(#main-content.home-light) ::selection {
-  background: rgba(37, 99, 235, 0.15);
-  color: #0A0A0A;
-}
-
-body:has(#main-content.home-light)::-webkit-scrollbar-track {
-  background: #FFFFFF;
-}
-body:has(#main-content.home-light)::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.15);
-}
-body:has(#main-content.home-light)::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 0, 0, 0.28);
-}
-
+/* Every route's <main id="main-content"> carries a "home-light" class
+   (see the app directory's page files) — there is only one theme now, so
+   what used to be a `:has()`-scoped override is now just the base rule.
+   The "home-light" class name is legacy naming (harmless to leave on the
+   markup) but no longer does anything special in CSS — don't scope new
+   rules behind it. */
 ::selection {
-  background: rgba(37, 99, 235, 0.4);
-  color: #FFFFFF;
+  background: var(--color-accent-soft);
+  color: var(--color-ink);
 }
 
 ::-webkit-scrollbar {
   width: 5px;
 }
 ::-webkit-scrollbar-track {
-  background: #07080C;
+  background: var(--color-cream);
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.15);
+  background: var(--color-ink-faint);
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.28);
+  background: rgba(19, 51, 44, 0.2);
 }
 
 .font-display {
   font-family: var(--font-syne), var(--font-inter), sans-serif !important;
 }
 
-/* Minimalist Glass Card Utilities */
-.glass-panel {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+/* Plain card surface — flat, no glass/blur. Composite's cards are real
+   photography/screenshots with no glassmorphism; when a plain neutral
+   surface is genuinely needed (not a photo card), use this instead of the
+   old backdrop-blur glass-panel treatment. */
+.surface-panel {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
 }
 
-body:has(#main-content.home-light) .glass-panel {
-  background: #FFFFFF;
-  border: 1px solid rgba(10, 10, 10, 0.1);
-  box-shadow: 0 1px 2px rgba(10, 10, 10, 0.04);
-}
-
-.glass-panel-hover {
+.surface-panel-hover {
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.glass-panel-hover:hover {
-  background: rgba(255, 255, 255, 0.035);
-  border-color: rgba(255, 255, 255, 0.15);
+.surface-panel-hover:hover {
+  border-color: var(--color-accent);
   transform: translateY(-2px);
 }
 
-body:has(#main-content.home-light) .glass-panel-hover:hover {
-  background: #FAFAFA;
-  border-color: rgba(37, 99, 235, 0.25);
-  transform: translateY(-2px);
+/* Sitewide accent: solid --color-accent (coral). Never a gradient, never
+   blue/purple — see research/design-system-v2.md. Headlines default to a
+   single flat --color-ink; only color a phrase when that specific sentence
+   earns it, not as a rule reapplied on every section. */
+
+/* Soft grid texture for a section that wants a distinct backdrop instead of
+   flat white/cream — sparingly, not as a default. */
+.bg-grid-dots {
+  background-image: radial-gradient(var(--color-ink-faint) 1px, transparent 1px);
+  background-size: 28px 28px;
 }
 
-.text-gradient {
-  background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0.72) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+.bg-grid-lines {
+  background-image: linear-gradient(to right, var(--color-border) 1px, transparent 1px),
+                    linear-gradient(to bottom, var(--color-border) 1px, transparent 1px);
+  background-size: 40px 40px;
 }
 
-body:has(#main-content.home-light) .text-gradient {
-  background: linear-gradient(180deg, #0A0A0A 0%, rgba(10, 10, 10, 0.72) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* Locked sitewide accent: flat blue-600 (light surfaces) / blue-400 (dark
-   surfaces, for contrast) — see research/creative-improvement-round-1.md.
-   The blue->purple gradient headline treatment this project shipped with
-   has been fully retired; do not reintroduce .text-gradient-accent. */
-
+/* TEMPORARY compat shims, retinted to the v2 palette, for classes ~13 page
+   files still reference (pre-rebuild). Each owning implementation agent
+   (research/design-system-v2.md) should retire these per-page — the
+   pill-badge-above-every-headline formula is exactly the AI-slop tell being
+   removed — not lean on this fallback long-term. Delete this block once no
+   page references them any more. */
 .glow-pill {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   padding: 6px 14px;
   border-radius: 9999px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(12px);
+  border: 1px solid var(--color-border);
+  background: var(--color-cream);
   font-size: 12px;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.85);
+  color: var(--color-ink-soft);
   letter-spacing: 0.02em;
 }
 
-body:has(#main-content.home-light) .glow-pill {
-  border-color: rgba(10, 10, 10, 0.1);
-  background: rgba(10, 10, 10, 0.025);
-  color: rgba(23, 23, 23, 0.65);
-}
-
-/* Blueprint subtle grid overlay */
-.bg-grid-dots {
-  background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
-  background-size: 28px 28px;
-}
-
-.bg-grid-lines {
-  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 40px 40px;
-}
-
-/* Light-theme dot texture — used to give Pricing its own backdrop instead of
-   flat white, so the section reads as a distinct surface rather than a 9th
-   instance of the same card-on-white shell. */
 .bg-dot-grid-light {
-  background-image: radial-gradient(rgba(37, 99, 235, 0.14) 1px, transparent 1px);
+  background-image: radial-gradient(var(--color-ink-faint) 1px, transparent 1px);
   background-size: 22px 22px;
 }
 
 /* Accessibility Focus States */
 a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
-  outline: 2px solid #3B82F6;
+  outline: 2px solid var(--color-accent);
   outline-offset: 2px;
 }
 

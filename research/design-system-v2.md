@@ -1,5 +1,7 @@
 # Design System v2 — reference-driven rebuild (2026-09-22)
 
+> **2026-11-05: palette and fonts superseded by official Brand Guidelines v1.0** (`design-references/brand/`). Token names unchanged; values are now Midnight/Cobalt/Cloud + Montserrat/Inter (see `app/globals.css`). Layout and motion principles here still apply.
+
 ## Why this doc exists, and why it supersedes `design-references/DESIGN_REFERENCES.md`
 
 The v1 creative-score-loop (5 rounds, logged in `research/creative-score-log.md`) plateaued

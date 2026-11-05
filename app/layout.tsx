@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
-import { Sora, Inter } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Montserrat, Inter } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
@@ -11,7 +11,7 @@ import MotionProvider from "@/components/MotionProvider";
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
 const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID;
 
-const sora = Sora({
+const montserrat = Montserrat({
   variable: "--font-syne",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
@@ -68,10 +68,13 @@ export const metadata: Metadata = {
   },
 };
 
-export const viewport = {
+// themeColor = --color-cream (app/globals.css). Next's viewport export needs
+// a literal color string, not a CSS variable, so keep this in sync by hand.
+export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#FAF6EE",
+  themeColor: "#F4F7FC",
+  colorScheme: "light",
 };
 
 const organizationSchema = {
@@ -99,11 +102,11 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${sora.variable} ${inter.variable}`} suppressHydrationWarning>
-      <body className="bg-white text-[#13332C] selection:bg-[#FF6B3D]/15 selection:text-[#13332C]">
+    <html lang="en" className={`${montserrat.variable} ${inter.variable}`} suppressHydrationWarning>
+      <body className="bg-cream text-ink antialiased">
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2.5 focus:rounded-xl focus:bg-white focus:text-black focus:text-sm focus:font-semibold"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-5 focus:py-2.5 focus:rounded-full focus:bg-ink focus:text-cream focus:text-sm focus:font-semibold"
         >
           Skip to main content
         </a>

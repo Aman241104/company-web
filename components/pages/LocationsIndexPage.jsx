@@ -2,7 +2,7 @@
 import { useRef, useState } from 'react'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ArrowRight, ArrowUpRight, Plus, Minus, MapPin } from 'lucide-react'
+import { ArrowRight, ArrowUpRight, Plus, Minus } from 'lucide-react'
 import { locations } from '@/lib/locations'
 import { clipWipe } from '@/lib/motionVariants'
 import { useClearanceGuard } from '@/lib/useClearanceGuard'
@@ -29,72 +29,85 @@ function LocationRow({ location, isOpen, onToggle, index }) {
   useClearanceGuard(['--whatsapp-clearance', '--mobile-dock-clearance'], [rowRef], {}, [isOpen])
 
   return (
-    <motion.div
+    <motion.li
       ref={rowRef}
       initial={{ opacity: 0, y: 12 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-100px' }}
       transition={{ duration: 0.4, delay: index * 0.05 }}
-      className="border-t border-neutral-200 last:border-b"
+      className="border-b border-border"
     >
-      <button
-        onClick={onToggle}
-        aria-expanded={isOpen}
-        aria-controls={`location-panel-${slug}`}
-        className="w-full flex items-center justify-between gap-4 py-5 sm:py-6 text-left group"
-      >
-        <div className="flex items-baseline gap-3 flex-wrap">
-          <h2 className={`text-xl sm:text-2xl font-extrabold tracking-tight transition-colors ${isOpen ? 'text-blue-600' : 'text-neutral-950 group-hover:text-blue-600'}`}>
-            {city}
-          </h2>
-          <span className="text-[11px] font-mono uppercase tracking-wider text-neutral-500 bg-neutral-50 border border-neutral-200 rounded-full px-2.5 py-0.5">
-            {region}
+      <h2>
+        <button
+          type="button"
+          onClick={onToggle}
+          aria-expanded={isOpen}
+          aria-controls={`location-panel-${slug}`}
+          id={`location-trigger-${slug}`}
+          className="w-full flex items-center justify-between gap-4 py-6 sm:py-7 text-left group rounded-lg"
+        >
+          <span className="flex items-baseline gap-3 sm:gap-4 flex-wrap min-w-0">
+            <span className="font-display text-2xl sm:text-[34px] font-semibold tracking-tight text-ink leading-tight">
+              {city}
+            </span>
+            <span className="text-xs font-medium text-ink rounded-full border border-ink/20 px-3 py-1">
+              {region}
+            </span>
           </span>
-        </div>
-        <div className="flex items-center gap-4 shrink-0">
-          <p className="hidden md:block text-sm text-neutral-500 max-w-xs text-right leading-snug">
-            {tagline}
-          </p>
-          <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-all ${isOpen ? 'bg-blue-50 text-blue-600 border border-blue-200' : 'bg-white text-neutral-500 border border-neutral-200 group-hover:text-neutral-950 group-hover:border-neutral-300'}`}>
-            {isOpen ? <Minus size={14} /> : <Plus size={14} />}
-          </div>
-        </div>
-      </button>
+          <span className="flex items-center gap-5 shrink-0">
+            <span className="hidden md:block text-sm text-ink/75 max-w-xs text-right leading-snug">
+              {tagline}
+            </span>
+            <span
+              aria-hidden="true"
+              className={`w-11 h-11 rounded-full inline-flex items-center justify-center shrink-0 transition-colors ${
+                isOpen ? 'bg-accent text-ink' : 'border border-ink/20 text-ink group-hover:bg-ink group-hover:text-cream group-hover:border-ink'
+              }`}
+            >
+              {isOpen ? <Minus size={16} /> : <Plus size={16} />}
+            </span>
+          </span>
+        </button>
+      </h2>
 
       <AnimatePresence initial={false}>
         {isOpen && (
           <motion.div
             id={`location-panel-${slug}`}
             role="region"
+            aria-labelledby={`location-trigger-${slug}`}
             variants={clipWipe}
             initial="initial"
             animate="animate"
             exit="exit"
             className="overflow-hidden"
           >
-            <div className="pb-7 sm:pb-8 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10">
-              <p className="lg:col-span-7 text-sm sm:text-base text-neutral-600 leading-relaxed">
+            <div className="pb-8 sm:pb-10 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10">
+              <p className="md:hidden text-base text-ink font-medium leading-snug">{tagline}</p>
+              <p className="lg:col-span-7 text-[15px] sm:text-base text-ink/80 leading-relaxed">
                 {intro}
               </p>
-              <div className="lg:col-span-5 space-y-3">
-                {previewPoints.map((point) => (
-                  <div key={point.title} className="text-sm">
-                    <span className="font-semibold text-neutral-900">{point.title}</span>
-                    <span className="text-neutral-500"> — {point.desc}</span>
-                  </div>
-                ))}
+              <div className="lg:col-span-5">
+                <ul className="space-y-3">
+                  {previewPoints.map((point) => (
+                    <li key={point.title} className="text-sm leading-relaxed">
+                      <span className="font-semibold text-ink">{point.title}</span>
+                      <span className="text-ink/75"> — {point.desc}</span>
+                    </li>
+                  ))}
+                </ul>
                 <Link
                   href={`/locations/${slug}`}
-                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-600 hover:text-blue-700 transition-colors pt-1"
+                  className="mt-5 inline-flex items-center gap-2 rounded-full border border-ink/25 text-ink px-5 py-2.5 text-sm font-semibold transition-colors hover:border-ink hover:bg-ink/5"
                 >
-                  View the full {city} page <ArrowUpRight size={13} />
+                  {city} page <ArrowUpRight size={14} aria-hidden="true" />
                 </Link>
               </div>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.div>
+    </motion.li>
   )
 }
 
@@ -102,65 +115,79 @@ export default function LocationsIndexPage() {
   const [openSlug, setOpenSlug] = useState(locations[0]?.slug ?? null)
 
   return (
-    <div className="pt-32 pb-24 overflow-hidden">
-      {/* Header — left-aligned and deliberately smaller than a full page
+    <div className="overflow-hidden">
+      {/* Header — cream, asymmetric. Deliberately smaller than a full page
           hero, since the list below (not a hero statement) is the point of
-          this page. */}
-      <section className="max-w-[1360px] mx-auto px-6 md:px-8 mb-10 sm:mb-14">
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="max-w-2xl"
-        >
-          <div className="flex items-center gap-2 mb-4">
-            <MapPin size={14} className="text-blue-600" />
-            <span className="text-xs font-mono font-bold uppercase tracking-wider text-blue-600">
-              Where We Work
-            </span>
+          this page. Copy only states what's true: the studio is in
+          Ahmedabad and delivery is remote-first — no implied local offices. */}
+      <section className="bg-cream pt-32 sm:pt-36 pb-14 sm:pb-16">
+        <div className="max-w-[1360px] mx-auto px-5 sm:px-6 md:px-8">
+          <nav aria-label="Breadcrumb" className="mb-10 sm:mb-14">
+            <ol className="flex flex-wrap items-center gap-2 text-[13px] text-ink/75">
+              <li><Link href="/" className="hover:text-ink underline-offset-4 hover:underline">Home</Link></li>
+              <li aria-hidden="true">/</li>
+              <li aria-current="page" className="text-ink font-medium">Locations</li>
+            </ol>
+          </nav>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-end">
+            <motion.h1
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              className="lg:col-span-7 font-display text-[40px] leading-[1.05] sm:text-6xl lg:text-[72px] font-semibold text-ink tracking-tight"
+            >
+              Remote-first delivery, from Ahmedabad.
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
+              className="lg:col-span-5 text-[15px] sm:text-base text-ink/80 leading-relaxed"
+            >
+              Our studio is in Ahmedabad and most of our delivery runs remotely. Open a city below for what businesses there usually ask us for, and the related work we&apos;ve shipped.
+            </motion.p>
           </div>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-neutral-950 tracking-tight leading-[1.1] mb-4">
-            Remote-first delivery, real local work.
-          </h1>
-          <p className="text-sm sm:text-base text-neutral-500 leading-relaxed">
-            Active client work across Gujarat and Maharashtra today. Open a city below for its specific focus areas and case studies.
-          </p>
-        </motion.div>
-      </section>
-
-      {/* Directory — a bare divided list you expand in place, not a card
-          grid. Reuses the site's accordion affordance (see FAQ.jsx) with a
-          clip-path reveal instead of a plain height fade, so switching
-          between cities visually reads as swapping content, not arriving. */}
-      <section className="max-w-[1360px] mx-auto px-6 md:px-8 mb-20 sm:mb-24">
-        <div>
-          {locations.map((location, i) => (
-            <LocationRow
-              key={location.slug}
-              location={location}
-              index={i}
-              isOpen={openSlug === location.slug}
-              onToggle={() => setOpenSlug(openSlug === location.slug ? null : location.slug)}
-            />
-          ))}
         </div>
       </section>
 
-      {/* Bottom CTA */}
-      <section className="max-w-[1360px] mx-auto px-6 md:px-8 text-center">
-        <div className="max-w-2xl mx-auto rounded-3xl bg-neutral-50 border border-neutral-200 p-10 sm:p-14">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-neutral-950 tracking-tight mb-4">
-            Not seeing your city?
-          </h2>
-          <p className="text-sm sm:text-base text-neutral-500 mb-8 max-w-md mx-auto">
-            Our delivery process is remote-first — location within India has never been a constraint on the work.
-          </p>
-          <Link
-            href="/contact"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-xs sm:text-sm font-semibold bg-neutral-950 text-white hover:bg-neutral-800 shadow-xl shadow-neutral-950/10 transition-all"
-          >
-            Book Free Discovery Session <ArrowRight size={14} />
-          </Link>
+      {/* Directory — white; a bare divided list you expand in place, not a
+          card grid. Clip-path reveal so switching cities reads as swapping
+          content, not arriving. */}
+      <section className="bg-bg py-12 sm:py-16 lg:py-20">
+        <div className="max-w-[1360px] mx-auto px-5 sm:px-6 md:px-8">
+          <ul className="border-t border-border">
+            {locations.map((location, i) => (
+              <LocationRow
+                key={location.slug}
+                location={location}
+                index={i}
+                isOpen={openSlug === location.slug}
+                onToggle={() => setOpenSlug(openSlug === location.slug ? null : location.slug)}
+              />
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* Closing CTA — cream-dim, sits right above the ink footer band. */}
+      <section className="bg-cream-dim py-20 sm:py-24">
+        <div className="max-w-[1360px] mx-auto px-5 sm:px-6 md:px-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+          <div className="lg:col-span-8">
+            <h2 className="font-display text-3xl sm:text-5xl font-semibold text-ink tracking-tight leading-[1.08]">
+              Not seeing your city?
+            </h2>
+            <p className="mt-4 text-[15px] sm:text-base text-ink/80 leading-relaxed max-w-xl">
+              Our delivery process is remote-first — location within India has never been a constraint on the work.
+            </p>
+          </div>
+          <div className="lg:col-span-4 lg:justify-self-end">
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-accent text-ink px-6 py-3.5 text-sm font-semibold transition-colors hover:bg-ink hover:text-cream"
+            >
+              Book a free discovery call <ArrowRight size={15} aria-hidden="true" />
+            </Link>
+          </div>
         </div>
       </section>
     </div>

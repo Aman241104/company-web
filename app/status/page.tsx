@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Navbar from '@/components/sections/Navbar'
 import Footer from '@/components/sections/Footer'
-import { CheckCircle2, ShieldCheck, Clock, ArrowLeft, ArrowUpRight } from 'lucide-react'
+import { ArrowLeft, ArrowRight } from 'lucide-react'
 
 export const metadata: Metadata = {
   title: "Support & Maintenance Standards",
@@ -11,11 +11,20 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://mehtatechnologies.com/status" },
 }
 
+// Plain commitments only — deliberately no uptime percentages, response-time
+// SLAs or "all systems operational" indicators, because there is no live
+// monitoring feed behind this page and those numbers would be invented.
 const commitments = [
   { name: 'Website & Hosting Uptime', target: 'Reliable, monitored hosting', detail: 'Built on modern, well-supported infrastructure' },
   { name: 'Bug Fixes & Support', target: 'Prompt response', detail: 'Covered under your post-launch support window' },
   { name: 'Deployments & Updates', target: 'Scheduled, low-risk rollouts', detail: 'Tested before going live, with rollback if something breaks' },
   { name: 'Security & Backups', target: 'Regular patching', detail: 'Dependency updates and backups on an ongoing basis' },
+]
+
+const practices = [
+  'Every update is tested before it goes live, with a plan to roll back quickly if something doesn’t work as expected — no risky, untested changes to a live site.',
+  'Bigger changes and maintenance windows are scheduled at low-traffic times to minimize any disruption to your visitors.',
+  'Every project includes a post-launch support window (see your project plan) covering bug fixes and minor updates. Ongoing monthly retainers are available after that.',
 ]
 
 export default function StatusPage() {
@@ -24,98 +33,104 @@ export default function StatusPage() {
     <Navbar />
     <main id="main-content" tabIndex={-1} className="home-light bg-white min-h-screen">
 
-      <div className="pt-32 pb-24 max-w-[1200px] mx-auto px-6 md:px-8">
-
-        {/* Back link */}
-        <div className="mb-8">
+      {/* Header — cream, plain */}
+      <section className="bg-cream pt-32 sm:pt-40 pb-14 sm:pb-16">
+        <div className="max-w-[1200px] mx-auto px-5 sm:px-6 md:px-8">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-xs font-semibold text-neutral-500 hover:text-neutral-950 transition-colors"
+            className="inline-flex items-center gap-2 text-xs font-semibold text-ink/70 hover:text-ink transition-colors mb-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink rounded-sm"
           >
-            <ArrowLeft size={14} /> Back to Home
+            <ArrowLeft size={14} aria-hidden="true" /> Back to Home
           </Link>
-        </div>
-
-        {/* Header Banner */}
-        <div className="p-8 sm:p-12 rounded-3xl bg-emerald-50 border border-emerald-200 mb-12 shadow-sm relative overflow-hidden">
-          <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-emerald-400 via-teal-300 to-transparent" />
-
-          <div className="space-y-2">
-            <div className="flex items-center gap-2">
-              <ShieldCheck size={14} className="text-emerald-600" />
-              <span className="text-xs font-mono font-bold uppercase tracking-wider text-emerald-600">
-                Support Standards
-              </span>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+            <div className="lg:col-span-8">
+              <div className="text-xs font-mono uppercase tracking-wider text-ink/55 mb-5">Support standards</div>
+              <h1 className="font-display text-[40px] sm:text-6xl font-extrabold text-ink tracking-tight leading-[1.05]">
+                Support &amp; maintenance standards
+              </h1>
             </div>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-neutral-950">
-              Support & Maintenance Standards
-            </h1>
-            <p className="text-xs sm:text-sm text-neutral-500 font-normal max-w-2xl">
+            <p className="lg:col-span-4 text-base text-ink-soft leading-relaxed">
               How we handle deployments, maintenance, and support for the websites and software we build — plain commitments, no fine print.
             </p>
           </div>
         </div>
+      </section>
 
-        {/* Commitments Breakdown */}
-        <div className="space-y-4 mb-16">
-          <div className="text-xs font-mono uppercase tracking-wider text-neutral-500 mb-2">
-            What You Can Expect
-          </div>
-
-          <div className="grid grid-cols-1 gap-3">
-            {commitments.map((s) => (
-              <div
-                key={s.name}
-                className="p-5 rounded-2xl bg-white border border-neutral-200 shadow-sm hover:border-neutral-300 transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-4"
-              >
-                <div className="space-y-1">
-                  <div className="text-sm font-bold text-neutral-900 tracking-tight flex items-center gap-2">
-                    <CheckCircle2 size={15} className="text-emerald-600 shrink-0" />
-                    <span>{s.name}</span>
-                  </div>
-                  <div className="text-xs text-neutral-500 pl-6">{s.detail}</div>
-                </div>
-
-                <span className="ml-6 sm:ml-0 px-2.5 py-1 rounded-md bg-emerald-50 text-emerald-700 border border-emerald-200 font-semibold text-xs shrink-0 w-fit">
-                  {s.target}
-                </span>
-              </div>
-            ))}
-          </div>
+      {/* Commitments table — white */}
+      <section className="bg-white py-14 sm:py-20">
+        <div className="max-w-[1200px] mx-auto px-5 sm:px-6 md:px-8">
+          <table className="w-full text-left border-collapse">
+            <caption className="text-left text-xs font-mono uppercase tracking-wider text-ink/55 pb-4">
+              What you can expect
+            </caption>
+            <thead className="hidden md:table-header-group">
+              <tr className="border-y border-ink/20">
+                <th scope="col" className="py-3 pr-6 text-[11px] font-mono uppercase tracking-wider font-medium text-ink/60 w-[34%]">Area</th>
+                <th scope="col" className="py-3 pr-6 text-[11px] font-mono uppercase tracking-wider font-medium text-ink/60 w-[30%]">Our standard</th>
+                <th scope="col" className="py-3 text-[11px] font-mono uppercase tracking-wider font-medium text-ink/60">How it works</th>
+              </tr>
+            </thead>
+            <tbody>
+              {commitments.map((c) => (
+                <tr key={c.name} className="block md:table-row border-b border-border first:border-t md:first:border-t-0 py-5 md:py-0">
+                  <th scope="row" className="block md:table-cell md:py-6 md:pr-6 align-top">
+                    <span className="flex items-center gap-3">
+                      <span aria-hidden="true" className="w-2 h-2 rounded-full bg-accent shrink-0" />
+                      <span className="text-base font-bold text-ink tracking-tight">{c.name}</span>
+                    </span>
+                  </th>
+                  <td className="block md:table-cell pl-5 md:pl-0 mt-2 md:mt-0 md:py-6 md:pr-6 align-top">
+                    <span className="md:hidden text-[11px] font-mono uppercase tracking-wider text-ink/55 mr-2">Standard:</span>
+                    <span className="text-sm font-semibold text-ink">{c.target}</span>
+                  </td>
+                  <td className="block md:table-cell pl-5 md:pl-0 mt-1 md:mt-0 md:py-6 align-top text-sm text-ink-soft leading-relaxed">
+                    {c.detail}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
+      </section>
 
-        {/* Change Management */}
-        <div className="rounded-3xl bg-white border border-neutral-200 shadow-sm p-8 sm:p-10 mb-16">
-          <h2 className="text-xl font-bold tracking-tight mb-6 flex items-center gap-2 text-neutral-900">
-            <Clock size={18} className="text-blue-600" /> How We Handle Maintenance & Deployments
+      {/* How we work — cream-dim, numbered */}
+      <section className="bg-cream-dim py-16 sm:py-24">
+        <div className="max-w-[1200px] mx-auto px-5 sm:px-6 md:px-8 grid grid-cols-1 lg:grid-cols-12 gap-10">
+          <h2 className="lg:col-span-4 font-display text-2xl sm:text-3xl font-extrabold text-ink tracking-tight leading-tight">
+            How we handle maintenance &amp; deployments
           </h2>
-
-          <div className="space-y-4 text-xs sm:text-sm text-neutral-500 leading-relaxed">
-            <p>Every update is tested before it goes live, with a plan to roll back quickly if something doesn&apos;t work as expected — no risky, untested changes to a live site.</p>
-            <p>Bigger changes and maintenance windows are scheduled at low-traffic times to minimize any disruption to your visitors.</p>
-            <p>Every project includes a post-launch support window (see your project plan) covering bug fixes and minor updates. Ongoing monthly retainers are available after that.</p>
-          </div>
+          <ol className="lg:col-span-8 space-y-8">
+            {practices.map((p, i) => (
+              <li key={i} className="grid grid-cols-[auto_1fr] gap-5 sm:gap-8">
+                <span className="font-display text-2xl font-extrabold text-ink/30 leading-none pt-0.5">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <p className="text-base text-ink/80 leading-relaxed">{p}</p>
+              </li>
+            ))}
+          </ol>
         </div>
+      </section>
 
-        {/* Need Ongoing Support? */}
-        <div className="p-8 sm:p-10 rounded-3xl bg-neutral-50 border border-neutral-200 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
+      {/* Ongoing support — ink band */}
+      <section className="bg-ink text-white">
+        <div className="max-w-[1200px] mx-auto px-5 sm:px-6 md:px-8 py-14 sm:py-20 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
           <div>
-            <h3 className="text-xl font-bold text-neutral-950 tracking-tight mb-1">
+            <h2 className="font-display text-2xl sm:text-3xl font-extrabold tracking-tight mb-2">
               Need ongoing support for your website?
-            </h3>
-            <p className="text-xs sm:text-sm text-neutral-500">
+            </h2>
+            <p className="text-sm sm:text-base text-white/75">
               Ask us about monthly maintenance and support retainers.
             </p>
           </div>
           <Link
             href="/contact"
-            className="px-6 py-3.5 rounded-full text-xs font-semibold bg-neutral-950 text-white hover:bg-neutral-800 transition-all shadow-xl shadow-neutral-950/10 whitespace-nowrap"
+            className="self-start sm:self-auto inline-flex items-center justify-center gap-2 rounded-full bg-accent text-white font-semibold px-7 py-3.5 text-sm hover:bg-accent-dim transition-colors whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
           >
-            Get in Touch <ArrowUpRight size={13} className="inline ml-1" />
+            Get in touch <ArrowRight size={15} aria-hidden="true" />
           </Link>
         </div>
-
-      </div>
+      </section>
 
       <Footer />
     </main>

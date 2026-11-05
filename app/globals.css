@@ -1,38 +1,46 @@
 @import "tailwindcss";
 
 @theme inline {
-  --font-display: var(--font-syne), var(--font-inter), sans-serif;
+  --font-display: var(--font-syne), var(--font-inter), sans-serif; /* --font-syne now carries Montserrat (app/layout.tsx) */
   --font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-syne: var(--font-syne), sans-serif;
   --font-outfit: var(--font-inter), sans-serif;
 
-  /* Design system v2 (research/design-system-v2.md) — reference-driven off
-     composite.global. Warm cream base, one forest-green ink color doing
-     double duty as headline text AND dark-section background, one coral
-     accent. Replaces the old dark-mode-by-default (#07080C) + blue-600
-     two-tone-headline system entirely — do not reintroduce --color-blue*
-     as a default accent anywhere in new work. */
-  --color-cream: #FAF6EE;
-  --color-cream-dim: #F1EAD9;
+  /* Brand v1.0 (design-references/brand/Mehta-Technologies-Brand-Guidelines.pdf,
+     Nov 2026). Token NAMES kept from design-system-v2 so every component
+     re-skins without edits; VALUES are now the official palette:
+     cream = Cloud (light base), ink = Midnight (text + dark sections),
+     accent = Mehta Cobalt (buttons, one highlighted phrase on light).
+     On dark sections highlight with --color-ice, never Cobalt text.
+     Lime is a <5% spark only (badge/underline) — never body text or
+     large areas. Status colours are for software UI only. */
+  --color-cream: #F4F7FC;
+  --color-cream-dim: #E7EDF8;
   --color-bg: #FFFFFF;
 
-  --color-ink: #13332C;
-  --color-ink-dim: #0D2621;
-  --color-ink-soft: rgba(19, 51, 44, 0.64);
-  --color-ink-faint: rgba(19, 51, 44, 0.08);
+  --color-ink: #0A1124;
+  --color-ink-dim: #060B18;
+  --color-ink-soft: rgba(10, 17, 36, 0.64);
+  --color-ink-faint: rgba(10, 17, 36, 0.08);
 
-  --color-accent: #FF6B3D;
-  --color-accent-dim: #E2542A;
-  --color-accent-soft: rgba(255, 107, 61, 0.12);
+  --color-accent: #1F4FFF;
+  --color-accent-dim: #1A3FD6;
+  --color-accent-soft: rgba(31, 79, 255, 0.12);
 
-  --color-warm-500: #8A8172;
-  --color-warm-300: #C9C0AC;
-  --color-warm-200: #DED5C2;
-  --color-warm-100: #EDE7D9;
+  --color-warm-500: #4A5468;
+  --color-warm-300: #A3ADC2;
+  --color-warm-200: #D5DCEA;
+  --color-warm-100: #EEF2FA;
 
-  --color-card: rgba(19, 51, 44, 0.03);
-  --color-border: rgba(19, 51, 44, 0.1);
-  --color-border-hover: rgba(19, 51, 44, 0.2);
+  --color-ice: #8DB8FF;
+  --color-mist: #A3ADC2;
+  --color-slate: #4A5468;
+  --color-navy: #131C36;
+  --color-lime: #C8F560;
+
+  --color-card: rgba(10, 17, 36, 0.03);
+  --color-border: rgba(10, 17, 36, 0.1);
+  --color-border-hover: rgba(10, 17, 36, 0.2);
 
   --animate-marquee: marquee 35s linear infinite;
   --animate-marquee-r: marquee-reverse 35s linear infinite;
@@ -96,8 +104,11 @@ html {
   max-width: 100vw;
 }
 
+/* Base surface is cream (design-system-v2), matching viewport.themeColor in
+   app/layout.tsx. Unlayered, so it wins over utility classes on <body> —
+   keep this and layout.tsx's `bg-cream text-ink` in agreement. */
 body {
-  background: var(--color-bg);
+  background: var(--color-cream);
   color: var(--color-ink);
   font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -138,7 +149,7 @@ body {
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(19, 51, 44, 0.2);
+  background: rgba(10, 17, 36, 0.2);
 }
 
 .font-display {
@@ -205,10 +216,21 @@ body {
   background-size: 22px 22px;
 }
 
-/* Accessibility Focus States */
-a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
-  outline: 2px solid var(--color-accent);
-  outline-offset: 2px;
+/* Accessibility focus states. Ink outline on light surfaces (coral on cream
+   is only ~2.8:1, under the 3:1 non-text minimum for a focus indicator);
+   inside ink-dark bands (footer, dark sections, the mobile dock) the ink
+   outline would vanish, so it switches to coral there (~4.8:1 on ink).
+   In @layer base so a component's own `focus-visible:outline-*` utility
+   can still override it (unlayered CSS would beat every utility). */
+@layer base {
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible, summary:focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
+  }
+  .bg-ink :focus-visible,
+  .bg-ink:focus-visible {
+    outline-color: var(--color-accent);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

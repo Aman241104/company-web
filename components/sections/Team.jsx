@@ -43,12 +43,13 @@ const team = [
   {
     name: 'Kavya Reddy',
     role: 'Technical SEO Lead',
-    // No published headshot yet — `init` triggers the branded monogram
-    // fallback below instead of a photo. This is a deliberate, documented
-    // pattern for "no photo yet," not a missing asset: every card uses the
-    // same 56px circular frame/border/shadow, and the monogram gets a
-    // brand-gradient fill with equal visual weight to a photo rather than a
-    // pale placeholder tint. Swap in `image: '/team/kavya.jpg'` (and drop
+    // No published headshot yet — `init` triggers the monogram fallback
+    // below instead of a photo. Deliberate, documented pattern for "no
+    // photo yet," not a missing asset: every card uses the same 56px
+    // circular frame/border/shadow, and the monogram gets a solid ink fill
+    // (not a gradient — see research/design-system-v2.md, gradient fills
+    // are retired sitewide) with equal visual weight to a photo rather than
+    // a pale placeholder tint. Swap in `image: '/team/kavya.jpg'` (and drop
     // `init`) the moment a real photo exists — never fabricate one.
     init: 'KR',
     bio: 'Technical SEO specialist focused on Core Web Vitals, site structure, and search fundamentals that help clients actually get found.',
@@ -60,12 +61,12 @@ function TeamCard({ member }) {
   return (
     <motion.div
       variants={cardSpringItem}
-      className="rounded-2xl bg-white border border-neutral-200 hover:border-blue-300 hover:shadow-md p-6 sm:p-7 flex flex-col justify-between shadow-sm transition-all duration-300 group"
+      className="rounded-2xl bg-white border border-[#0A1124]/10 hover:border-[#1F4FFF] hover:shadow-md hover:-translate-y-0.5 p-6 sm:p-7 flex flex-col justify-between shadow-sm transition-all duration-300 group"
     >
       <div>
         {/* Avatar & Header */}
         <div className="flex items-center gap-4 mb-5">
-          <div className="relative w-14 h-14 rounded-full overflow-hidden border border-neutral-200 bg-blue-50 shrink-0 shadow-sm">
+          <div className="relative w-14 h-14 rounded-full overflow-hidden border border-[#0A1124]/10 bg-[#F4F7FC] shrink-0">
             {member.image ? (
               <Image
                 src={member.image}
@@ -78,20 +79,20 @@ function TeamCard({ member }) {
               <div
                 role="img"
                 aria-label={member.name}
-                className="w-full h-full flex items-center justify-center font-bold text-base tracking-wide text-white bg-gradient-to-br from-blue-500 to-indigo-600 group-hover:scale-105 transition-transform duration-300"
+                className="w-full h-full flex items-center justify-center font-bold text-base tracking-wide text-[#F4F7FC] bg-[#0A1124] group-hover:scale-105 transition-transform duration-300"
               >
                 {member.init}
               </div>
             )}
           </div>
           <div>
-            <h3 className="text-base font-bold text-neutral-950 tracking-tight">{member.name}</h3>
-            <p className="text-xs text-blue-600 font-medium">{member.role}</p>
+            <h3 className="text-base font-bold text-[#0A1124] tracking-tight">{member.name}</h3>
+            <p className="text-xs text-[#0A1124]/55 font-medium">{member.role}</p>
           </div>
         </div>
 
         {/* Bio */}
-        <p className="text-xs sm:text-sm text-neutral-500 leading-relaxed mb-6 font-normal">
+        <p className="text-xs sm:text-sm text-[#0A1124]/60 leading-relaxed mb-6 font-normal">
           {member.bio}
         </p>
 
@@ -100,7 +101,7 @@ function TeamCard({ member }) {
           {member.skills.map((s) => (
             <span
               key={s}
-              className="text-[11px] font-medium px-2.5 py-0.5 rounded-md bg-neutral-50 text-neutral-600 border border-neutral-200"
+              className="text-[11px] font-medium px-2.5 py-0.5 rounded-md bg-[#0A1124]/[0.03] text-[#0A1124]/70 border border-[#0A1124]/10"
             >
               {s}
             </span>
@@ -108,8 +109,8 @@ function TeamCard({ member }) {
         </div>
       </div>
 
-      <div className="pt-4 border-t border-neutral-100">
-        <span className="text-xs text-neutral-500 font-mono">Mehta Tech Core</span>
+      <div className="pt-4 border-t border-[#0A1124]/[0.06]">
+        <span className="text-xs text-[#0A1124]/45 font-mono">Mehta Tech Core</span>
       </div>
     </motion.div>
   )
@@ -117,8 +118,10 @@ function TeamCard({ member }) {
 
 export default function Team() {
   return (
-    <section id="team" className="py-24 md:py-32 max-w-[1360px] mx-auto px-6 md:px-8 border-t border-neutral-200">
-      {/* Section Header */}
+    <section id="team" className="py-24 md:py-32 max-w-[1360px] mx-auto px-6 md:px-8 border-t border-[#0A1124]/10">
+      {/* Section Header — plain kicker, single-color headline. No
+          pill-badge-above-headline, no two-tone accent split: retired per
+          research/design-system-v2.md. */}
       <div className="max-w-2xl mx-auto text-center mb-16 md:mb-20">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -126,14 +129,13 @@ export default function Team() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <span className="glow-pill mb-4 inline-flex">
+          <div className="text-xs font-mono uppercase tracking-wider text-[#0A1124]/45 mb-4">
             Leadership & Core Engineers
-          </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-neutral-950 tracking-tight leading-tight mb-4">
-            Meet the engineers{' '}
-            <span className="text-blue-600">behind your product.</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0A1124] tracking-tight leading-tight mb-4">
+            Meet the engineers behind your product.
           </h2>
-          <p className="text-base sm:text-lg text-neutral-500 leading-relaxed">
+          <p className="text-base sm:text-lg text-[#0A1124]/60 leading-relaxed">
             A small, high-leverage team of senior specialists across architecture, UI/UX, cloud infrastructure, and growth.
           </p>
         </motion.div>
@@ -158,19 +160,19 @@ export default function Team() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
-        className="p-6 sm:p-8 rounded-2xl bg-neutral-50 border border-neutral-200 flex flex-col sm:flex-row items-center justify-between gap-6"
+        className="p-6 sm:p-8 rounded-2xl bg-[#F4F7FC] border border-[#0A1124]/10 flex flex-col sm:flex-row items-center justify-between gap-6"
       >
         <div>
-          <h3 className="text-base sm:text-lg font-bold text-neutral-950 tracking-tight mb-1">
+          <h3 className="text-base sm:text-lg font-bold text-[#0A1124] tracking-tight mb-1">
             We are always looking for senior builders.
           </h3>
-          <p className="text-xs sm:text-sm text-neutral-500">
+          <p className="text-xs sm:text-sm text-[#0A1124]/60">
             Open roles in Next.js, distributed backend systems, and performance marketing.
           </p>
         </div>
         <a
           href="mailto:careers@mehtatechnologies.com"
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold bg-white hover:bg-neutral-100 text-neutral-800 border border-neutral-200 transition-all whitespace-nowrap"
+          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold bg-white hover:bg-[#0A1124]/[0.03] text-[#0A1124] border border-[#0A1124]/15 hover:border-[#0A1124]/25 transition-all whitespace-nowrap"
         >
           Explore Careers <ArrowRight size={13} />
         </a>

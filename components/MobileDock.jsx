@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Home, Layers, Briefcase, Sparkles, Zap } from 'lucide-react'
+import { Home, Layers, Briefcase, FlaskConical } from 'lucide-react'
 
 const DOCK_BOTTOM_OFFSET = 12 // matches `bottom-3` on the nav
 const DOCK_SAFETY_BUFFER = 8 // small cushion so content never sits flush against the pill
@@ -12,15 +12,21 @@ const dockNavItems = [
   { label: 'Home', href: '/', icon: Home },
   { label: 'Services', href: '/services', icon: Layers },
   { label: 'Work', href: '/work', icon: Briefcase },
-  { label: 'Labs', href: '/labs', icon: Sparkles },
+  { label: 'Labs', href: '/labs', icon: FlaskConical },
 ]
 
+function isActivePath(pathname, href) {
+  if (href === '/') return pathname === '/'
+  return pathname === href || pathname.startsWith(`${href}/`)
+}
+
 export default function MobileDock() {
-  const pathname = usePathname()
+  const pathname = usePathname() || '/'
   const [visible, setVisible] = useState(true)
-  const [lastY, setLastY] = useState(0)
   const [navMenuOpen, setNavMenuOpen] = useState(false)
   const navRef = useRef(null)
+  const lastYRef = useRef(0)
+  const shown = visible && !navMenuOpen
 
   useEffect(() => {
     const handleNavToggle = (e) => setNavMenuOpen(!!e.detail?.open)
@@ -33,7 +39,12 @@ export default function MobileDock() {
   // so any part of the site can reserve exactly enough clearance to never be
   // covered by the dock — self-adjusting if the dock's own size ever changes,
   // instead of a hardcoded pixel guess tuned to one device.
+  // Re-runs whenever the dock remounts (it unmounts while hidden), so the
+  // ResizeObserver always watches the live node rather than a detached one.
+  // The last published value is deliberately kept while hidden: the dock
+  // slides back in on scroll-up, so consumers must keep reserving for it.
   useEffect(() => {
+    if (!shown) return
     const el = navRef.current
     if (!el || typeof ResizeObserver === 'undefined') return
     const publish = () => {
@@ -44,93 +55,92 @@ export default function MobileDock() {
     const ro = new ResizeObserver(publish)
     ro.observe(el)
     return () => ro.disconnect()
-  }, [])
+  }, [shown])
 
   useEffect(() => {
     let ticking = false
     const onScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          const y = window.scrollY
-          // Show when scrolling up or near the top
-          if (y < 60) {
-            setVisible(true)
-          } else if (y > lastY + 12) {
-            setVisible(false)
-          } else if (y < lastY - 8) {
-            setVisible(true)
-          }
-          setLastY(y)
-          ticking = false
-        })
-        ticking = true
-      }
+      if (ticking) return
+      ticking = true
+      window.requestAnimationFrame(() => {
+        const y = window.scrollY
+        const lastY = lastYRef.current
+        // Show when scrolling up or near the top
+        if (y < 60) {
+          setVisible(true)
+        } else if (y > lastY + 12) {
+          setVisible(false)
+        } else if (y < lastY - 8) {
+          setVisible(true)
+        }
+        lastYRef.current = y
+        ticking = false
+      })
     }
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
-  }, [lastY])
+  }, [])
 
+  // The fast-track drawer is only mounted on some routes. When it is, it
+  // flags <html data-fast-track="ready"> and the button opens it in place;
+  // everywhere else this stays an ordinary link to /contact (which is also
+  // what a no-JS visitor gets).
   const openFastTrack = (e) => {
+    if (document.documentElement.getAttribute('data-fast-track') !== 'ready') return
     e.preventDefault()
     window.dispatchEvent(new CustomEvent('open-fast-track'))
   }
 
   return (
     <AnimatePresence>
-      {visible && !navMenuOpen && (
+      {shown && (
         <motion.nav
           ref={navRef}
           initial={{ y: 70, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 70, opacity: 0 }}
-          transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-          aria-label="Mobile Navigation Dock"
+          transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+          aria-label="Mobile navigation"
           className="md:hidden fixed bottom-3 inset-x-0 z-50 flex justify-center px-3 pointer-events-none"
           style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}
         >
-          <div className="pointer-events-auto rounded-full bg-[#13332C]/96 backdrop-blur-2xl border border-white/15 p-1.5 shadow-[0_12px_40px_rgba(0,0,0,0.4),0_0_24px_rgba(255,107,61,0.16)] flex items-center justify-between gap-0.5 max-w-[350px] w-full mx-auto">
+          <div className="pointer-events-auto rounded-full bg-ink border border-cream/10 p-1.5 shadow-lg shadow-ink/25 flex items-center justify-between gap-0.5 max-w-[360px] w-full mx-auto">
             {dockNavItems.map((item) => {
-              const isActive = pathname === item.href
+              const isActive = isActivePath(pathname, item.href)
               const Icon = item.icon
 
               return (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`relative flex-1 flex flex-col items-center justify-center h-11 px-1 rounded-full transition-all active:scale-90 ${
-                    isActive ? 'text-white' : 'text-white/50 hover:text-white/80'
+                  aria-current={isActive ? 'page' : undefined}
+                  className={`relative flex-1 flex flex-col items-center justify-center h-11 px-1 rounded-full transition-colors active:scale-95 ${
+                    isActive ? 'text-cream' : 'text-cream/70 hover:text-cream'
                   }`}
                 >
                   {isActive && (
-                    <motion.div
+                    <motion.span
                       layoutId="dock-active-pill"
-                      className="absolute inset-0 rounded-full bg-white/[0.08] border border-white/15 shadow-inner"
-                      transition={{ type: 'spring', stiffness: 420, damping: 32 }}
+                      className="absolute inset-0 rounded-full bg-cream/10"
+                      transition={{ type: 'spring', stiffness: 420, damping: 34 }}
                     />
                   )}
-                  
-                  <Icon size={17} className={`relative z-10 ${isActive ? 'text-[#FF9370]' : ''}`} />
-
-                  <span className={`relative z-10 text-[10px] font-medium tracking-tight mt-0.5 ${isActive ? 'text-white font-semibold' : 'text-white/55'}`}>
+                  <Icon size={17} aria-hidden="true" className={`relative z-10 ${isActive ? 'text-ice' : ''}`} />
+                  <span className={`relative z-10 text-[10px] tracking-tight mt-0.5 ${isActive ? 'font-semibold' : 'font-medium'}`}>
                     {item.label}
                   </span>
-
-                  {isActive && (
-                    <span className="absolute bottom-0.5 w-1 h-1 rounded-full bg-[#FF9370] z-10 shadow-[0_0_6px_#FF9370]" />
-                  )}
                 </Link>
               )
             })}
 
-            {/* Fast-Track Consultation Action Button */}
-            <button
+            {/* Primary action — the coral pill, ink label for AA contrast. */}
+            <Link
+              href="/contact"
               onClick={openFastTrack}
-              aria-label="Open Fast-Track Consultation Drawer"
-              className="relative flex items-center justify-center gap-1.5 px-3.5 h-9 rounded-full bg-[#FF6B3D] hover:bg-[#E2542A] text-white font-semibold text-xs shadow-lg shadow-[#FF6B3D]/35 active:scale-95 transition-all shrink-0 ml-1 cursor-pointer"
+              className="relative flex items-center justify-center px-4 h-10 rounded-full bg-accent text-ink font-semibold text-xs active:scale-95 transition-transform shrink-0 ml-1"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-300 animate-pulse" />
-              <span>Consult</span>
-            </button>
+              Consult
+            </Link>
           </div>
         </motion.nav>
       )}

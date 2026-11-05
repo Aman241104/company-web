@@ -1,25 +1,84 @@
 'use client'
-import { useState } from 'react'
+import { useState, useId } from 'react'
 import Link from 'next/link'
-import { motion } from 'framer-motion'
-import {
-  Code2,
-  Database,
-  Terminal,
-  Copy,
-  Check,
-  ArrowRight,
-} from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Copy, Check, Plus, ArrowRight } from 'lucide-react'
 
+// Labs, rebuilt for design-system-v2 as an honest experiments list: three
+// small client-side code generators, each a row you open to configure.
+// No usage stats, stars or download counts are shown because none exist —
+// the page says plainly what these are (starter code, generated in the
+// browser, to be reviewed before shipping).
 const tools = [
-  { id: 'server-action', name: 'Next.js 15 Server Action Scaffolder', icon: Code2, tag: 'Frontend Architecture' },
-  { id: 'postgres-rls', name: 'PostgreSQL Multi-Tenant RLS Policy Builder', icon: Database, tag: 'Database Security' },
-  { id: 'stripe-webhook', name: 'Stripe Webhook Route Handler Scaffolder', icon: Terminal, tag: 'Billing Systems' },
+  {
+    id: 'server-action',
+    num: '01',
+    name: 'Next.js 15 Server Action Scaffolder',
+    tag: 'Frontend Architecture',
+    blurb: 'Generates a typed Server Action with Zod validation, an auth check and cache revalidation.',
+    checks: ['Zod schema runtime validation', 'Auth session check', 'Next.js server cache invalidation'],
+  },
+  {
+    id: 'postgres-rls',
+    num: '02',
+    name: 'PostgreSQL Multi-Tenant RLS Policy Builder',
+    tag: 'Database Security',
+    blurb: 'Writes the row-level security policy that keeps one tenant from reading another tenant’s rows.',
+    checks: ['Strict JWT claims isolation', 'Multi-tenant data leakage prevention', 'Supabase & vanilla PostgreSQL compatible'],
+  },
+  {
+    id: 'stripe-webhook',
+    num: '03',
+    name: 'Stripe Webhook Route Handler Scaffolder',
+    tag: 'Billing Systems',
+    blurb: 'An App Router route handler with raw-body signature verification and an idempotent subscription upsert.',
+    checks: ['Signature verification', 'Idempotent upsert on repeat events', 'Type-safe Stripe TypeScript SDK'],
+  },
 ]
 
+function Field({ label, value, onChange }) {
+  const id = useId()
+  return (
+    <div className="space-y-1.5">
+      <label htmlFor={id} className="block text-xs font-semibold text-ink">
+        {label}
+      </label>
+      <input
+        id={id}
+        type="text"
+        value={value}
+        spellCheck={false}
+        onChange={(e) => onChange(e.target.value)}
+        className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-ink/20 text-ink font-mono text-xs focus:outline-none focus-visible:border-ink focus-visible:ring-2 focus-visible:ring-ink/20"
+      />
+    </div>
+  )
+}
+
+function CodePanel({ filename, code, copyLabel, copied, onCopy }) {
+  return (
+    <div className="rounded-2xl bg-ink-dim overflow-hidden min-w-0">
+      <div className="px-4 sm:px-5 py-3 border-b border-white/10 flex items-center justify-between gap-3">
+        <span className="font-mono text-xs text-white/70 truncate">{filename}</span>
+        <button
+          type="button"
+          onClick={onCopy}
+          className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-white/25 text-white text-xs font-semibold hover:bg-white hover:text-ink transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+        >
+          {copied ? <Check size={12} aria-hidden="true" /> : <Copy size={12} aria-hidden="true" />}
+          <span aria-live="polite">{copied ? 'Copied' : copyLabel}</span>
+        </button>
+      </div>
+      <pre className="p-5 sm:p-6 text-xs sm:text-[13px] font-mono text-white/85 overflow-x-auto leading-relaxed max-h-[520px]">
+        <code>{code}</code>
+      </pre>
+    </div>
+  )
+}
+
 export default function LabsPage() {
-  const [activeTool, setActiveTool] = useState('server-action')
-  
+  const [openTool, setOpenTool] = useState('server-action')
+
   // Tool 1 State: Server Action
   const [actionName, setActionName] = useState('createOrganization')
   const [modelName, setModelName] = useState('Organization')
@@ -29,13 +88,13 @@ export default function LabsPage() {
   const [tableName, setTableName] = useState('invoices')
   const [tenantColumn, setTenantColumn] = useState('tenant_id')
 
-  // Copy feedback
-  const [copied, setCopied] = useState(false)
+  // Copy feedback (per tool, so one row's "Copied" doesn't leak to another)
+  const [copiedId, setCopiedId] = useState(null)
 
-  const handleCopy = (text) => {
+  const handleCopy = (id, text) => {
     navigator.clipboard?.writeText(text)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 1500)
+    setCopiedId(id)
+    setTimeout(() => setCopiedId((c) => (c === id ? null : c)), 1500)
   }
 
   // Generated Code for Tool 1
@@ -99,7 +158,7 @@ import { db } from '@/lib/db'
 
 export async function POST(req: Request) {
   const body = await req.text()
-  const sig = headers().get('stripe-signature')
+  const sig = (await headers()).get('stripe-signature')
 
   if (!sig) return new Response('Missing stripe signature', { status: 400 })
 
@@ -126,226 +185,192 @@ export async function POST(req: Request) {
   return Response.json({ received: true })
 }`
 
+  const panels = {
+    'server-action': {
+      fields: [
+        { label: 'Action function name', value: actionName, onChange: setActionName },
+        { label: 'Prisma / Drizzle model name', value: modelName, onChange: setModelName },
+        { label: 'Cache revalidation tag', value: tagToRevalidate, onChange: setTagToRevalidate },
+      ],
+      filename: `app/actions/${actionName}.ts`,
+      code: generatedServerAction,
+      copyLabel: 'Copy code',
+    },
+    'postgres-rls': {
+      fields: [
+        { label: 'Target database table', value: tableName, onChange: setTableName },
+        { label: 'Tenant ID column', value: tenantColumn, onChange: setTenantColumn },
+      ],
+      filename: `migrations/rls_policy_${tableName}.sql`,
+      code: generatedPostgresRLS,
+      copyLabel: 'Copy SQL',
+    },
+    'stripe-webhook': {
+      fields: [],
+      filename: 'app/api/webhooks/stripe/route.ts',
+      code: generatedStripeWebhook,
+      copyLabel: 'Copy handler',
+    },
+  }
+
   return (
-    <div className="pt-32 pb-24 max-w-[1360px] mx-auto px-6 md:px-8">
-      {/* Header + tool selector, left-aligned and compact — the interactive
-          playground below is the hook, so this gets out of its own way
-          instead of running a full centered pill/H1/subtext announcement
-          first. Mirrors the asymmetric split WorkPage already established
-          (headline left, functional control right), scaled down for a
-          secondary/tool page. */}
-      <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-10">
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="max-w-xl"
-        >
-          <span className="glow-pill mb-4 inline-flex">
-            Mehta Tech Open-Source Labs
-          </span>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-neutral-950 tracking-tight leading-[1.1] mb-3">
-            Free tools for <span className="text-blue-600">engineers & founders.</span>
-          </h1>
-          <p className="text-sm sm:text-base text-neutral-500 leading-relaxed">
-            Open-source scaffolders and security builders, engineered by our team. Pick one below and configure it live.
-          </p>
-        </motion.div>
+    <div className="overflow-hidden">
+      {/* Hero — cream, compact: the experiments are the point */}
+      <section className="bg-cream pt-32 sm:pt-40 pb-14 sm:pb-20">
+        <div className="max-w-[1360px] mx-auto px-5 sm:px-6 md:px-8 grid grid-cols-1 lg:grid-cols-12 gap-10 items-end">
+          <motion.div
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45 }}
+            className="lg:col-span-7"
+          >
+            <div className="text-xs font-mono uppercase tracking-wider text-ink/55 mb-5">Mehta Tech Labs</div>
+            <h1 className="font-display text-[40px] sm:text-6xl font-extrabold text-ink tracking-tight leading-[1.05] mb-6">
+              Small, free tools for engineers and founders.
+            </h1>
+            <p className="text-base sm:text-lg text-ink-soft leading-relaxed max-w-xl">
+              Three code generators built by our team. Fill in a few names and they write starter code right in your
+              browser — nothing you type is sent anywhere. Treat the output as a starting point and review it before you ship.
+            </p>
+          </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="flex items-center gap-2 flex-wrap lg:justify-end"
-        >
-          {tools.map((t) => {
-            const Icon = t.icon
-            const isSelected = t.id === activeTool
-            return (
-              <button
-                key={t.id}
-                onClick={() => setActiveTool(t.id)}
-                aria-pressed={isSelected}
-                className={`px-5 py-3 rounded-full text-xs font-semibold transition-all flex items-center gap-2 ${
-                  isSelected
-                    ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/30'
-                    : 'bg-neutral-50 text-neutral-600 hover:text-neutral-950 hover:bg-neutral-100 border border-neutral-200'
-                }`}
-              >
-                <Icon size={14} />
-                <span>{t.name}</span>
-              </button>
-            )
-          })}
-        </motion.div>
-      </div>
+          <motion.dl
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45, delay: 0.1 }}
+            className="lg:col-span-4 lg:col-start-9 grid grid-cols-3 lg:grid-cols-1 border-t border-border"
+          >
+            {[
+              ['Experiments', String(tools.length)],
+              ['Runs', 'In your browser'],
+              ['Cost', 'Free'],
+            ].map(([k, v]) => (
+              <div key={k} className="py-3 lg:flex lg:items-baseline lg:justify-between lg:border-b lg:border-border pr-3 lg:pr-0">
+                <dt className="text-[11px] font-mono uppercase tracking-wider text-ink/55">{k}</dt>
+                <dd className="text-sm font-semibold text-ink mt-1 lg:mt-0">{v}</dd>
+              </div>
+            ))}
+          </motion.dl>
+        </div>
+      </section>
 
-      {/* Interactive Tool Playground Container — light outer frame; the code/terminal panels inside stay dark by design */}
-      <div className="rounded-3xl bg-neutral-50 border border-neutral-200 p-6 sm:p-10 shadow-sm">
-        
-        {/* TOOL 1: Server Action Scaffolder */}
-        {activeTool === 'server-action' && (
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            <div className="lg:col-span-4 space-y-4">
-              <div className="text-xs font-mono uppercase tracking-wider text-blue-600 font-bold">
-                Configure Action Parameters
-              </div>
-              <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-neutral-700">Action Function Name</label>
-                <input
-                  type="text"
-                  value={actionName}
-                  onChange={(e) => setActionName(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-neutral-300 text-neutral-900 font-mono text-xs focus:outline-none focus:border-blue-400"
-                />
-              </div>
-              <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-neutral-700">Prisma / Drizzle Model Name</label>
-                <input
-                  type="text"
-                  value={modelName}
-                  onChange={(e) => setModelName(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-neutral-300 text-neutral-900 font-mono text-xs focus:outline-none focus:border-blue-400"
-                />
-              </div>
-              <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-neutral-700">Cache Revalidation Tag</label>
-                <input
-                  type="text"
-                  value={tagToRevalidate}
-                  onChange={(e) => setTagToRevalidate(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-neutral-300 text-neutral-900 font-mono text-xs focus:outline-none focus:border-blue-400"
-                />
-              </div>
-
-              <div className="pt-4 border-t border-neutral-200 text-xs text-neutral-500 space-y-1 font-mono">
-                <div>✔ Zod schema runtime validation</div>
-                <div>✔ Auth session check</div>
-                <div>✔ Next.js 15 Server Cache invalidation</div>
-              </div>
-            </div>
-
-            <div className="lg:col-span-8 rounded-2xl bg-[#06070B] border border-white/10 overflow-hidden">
-              <div className="px-5 py-3 bg-black/60 border-b border-white/[0.06] flex items-center justify-between">
-                <span className="font-mono text-xs text-white/50">app/actions/{actionName}.ts</span>
-                <button
-                  onClick={() => handleCopy(generatedServerAction)}
-                  className="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white/[0.06] hover:bg-white text-white hover:text-black text-xs font-mono transition-all"
+      {/* Experiments list — white */}
+      <section className="bg-white py-14 sm:py-20">
+        <div className="max-w-[1360px] mx-auto px-5 sm:px-6 md:px-8">
+          <ol className="border-t border-border">
+            {tools.map((t, i) => {
+              const isOpen = openTool === t.id
+              const panel = panels[t.id]
+              const panelId = `lab-panel-${t.id}`
+              return (
+                <motion.li
+                  key={t.id}
+                  initial={{ opacity: 0, x: -12 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: '-60px' }}
+                  transition={{ duration: 0.45, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                  className="border-b border-border"
                 >
-                  {copied ? <Check size={12} className="text-emerald-400" /> : <Copy size={12} />}
-                  <span>{copied ? 'Copied' : 'Copy Code'}</span>
-                </button>
-              </div>
-              <pre className="p-6 text-xs sm:text-sm font-mono text-white/80 overflow-x-auto leading-relaxed">
-                <code>{generatedServerAction}</code>
-              </pre>
-            </div>
+                  <h2>
+                    <button
+                      type="button"
+                      aria-expanded={isOpen}
+                      aria-controls={panelId}
+                      onClick={() => setOpenTool(isOpen ? null : t.id)}
+                      className="group w-full text-left grid grid-cols-[auto_1fr_auto] items-start sm:items-center gap-4 sm:gap-8 py-6 sm:py-8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink rounded-sm"
+                    >
+                      <span className="text-xs font-mono text-ink/55 pt-1 sm:pt-0">Lab {t.num}</span>
+                      <span className="min-w-0">
+                        <span className="flex flex-wrap items-center gap-x-3 gap-y-2 mb-1.5">
+                          <span className="font-display text-lg sm:text-2xl font-extrabold text-ink tracking-tight leading-tight">
+                            {t.name}
+                          </span>
+                          <span className="px-2.5 py-0.5 rounded-full border border-ink/15 text-[11px] font-medium text-ink/75">
+                            {t.tag}
+                          </span>
+                        </span>
+                        <span className="block text-sm text-ink-soft leading-relaxed max-w-2xl">{t.blurb}</span>
+                      </span>
+                      <span
+                        aria-hidden="true"
+                        className={`w-11 h-11 rounded-full border flex items-center justify-center transition-all duration-300 ${
+                          isOpen
+                            ? 'bg-ink border-ink text-white rotate-45'
+                            : 'border-ink/20 text-ink group-hover:border-ink/50'
+                        }`}
+                      >
+                        <Plus size={16} />
+                      </span>
+                    </button>
+                  </h2>
+
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div
+                        id={panelId}
+                        key="panel"
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                        className="overflow-hidden"
+                      >
+                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 pb-8 sm:pb-10">
+                          <div className="lg:col-span-4 rounded-2xl bg-cream p-5 sm:p-6 space-y-4 self-start">
+                            <div className="text-[11px] font-mono uppercase tracking-wider text-ink/60">
+                              {panel.fields.length ? 'Configure' : 'What it does'}
+                            </div>
+                            {panel.fields.map((f) => (
+                              <Field key={f.label} {...f} />
+                            ))}
+                            <ul className="pt-4 border-t border-border space-y-2">
+                              {t.checks.map((c) => (
+                                <li key={c} className="flex gap-3 text-xs text-ink/80 leading-relaxed">
+                                  <span aria-hidden="true" className="mt-[0.6em] h-px w-3 shrink-0 bg-accent" />
+                                  <span>{c}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                          <div className="lg:col-span-8 min-w-0">
+                            <CodePanel
+                              filename={panel.filename}
+                              code={panel.code}
+                              copyLabel={panel.copyLabel}
+                              copied={copiedId === t.id}
+                              onCopy={() => handleCopy(t.id, panel.code)}
+                            />
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.li>
+              )
+            })}
+          </ol>
+        </div>
+      </section>
+
+      {/* Closing — ink band */}
+      <section className="bg-ink text-white">
+        <div className="max-w-[1360px] mx-auto px-5 sm:px-6 md:px-8 py-16 sm:py-24 flex flex-col lg:flex-row lg:items-end justify-between gap-8">
+          <div className="max-w-2xl">
+            <h2 className="font-display text-3xl sm:text-4xl font-extrabold tracking-tight leading-[1.1] mb-4">
+              Want our team to build your complete production platform?
+            </h2>
+            <p className="text-base text-white/75 leading-relaxed">
+              We engineer full-stack web platforms, mobile apps, and SaaS platforms with fixed timelines.
+            </p>
           </div>
-        )}
-
-        {/* TOOL 2: Postgres RLS Builder */}
-        {activeTool === 'postgres-rls' && (
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            <div className="lg:col-span-4 space-y-4">
-              <div className="text-xs font-mono uppercase tracking-wider text-blue-600 font-bold">
-                Configure RLS Parameters
-              </div>
-              <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-neutral-700">Target Database Table</label>
-                <input
-                  type="text"
-                  value={tableName}
-                  onChange={(e) => setTableName(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-neutral-300 text-neutral-900 font-mono text-xs focus:outline-none focus:border-blue-400"
-                />
-              </div>
-              <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-neutral-700">Tenant ID Column</label>
-                <input
-                  type="text"
-                  value={tenantColumn}
-                  onChange={(e) => setTenantColumn(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-neutral-300 text-neutral-900 font-mono text-xs focus:outline-none focus:border-blue-400"
-                />
-              </div>
-
-              <div className="pt-4 border-t border-neutral-200 text-xs text-neutral-500 space-y-1 font-mono">
-                <div>✔ Strict JWT claims isolation</div>
-                <div>✔ Multi-tenant data leakage prevention</div>
-                <div>✔ Supabase & Vanilla PostgreSQL compatible</div>
-              </div>
-            </div>
-
-            <div className="lg:col-span-8 rounded-2xl bg-[#06070B] border border-white/10 overflow-hidden">
-              <div className="px-5 py-3 bg-black/60 border-b border-white/[0.06] flex items-center justify-between">
-                <span className="font-mono text-xs text-white/50">migrations/rls_policy_{tableName}.sql</span>
-                <button
-                  onClick={() => handleCopy(generatedPostgresRLS)}
-                  className="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white/[0.06] hover:bg-white text-white hover:text-black text-xs font-mono transition-all"
-                >
-                  {copied ? <Check size={12} className="text-emerald-400" /> : <Copy size={12} />}
-                  <span>{copied ? 'Copied' : 'Copy SQL'}</span>
-                </button>
-              </div>
-              <pre className="p-6 text-xs sm:text-sm font-mono text-white/80 overflow-x-auto leading-relaxed">
-                <code>{generatedPostgresRLS}</code>
-              </pre>
-            </div>
-          </div>
-        )}
-
-        {/* TOOL 3: Stripe Webhook Scaffolder */}
-        {activeTool === 'stripe-webhook' && (
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            <div className="lg:col-span-4 space-y-4">
-              <div className="text-xs font-mono uppercase tracking-wider text-blue-600 font-bold">
-                Webhook Architecture Specs
-              </div>
-              <p className="text-xs text-neutral-500 leading-relaxed">
-                Production-grade Next.js App Router Route Handler with raw body verification, cryptographic HMAC signature matching, and database idempotency upserts.
-              </p>
-              <div className="pt-4 border-t border-neutral-200 text-xs text-neutral-500 space-y-1 font-mono">
-                <div>✔ Signature verification</div>
-                <div>✔ Zero duplicate billing events</div>
-                <div>✔ Type-safe Stripe TypeScript SDK</div>
-              </div>
-            </div>
-
-            <div className="lg:col-span-8 rounded-2xl bg-[#06070B] border border-white/10 overflow-hidden">
-              <div className="px-5 py-3 bg-black/60 border-b border-white/[0.06] flex items-center justify-between">
-                <span className="font-mono text-xs text-white/50">app/api/webhooks/stripe/route.ts</span>
-                <button
-                  onClick={() => handleCopy(generatedStripeWebhook)}
-                  className="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white/[0.06] hover:bg-white text-white hover:text-black text-xs font-mono transition-all"
-                >
-                  {copied ? <Check size={12} className="text-emerald-400" /> : <Copy size={12} />}
-                  <span>{copied ? 'Copied' : 'Copy Handler'}</span>
-                </button>
-              </div>
-              <pre className="p-6 text-xs sm:text-sm font-mono text-white/80 overflow-x-auto leading-relaxed">
-                <code>{generatedStripeWebhook}</code>
-              </pre>
-            </div>
-          </div>
-        )}
-
-      </div>
-
-      {/* Need Dedicated Engineering? */}
-      <div className="mt-16 text-center p-10 rounded-3xl bg-neutral-50 border border-neutral-200">
-        <h2 className="text-2xl font-bold text-neutral-950 mb-2">
-          Want our team to build your complete production platform?
-        </h2>
-        <p className="text-xs sm:text-sm text-neutral-500 mb-6 max-w-lg mx-auto">
-          We engineer full-stack web platforms, mobile apps, and SaaS platforms with fixed timelines.
-        </p>
-        <Link
-          href="/contact"
-          className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full text-xs font-semibold bg-neutral-950 text-white hover:bg-neutral-800 shadow-xl shadow-neutral-950/10 transition-all"
-        >
-          Book Architecture Discovery <ArrowRight size={13} />
-        </Link>
-      </div>
+          <Link
+            href="/contact"
+            className="self-start lg:self-auto inline-flex items-center justify-center gap-2 rounded-full bg-accent text-white font-semibold px-7 py-3.5 text-sm hover:bg-accent-dim transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+          >
+            Book architecture discovery <ArrowRight size={15} aria-hidden="true" />
+          </Link>
+        </div>
+      </section>
     </div>
   )
 }

@@ -1,27 +1,29 @@
 'use client'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { CheckCircle2, Star } from 'lucide-react'
+import { usePrefersReducedMotion } from '@/lib/usePrefersReducedMotion'
 
+// Hero visual: two real delivered sites in plain device frames on the cream
+// hero. No ambient glow, no stat chips (the homepage's real figures live in
+// Stats.jsx's proof band) — just honest captions naming what each screen is.
 export default function HeroDashboardShowcase() {
+  const reduced = usePrefersReducedMotion()
+
   return (
     <div className="relative w-full mx-auto pt-6 lg:pt-0 overflow-visible">
-      {/* Radial ambient background glow */}
-      <div className="absolute -inset-10 bg-gradient-to-r from-blue-200/50 via-indigo-200/40 to-sky-200/30 rounded-3xl blur-3xl -z-10 pointer-events-none" />
-
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: reduced ? 0 : 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.15 }}
-        className="relative w-[104%] -mx-[2%] sm:w-[104%] sm:-mx-[2%] lg:w-[118%] lg:-ml-[9%] xl:w-[122%] xl:-ml-[11%] pb-10 sm:pb-14"
+        className="relative w-full lg:w-[108%] lg:-ml-[6%] pb-10 sm:pb-14"
       >
-        {/* Laptop: a premium business website */}
+        {/* Laptop: a business website */}
         <div className="relative w-full">
-          <div className="rounded-t-xl border border-white/15 bg-[#14161C] p-2 shadow-[0_35px_60px_rgba(0,0,0,0.25)]">
+          <div className="rounded-t-xl bg-ink p-2 shadow-[0_30px_60px_-20px_rgba(10, 17, 36,0.35)]">
             <div className="flex items-center justify-center pb-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-white/20" />
+              <span className="w-1.5 h-1.5 rounded-full bg-white/25" />
             </div>
-            <div className="relative aspect-[16/10] rounded-md overflow-hidden bg-[#0B0D14]">
+            <div className="relative aspect-[16/10] rounded-md overflow-hidden bg-cream-dim">
               <Image
                 src="/assets/sv-space-designs-live.jpg"
                 alt="SV Space Designs, a business website built by Mehta Technologies"
@@ -33,14 +35,13 @@ export default function HeroDashboardShowcase() {
               />
             </div>
           </div>
-          {/* Laptop base */}
-          <div className="h-2.5 rounded-b-[10px] bg-gradient-to-b from-[#2A2D36] to-[#14161C] border-x border-b border-white/10" />
-          <div className="mx-auto h-1 w-1/3 rounded-b-xl bg-[#0B0D14]" />
+          <div className="h-2.5 rounded-b-[10px] bg-ink-dim" />
+          <div className="mx-auto h-1 w-1/3 rounded-b-xl bg-ink/40" />
         </div>
 
         {/* Phone: an e-commerce website */}
-        <div className="absolute -bottom-2 right-0 sm:-right-4 w-[30%] max-w-[150px]">
-          <div className="rounded-[1.4rem] border-[3px] border-[#1C1E26] bg-[#0B0D14] shadow-[0_25px_45px_rgba(0,0,0,0.22)] overflow-hidden">
+        <div className="absolute -bottom-2 right-0 w-[30%] max-w-[150px]">
+          <div className="rounded-[1.4rem] border-[3px] border-ink bg-ink shadow-[0_24px_40px_-16px_rgba(10, 17, 36,0.4)] overflow-hidden">
             <div className="relative aspect-[9/19]">
               <Image
                 src="/assets/prihaan-spices-mobile.jpg"
@@ -54,25 +55,23 @@ export default function HeroDashboardShowcase() {
           </div>
         </div>
 
-        {/* Floating trust chips */}
-        <motion.div
-          initial={{ opacity: 0, y: -8 }}
+        {/* Captions — outlined tag pills naming the real projects on screen */}
+        <motion.span
+          initial={{ opacity: 0, y: reduced ? 0 : -6 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.5 }}
-          className="absolute -top-3 left-2 sm:left-6 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/95 border border-neutral-200 backdrop-blur-md text-[11px] font-semibold text-neutral-800 shadow-lg shadow-black/10"
+          className="absolute -top-3 left-3 sm:left-6 px-3 py-1.5 rounded-full bg-cream border border-ink/20 text-[11px] font-semibold text-ink"
         >
-          <CheckCircle2 size={13} className="text-emerald-500" />
-          SEO-Ready
-        </motion.div>
-        <motion.div
-          initial={{ opacity: 0, y: 8 }}
+          SV Space Designs · website
+        </motion.span>
+        <motion.span
+          initial={{ opacity: 0, y: reduced ? 0 : 6 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.65 }}
-          className="absolute bottom-8 -left-3 sm:left-0 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/95 border border-neutral-200 backdrop-blur-md text-[11px] font-semibold text-neutral-800 shadow-lg shadow-black/10"
+          className="absolute bottom-6 left-0 sm:left-2 px-3 py-1.5 rounded-full bg-cream border border-ink/20 text-[11px] font-semibold text-ink"
         >
-          <Star size={12} className="text-amber-500 fill-amber-500" />
-          4.9/5 Client Rating
-        </motion.div>
+          Prihaan Spices · online store
+        </motion.span>
       </motion.div>
     </div>
   )

@@ -84,13 +84,13 @@ function StatCard({ stat, index }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.08 }}
-      className="p-6 sm:p-8 rounded-2xl bg-white border border-neutral-200 shadow-sm text-center relative overflow-hidden"
+      className="p-6 sm:p-8 rounded-2xl bg-white border border-[#0A1124]/10 shadow-sm text-center"
     >
-      <div className="text-4xl sm:text-5xl font-extrabold text-neutral-950 tracking-tight mb-2">
+      <div className="text-4xl sm:text-5xl font-extrabold text-[#0A1124] tracking-tight mb-2">
         {Number.isInteger(stat.value) ? count : (inView ? stat.value : 0)}{stat.suffix}
       </div>
-      <div className="text-sm font-bold text-neutral-900 mb-1">{stat.label}</div>
-      <div className="text-xs text-neutral-500">{stat.desc}</div>
+      <div className="text-sm font-bold text-[#0A1124] mb-1">{stat.label}</div>
+      <div className="text-xs text-[#0A1124]/50">{stat.desc}</div>
     </motion.div>
   )
 }
@@ -101,31 +101,30 @@ export default function AboutPage() {
       {/* Hero Section */}
       <section className="max-w-[1360px] mx-auto px-6 md:px-8 mb-24">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          
-          <div className="lg:col-span-7 space-y-6">
-            <span className="glow-pill inline-flex">
-              About Mehta Technologies
-            </span>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-neutral-950 tracking-tight leading-[1.08]">
-              Engineering digital products{' '}
-              <span className="text-blue-600">built for real impact.</span>
+          <div className="lg:col-span-7 space-y-6">
+            <div className="text-xs font-mono uppercase tracking-wider text-[#0A1124]/45">
+              About Mehta Technologies
+            </div>
+
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#0A1124] tracking-tight leading-[1.08]">
+              Engineering digital products built for real impact.
             </h1>
 
-            <p className="text-base sm:text-lg text-neutral-500 leading-relaxed max-w-2xl font-normal">
+            <p className="text-base sm:text-lg text-[#0A1124]/60 leading-relaxed max-w-2xl font-normal">
               Mehta Technologies was founded on a singular conviction: every business deserves a website that builds trust and actually brings in enquiries. We build fast, SEO-ready websites, e-commerce stores, and custom software for growing businesses.
             </p>
 
             <div className="flex flex-wrap gap-4 pt-4">
               <Link
                 href="/contact"
-                className="px-6 py-3.5 rounded-full text-xs sm:text-sm font-semibold bg-neutral-950 text-white hover:bg-neutral-800 shadow-xl shadow-neutral-950/10 transition-all flex items-center gap-2"
+                className="px-6 py-3.5 rounded-full text-xs sm:text-sm font-semibold bg-[#1F4FFF] text-white hover:bg-[#1A3FD6] shadow-lg shadow-[#1F4FFF]/20 transition-all flex items-center gap-2"
               >
                 Work With Us <ArrowRight size={14} />
               </Link>
               <Link
                 href="/work"
-                className="px-6 py-3.5 rounded-full text-xs sm:text-sm font-semibold bg-white hover:bg-neutral-50 text-neutral-800 border border-neutral-200 hover:border-neutral-300 transition-all"
+                className="px-6 py-3.5 rounded-full text-xs sm:text-sm font-semibold bg-white hover:bg-[#0A1124]/[0.03] text-[#0A1124] border border-[#0A1124]/15 hover:border-[#0A1124]/25 transition-all"
               >
                 Explore Portfolio
               </Link>
@@ -136,21 +135,21 @@ export default function AboutPage() {
             {/* Hero opens with the company's actual journey, not a stat
                 tile — the fuller Timeline section further down the page
                 was folded into this one so the story isn't told twice. */}
-            <div className="rounded-3xl bg-white border border-neutral-200 p-5 sm:p-8 md:p-10 shadow-xl shadow-neutral-950/5 relative overflow-hidden">
-              <div className="text-xs font-mono uppercase tracking-wider text-neutral-500 mb-6">
+            <div className="rounded-3xl bg-white border border-[#0A1124]/10 p-5 sm:p-8 md:p-10 shadow-sm relative overflow-hidden">
+              <div className="text-xs font-mono uppercase tracking-wider text-[#0A1124]/45 mb-6">
                 Our Journey So Far
               </div>
-              <div className="relative pl-5 space-y-5 before:content-[''] before:absolute before:left-[3px] before:top-1.5 before:bottom-1.5 before:w-px before:bg-neutral-200">
+              <div className="relative pl-5 space-y-5 before:content-[''] before:absolute before:left-[3px] before:top-1.5 before:bottom-1.5 before:w-px before:bg-[#0A1124]/10">
                 {timeline.map((item) => (
                   <div key={item.year} className="relative">
-                    <span className="absolute -left-5 top-1 w-[7px] h-[7px] rounded-full bg-blue-600 ring-4 ring-blue-50" />
-                    <div className="text-xs font-mono font-bold text-blue-600 mb-0.5">{item.year}</div>
-                    <p className="text-xs sm:text-[13px] text-neutral-600 leading-relaxed">{item.event}</p>
+                    <span className="absolute -left-5 top-1 w-[7px] h-[7px] rounded-full bg-[#1F4FFF] ring-4 ring-[#1F4FFF]/10" />
+                    <div className="text-xs font-mono font-bold text-[#0A1124] mb-0.5">{item.year}</div>
+                    <p className="text-xs sm:text-[13px] text-[#0A1124]/60 leading-relaxed">{item.event}</p>
                   </div>
                 ))}
               </div>
 
-              <div className="mt-7 pt-6 border-t border-neutral-200 flex items-center gap-2 text-xs text-emerald-600 font-medium">
+              <div className="mt-7 pt-6 border-t border-[#0A1124]/10 flex items-center gap-2 text-xs text-emerald-600 font-medium">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                 <span>Currently onboarding Q1/Q2 partner projects</span>
               </div>
@@ -160,24 +159,26 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Stats Grid */}
-      <section className="max-w-[1360px] mx-auto px-6 md:px-8 mb-28">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {stats.map((s, i) => (
-            <StatCard key={s.label} stat={s} index={i} />
-          ))}
+      {/* Stats — cream band for section-rhythm alternation against the
+          white hero/values sections around it. */}
+      <section className="bg-[#F4F7FC] border-y border-[#0A1124]/10 py-16 sm:py-20 mb-28">
+        <div className="max-w-[1360px] mx-auto px-6 md:px-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {stats.map((s, i) => (
+              <StatCard key={s.label} stat={s} index={i} />
+            ))}
+          </div>
         </div>
       </section>
 
       {/* Values Section */}
       <section className="max-w-[1360px] mx-auto px-6 md:px-8 mb-28">
         <div className="max-w-2xl mb-16">
-          <span className="glow-pill mb-4 inline-flex">
+          <div className="text-xs font-mono uppercase tracking-wider text-[#0A1124]/45 mb-4">
             Core Principles
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-neutral-950 tracking-tight">
-            How we engineer.{' '}
-            <span className="text-blue-600">How we deliver.</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0A1124] tracking-tight">
+            How we engineer. How we deliver.
           </h2>
         </div>
 
@@ -189,16 +190,16 @@ export default function AboutPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.45, delay: i * 0.08 }}
-              className="p-7 rounded-2xl bg-white border border-neutral-200 shadow-sm hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between"
+              className="p-7 rounded-2xl bg-white border border-[#0A1124]/10 shadow-sm hover:border-[#1F4FFF] hover:shadow-md transition-all flex flex-col justify-between"
             >
               <div>
-                <div className="w-9 h-9 rounded-lg bg-blue-50 border border-blue-100 text-blue-600 font-mono font-bold text-xs flex items-center justify-center mb-5">
+                <div className="w-9 h-9 rounded-lg bg-[#0A1124]/[0.04] border border-[#0A1124]/10 text-[#0A1124] font-mono font-bold text-xs flex items-center justify-center mb-5">
                   {v.num}
                 </div>
-                <h3 className="text-base font-bold text-neutral-900 tracking-tight mb-2">
+                <h3 className="text-base font-bold text-[#0A1124] tracking-tight mb-2">
                   {v.title}
                 </h3>
-                <p className="text-xs sm:text-sm text-neutral-500 leading-relaxed font-normal">
+                <p className="text-xs sm:text-sm text-[#0A1124]/60 leading-relaxed font-normal">
                   {v.desc}
                 </p>
               </div>
@@ -208,16 +209,16 @@ export default function AboutPage() {
       </section>
 
       {/* Interactive Project Showcase Loop */}
-      <section className="py-12 border-y border-neutral-200 mb-28 overflow-hidden bg-neutral-50">
+      <section className="py-12 border-y border-[#0A1124]/10 mb-28 overflow-hidden bg-[#F4F7FC]">
         <div className="max-w-[1360px] mx-auto px-6 md:px-8 mb-6">
-          <div className="text-xs font-mono uppercase tracking-wider text-neutral-500">
+          <div className="text-xs font-mono uppercase tracking-wider text-[#0A1124]/45">
             A Sample of Real Websites We&apos;ve Built
           </div>
         </div>
         <LogoLoop
           logos={[...projectScreenshots, ...projectScreenshots].map(({ src, label }, i) => ({
             node: (
-              <div key={i} className="w-56 h-32 rounded-xl border border-neutral-200 overflow-hidden shrink-0 relative bg-neutral-100">
+              <div key={i} className="w-56 h-32 rounded-xl border border-[#0A1124]/10 overflow-hidden shrink-0 relative bg-white">
                 <Image
                   src={src}
                   alt={label}
@@ -239,18 +240,20 @@ export default function AboutPage() {
       {/* Team Section */}
       <Team />
 
-      {/* Bottom Conversion CTA */}
+      {/* Bottom Conversion CTA — inverted dark ink section: the forest-
+          green ink doing double duty as background rather than the old
+          black/white default (see research/design-system-v2.md). */}
       <section className="max-w-[1360px] mx-auto px-6 md:px-8 mt-24 text-center">
-        <div className="max-w-2xl mx-auto rounded-3xl bg-neutral-50 border border-neutral-200 p-10 sm:p-14">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-neutral-950 tracking-tight mb-4">
+        <div className="max-w-2xl mx-auto rounded-3xl bg-[#0A1124] p-10 sm:p-14">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-4">
             Ready to build your next milestone?
           </h2>
-          <p className="text-sm sm:text-base text-neutral-500 mb-8 max-w-md mx-auto">
+          <p className="text-sm sm:text-base text-white/60 mb-8 max-w-md mx-auto">
             Book a 30-minute discovery session with our founding engineering team.
           </p>
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-xs sm:text-sm font-semibold bg-neutral-950 text-white hover:bg-neutral-800 shadow-xl shadow-neutral-950/10 transition-all"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-xs sm:text-sm font-semibold bg-[#1F4FFF] text-white hover:bg-[#1A3FD6] shadow-lg shadow-[#1F4FFF]/25 transition-all"
           >
             Start Your Conversation <ArrowRight size={14} />
           </Link>

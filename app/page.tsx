@@ -84,16 +84,22 @@ export default function Home() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <Navbar />
       <main id="main-content" tabIndex={-1} className="home-light bg-white relative overflow-x-hidden w-full max-w-[100vw]">
+        {/* Section order + background rhythm (research/design-system-v2.md):
+            Hero cream -> Portfolio white (signature case-study rail, placed
+            right after the hero so "View Our Work" has proof directly below)
+            -> Services cream -> Stats ink (proof band) -> Products white ->
+            WhyUs cream-dim -> Pricing -> FAQ -> CTA -> Footer ink. Each
+            section owns its own background. */}
         <Hero />
-        <Stats />
-        <Services />
-        <Pricing />
         <Portfolio />
-        <WhyUs />
+        <Services />
+        <Stats />
         <Products />
-        {/* Testimonials section (components/sections/Testimonials.jsx) is built and
-            ready but intentionally not rendered — it only has placeholder quotes.
-            Wire it back in once real client testimonials are available. */}
+        <WhyUs />
+        <Pricing />
+        {/* Testimonials (components/sections/Testimonials.jsx) is intentionally
+            not rendered: it only holds placeholder quotes. Wire it back in
+            once real client testimonials exist — never ship invented ones. */}
         <FAQ />
         <CTA />
         <Footer />

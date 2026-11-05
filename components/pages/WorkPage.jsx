@@ -3,13 +3,19 @@ import { useRef, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ArrowRight, ArrowUpRight } from 'lucide-react'
-import SpotlightCard from '@/components/ui/SpotlightCard'
+import { ArrowRight, ArrowUpRight, ChevronLeft, ChevronRight } from 'lucide-react'
 import { useClearanceGuard } from '@/lib/useClearanceGuard'
 import { cardGridContainer, cardSpringItem } from '@/lib/motionVariants'
 
 const categories = ['All', 'Web', 'E-Commerce', 'SaaS', 'Media']
 
+// Real project data only (lib/ + public/assets, per research/design-system-v2.md —
+// no invented projects, stats, or client logos). Each entry additionally carries
+// an `accent` — an editorial art-direction color for that project's card (tag
+// pill / overlaid stat text / the block background for the one project with no
+// live screenshot yet), loosely evoking that client's industry the way
+// composite.global tints each case-study card with the client's own brand color.
+// This is presentation styling, not a factual claim about the client's brand.
 const projects = [
   {
     name: 'SV Space Designs',
@@ -22,6 +28,8 @@ const projects = [
     url: 'https://www.svspacedesigns.in',
     year: '2025',
     result: '100/100 Mobile Speed',
+    accent: '#B5652D',
+    featured: true,
   },
   {
     name: 'Prihaan Spices & Agro',
@@ -33,7 +41,9 @@ const projects = [
     image: '/assets/prihaan-spices-live.jpg',
     url: 'https://www.prihaanspices.in',
     year: '2025',
-    result: '252+ SKU E-Commerce Catalog',
+    result: '252+ SKU Catalog',
+    accent: '#9C3B2E',
+    featured: true,
   },
   {
     name: 'The Silver Spoon / Argentum',
@@ -46,6 +56,8 @@ const projects = [
     url: 'https://www.silverspoonbyacj.com',
     year: '2024',
     result: 'Headless Next.js Storefront',
+    accent: '#5B6169',
+    featured: true,
   },
   {
     name: 'Vibo ERP',
@@ -60,6 +72,7 @@ const projects = [
     url: 'https://app.viboerp.com/',
     year: '2024',
     result: 'Built & Used In-House',
+    accent: '#0A1124',
   },
   {
     name: 'Chahana Dental Studio',
@@ -72,6 +85,7 @@ const projects = [
     url: 'https://chahanadentalstudio.com',
     year: '2024',
     result: 'Technical SEO & Booking Flow',
+    accent: '#2C6E6B',
   },
   {
     name: 'Destination Anywhere',
@@ -84,6 +98,7 @@ const projects = [
     url: 'https://www.destinationanywhere.co.in/',
     year: '2024',
     result: '40+ Countries Covered',
+    accent: '#1F4E5F',
   },
   {
     name: 'ZingBliss Events',
@@ -96,6 +111,7 @@ const projects = [
     url: 'https://www.zingblissevents.com',
     year: '2024',
     result: 'Luxury Event Portfolio Site',
+    accent: '#7A2E3A',
   },
   {
     name: 'Ares Business League',
@@ -108,6 +124,8 @@ const projects = [
     url: 'https://www.aresbusinessleague.com',
     year: '2025',
     result: 'Executive Member Directory',
+    accent: '#1E2A3A',
+    featured: true,
   },
   {
     name: 'CMJ Events',
@@ -120,6 +138,8 @@ const projects = [
     url: 'https://www.clubmjevents.com',
     year: '2025',
     result: '250+ Events Delivered',
+    accent: '#5A2A52',
+    featured: true,
   },
   {
     name: 'Naam Transfer',
@@ -132,6 +152,7 @@ const projects = [
     url: 'https://www.naamtransfer.com',
     year: '2025',
     result: '100% Automated Intake',
+    accent: '#22344A',
   },
   {
     name: 'NexSphere Global',
@@ -144,6 +165,7 @@ const projects = [
     url: 'https://www.thenexsphereglobal.com',
     year: '2024',
     result: 'Global Corporate Hub',
+    accent: '#24425C',
   },
   {
     name: 'Jukebox Media',
@@ -156,6 +178,7 @@ const projects = [
     url: 'https://www.jukeboxmedia.in',
     year: '2025',
     result: 'Marketing & Creator Showcase',
+    accent: '#B23A6B',
   },
   {
     name: 'Rising Rechargeable',
@@ -168,6 +191,7 @@ const projects = [
     url: 'https://www.risingrechargeable.com',
     year: '2025',
     result: 'Clean Energy Supply',
+    accent: '#2F6F4E',
   },
   {
     name: 'FGP Industries',
@@ -180,6 +204,7 @@ const projects = [
     url: 'https://fgpind.com',
     year: '2024',
     result: 'Heavy Industrial Specs',
+    accent: '#3E5064',
   },
   {
     name: 'Aangan Boutique',
@@ -192,6 +217,7 @@ const projects = [
     url: 'https://www.aanganboutique.in',
     year: '2024',
     result: 'Global Bridal Reach',
+    accent: '#6E1F2C',
   },
   {
     name: 'SI Decor & Interiors',
@@ -204,6 +230,7 @@ const projects = [
     url: 'https://www.sidecor.in',
     year: '2024',
     result: 'Turnkey Interior Portfolio',
+    accent: '#9C5A34',
   },
   {
     name: 'Jade Travels',
@@ -217,128 +244,214 @@ const projects = [
     year: '2026',
     result: 'In Development',
     inProgress: true,
+    accent: '#4A5468',
   },
 ]
 
+const featuredProjects = projects.filter((p) => p.featured)
 
+// Three reused button primitives (design-system-v2.md's "button/affordance
+// system, reused consistently") instead of one-off classes per section.
+const btnPrimary =
+  'inline-flex items-center justify-center gap-1.5 rounded-full text-xs font-semibold bg-[#1F4FFF] text-white hover:bg-[#1A3FD6] transition-all'
+const btnSecondary =
+  'inline-flex items-center justify-center gap-1.5 rounded-full text-xs font-semibold bg-white hover:bg-[#0A1124]/[0.03] text-[#0A1124] border border-[#0A1124]/15 hover:border-[#0A1124]/25 transition-all'
+const btnIconCircle =
+  'w-10 h-10 sm:w-11 sm:h-11 rounded-full border border-[#0A1124]/15 bg-white hover:bg-[#0A1124]/[0.04] hover:border-[#0A1124]/30 text-[#0A1124] flex items-center justify-center transition-all disabled:opacity-30 disabled:pointer-events-none'
 
-function ProjectCard({ project }) {
+function ProjectTag({ label, accent }) {
   return (
-    // Spring pop-in is on this outer wrapper, not SpotlightCard itself —
-    // SpotlightCard's own motion.div already owns an explicit `animate`
-    // object for cursor tilt, which would block variant propagation from a
-    // parent stagger. Keeping the two concerns on separate elements lets
-    // each animate its own transform independently.
-    <motion.div variants={cardSpringItem} className="h-full">
-    <SpotlightCard
-      enableTilt={false}
-      spotlightColor="rgba(59, 130, 246, 0.15)"
-      borderColor="rgba(59, 130, 246, 0.3)"
-      className="group rounded-3xl !bg-white !border !border-neutral-200 hover:!border-blue-300 overflow-hidden flex flex-col justify-between transition-all duration-300 shadow-sm h-full"
+    <span
+      className="px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] font-semibold backdrop-blur-md border"
+      style={{ color: accent, borderColor: `${accent}55`, backgroundColor: `${accent}14` }}
     >
-      <div>
-        {/* Visual Cover */}
-        <div className={`relative aspect-[16/10] bg-neutral-100 overflow-hidden ${project.imageFit === 'contain' ? 'p-6' : ''}`}>
-          {project.image ? (
-            <Image
-              src={project.image}
-              alt={project.name}
-              fill
-              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-              className={project.imageFit === 'contain'
+      {label}
+    </span>
+  )
+}
+
+// Bespoke, per-project card: real photography, that project's own accent
+// tint on the tag pills, and the real metric set directly into the photo —
+// not a uniform white icon-square card. `size` varies the card between the
+// horizontal rail (tall, one column of copy) and the filterable grid below.
+function ProjectCard({ project, size = 'grid' }) {
+  const isRail = size === 'rail'
+
+  return (
+    <motion.div
+      variants={cardSpringItem}
+      className={`group rounded-3xl bg-white border border-[#0A1124]/10 overflow-hidden flex flex-col shadow-sm hover:shadow-lg transition-shadow duration-300 h-full ${
+        isRail ? 'w-[300px] sm:w-[360px] shrink-0 snap-start' : ''
+      }`}
+    >
+      {/* Visual Cover — full-bleed real photography, this project's accent
+          used for the tag pills and the stat set directly onto the photo. */}
+      <div
+        className={`relative overflow-hidden ${isRail ? 'aspect-[3/4]' : 'aspect-[16/10]'} ${
+          project.imageFit === 'contain' ? 'p-6' : ''
+        }`}
+        style={{ backgroundColor: project.image ? '#E7EDF8' : project.accent }}
+      >
+        {project.image ? (
+          <Image
+            src={project.image}
+            alt={project.name}
+            fill
+            sizes={isRail ? '360px' : '(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw'}
+            className={
+              project.imageFit === 'contain'
                 ? 'object-contain object-center group-hover:scale-[1.03] transition-transform duration-500'
-                : 'object-cover object-top group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100'}
-            />
-          ) : project.inProgress ? (
-            <div className="w-full h-full flex flex-col items-center justify-center gap-1.5 bg-blue-50 text-center px-4">
-              <span className="text-[10px] font-mono uppercase tracking-wider text-blue-600/70">Build In Progress</span>
-              <span className="text-xs text-neutral-500">Preview coming at launch</span>
-            </div>
-          ) : (
-            <div className="w-full h-full flex items-center justify-center font-bold text-2xl text-blue-600/40 bg-blue-50">
-              {project.name.slice(0, 2).toUpperCase()}
-            </div>
-          )}
-
-          {/* Category Pill — dark chip overlaid on the photo, intentionally stays dark */}
-          <div className="absolute top-3 sm:top-4 left-3 sm:left-4">
-            <span className="px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-[11px] font-semibold bg-neutral-950/80 backdrop-blur-md text-blue-300 border border-white/10">
-              {project.category}
-            </span>
+                : 'object-cover object-top group-hover:scale-105 transition-transform duration-500'
+            }
+          />
+        ) : project.inProgress ? (
+          <div className="w-full h-full flex flex-col items-center justify-center gap-1.5 text-center px-4">
+            <span className="text-[10px] font-mono uppercase tracking-wider text-white/70">Build In Progress</span>
+            <span className="text-xs text-white/90">Preview coming at launch</span>
           </div>
-
-          {/* Metric badge */}
-          {project.result && (
-            <div className="absolute bottom-3 sm:bottom-4 right-3 sm:right-4 max-w-[70%] text-right">
-              <span className="inline-block px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-[11px] font-bold bg-blue-600/90 text-white shadow-lg shadow-blue-900/40 truncate">
-                {project.result}
-              </span>
-            </div>
-          )}
-        </div>
-
-        {/* Content Body */}
-        <div className="p-6 sm:p-7">
-          <div className="flex items-center justify-between gap-2 mb-2">
-            <h3 className="text-xl font-bold text-neutral-950 tracking-tight group-hover:text-blue-600 transition-colors">
-              {project.name}
-            </h3>
-            <span className="text-xs font-mono text-neutral-500">{project.year}</span>
-          </div>
-
-          <p className="text-xs text-blue-600 font-medium mb-3">
-            {project.subtitle}
-          </p>
-
-          <p className="text-xs sm:text-sm text-neutral-500 leading-relaxed font-normal mb-6">
-            {project.desc}
-          </p>
-
-          {/* Tech tags */}
-          <div className="flex flex-wrap gap-1.5 pt-4 border-t border-neutral-100">
-            {project.tags.map((t) => (
-              <span
-                key={t}
-                className="text-[11px] font-medium px-2 py-0.5 rounded-md bg-neutral-50 text-neutral-600 border border-neutral-200"
-              >
-                {t}
-              </span>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Footer Links */}
-      <div className="p-6 sm:p-7 pt-0 space-y-2">
-        {project.slug && (
-          <Link
-            href={`/work/${project.slug}`}
-            className="w-full py-2.5 rounded-full text-xs font-semibold bg-blue-50 hover:bg-blue-100 text-blue-600 border border-blue-100 transition-all flex items-center justify-center gap-1.5"
-          >
-            Read Case Study Deep-Dive <ArrowRight size={12} />
-          </Link>
-        )}
-        {project.inProgress ? (
-          <div className="w-full py-2.5 rounded-full text-xs font-medium text-blue-600/70 border border-blue-100 text-center">
-            Build In Progress
-          </div>
-        ) : project.url ? (
-          <a
-            href={project.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full py-2.5 rounded-full text-xs font-semibold bg-neutral-950 hover:bg-neutral-800 text-white transition-all flex items-center justify-center gap-1.5"
-          >
-            Visit Live Project <ArrowUpRight size={13} />
-          </a>
         ) : (
-          <div className="w-full py-2.5 rounded-full text-xs font-medium text-neutral-500 border border-neutral-200 text-center">
-            Enterprise Client IP Protected
+          <div className="w-full h-full flex items-center justify-center font-bold text-2xl text-white/70">
+            {project.name.slice(0, 2).toUpperCase()}
+          </div>
+        )}
+
+        {/* Gradient scrim so the overlaid pill/stat stay legible over any photo */}
+        {project.image && (
+          <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/0 to-black/10 pointer-events-none" />
+        )}
+
+        {/* Category tag — outlined pill, tinted with this project's accent */}
+        <div className="absolute top-3 sm:top-4 left-3 sm:left-4">
+          <ProjectTag label={project.category} accent={project.image ? '#FFFFFF' : project.accent} />
+        </div>
+
+        {/* Real result, set directly into the photo — large, not a separate badge component */}
+        {project.result && (
+          <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 right-3 sm:right-4">
+            <div className="text-[10px] sm:text-xs font-mono uppercase tracking-wider text-white/70 mb-0.5">
+              {project.year}
+            </div>
+            <div className="text-base sm:text-lg font-extrabold text-white tracking-tight leading-tight">
+              {project.result}
+            </div>
           </div>
         )}
       </div>
-    </SpotlightCard>
+
+      {/* Content Body */}
+      <div className="p-6 sm:p-7 flex flex-col flex-1">
+        <div className="flex items-start justify-between gap-2 mb-1.5">
+          <h3 className="text-lg sm:text-xl font-bold text-[#0A1124] tracking-tight">
+            {project.name}
+          </h3>
+        </div>
+
+        <p className="text-xs font-medium mb-3" style={{ color: project.accent }}>
+          {project.subtitle}
+        </p>
+
+        <p className="text-xs sm:text-sm text-[#0A1124]/60 leading-relaxed font-normal mb-5">
+          {project.desc}
+        </p>
+
+        {/* Tech tags */}
+        <div className="flex flex-wrap gap-1.5 pt-4 mt-auto border-t border-[#0A1124]/[0.06] mb-5">
+          {project.tags.map((t) => (
+            <span
+              key={t}
+              className="text-[11px] font-medium px-2 py-0.5 rounded-md bg-[#0A1124]/[0.03] text-[#0A1124]/65 border border-[#0A1124]/10"
+            >
+              {t}
+            </span>
+          ))}
+        </div>
+
+        {/* Footer Links — the 3-button system: solid accent primary for the
+            proof-in-the-world action, outlined secondary for the deep-dive. */}
+        <div className="space-y-2">
+          {project.inProgress ? (
+            <div className="w-full py-2.5 rounded-full text-xs font-medium text-[#0A1124]/50 border border-[#0A1124]/15 text-center">
+              Build In Progress
+            </div>
+          ) : project.url ? (
+            <a href={project.url} target="_blank" rel="noopener noreferrer" className={`w-full py-2.5 ${btnPrimary}`}>
+              Visit Live Project <ArrowUpRight size={13} />
+            </a>
+          ) : (
+            <div className="w-full py-2.5 rounded-full text-xs font-medium text-[#0A1124]/50 border border-[#0A1124]/15 text-center">
+              Enterprise Client IP Protected
+            </div>
+          )}
+          {project.slug && (
+            <Link href={`/work/${project.slug}`} className={`w-full py-2.5 ${btnSecondary}`}>
+              Read Case Study <ArrowRight size={12} />
+            </Link>
+          )}
+        </div>
+      </div>
     </motion.div>
+  )
+}
+
+// Signature interaction: horizontal-scroll, manually-controlled case-study
+// rail (design-system-v2.md's "supporting motion / signature interaction"
+// budget item) for the flagship, most-photographed real projects. Native
+// touch/trackpad scrolling still works — the circular arrows are an
+// additional, explicit control, not a replacement for it.
+function FeaturedRail() {
+  const railRef = useRef(null)
+
+  const scrollRail = (dir) => {
+    const el = railRef.current
+    if (!el) return
+    const card = el.querySelector('[data-rail-card]')
+    const step = (card?.offsetWidth || 320) + 24
+    el.scrollBy({ left: dir * step, behavior: 'smooth' })
+  }
+
+  return (
+    <section className="mb-28">
+      <div className="max-w-[1360px] mx-auto px-6 md:px-8 flex items-end justify-between gap-6 mb-8">
+        <div>
+          <div className="text-xs font-mono uppercase tracking-wider text-[#0A1124]/45 mb-3">
+            Featured Case Studies
+          </div>
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0A1124] tracking-tight">
+            Real projects, art-directed one at a time.
+          </h2>
+        </div>
+        <div className="hidden sm:flex items-center gap-2 shrink-0">
+          <button type="button" aria-label="Scroll to previous case study" className={btnIconCircle} onClick={() => scrollRail(-1)}>
+            <ChevronLeft size={16} />
+          </button>
+          <button type="button" aria-label="Scroll to next case study" className={btnIconCircle} onClick={() => scrollRail(1)}>
+            <ChevronRight size={16} />
+          </button>
+        </div>
+      </div>
+
+      <div
+        ref={railRef}
+        className="flex gap-6 overflow-x-auto snap-x snap-mandatory pl-6 md:pl-[max(1.5rem,calc((100vw-1360px)/2+2rem))] pr-6 pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+      >
+        {featuredProjects.map((p) => (
+          <div key={p.slug} data-rail-card>
+            <ProjectCard project={p} size="rail" />
+          </div>
+        ))}
+      </div>
+
+      {/* Mobile controls — the rail scrolls natively via touch above this
+          breakpoint too, these just surface the same manual control. */}
+      <div className="sm:hidden flex items-center gap-2 px-6 mt-4">
+        <button type="button" aria-label="Scroll to previous case study" className={btnIconCircle} onClick={() => scrollRail(-1)}>
+          <ChevronLeft size={16} />
+        </button>
+        <button type="button" aria-label="Scroll to next case study" className={btnIconCircle} onClick={() => scrollRail(1)}>
+          <ChevronRight size={16} />
+        </button>
+      </div>
+    </section>
   )
 }
 
@@ -369,14 +482,13 @@ export default function WorkPage() {
             transition={{ duration: 0.5 }}
             className="lg:col-span-7"
           >
-            <span className="glow-pill mb-4 inline-flex">
+            <div className="text-xs font-mono uppercase tracking-wider text-[#0A1124]/45 mb-4">
               Portfolio & Case Studies
-            </span>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-neutral-950 tracking-tight leading-[1.08] mb-6">
-              Engineering that drives{' '}
-              <span className="text-blue-600">measurable outcomes.</span>
+            </div>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#0A1124] tracking-tight leading-[1.08] mb-6">
+              Engineering that drives measurable outcomes.
             </h1>
-            <p className="text-base sm:text-lg text-neutral-500 leading-relaxed max-w-lg">
+            <p className="text-base sm:text-lg text-[#0A1124]/60 leading-relaxed max-w-lg">
               150+ shipped production applications, luxury e-commerce storefronts, and cloud SaaS platforms.
             </p>
           </motion.div>
@@ -388,8 +500,8 @@ export default function WorkPage() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="lg:col-span-5"
           >
-            <div className="rounded-2xl bg-white border border-neutral-200 shadow-sm p-2 sm:p-2.5">
-              <div className="px-3.5 pt-2.5 pb-1.5 text-[11px] font-mono uppercase tracking-wider text-neutral-500">
+            <div className="rounded-2xl bg-white border border-[#0A1124]/10 shadow-sm p-2 sm:p-2.5">
+              <div className="px-3.5 pt-2.5 pb-1.5 text-[11px] font-mono uppercase tracking-wider text-[#0A1124]/45">
                 Browse by category
               </div>
               {categories.map((cat) => {
@@ -405,12 +517,12 @@ export default function WorkPage() {
                     aria-pressed={isSelected}
                     className={`w-full flex items-center justify-between gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-all ${
                       isSelected
-                        ? 'bg-blue-50 text-blue-700'
-                        : 'text-neutral-600 hover:bg-neutral-50 hover:text-neutral-950'
+                        ? 'bg-[#1F4FFF]/10 text-[#1F4FFF]'
+                        : 'text-[#0A1124]/65 hover:bg-[#0A1124]/[0.03] hover:text-[#0A1124]'
                     }`}
                   >
                     <span>{cat}</span>
-                    <span className={`text-xs font-mono px-2 py-0.5 rounded-full ${isSelected ? 'bg-blue-600 text-white' : 'bg-neutral-100 text-neutral-500'}`}>
+                    <span className={`text-xs font-mono px-2 py-0.5 rounded-full ${isSelected ? 'bg-[#1F4FFF] text-white' : 'bg-[#0A1124]/[0.05] text-[#0A1124]/50'}`}>
                       {count}
                     </span>
                   </button>
@@ -421,8 +533,14 @@ export default function WorkPage() {
         </div>
       </section>
 
-      {/* Projects Grid */}
+      {/* Signature horizontal case-study rail */}
+      <FeaturedRail />
+
+      {/* Full Portfolio Grid */}
       <section className="max-w-[1360px] mx-auto px-6 md:px-8 mb-28">
+        <div className="text-xs font-mono uppercase tracking-wider text-[#0A1124]/45 mb-6">
+          Full Portfolio
+        </div>
         <motion.div
           key={activeCategory}
           variants={cardGridContainer}
@@ -431,26 +549,25 @@ export default function WorkPage() {
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
           <AnimatePresence mode="popLayout">
-            {filtered.map((p, i) => (
-              <ProjectCard key={p.name} project={p} index={i} />
+            {filtered.map((p) => (
+              <ProjectCard key={p.name} project={p} size="grid" />
             ))}
           </AnimatePresence>
         </motion.div>
       </section>
 
-      {/* Bottom CTA */}
+      {/* Bottom CTA — a warm cream surface (the About page's own bottom CTA
+          already carries the dark inverted-ink treatment; alternating which
+          page does which keeps this a genuine rhythm, not a repeated tic). */}
       <section className="max-w-[1360px] mx-auto px-6 md:px-8 text-center">
-        <div className="max-w-2xl mx-auto rounded-3xl bg-neutral-50 border border-neutral-200 p-10 sm:p-14">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-neutral-950 tracking-tight mb-4">
+        <div className="max-w-2xl mx-auto rounded-3xl bg-[#F4F7FC] border border-[#0A1124]/10 p-10 sm:p-14">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0A1124] tracking-tight mb-4">
             Have a project in mind?
           </h2>
-          <p className="text-sm sm:text-base text-neutral-500 mb-8 max-w-md mx-auto">
+          <p className="text-sm sm:text-base text-[#0A1124]/60 mb-8 max-w-md mx-auto">
             Let us engineer a custom high-performance solution tailored to your roadmap.
           </p>
-          <Link
-            href="/contact"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-xs sm:text-sm font-semibold bg-neutral-950 text-white hover:bg-neutral-800 shadow-xl shadow-neutral-950/10 transition-all"
-          >
+          <Link href="/contact" className={`px-8 py-4 ${btnPrimary}`}>
             Start a Conversation <ArrowRight size={14} />
           </Link>
         </div>

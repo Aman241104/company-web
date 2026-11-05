@@ -4,6 +4,7 @@ import { useSearchParams } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { Mail, Phone, MapPin, Clock, ArrowRight, CheckCircle2 } from 'lucide-react'
 import { cheapestTier, pricingTiers } from '@/lib/pricing'
+import { cardGridContainer, cardSpringItem } from '@/lib/motionVariants'
 
 /**
  * Guards a set of stacked elements (mobile-dock "rows" of interest — form field
@@ -206,8 +207,8 @@ function ContactForm() {
   }
 
   return (
-    <div className="rounded-3xl bg-white border border-neutral-200 p-8 sm:p-10 shadow-xl shadow-neutral-950/5 relative overflow-hidden">
-      <div className="absolute top-0 left-1/4 right-1/4 h-[1px] bg-gradient-to-r from-transparent via-blue-400/50 to-transparent" />
+    <div className="rounded-3xl bg-white border border-[#0A1124]/10 p-8 sm:p-10 shadow-xl shadow-black/5 relative overflow-hidden">
+      <div className="absolute top-0 left-1/4 right-1/4 h-[1px] bg-gradient-to-r from-transparent via-[#1F4FFF]/40 to-transparent" />
 
       {sent ? (
         <div className="py-16 text-center space-y-4">
@@ -216,29 +217,29 @@ function ContactForm() {
           </div>
           {delivered ? (
             <>
-              <h3 className="text-2xl font-bold text-neutral-950 tracking-tight">
+              <h3 className="text-2xl font-bold text-[#0A1124] tracking-tight">
                 Brief Sent Successfully!
               </h3>
-              <p className="text-sm text-neutral-500 max-w-sm mx-auto">
+              <p className="text-sm text-[#0A1124]/55 max-w-sm mx-auto">
                 Our engineering team has received your details and will review them before our discovery call.
               </p>
             </>
           ) : (
             <>
-              <h3 className="text-2xl font-bold text-neutral-950 tracking-tight">
+              <h3 className="text-2xl font-bold text-[#0A1124] tracking-tight">
                 Almost there — one more step
               </h3>
-              <p className="text-sm text-neutral-500 max-w-sm mx-auto">
+              <p className="text-sm text-[#0A1124]/55 max-w-sm mx-auto">
                 We opened your email app with your brief pre-filled. Hit send there to reach our team — if nothing opened, email us directly at{' '}
-                <a href="mailto:hello@mehtatechnologies.com" className="text-blue-600 hover:text-blue-700">hello@mehtatechnologies.com</a>
+                <a href="mailto:hello@mehtatechnologies.com" className="text-[#1F4FFF] hover:text-[#1A3FD6]">hello@mehtatechnologies.com</a>
                 {' '}or{' '}
-                <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700">message us on WhatsApp</a>.
+                <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer" className="text-[#1F4FFF] hover:text-[#1A3FD6]">message us on WhatsApp</a>.
               </p>
             </>
           )}
           <button
             onClick={() => setSent(false)}
-            className="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-600 hover:text-blue-700 pt-4"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#1F4FFF] hover:text-[#1A3FD6] pt-4"
           >
             Submit Another Inquiry →
           </button>
@@ -256,18 +257,18 @@ function ContactForm() {
             className="absolute left-[-9999px] w-px h-px opacity-0"
           />
           <div>
-            <h3 className="text-xl sm:text-2xl font-bold text-neutral-950 tracking-tight mb-1">
+            <h3 className="text-xl sm:text-2xl font-bold text-[#0A1124] tracking-tight mb-1">
               Submit Your Project Brief
             </h3>
-            <p className="text-xs sm:text-sm text-neutral-500">
+            <p className="text-xs sm:text-sm text-[#0A1124]/55">
               Fill in your specifications for an accurate milestone timeline and cost breakdown.
             </p>
           </div>
 
           <div ref={nameRowRef} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label htmlFor="contact-name" className="block text-xs font-mono uppercase tracking-wider text-neutral-500 mb-1.5">
-                Your Name <span className="text-blue-600">*</span>
+              <label htmlFor="contact-name" className="block text-xs font-mono uppercase tracking-wider text-[#0A1124]/50 mb-1.5">
+                Your Name <span className="text-[#1F4FFF]">*</span>
               </label>
               <input
                 id="contact-name"
@@ -277,11 +278,11 @@ function ContactForm() {
                 placeholder="Gaurav Mehta"
                 value={form.name}
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
-                className="w-full px-4 py-3 rounded-xl bg-white border border-neutral-300 text-neutral-900 placeholder:text-neutral-500 text-sm focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 transition-all"
+                className="w-full px-4 py-3 rounded-xl bg-white border border-[#0A1124]/15 text-[#0A1124] placeholder:text-[#0A1124]/35 text-sm focus:outline-none focus:border-[#1F4FFF] focus:ring-1 focus:ring-[#1F4FFF] transition-all"
               />
             </div>
             <div>
-              <label htmlFor="contact-company" className="block text-xs font-mono uppercase tracking-wider text-neutral-500 mb-1.5">
+              <label htmlFor="contact-company" className="block text-xs font-mono uppercase tracking-wider text-[#0A1124]/50 mb-1.5">
                 Company / Organization
               </label>
               <input
@@ -291,15 +292,15 @@ function ContactForm() {
                 placeholder="Shah Textiles Pvt. Ltd."
                 value={form.company}
                 onChange={(e) => setForm({ ...form, company: e.target.value })}
-                className="w-full px-4 py-3 rounded-xl bg-white border border-neutral-300 text-neutral-900 placeholder:text-neutral-500 text-sm focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 transition-all"
+                className="w-full px-4 py-3 rounded-xl bg-white border border-[#0A1124]/15 text-[#0A1124] placeholder:text-[#0A1124]/35 text-sm focus:outline-none focus:border-[#1F4FFF] focus:ring-1 focus:ring-[#1F4FFF] transition-all"
               />
             </div>
           </div>
 
           <div ref={emailRowRef} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label htmlFor="contact-email" className="block text-xs font-mono uppercase tracking-wider text-neutral-500 mb-1.5">
-                Work Email <span className="text-blue-600">*</span>
+              <label htmlFor="contact-email" className="block text-xs font-mono uppercase tracking-wider text-[#0A1124]/50 mb-1.5">
+                Work Email <span className="text-[#1F4FFF]">*</span>
               </label>
               <input
                 id="contact-email"
@@ -309,11 +310,11 @@ function ContactForm() {
                 placeholder="name@company.com"
                 value={form.email}
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
-                className="w-full px-4 py-3 rounded-xl bg-white border border-neutral-300 text-neutral-900 placeholder:text-neutral-500 text-sm focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 transition-all"
+                className="w-full px-4 py-3 rounded-xl bg-white border border-[#0A1124]/15 text-[#0A1124] placeholder:text-[#0A1124]/35 text-sm focus:outline-none focus:border-[#1F4FFF] focus:ring-1 focus:ring-[#1F4FFF] transition-all"
               />
             </div>
             <div>
-              <label htmlFor="contact-phone" className="block text-xs font-mono uppercase tracking-wider text-neutral-500 mb-1.5">
+              <label htmlFor="contact-phone" className="block text-xs font-mono uppercase tracking-wider text-[#0A1124]/50 mb-1.5">
                 Phone / WhatsApp
               </label>
               <input
@@ -323,14 +324,14 @@ function ContactForm() {
                 placeholder="+91 98765 43210"
                 value={form.phone}
                 onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                className="w-full px-4 py-3 rounded-xl bg-white border border-neutral-300 text-neutral-900 placeholder:text-neutral-500 text-sm focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 transition-all"
+                className="w-full px-4 py-3 rounded-xl bg-white border border-[#0A1124]/15 text-[#0A1124] placeholder:text-[#0A1124]/35 text-sm focus:outline-none focus:border-[#1F4FFF] focus:ring-1 focus:ring-[#1F4FFF] transition-all"
               />
             </div>
           </div>
 
           <div ref={serviceRowRef} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label htmlFor="contact-service" className="block text-xs font-mono uppercase tracking-wider text-neutral-500 mb-1.5">
+              <label htmlFor="contact-service" className="block text-xs font-mono uppercase tracking-wider text-[#0A1124]/50 mb-1.5">
                 Service Focus
               </label>
               <select
@@ -338,7 +339,7 @@ function ContactForm() {
                 name="serviceFocus"
                 value={form.service}
                 onChange={(e) => setForm({ ...form, service: e.target.value })}
-                className="w-full px-4 py-3 rounded-xl bg-white border border-neutral-300 text-neutral-900 text-sm focus:outline-none focus:border-blue-400 transition-all cursor-pointer"
+                className="w-full px-4 py-3 rounded-xl bg-white border border-[#0A1124]/15 text-[#0A1124] text-sm focus:outline-none focus:border-[#1F4FFF] transition-all cursor-pointer"
               >
                 <option value="">Select a service category</option>
                 {services.map((s) => (
@@ -349,7 +350,7 @@ function ContactForm() {
               </select>
             </div>
             <div>
-              <label htmlFor="contact-budget" className="block text-xs font-mono uppercase tracking-wider text-neutral-500 mb-1.5">
+              <label htmlFor="contact-budget" className="block text-xs font-mono uppercase tracking-wider text-[#0A1124]/50 mb-1.5">
                 Estimated Budget
               </label>
               <select
@@ -357,7 +358,7 @@ function ContactForm() {
                 name="budget"
                 value={form.budget}
                 onChange={(e) => setForm({ ...form, budget: e.target.value })}
-                className="w-full px-4 py-3 rounded-xl bg-white border border-neutral-300 text-neutral-900 text-sm focus:outline-none focus:border-blue-400 transition-all cursor-pointer"
+                className="w-full px-4 py-3 rounded-xl bg-white border border-[#0A1124]/15 text-[#0A1124] text-sm focus:outline-none focus:border-[#1F4FFF] transition-all cursor-pointer"
               >
                 <option value="">Select budget range</option>
                 {budgets.map((b) => (
@@ -370,7 +371,7 @@ function ContactForm() {
           </div>
 
           <div ref={requirementsRowRef}>
-            <label htmlFor="contact-requirements" className="block text-xs font-mono uppercase tracking-wider text-neutral-500 mb-1.5">
+            <label htmlFor="contact-requirements" className="block text-xs font-mono uppercase tracking-wider text-[#0A1124]/50 mb-1.5">
               Project Architecture & Requirements
             </label>
             <textarea
@@ -380,19 +381,19 @@ function ContactForm() {
               placeholder="Describe your current system, objectives, target launch date, and key features..."
               value={form.project}
               onChange={(e) => setForm({ ...form, project: e.target.value })}
-              className="w-full px-4 py-3 rounded-xl bg-white border border-neutral-300 text-neutral-900 placeholder:text-neutral-500 text-sm focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 transition-all resize-none"
+              className="w-full px-4 py-3 rounded-xl bg-white border border-[#0A1124]/15 text-[#0A1124] placeholder:text-[#0A1124]/35 text-sm focus:outline-none focus:border-[#1F4FFF] focus:ring-1 focus:ring-[#1F4FFF] transition-all resize-none"
             />
           </div>
 
           <button
             type="submit"
             disabled={submitting}
-            className="w-full py-4 rounded-full text-xs sm:text-sm font-semibold bg-neutral-950 text-white hover:bg-neutral-800 shadow-xl shadow-neutral-950/10 transition-all flex items-center justify-center gap-2 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed"
+            className="w-full py-4 rounded-full text-xs sm:text-sm font-semibold bg-[#1F4FFF] text-white hover:bg-[#1A3FD6] shadow-lg shadow-[#1F4FFF]/20 transition-all flex items-center justify-center gap-2 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed"
           >
             {submitting ? 'Sending…' : <>Submit Project Brief <ArrowRight size={15} /></>}
           </button>
 
-          <p className="text-center text-xs text-neutral-500 font-mono">
+          <p className="text-center text-xs text-[#0A1124]/45 font-mono">
             Direct NDA Protected · 24h Turnaround · Zero Spam Guaranteed
           </p>
         </form>
@@ -418,17 +419,17 @@ export default function ContactPage() {
               transition={{ duration: 0.5 }}
               className="mb-6"
             >
-              <span className="glow-pill mb-4 inline-flex">
+              <span className="block text-xs font-mono font-bold uppercase tracking-wider text-[#1F4FFF] mb-4">
                 Get In Touch
               </span>
-              <h1 className="text-3xl sm:text-4xl font-extrabold text-neutral-950 tracking-tight leading-[1.1] mb-3">
+              <h1 className="text-3xl sm:text-4xl font-extrabold text-[#0A1124] tracking-tight leading-[1.1] mb-3">
                 Tell us about your project.
               </h1>
-              <p className="text-sm sm:text-base text-neutral-500 leading-relaxed max-w-lg">
+              <p className="text-sm sm:text-base text-[#0A1124]/55 leading-relaxed max-w-lg">
                 Submit a brief below and our founding team replies within 24 business hours — no discovery call required just to get a straight answer.
               </p>
             </motion.div>
-            <Suspense fallback={<div className="h-96 rounded-3xl bg-neutral-100 animate-pulse" />}>
+            <Suspense fallback={<div className="h-96 rounded-3xl bg-[#F4F7FC] animate-pulse" />}>
               <ContactForm />
             </Suspense>
           </div>
@@ -436,23 +437,32 @@ export default function ContactPage() {
           {/* Right Column: Contact Channels & What Happens Next */}
           <div className="lg:col-span-5 space-y-6">
             {/* Quick Contact Channels */}
-            <div className="space-y-3">
+            <motion.div
+              variants={cardGridContainer}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: '-80px' }}
+              className="space-y-3"
+            >
               {contactInfo.map((info) => {
                 const Icon = info.icon
                 const content = (
-                  <div className="p-4 rounded-2xl bg-white border border-neutral-200 shadow-sm hover:border-blue-300 transition-all flex items-center gap-4 group">
-                    <div className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600 shrink-0 group-hover:scale-105 transition-transform">
-                      <Icon size={18} />
+                  <motion.div
+                    variants={cardSpringItem}
+                    className="p-4 rounded-2xl bg-white border border-[#0A1124]/10 shadow-sm hover:border-[#1F4FFF]/40 transition-all flex items-center gap-4 group"
+                  >
+                    <div className="w-10 h-10 rounded-full border border-[#0A1124]/15 flex items-center justify-center text-[#0A1124]/60 shrink-0 group-hover:border-[#1F4FFF]/50 group-hover:text-[#1F4FFF] transition-colors">
+                      <Icon size={17} />
                     </div>
                     <div>
-                      <div className="text-[11px] font-mono uppercase tracking-wider text-neutral-500">
+                      <div className="text-[11px] font-mono uppercase tracking-wider text-[#0A1124]/45">
                         {info.label}
                       </div>
-                      <div className="text-sm font-semibold text-neutral-950 group-hover:text-blue-600 transition-colors">
+                      <div className="text-sm font-semibold text-[#0A1124] group-hover:text-[#1F4FFF] transition-colors">
                         {info.value}
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                 )
                 return info.href ? (
                   <a key={info.label} href={info.href} className="block">
@@ -462,22 +472,22 @@ export default function ContactPage() {
                   <div key={info.label}>{content}</div>
                 )
               })}
-            </div>
+            </motion.div>
 
             {/* What Happens Next Card */}
-            <div className="rounded-3xl bg-white border border-neutral-200 shadow-sm p-6 sm:p-7 space-y-4">
-              <div className="text-xs font-mono uppercase tracking-wider text-neutral-500">
+            <div className="rounded-3xl bg-white border border-[#0A1124]/10 shadow-sm p-6 sm:p-7 space-y-4">
+              <div className="text-xs font-mono uppercase tracking-wider text-[#0A1124]/45">
                 What Happens Next
               </div>
               <div className="space-y-4">
                 {nextSteps.map((step) => (
                   <div key={step.n} className="flex items-start gap-3.5">
-                    <div className="w-6 h-6 rounded-full bg-blue-50 border border-blue-100 text-blue-600 text-xs font-mono font-bold flex items-center justify-center shrink-0 mt-0.5">
+                    <div className="w-6 h-6 rounded-full bg-[#1F4FFF]/10 border border-[#1F4FFF]/20 text-[#1F4FFF] text-xs font-mono font-bold flex items-center justify-center shrink-0 mt-0.5">
                       {step.n}
                     </div>
                     <div>
-                      <div className="text-xs font-bold text-neutral-900 mb-0.5">{step.title}</div>
-                      <div className="text-xs text-neutral-500 leading-relaxed">{step.text}</div>
+                      <div className="text-xs font-bold text-[#0A1124] mb-0.5">{step.title}</div>
+                      <div className="text-xs text-[#0A1124]/55 leading-relaxed">{step.text}</div>
                     </div>
                   </div>
                 ))}

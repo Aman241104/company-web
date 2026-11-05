@@ -7,6 +7,19 @@ import { locations, getLocationBySlug } from '@/lib/locations'
 
 const base = 'https://mehtatechnologies.com'
 
+// The studio is physically in Ahmedabad (see organizationSchema in
+// app/layout.tsx). Only that page may say "agency in <city>"; every other
+// location is served remotely, so its title says "for businesses in <city>"
+// instead of implying a local office (honest-SEO rule — no fabricated local
+// presence). `keywordLabel` in lib/locations.ts is left untouched.
+const HQ_SLUG = 'ahmedabad'
+
+function pageTitle(location: { slug: string; city: string; keywordLabel: string }) {
+  return location.slug === HQ_SLUG
+    ? location.keywordLabel
+    : `Website Development for Businesses in ${location.city}`
+}
+
 export async function generateStaticParams() {
   return locations.map((loc) => ({ city: loc.slug }))
 }
@@ -16,7 +29,7 @@ export async function generateMetadata({ params }: { params: Promise<{ city: str
   const location = getLocationBySlug(city)
   if (!location) return { title: 'Location Not Found' }
 
-  const title = location.keywordLabel
+  const title = pageTitle(location)
   return {
     title,
     description: `${location.tagline} ${location.intro}`.slice(0, 300),
@@ -60,7 +73,8 @@ export default async function LocationDetail({ params }: { params: Promise<{ cit
     '@type': 'Service',
     serviceType: 'Website Development',
     provider: { '@type': 'Organization', name: 'Mehta Technologies', url: base },
-    areaServed: { '@type': 'City', name: location.city },
+    // lib/locations.ts has one state-level entry (Gujarat, region 'India').
+    areaServed: { '@type': location.region === 'India' ? 'State' : 'City', name: location.city },
     description: location.intro,
   }
 
@@ -70,7 +84,7 @@ export default async function LocationDetail({ params }: { params: Promise<{ cit
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
       <Navbar />
-      <main id="main-content" tabIndex={-1} className="home-light bg-white">
+      <main id="main-content" tabIndex={-1} className="home-light bg-cream">
         <LocationPage location={location} />
         <Footer />
       </main>

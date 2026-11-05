@@ -1,119 +1,132 @@
 'use client'
-import { useState } from 'react'
+import { useId, useState } from 'react'
 import Link from 'next/link'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Plus, Minus, ArrowRight } from 'lucide-react'
+import { motion, MotionConfig } from 'framer-motion'
+import { Plus, ArrowRight } from 'lucide-react'
 import { faqs } from '@/lib/faqs'
+import { usePrefersReducedMotion } from '@/lib/usePrefersReducedMotion'
 
-function FAQItem({ item, isOpen, onToggle, index }) {
-  const panelId = `faq-panel-${index}`
-  const buttonId = `faq-button-${index}`
+// FAQ — Design System v2. Content comes straight from lib/faqs.ts, which is
+// also what app/page.tsx maps into the FAQPage JSON-LD, so the visible
+// answers and the schema can't drift apart.
+//
+// Accordion pattern (WAI-ARIA APG): each question is a <button> inside a
+// heading, with aria-expanded + aria-controls; each answer is a
+// role="region" labelled by its button. Panels stay mounted (so
+// aria-controls always resolves) and collapse via a grid-rows transition;
+// closed panels are `inert` so their text isn't reachable by tab/AT.
+// List-type reveal: short, tight stagger — distinct from the card-grid
+// spring (Pricing) and the slow single rise (CTA).
+const itemReveal = {
+  hidden: { opacity: 0, y: 8 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.35, ease: 'easeOut' } },
+}
+
+function FAQItem({ item, isOpen, onToggle, baseId, index }) {
+  const buttonId = `${baseId}-q-${index}`
+  const panelId = `${baseId}-a-${index}`
 
   return (
-    <div className="border-b border-neutral-200">
-      <button
-        id={buttonId}
-        onClick={onToggle}
-        aria-expanded={isOpen}
-        aria-controls={panelId}
-        className="w-full flex items-center justify-between gap-4 py-5 text-left group transition-colors"
-      >
-        <span className={`text-sm sm:text-base font-bold tracking-tight transition-colors ${isOpen ? 'text-blue-600' : 'text-neutral-900 group-hover:text-neutral-700'}`}>
-          {item.q}
-        </span>
-        <div className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 transition-all ${isOpen ? 'bg-blue-50 text-blue-600 border border-blue-200' : 'bg-white text-neutral-400 border border-neutral-200 group-hover:text-neutral-700 group-hover:border-neutral-300'}`}>
-          {isOpen ? <Minus size={13} /> : <Plus size={13} />}
-        </div>
-      </button>
-
-      <AnimatePresence initial={false}>
-        {isOpen && (
-          <motion.div
-            id={panelId}
-            role="region"
-            aria-labelledby={buttonId}
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.25, ease: 'easeOut' }}
-            className="overflow-hidden"
+    <motion.li variants={itemReveal} className="border-b border-border">
+      <h3 className="m-0">
+        <button
+          id={buttonId}
+          type="button"
+          onClick={onToggle}
+          aria-expanded={isOpen}
+          aria-controls={panelId}
+          className="group w-full flex items-start justify-between gap-6 py-5 sm:py-6 text-left rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+        >
+          <span className="font-display text-base sm:text-lg font-semibold text-ink tracking-tight leading-snug">
+            {item.q}
+          </span>
+          <span
+            aria-hidden="true"
+            className={`mt-0.5 w-8 h-8 rounded-full border flex items-center justify-center shrink-0 transition-[background-color,border-color,color,transform] duration-300 motion-reduce:transition-none ${
+              isOpen
+                ? 'bg-ink border-ink text-cream rotate-45'
+                : 'border-border-hover text-ink group-hover:border-ink'
+            }`}
           >
-            <p className="text-sm text-neutral-500 leading-relaxed pb-5 max-w-md font-normal">
-              {item.a}
-            </p>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
+            <Plus size={15} />
+          </span>
+        </button>
+      </h3>
+      <div
+        id={panelId}
+        role="region"
+        aria-labelledby={buttonId}
+        inert={!isOpen}
+        className={`grid transition-[grid-template-rows,opacity] duration-300 ease-out motion-reduce:transition-none ${
+          isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
+        }`}
+      >
+        <div className="overflow-hidden">
+          <p className="text-sm sm:text-[15px] text-ink/75 leading-relaxed pb-6 sm:pr-12 max-w-2xl">
+            {item.a}
+          </p>
+        </div>
+      </div>
+    </motion.li>
   )
 }
 
 export default function FAQ() {
   const [open, setOpen] = useState(0)
-  const mid = Math.ceil(faqs.length / 2)
-  const colA = faqs.slice(0, mid)
-  const colB = faqs.slice(mid)
+  const baseId = useId()
+  const reduced = usePrefersReducedMotion()
 
   return (
-    <section id="faq" className="relative bg-neutral-50 py-16 sm:py-24 md:py-32">
-      <div className="max-w-[1160px] mx-auto px-5 sm:px-6 md:px-8">
-        {/* Left-aligned, compact — this is a reference/index section, not
-            another hero-style centered announcement. */}
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10 sm:mb-14">
-          <div className="max-w-lg">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-neutral-900 tracking-tight leading-tight mb-3">
-              Questions we get{' '}
-              <span className="text-blue-600">before every project</span>
+    <MotionConfig reducedMotion={reduced ? 'always' : 'never'}>
+      <section id="faq" className="relative bg-cream py-16 sm:py-24 md:py-32">
+        <div className="max-w-[1360px] mx-auto px-5 sm:px-6 md:px-8 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
+          {/* Index-style layout: header pinned on the left at desktop, one
+              clean list on the right — reference material, not a hero. */}
+          <motion.div
+            initial={{ opacity: 0, y: 14 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-120px' }}
+            transition={{ duration: 0.45, ease: 'easeOut' }}
+            className="lg:col-span-4 lg:sticky lg:top-28 self-start"
+          >
+            <span className="text-xs font-mono font-semibold uppercase tracking-wider text-ink/70 mb-3 inline-block">
+              FAQ
+            </span>
+            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-ink tracking-tight leading-[1.08] mb-4">
+              Questions we get before every project
             </h2>
-            <p className="text-sm sm:text-base text-neutral-500 leading-relaxed">
+            <p className="text-sm sm:text-base text-ink/75 leading-relaxed mb-8 max-w-sm">
               Straight answers on timelines, pricing, ownership and how we work.
             </p>
-          </div>
-          <Link
-            href="/contact"
-            className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-blue-600 hover:text-blue-700 transition-colors shrink-0"
-          >
-            Ask our engineering leads directly <ArrowRight size={13} />
-          </Link>
-        </div>
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 min-h-11 px-5 py-2.5 rounded-full border border-ink text-sm font-semibold text-ink hover:bg-ink hover:text-cream transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+            >
+              Ask us directly <ArrowRight size={14} aria-hidden="true" />
+            </Link>
+          </motion.div>
 
-        {/* No shared white card shell — a bare two-column index sitting
-            directly on the section's own background, divided by a rule
-            rather than boxed like every other section on the site. */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-150px' }}
-          transition={{ duration: 0.45 }}
-          className="grid grid-cols-1 lg:grid-cols-2 lg:divide-x lg:divide-neutral-200"
-        >
-          <div className="lg:pr-10 border-t border-neutral-200 lg:border-t-0">
-            {colA.map((faq, i) => (
+          <motion.ul
+            role="list"
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: '-120px' }}
+            variants={{ hidden: {}, show: { transition: { staggerChildren: 0.04 } } }}
+            className="lg:col-span-8 border-t border-border"
+          >
+            {faqs.map((faq, i) => (
               <FAQItem
                 key={faq.q}
                 item={faq}
                 index={i}
+                baseId={baseId}
                 isOpen={open === i}
                 onToggle={() => setOpen(open === i ? null : i)}
               />
             ))}
-          </div>
-          <div className="lg:pl-10 border-t border-neutral-200 lg:border-t-0">
-            {colB.map((faq, i) => {
-              const globalIndex = mid + i
-              return (
-                <FAQItem
-                  key={faq.q}
-                  item={faq}
-                  index={globalIndex}
-                  isOpen={open === globalIndex}
-                  onToggle={() => setOpen(open === globalIndex ? null : globalIndex)}
-                />
-              )
-            })}
-          </div>
-        </motion.div>
-      </div>
-    </section>
+          </motion.ul>
+        </div>
+      </section>
+    </MotionConfig>
   )
 }

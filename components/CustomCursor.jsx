@@ -2,6 +2,15 @@
 import { useEffect, useRef, useState } from 'react'
 import { usePrefersReducedMotion } from '@/lib/usePrefersReducedMotion'
 
+// Design system v2 palette (app/globals.css tokens). Coral for the follower
+// so it stays visible on both cream sections and the ink-dark footer band;
+// no blur/glow treatment.
+const RING_IDLE = 'rgba(31, 79, 255, 0.55)' // --color-accent @ 55%
+const ACCENT = '#1F4FFF' // --color-accent
+const ACCENT_SOFT = 'rgba(31, 79, 255, 0.12)' // --color-accent-soft
+const INK = 'rgba(10, 17, 36, 0.92)' // --color-ink
+const CREAM = '#F4F7FC' // --color-cream
+
 export default function CustomCursor() {
   const dotRef = useRef(null)
   const ringRef = useRef(null)
@@ -63,9 +72,8 @@ export default function CustomCursor() {
     const onEnterView = () => {
       ring.style.width = '80px'
       ring.style.height = '80px'
-      ring.style.background = 'rgba(37,99,235,0.15)'
-      ring.style.borderColor = 'rgba(37,99,235,0.6)'
-      ring.style.backdropFilter = 'blur(4px)'
+      ring.style.background = INK
+      ring.style.borderColor = INK
       dot.style.opacity = '0'
       label.style.opacity = '1'
     }
@@ -73,8 +81,7 @@ export default function CustomCursor() {
       ring.style.width = '28px'
       ring.style.height = '28px'
       ring.style.background = 'transparent'
-      ring.style.borderColor = 'rgba(255,255,255,0.28)'
-      ring.style.backdropFilter = 'none'
+      ring.style.borderColor = RING_IDLE
       dot.style.opacity = '1'
       label.style.opacity = '0'
     }
@@ -82,8 +89,8 @@ export default function CustomCursor() {
     const onEnterLink = () => {
       ring.style.width = '48px'
       ring.style.height = '48px'
-      ring.style.background = 'rgba(37,99,235,0.1)'
-      ring.style.borderColor = 'rgba(37,99,235,0.7)'
+      ring.style.background = ACCENT_SOFT
+      ring.style.borderColor = ACCENT
       dot.style.opacity = '0'
       label.style.opacity = '0'
     }
@@ -91,12 +98,23 @@ export default function CustomCursor() {
       ring.style.width = '28px'
       ring.style.height = '28px'
       ring.style.background = 'transparent'
-      ring.style.borderColor = 'rgba(255,255,255,0.28)'
+      ring.style.borderColor = RING_IDLE
       dot.style.opacity = '1'
       label.style.opacity = '0'
     }
 
     document.addEventListener('mousemove', onMove)
+
+    const unbindAll = () => {
+      document.querySelectorAll('[data-cursor="view"]').forEach((el) => {
+        el.removeEventListener('mouseenter', onEnterView)
+        el.removeEventListener('mouseleave', onLeaveView)
+      })
+      document.querySelectorAll('a, button, [data-cursor="link"]').forEach((el) => {
+        el.removeEventListener('mouseenter', onEnterLink)
+        el.removeEventListener('mouseleave', onLeaveLink)
+      })
+    }
 
     const bindAll = () => {
       document.querySelectorAll('[data-cursor="view"]').forEach((el) => {
@@ -128,6 +146,7 @@ export default function CustomCursor() {
       cancelAnimationFrame(animId)
       document.removeEventListener('mousemove', onMove)
       observer.disconnect()
+      unbindAll()
     }
   }, [isTouch, reducedMotion])
 
@@ -140,7 +159,7 @@ export default function CustomCursor() {
         className="fixed top-0 left-0 z-[9999] pointer-events-none will-change-transform"
         style={{
           width: 6, height: 6, borderRadius: '50%',
-          background: '#2563EB',
+          background: ACCENT,
           marginLeft: -3, marginTop: -3,
           opacity: 0,
           transition: 'opacity 0.3s',
@@ -151,7 +170,7 @@ export default function CustomCursor() {
         className="fixed top-0 left-0 z-[9998] pointer-events-none will-change-transform flex items-center justify-center"
         style={{
           width: 28, height: 28, borderRadius: '50%',
-          border: '1px solid rgba(255,255,255,0.28)',
+          border: `1px solid ${RING_IDLE}`,
           background: 'transparent',
           marginLeft: -14, marginTop: -14,
           opacity: 0,
@@ -167,7 +186,7 @@ export default function CustomCursor() {
           transition: 'opacity 0.25s ease',
         }}
       >
-        <span style={{ fontSize: 9, letterSpacing: '0.12em', color: 'white', fontWeight: 600, textTransform: 'uppercase' }}>
+        <span style={{ fontSize: 9, letterSpacing: '0.12em', color: CREAM, fontWeight: 600, textTransform: 'uppercase' }}>
           VIEW
         </span>
       </div>

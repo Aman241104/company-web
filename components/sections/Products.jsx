@@ -1,140 +1,111 @@
 'use client'
 import Image from 'next/image'
 import Link from 'next/link'
-import { CheckCircle2, ArrowUpRight, ShoppingBag, Boxes, Receipt, Users2, Package, BarChart3, ArrowRight } from 'lucide-react'
-import BorderBeam from '@/components/ui/BorderBeam'
-import SpotlightCard from '@/components/ui/SpotlightCard'
+import { motion } from 'framer-motion'
+import { ArrowRight } from 'lucide-react'
+import { usePrefersReducedMotion } from '@/lib/usePrefersReducedMotion'
 
+// Vibo ERP — Mehta's own product. Same real copy as before; restyled to the
+// v2 system: plain surfaces, the 3 button primitives, and the modules set as
+// an editorial index list (hairline rows) instead of glowing icon tiles.
 const modules = [
-  { n: '01', icon: ShoppingBag, title: 'Sales', desc: 'Track orders and manage your sales pipeline in one place.' },
-  { n: '02', icon: Boxes, title: 'Inventory', desc: 'Real-time stock levels across your products and locations.' },
-  { n: '03', icon: Receipt, title: 'Billing', desc: 'Fast, compliant invoicing without spreadsheets.' },
-  { n: '04', icon: Users2, title: 'Customers', desc: 'A single record of every customer and their order history.' },
-  { n: '05', icon: Package, title: 'Purchases', desc: 'Manage suppliers and purchase orders end to end.' },
-  { n: '06', icon: BarChart3, title: 'Business Reports', desc: 'Clear reporting on how your business is actually performing.' },
+  { title: 'Sales', desc: 'Track orders and manage your sales pipeline in one place.' },
+  { title: 'Inventory', desc: 'Real-time stock levels across your products and locations.' },
+  { title: 'Billing', desc: 'Fast, compliant invoicing without spreadsheets.' },
+  { title: 'Customers', desc: 'A single record of every customer and their order history.' },
+  { title: 'Purchases', desc: 'Manage suppliers and purchase orders end to end.' },
+  { title: 'Business Reports', desc: 'Clear reporting on how your business is actually performing.' },
+]
+
+const benefits = [
+  'Manage sales, inventory, billing and customers from one dashboard',
+  'Built and refined through everyday use in our own operations',
+  'Available to clients who need more than a website',
 ]
 
 export default function Products() {
+  const reduced = usePrefersReducedMotion()
+  const rise = (delay = 0) => ({
+    initial: { opacity: 0, y: reduced ? 0 : 24 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true, margin: '-120px' },
+    transition: { duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] },
+  })
+
   return (
-    <section id="products" className="relative bg-white overflow-hidden">
-      <div className="relative z-10 py-16 sm:py-24 md:py-32 max-w-[1360px] mx-auto px-5 sm:px-6 md:px-8">
-      {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-16">
-        <div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-neutral-900 tracking-tight leading-tight">
-            Vibo ERP,{' '}
-            <span className="text-blue-600">Our Own Product.</span>
-          </h2>
-        </div>
-        <div>
-          <Link
-            href="/work/vibo-erp"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold bg-white hover:bg-neutral-50 text-neutral-900 border border-neutral-200 shadow-sm transition-all whitespace-nowrap"
-          >
-            See Vibo ERP Case Study <ArrowUpRight size={13} />
-          </Link>
-        </div>
-      </div>
-
-      {/* Vibo ERP Card with Visual preview + Module Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-stretch">
-
-        {/* Flagship: Vibo ERP Card with Visual preview */}
-        <SpotlightCard
-          enableTilt={false}
-          spotlightColor="rgba(59, 130, 246, 0.12)"
-          borderColor="rgba(59, 130, 246, 0.3)"
-          className="!bg-white !border-blue-100 lg:col-span-7 rounded-3xl p-5 sm:p-8 md:p-10 flex flex-col justify-between relative overflow-hidden shadow-xl shadow-blue-900/5"
-        >
-          {/* Animated Border Beam */}
-          <BorderBeam size={220} duration={12} colorFrom="#3b82f6" colorTo="#a855f7" />
-
-          <div>
-            <div className="flex items-center gap-2 mb-6">
-              <span className="px-3 py-1 rounded-full text-[11px] font-semibold bg-blue-50 border border-blue-100 text-blue-600">
-                Built In-House
-              </span>
-            </div>
-
-            <h3 className="text-3xl sm:text-4xl font-extrabold text-neutral-900 tracking-tight mb-3">
+    <section id="products" className="relative bg-white py-16 sm:py-24 md:py-32">
+      <div className="max-w-[1360px] mx-auto px-5 sm:px-6 md:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+          {/* Copy */}
+          <motion.div {...rise()} className="lg:col-span-5">
+            <span className="text-xs font-mono font-semibold uppercase tracking-wider text-ink/70 mb-3 inline-block">
+              Our own product
+            </span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-ink tracking-tight leading-[1.08] mb-5">
               Vibo ERP
-            </h3>
-            <p className="text-sm sm:text-base text-neutral-500 leading-relaxed max-w-xl mb-6 font-normal">
-              Vibo ERP is our in-house business management software, designed to help businesses manage their operations (sales, inventory, billing and more) from one place.
+            </h2>
+            <p className="text-sm sm:text-base text-ink/70 leading-relaxed mb-7 max-w-lg">
+              Vibo ERP is our in-house business management software, designed to help businesses manage their
+              operations (sales, inventory, billing and more) from one place.
             </p>
 
-            {/* Visual SaaS snapshot banner */}
-            <div className="relative aspect-[16/9] rounded-2xl overflow-hidden border border-neutral-200 mb-6 group bg-neutral-900 p-6 sm:p-8">
-              <Image
-                src="/assets/saas_hero_mockup.png"
-                alt="Vibo ERP Platform View"
-                fill
-                sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-contain object-center group-hover:scale-[1.03] transition-transform duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-transparent to-transparent" />
-            </div>
-
-            {/* Key Benefits */}
-            <div className="grid grid-cols-1 gap-3 mb-8">
-              {[
-                'Manage sales, inventory, billing and customers from one dashboard',
-                'Built and refined through everyday use in our own operations',
-                'Available to clients who need more than a website',
-              ].map((f) => (
-                <div key={f} className="flex items-start gap-2.5 text-xs text-neutral-700 font-medium">
-                  <CheckCircle2 size={14} className="text-blue-600 shrink-0 mt-0.5" />
-                  <span>{f}</span>
-                </div>
+            <ul className="space-y-3 mb-8">
+              {benefits.map((b) => (
+                <li key={b} className="flex items-start gap-3 text-sm text-ink/80">
+                  <span aria-hidden="true" className="mt-[7px] w-1.5 h-1.5 rounded-full bg-accent shrink-0" />
+                  <span>{b}</span>
+                </li>
               ))}
-            </div>
-          </div>
+            </ul>
 
-          <div>
-            <div className="pt-6 border-t border-neutral-100 flex items-center justify-between flex-wrap gap-4">
-              <span className="text-xs font-semibold text-neutral-500">
-                Built and used in-house at Mehta Technologies
-              </span>
+            <div className="flex flex-wrap items-center gap-3">
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full text-xs font-semibold bg-blue-600 text-white hover:bg-blue-700 shadow-md shadow-blue-600/20 transition-all active:scale-[0.98]"
+                className="inline-flex items-center gap-1.5 px-6 py-3 rounded-full text-sm font-semibold bg-accent text-white hover:bg-accent-dim transition-colors active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2"
               >
-                Talk to Us About Vibo ERP <ArrowRight size={13} />
+                Talk to us about Vibo ERP <ArrowRight size={14} />
+              </Link>
+              <Link
+                href="/work/vibo-erp"
+                className="inline-flex items-center gap-1.5 px-6 py-3 rounded-full text-sm font-semibold text-ink border border-ink/20 hover:border-ink/40 hover:bg-ink/[0.04] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+              >
+                Read the case study
               </Link>
             </div>
-          </div>
-        </SpotlightCard>
+          </motion.div>
 
-        {/* Module Grid */}
-        <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {modules.map((p) => {
-            const Icon = p.icon
-            return (
-              <SpotlightCard
-                key={p.title}
-                enableTilt={true}
-                spotlightColor="rgba(59, 130, 246, 0.1)"
-                borderColor="rgba(59, 130, 246, 0.25)"
-                className="!bg-white !border-neutral-200 p-5 rounded-2xl shadow-sm hover:!border-blue-200 hover:shadow-md transition-all flex flex-col justify-between relative overflow-hidden"
-              >
-                {/* Large watermark index — distinguishes module tiles from
-                    the icon-in-a-square treatment used for Services/Stats */}
-                <span className="absolute -top-1 right-2 font-mono font-extrabold text-4xl text-blue-50 select-none" aria-hidden="true">
-                  {p.n}
-                </span>
-                <div className="relative">
-                  <Icon size={20} className="text-blue-600 mb-3.5" />
-                  <h4 className="text-sm font-bold text-neutral-900 mb-1.5">{p.title}</h4>
-                  <p className="text-xs text-neutral-500 leading-relaxed">{p.desc}</p>
-                </div>
-              </SpotlightCard>
-            )
-          })}
+          {/* Product screenshot on a plain cream-dim field */}
+          <motion.div {...rise(0.12)} className="lg:col-span-7">
+            <div className="relative rounded-[28px] bg-cream-dim p-5 sm:p-8 md:p-10">
+              <div className="relative aspect-[16/10]">
+                <Image
+                  src="/assets/saas_hero_mockup.png"
+                  alt="Vibo ERP dashboard"
+                  fill
+                  sizes="(max-width: 1024px) 90vw, 700px"
+                  className="object-contain object-center"
+                />
+              </div>
+              <span className="absolute bottom-4 left-5 sm:bottom-6 sm:left-8 text-[11px] font-medium text-ink/70">
+                Built and used in-house at Mehta Technologies
+              </span>
+            </div>
+          </motion.div>
         </div>
 
-      </div>
+        {/* Modules — an index list with hairline rules, not icon tiles */}
+        <motion.div {...rise(0.05)} className="mt-14 sm:mt-20">
+          <h3 className="text-sm font-semibold text-ink mb-4">What&apos;s inside</h3>
+          <dl className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-10 border-t border-ink/15">
+            {modules.map((m) => (
+              <div key={m.title} className="py-5 border-b border-ink/10">
+                <dt className="text-base font-bold text-ink tracking-tight mb-1">{m.title}</dt>
+                <dd className="text-sm text-ink/70 leading-relaxed">{m.desc}</dd>
+              </div>
+            ))}
+          </dl>
+        </motion.div>
       </div>
     </section>
   )
 }
-

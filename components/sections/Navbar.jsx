@@ -2,6 +2,7 @@
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, ArrowUpRight, ChevronDown } from 'lucide-react'
 
@@ -23,54 +24,86 @@ const links = [
   { label: 'About Us', href: '/about' },
 ]
 
-function NavLink({ href, children, dropdown }) {
-  const [hovered, setHovered] = useState(false)
+// Design system v2 primary button: solid coral pill. Ink (not white) text
+// on the coral fill — white-on-#1F4FFF is ~2.8:1 and fails AA at this size,
+// ink-on-coral is ~4.8:1. Hover flips to the ink fill rather than a darker
+// coral, which keeps the label legible in both states.
+const primaryPill =
+  'inline-flex items-center justify-center gap-1.5 rounded-full bg-accent text-ink font-semibold transition-colors hover:bg-ink hover:text-cream active:scale-[0.98]'
+
+function isActivePath(pathname, href) {
+  if (href === '/') return pathname === '/'
+  if (href.startsWith('/#')) return false
+  return pathname === href || pathname.startsWith(`${href}/`)
+}
+
+function NavLink({ href, children, dropdown, active }) {
+  const [open, setOpen] = useState(false)
+  const wrapperRef = useRef(null)
   const menuId = dropdown ? `navdropdown-${String(children).toLowerCase().replace(/\s+/g, '-')}` : undefined
+
+  // Hover opens the dropdown for pointer users; focus-within opens it for
+  // keyboard users (previously it was hover-only, so the sub-links were
+  // unreachable by Tab), and Escape / focus leaving the wrapper closes it.
+  const handleBlur = (e) => {
+    if (!wrapperRef.current?.contains(e.relatedTarget)) setOpen(false)
+  }
 
   return (
     <div
+      ref={wrapperRef}
       className="relative"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+      onFocus={() => dropdown && setOpen(true)}
+      onBlur={handleBlur}
+      onKeyDown={(e) => {
+        if (e.key === 'Escape') setOpen(false)
+      }}
     >
       <Link
         href={href}
-        aria-haspopup={dropdown ? 'menu' : undefined}
-        aria-expanded={dropdown ? hovered : undefined}
-        aria-controls={menuId}
-        className="inline-flex items-center gap-1.5 py-2 text-[13.5px] font-medium text-[#13332C]/65 hover:text-[#13332C] transition-colors"
+        aria-current={active ? 'page' : undefined}
+        aria-haspopup={dropdown ? 'true' : undefined}
+        aria-expanded={dropdown ? open : undefined}
+        aria-controls={dropdown ? menuId : undefined}
+        className={`relative inline-flex items-center gap-1.5 py-2 text-[14px] font-medium transition-colors after:absolute after:left-0 after:right-0 after:-bottom-0.5 after:h-px after:origin-left after:bg-ink after:transition-transform after:duration-300 ${
+          active ? 'text-ink after:scale-x-100' : 'text-ink/75 hover:text-ink after:scale-x-0 hover:after:scale-x-100'
+        }`}
       >
         {children}
         {dropdown && (
           <ChevronDown
             size={12}
             aria-hidden="true"
-            className={`transition-transform duration-200 opacity-60 ${hovered ? 'rotate-180 opacity-100' : ''}`}
+            className={`transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
           />
         )}
       </Link>
 
       {dropdown && (
         <AnimatePresence>
-          {hovered && (
+          {open && (
             <motion.div
               id={menuId}
-              role="menu"
-              initial={{ opacity: 0, y: 4, scale: 0.98 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 4, scale: 0.98 }}
-              transition={{ duration: 0.15 }}
-              className="absolute top-full left-0 mt-2 min-w-[220px] p-1.5 rounded-xl bg-white border border-[#13332C]/10 shadow-2xl shadow-black/10 z-50"
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 6 }}
+              transition={{ duration: 0.16, ease: [0.22, 1, 0.36, 1] }}
+              className="absolute top-full left-0 pt-2 z-50"
             >
-              {dropdown.map((d) => (
-                <Link
-                  key={d.label}
-                  href={d.href}
-                  className="block px-3 py-2 text-[13px] text-[#13332C]/65 hover:text-[#13332C] hover:bg-[#FAF6EE] rounded-lg transition-colors"
-                >
-                  {d.label}
-                </Link>
-              ))}
+              <ul className="min-w-[240px] p-2 rounded-2xl bg-bg border border-border shadow-lg shadow-ink/5">
+                {dropdown.map((d) => (
+                  <li key={d.label}>
+                    <Link
+                      href={d.href}
+                      className="block px-3 py-2 text-[13.5px] text-ink/75 hover:text-ink hover:bg-cream rounded-xl transition-colors"
+                    >
+                      {d.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </motion.div>
           )}
         </AnimatePresence>
@@ -80,6 +113,7 @@ function NavLink({ href, children, dropdown }) {
 }
 
 export default function Navbar() {
+  const pathname = usePathname() || '/'
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
   const mobileMenuRef = useRef(null)
@@ -88,6 +122,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 20)
+    fn()
     window.addEventListener('scroll', fn, { passive: true })
     return () => window.removeEventListener('scroll', fn)
   }, [])
@@ -102,26 +137,30 @@ export default function Navbar() {
   useEffect(() => {
     if (!open) return
 
+    // Snapshot the refs inside the effect so the cleanup restores focus to
+    // the nodes that existed when the menu opened (react-hooks/exhaustive-deps).
+    const toggle = mobileToggleRef.current
+    const menu = mobileMenuRef.current
     const main = document.getElementById('main-content')
     lastFocusedRef.current = document.activeElement
+    const lastFocused = lastFocusedRef.current
     document.body.style.overflow = 'hidden'
     main?.setAttribute('aria-hidden', 'true')
-    mobileMenuRef.current?.querySelector('a, button')?.focus()
+    menu?.querySelector('a, button')?.focus()
 
     const handleEsc = (e) => {
       if (e.key === 'Escape') setOpen(false)
     }
     const handleTab = (e) => {
-      if (e.key !== 'Tab' || !mobileMenuRef.current) return
+      const panel = mobileMenuRef.current
+      if (e.key !== 'Tab' || !panel) return
       // The toggle button lives in the header row, outside the dropdown
       // panel itself — include it explicitly so the trap loop covers the
       // whole interactive surface of the open menu, not just the panel.
-      const panelFocusable = mobileMenuRef.current.querySelectorAll(
+      const panelFocusable = panel.querySelectorAll(
         'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
       )
-      const focusable = mobileToggleRef.current
-        ? [mobileToggleRef.current, ...panelFocusable]
-        : [...panelFocusable]
+      const focusable = toggle ? [toggle, ...panelFocusable] : [...panelFocusable]
       if (focusable.length === 0) return
       const first = focusable[0]
       const last = focusable[focusable.length - 1]
@@ -141,7 +180,7 @@ export default function Navbar() {
       window.removeEventListener('keydown', handleTab)
       document.body.style.overflow = ''
       main?.removeAttribute('aria-hidden')
-      ;(lastFocusedRef.current || mobileToggleRef.current)?.focus()
+      ;(lastFocused || toggle)?.focus()
     }
   }, [open])
 
@@ -158,7 +197,8 @@ export default function Navbar() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
             onClick={() => setOpen(false)}
-            className="md:hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-40"
+            aria-hidden="true"
+            className="md:hidden fixed inset-0 bg-ink/40 backdrop-blur-[2px] z-40"
           />
         )}
       </AnimatePresence>
@@ -166,62 +206,68 @@ export default function Navbar() {
       <motion.header
         initial={{ opacity: 0, y: -12 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled
-            ? 'bg-white/90 backdrop-blur-xl border-b border-[#13332C]/10 shadow-sm'
-            : 'bg-white/70 backdrop-blur-md border-b border-transparent'
+        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+        className={`fixed top-0 left-0 right-0 z-50 transition-[background-color,border-color] duration-300 border-b ${
+          scrolled || open ? 'bg-cream/92 backdrop-blur-md border-border' : 'bg-cream/70 backdrop-blur-sm border-transparent'
         }`}
       >
-        <div className="max-w-[1360px] mx-auto flex items-center justify-between px-6 md:px-8 py-3.5">
+        <div className="max-w-[1360px] mx-auto flex items-center justify-between gap-6 px-5 sm:px-6 md:px-8 py-3.5">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2.5 group shrink-0">
-            <div className="w-8 h-8 rounded-lg overflow-hidden ring-1 ring-[#13332C]/10">
-              <Image src="/brand/mehta-logo-icon-dark.png" alt="Mehta Technologies" width={32} height={32} className="w-full h-full object-cover" loading="eager" fetchPriority="high" />
-            </div>
+          <Link href="/" className="flex items-center gap-2.5 shrink-0 rounded-lg" aria-label="Mehta Technologies — home">
+            <span className="w-8 h-8 rounded-lg overflow-hidden ring-1 ring-border">
+              <Image
+                src="/brand/mehta-logo-icon-dark.png"
+                alt=""
+                width={32}
+                height={32}
+                className="w-full h-full object-cover"
+                loading="eager"
+                fetchPriority="high"
+              />
+            </span>
             <span className="flex flex-col leading-none">
-              <span className="font-bold text-[14px] tracking-tight text-[#13332C]">MEHTA</span>
-              <span className="text-[9px] tracking-[0.15em] font-medium text-[#13332C]/50">TECHNOLOGIES</span>
+              <span className="font-display font-bold text-[14px] tracking-tight text-ink">MEHTA</span>
+              <span className="text-[9px] tracking-[0.18em] font-medium text-ink/70">TECHNOLOGIES</span>
             </span>
           </Link>
 
           {/* Desktop links */}
-          <nav className="hidden lg:flex items-center gap-7">
+          <nav aria-label="Primary" className="hidden lg:flex items-center gap-8">
             {links.map((l) => (
-              <NavLink key={l.label} href={l.href} dropdown={l.dropdown}>
+              <NavLink key={l.label} href={l.href} dropdown={l.dropdown} active={isActivePath(pathname, l.href)}>
                 {l.label}
               </NavLink>
             ))}
           </nav>
 
-          {/* Right Tools & CTA */}
+          {/* Right CTA */}
           <div className="hidden md:flex items-center gap-3">
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold bg-[#FF6B3D] text-white hover:bg-[#E2542A] transition-all active:scale-[0.98] shadow-sm shadow-[#FF6B3D]/20"
-            >
-              Get a Free Consultation <ArrowUpRight size={13} />
+            <Link href="/contact" className={`${primaryPill} px-5 py-2.5 text-[13px]`}>
+              Get a Free Consultation <ArrowUpRight size={14} aria-hidden="true" />
             </Link>
           </div>
 
-          {/* Mobile menu toggle */}
-          <div className="flex md:hidden items-center gap-2">
+          {/* Mobile menu toggle — small circular icon button, the third
+              primitive of the v2 button system. */}
+          <div className="flex md:hidden items-center">
             <button
               ref={mobileToggleRef}
               onClick={() => setOpen(!open)}
               aria-label={open ? 'Close menu' : 'Open menu'}
               aria-expanded={open}
-              className="p-2 rounded-lg bg-[#FAF6EE] border border-[#13332C]/10 text-[#13332C] hover:bg-[#F1EAD9] transition-colors"
+              aria-controls="mobile-menu"
+              className="w-10 h-10 inline-flex items-center justify-center rounded-full border border-ink/20 text-ink hover:bg-ink hover:text-cream transition-colors"
             >
-              {open ? <X size={18} /> : <Menu size={18} />}
+              {open ? <X size={18} aria-hidden="true" /> : <Menu size={18} aria-hidden="true" />}
             </button>
           </div>
         </div>
 
-        {/* Mobile menu dropdown */}
+        {/* Mobile menu panel */}
         <AnimatePresence>
           {open && (
             <motion.div
+              id="mobile-menu"
               ref={mobileMenuRef}
               role="dialog"
               aria-modal="true"
@@ -229,25 +275,35 @@ export default function Navbar() {
               initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.2 }}
-              className="md:hidden relative z-50 mx-4 mb-4 p-3 rounded-2xl bg-white border border-[#13332C]/10 shadow-2xl shadow-black/10"
+              transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+              className="md:hidden relative z-50 mx-4 mb-4 p-2 rounded-3xl bg-bg border border-border shadow-xl shadow-ink/10"
             >
-              {links.map((l) => (
-                <Link
-                  key={l.label}
-                  href={l.href}
-                  onClick={() => setOpen(false)}
-                  className="block px-3 py-2.5 text-sm font-medium text-[#13332C]/70 hover:text-[#13332C] hover:bg-[#FAF6EE] rounded-xl transition-colors"
-                >
-                  {l.label}
-                </Link>
-              ))}
+              <ul>
+                {links.map((l) => {
+                  const active = isActivePath(pathname, l.href)
+                  return (
+                    <li key={l.label}>
+                      <Link
+                        href={l.href}
+                        onClick={() => setOpen(false)}
+                        aria-current={active ? 'page' : undefined}
+                        className={`flex items-center justify-between px-4 py-3 text-[15px] font-medium rounded-2xl transition-colors ${
+                          active ? 'text-ink bg-cream' : 'text-ink/80 hover:text-ink hover:bg-cream'
+                        }`}
+                      >
+                        {l.label}
+                        {active && <span className="w-1.5 h-1.5 rounded-full bg-accent" aria-hidden="true" />}
+                      </Link>
+                    </li>
+                  )
+                })}
+              </ul>
               <Link
                 href="/contact"
                 onClick={() => setOpen(false)}
-                className="mt-2 block w-full py-2.5 text-center text-xs font-semibold rounded-xl bg-[#FF6B3D] hover:bg-[#E2542A] text-white transition-colors"
+                className={`${primaryPill} mt-2 w-full py-3 text-sm`}
               >
-                Get a Free Consultation
+                Get a Free Consultation <ArrowUpRight size={14} aria-hidden="true" />
               </Link>
             </motion.div>
           )}

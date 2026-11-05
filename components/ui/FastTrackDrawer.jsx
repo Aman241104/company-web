@@ -1,19 +1,39 @@
 'use client'
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import {
-  MessageSquare,
-  Phone,
-  Calendar,
-  ShieldCheck,
-  X,
-  ArrowRight,
-  Sparkles,
-  CheckCircle2,
-  ExternalLink,
-  Clock,
-  Send,
-} from 'lucide-react'
+import { MessageSquare, Phone, Calendar, ShieldCheck, X, ArrowRight, CheckCircle2, ArrowUpRight } from 'lucide-react'
+import { usePrefersReducedMotion } from '@/lib/usePrefersReducedMotion'
+
+// Marker on <html> that tells MobileDock's "Consult" button this drawer is
+// mounted on the current route and listening for `open-fast-track`. On
+// routes where it isn't mounted, the dock falls back to a plain /contact
+// link instead of dispatching an event nobody hears.
+const READY_ATTR = 'data-fast-track'
+
+const channels = [
+  {
+    key: 'whatsapp',
+    icon: MessageSquare,
+    title: 'Chat on WhatsApp',
+    detail: 'The quickest way to reach the team',
+    href: 'https://wa.me/919876543210?text=Hi%20Mehta%20Technologies%2C%20I%20would%20like%20to%20discuss%20a%20project.',
+    external: true,
+  },
+  {
+    key: 'discovery',
+    icon: Calendar,
+    title: 'Book a free discovery call',
+    detail: 'Tell us about your project — we reply within 24 hours',
+    href: '/contact',
+  },
+  {
+    key: 'phone',
+    icon: Phone,
+    title: 'Call us',
+    detail: '+91 98765 43210',
+    href: 'tel:+919876543210',
+  },
+]
 
 export default function FastTrackDrawer() {
   const [isOpen, setIsOpen] = useState(false)
@@ -22,7 +42,7 @@ export default function FastTrackDrawer() {
   const drawerRef = useRef(null)
   const closeButtonRef = useRef(null)
   const triggerButtonRef = useRef(null)
-  const lastFocusedRef = useRef(null)
+  const reducedMotion = usePrefersReducedMotion()
 
   useEffect(() => {
     const handleEsc = (e) => {
@@ -32,44 +52,50 @@ export default function FastTrackDrawer() {
 
     window.addEventListener('keydown', handleEsc)
     window.addEventListener('open-fast-track', handleOpen)
+    document.documentElement.setAttribute(READY_ATTR, 'ready')
 
     return () => {
       window.removeEventListener('keydown', handleEsc)
       window.removeEventListener('open-fast-track', handleOpen)
+      document.documentElement.removeAttribute(READY_ATTR)
     }
   }, [])
 
   useEffect(() => {
-    if (isOpen) {
-      const main = document.getElementById('main-content')
-      lastFocusedRef.current = document.activeElement
-      document.body.style.overflow = 'hidden'
-      main?.setAttribute('aria-hidden', 'true')
-      closeButtonRef.current?.focus()
+    if (!isOpen) return
 
-      const handleTab = (e) => {
-        if (e.key !== 'Tab' || !drawerRef.current) return
-        const focusable = drawerRef.current.querySelectorAll(
-          'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
-        )
-        if (focusable.length === 0) return
-        const first = focusable[0]
-        const last = focusable[focusable.length - 1]
-        if (e.shiftKey && document.activeElement === first) {
-          e.preventDefault()
-          last.focus()
-        } else if (!e.shiftKey && document.activeElement === last) {
-          e.preventDefault()
-          first.focus()
-        }
+    // Snapshot refs inside the effect so cleanup restores focus to the nodes
+    // that existed when the drawer opened (react-hooks/exhaustive-deps).
+    const trigger = triggerButtonRef.current
+    const lastFocused = document.activeElement
+    const main = document.getElementById('main-content')
+    document.body.style.overflow = 'hidden'
+    main?.setAttribute('aria-hidden', 'true')
+    closeButtonRef.current?.focus()
+
+    const handleTab = (e) => {
+      const drawer = drawerRef.current
+      if (e.key !== 'Tab' || !drawer) return
+      const focusable = drawer.querySelectorAll(
+        'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      )
+      if (focusable.length === 0) return
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault()
+        last.focus()
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault()
+        first.focus()
       }
-      window.addEventListener('keydown', handleTab)
-      return () => {
-        window.removeEventListener('keydown', handleTab)
-        document.body.style.overflow = ''
-        main?.removeAttribute('aria-hidden')
-        ;(lastFocusedRef.current || triggerButtonRef.current)?.focus()
-      }
+    }
+    window.addEventListener('keydown', handleTab)
+    return () => {
+      window.removeEventListener('keydown', handleTab)
+      document.body.style.overflow = ''
+      main?.removeAttribute('aria-hidden')
+      ;(lastFocused || trigger)?.focus()
     }
   }, [isOpen])
 
@@ -82,26 +108,21 @@ export default function FastTrackDrawer() {
 
   return (
     <>
-      {/* Floating Trigger Button - Desktop only so it never collides with MobileDock */}
+      {/* Floating trigger — desktop only so it never collides with MobileDock.
+          Plain ink pill with a static coral mark; no ping/glow. */}
       <div className="hidden md:block fixed bottom-6 right-6 z-40">
-        <motion.button
+        <button
           ref={triggerButtonRef}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
+          type="button"
           onClick={() => setIsOpen(true)}
-          className="flex items-center gap-2.5 px-4 py-3 rounded-full bg-[#0B0D14]/90 hover:bg-[#0B0D14] text-white border border-blue-500/30 hover:border-blue-500/60 shadow-2xl shadow-blue-600/30 backdrop-blur-xl transition-all group cursor-pointer"
+          aria-haspopup="dialog"
+          className="inline-flex items-center gap-2.5 pl-4 pr-5 py-3 rounded-full bg-ink text-cream text-[13px] font-semibold shadow-lg shadow-ink/20 transition-[transform,background-color] duration-200 hover:-translate-y-0.5 hover:bg-ink-dim cursor-pointer"
         >
-          <span className="relative flex h-2.5 w-2.5">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
-          </span>
-          <span className="text-xs font-semibold tracking-tight group-hover:text-blue-400 transition-colors">
-            Quick Consult
-          </span>
-        </motion.button>
+          <span className="w-2 h-2 rounded-full bg-accent" aria-hidden="true" />
+          Quick consult
+        </button>
       </div>
 
-      {/* Slide-in Consultation Drawer */}
       <AnimatePresence>
         {isOpen && (
           <div className="fixed inset-0 z-[60] flex justify-end">
@@ -111,153 +132,115 @@ export default function FastTrackDrawer() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsOpen(false)}
-              className="fixed inset-0 bg-black/75 backdrop-blur-sm"
+              aria-hidden="true"
+              className="fixed inset-0 bg-ink/45 backdrop-blur-[2px]"
             />
 
-            {/* Drawer Body */}
+            {/* Drawer body */}
             <motion.div
               ref={drawerRef}
               role="dialog"
               aria-modal="true"
               aria-labelledby="fast-track-drawer-title"
-              initial={{ x: '100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-              className="relative w-full max-w-md bg-[#080A10] border-l border-white/10 h-full p-6 sm:p-8 flex flex-col justify-between overflow-y-auto z-10 shadow-2xl"
+              initial={reducedMotion ? { opacity: 0 } : { x: '100%' }}
+              animate={reducedMotion ? { opacity: 1 } : { x: 0 }}
+              exit={reducedMotion ? { opacity: 0 } : { x: '100%' }}
+              transition={reducedMotion ? { duration: 0.01 } : { type: 'spring', damping: 32, stiffness: 300 }}
+              className="relative w-full max-w-md h-full bg-cream border-l border-border flex flex-col overflow-y-auto z-10 shadow-2xl shadow-ink/20"
             >
-              <div>
+              <div className="p-6 sm:p-8 flex-1">
                 {/* Header */}
-                <div className="flex items-center justify-between pb-5 border-b border-white/[0.08] mb-6">
+                <div className="flex items-start justify-between gap-4 pb-6 mb-2 border-b border-border">
                   <div>
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="w-2 h-2 rounded-full bg-emerald-400" />
-                      <span className="text-[11px] font-mono uppercase tracking-wider text-emerald-400">
-                        Direct Support Channels
-                      </span>
-                    </div>
-                    <h3 id="fast-track-drawer-title" className="text-xl font-bold text-white tracking-tight">
-                      Fast-Track Discovery
-                    </h3>
+                    <h2 id="fast-track-drawer-title" className="font-display text-2xl font-semibold text-ink tracking-tight leading-tight">
+                      Talk to the team
+                    </h2>
+                    <p className="mt-2 text-sm text-ink/75 leading-relaxed">
+                      Pick whichever channel suits you — all of them reach the same people.
+                    </p>
                   </div>
-
                   <button
                     ref={closeButtonRef}
+                    type="button"
                     onClick={() => setIsOpen(false)}
                     aria-label="Close dialog"
-                    className="p-2 rounded-xl bg-white/[0.04] text-white/50 hover:text-white hover:bg-white/10 transition-colors"
+                    className="w-10 h-10 shrink-0 inline-flex items-center justify-center rounded-full border border-ink/20 text-ink hover:bg-ink hover:text-cream transition-colors"
                   >
-                    <X size={18} />
+                    <X size={18} aria-hidden="true" />
                   </button>
                 </div>
 
-                {/* Primary Channels */}
-                <div className="space-y-3 mb-6">
-                  {/* WhatsApp Direct */}
-                  <a
-                    href="https://wa.me/919876543210?text=Hi%20Mehta%20Technologies%2C%20I%20would%20like%20to%20discuss%20a%20project."
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 hover:border-emerald-500/40 transition-all flex items-center justify-between group"
-                  >
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
-                        <MessageSquare size={18} />
-                      </div>
-                      <div>
-                        <div className="text-xs font-bold text-white group-hover:text-emerald-400 transition-colors">
-                          WhatsApp Direct Hotline
-                        </div>
-                        <div className="text-[11px] text-white/50">Average reply: &lt;15 mins</div>
-                      </div>
-                    </div>
-                    <ExternalLink size={14} className="text-emerald-400 opacity-60 group-hover:opacity-100 transition-opacity" />
-                  </a>
+                {/* Channels — a plain divided list, not icon-square cards. */}
+                <ul className="mb-8">
+                  {channels.map(({ key, icon: Icon, title, detail, href, external }) => (
+                    <li key={key} className="border-b border-border">
+                      <a
+                        href={href}
+                        {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                        onClick={key === 'discovery' ? () => setIsOpen(false) : undefined}
+                        className="group flex items-center gap-4 py-4 rounded-lg"
+                      >
+                        <Icon size={18} className="text-ink shrink-0" aria-hidden="true" />
+                        <span className="flex-1 min-w-0">
+                          <span className="block text-[15px] font-semibold text-ink">{title}</span>
+                          <span className="block text-[13px] text-ink/75">{detail}</span>
+                        </span>
+                        <span
+                          aria-hidden="true"
+                          className="w-9 h-9 shrink-0 rounded-full border border-ink/20 inline-flex items-center justify-center text-ink transition-colors group-hover:bg-accent group-hover:border-accent"
+                        >
+                          {external ? <ArrowUpRight size={15} /> : <ArrowRight size={15} />}
+                        </span>
+                        {external && <span className="sr-only">(opens in a new tab)</span>}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
 
-                  {/* 30-Min Discovery Session */}
-                  <a
-                    href="/contact"
-                    onClick={() => setIsOpen(false)}
-                    className="p-4 rounded-2xl bg-blue-500/10 border border-blue-500/20 hover:border-blue-500/40 transition-all flex items-center justify-between group"
-                  >
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center">
-                        <Calendar size={18} />
-                      </div>
-                      <div>
-                        <div className="text-xs font-bold text-white group-hover:text-blue-400 transition-colors">
-                          Book 30-Min Technical Discovery
-                        </div>
-                        <div className="text-[11px] text-white/50">With Founding Architect</div>
-                      </div>
-                    </div>
-                    <ArrowRight size={14} className="text-blue-400 opacity-60 group-hover:opacity-100 transition-opacity" />
-                  </a>
-
-                  {/* Direct Phone Call */}
-                  <a
-                    href="tel:+919876543210"
-                    className="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.08] hover:border-white/20 transition-all flex items-center justify-between group"
-                  >
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-xl bg-white/[0.04] text-white/70 flex items-center justify-center">
-                        <Phone size={18} />
-                      </div>
-                      <div>
-                        <div className="text-xs font-bold text-white group-hover:text-blue-400 transition-colors">
-                          Direct Engineering Line
-                        </div>
-                        <div className="text-[11px] text-white/50">+91 98765 43210</div>
-                      </div>
-                    </div>
-                    <ArrowRight size={14} className="text-white/55 group-hover:text-white transition-colors" />
-                  </a>
-                </div>
-
-                {/* Instant Mutual NDA Request */}
-                <div className="rounded-2xl bg-white/[0.02] border border-white/[0.08] p-5 mb-6">
+                {/* Mutual NDA request */}
+                <div className="rounded-2xl bg-bg border border-border p-5">
                   <div className="flex items-center gap-2 mb-2">
-                    <ShieldCheck size={16} className="text-blue-400" />
-                    <span className="text-xs font-bold text-white">Need a Signed NDA First?</span>
+                    <ShieldCheck size={16} className="text-ink" aria-hidden="true" />
+                    <h3 className="text-sm font-semibold text-ink">Need an NDA first?</h3>
                   </div>
-                  <p className="text-[11px] text-white/50 mb-4 leading-relaxed">
-                    We routinely execute standard mutual non-disclosure agreements before reviewing proprietary pitch decks or codebases.
+                  <p className="text-[13px] text-ink/75 mb-4 leading-relaxed">
+                    We sign mutual non-disclosure agreements on request before reviewing pitch decks or codebases.
                   </p>
 
                   {ndaRequested ? (
-                    <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-medium flex items-center gap-2">
-                      <CheckCircle2 size={14} /> NDA request generated. Check your email client.
-                    </div>
+                    <p role="status" className="p-3 rounded-xl bg-accent-soft text-ink text-[13px] font-medium flex items-center gap-2">
+                      <CheckCircle2 size={14} aria-hidden="true" /> NDA request drafted — check your email app to send it.
+                    </p>
                   ) : (
-                    <form onSubmit={handleNdaSubmit} className="space-y-2">
+                    <form onSubmit={handleNdaSubmit} className="flex flex-col sm:flex-row gap-2">
+                      <label htmlFor="nda-email" className="sr-only">Work email for NDA</label>
                       <input
+                        id="nda-email"
                         type="email"
                         required
-                        placeholder="Enter work email for NDA"
+                        placeholder="Work email"
                         value={ndaEmail}
                         onChange={(e) => setNdaEmail(e.target.value)}
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder-white/45 text-xs focus:outline-none focus:border-blue-500 transition-colors"
+                        className="flex-1 min-w-0 px-4 py-2.5 rounded-full bg-cream border border-ink/20 text-ink placeholder:text-ink/55 text-sm focus:border-ink transition-colors"
                       />
                       <button
                         type="submit"
-                        className="w-full py-2.5 rounded-xl bg-white/[0.06] hover:bg-white text-white hover:text-black text-xs font-semibold transition-all flex items-center justify-center gap-1.5"
+                        className="inline-flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-full bg-accent text-ink text-sm font-semibold transition-colors hover:bg-ink hover:text-cream"
                       >
-                        Request Instant Mutual NDA <Send size={12} />
+                        Request NDA
                       </button>
                     </form>
                   )}
                 </div>
               </div>
 
-              {/* Footer Guarantees */}
-              <div className="pt-6 border-t border-white/[0.08] space-y-2 text-[11px] text-white/55 font-mono">
-                <div className="flex items-center gap-2">
-                  <Clock size={12} className="text-blue-400" /> Guaranteed 24h brief response
-                </div>
-                <div className="flex items-center gap-2">
-                  <ShieldCheck size={12} className="text-blue-400" /> 100% IP ownership transferred upon launch
-                </div>
-              </div>
+              {/* Real commitments only — both are stated elsewhere on the
+                  site (contact page "reply within 24 hours"; IP transfer in
+                  Pricing, FAQ and Terms). */}
+              <ul className="px-6 sm:px-8 py-5 border-t border-border space-y-1.5 text-[13px] text-ink/75">
+                <li>Reply within 24 hours on project enquiries</li>
+                <li>Full IP ownership transferred on final delivery</li>
+              </ul>
             </motion.div>
           </div>
         )}

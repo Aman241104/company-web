@@ -1,0 +1,212 @@
+<title>Mehta Website Reference Board</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Inter:wght@400;500;600&display=swap">
+<style>
+/* Layout: one reading column with wide tables; brand v1.0 tokens (Midnight / Cobalt / Cloud, lime spark <5%) */
+:root{
+  --bg:#F4F7FC; --surface:#FFFFFF; --fg:#0A1124; --muted:#4A5468; --line:rgba(10,17,36,.12);
+  --accent:#1F4FFF; --accent-fg:#FFFFFF; --spark:#C8F560; --chip:rgba(31,79,255,.08);
+  --display:"Montserrat",system-ui,sans-serif; --body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0A1124; --surface:#131C36; --fg:#F4F7FC; --muted:#A3ADC2; --line:rgba(163,173,194,.18);
+  --accent:#8DB8FF; --accent-fg:#0A1124; --chip:rgba(141,184,255,.12); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0A1124; --surface:#131C36; --fg:#F4F7FC; --muted:#A3ADC2; --line:rgba(163,173,194,.18);
+  --accent:#8DB8FF; --accent-fg:#0A1124; --chip:rgba(141,184,255,.12); color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:16px/1.6 var(--body);margin:0}
+.wrap{max-width:1080px;margin:0 auto;padding-block:48px 80px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:56px}
+h1,h2,h3{font-family:var(--display);letter-spacing:-.02em;text-wrap:balance;margin:0;line-height:1.15}
+h1{font-size:clamp(30px,5vw,48px);font-weight:700}
+h2{font-size:clamp(22px,3vw,30px);font-weight:600}
+h3{font-size:17px;font-weight:600}
+p{margin:0;max-width:68ch;text-wrap:pretty}
+.label{font:600 12px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.lede{color:var(--muted);font-size:17px}
+.hl{color:var(--accent)}
+header{display:grid;gap:16px}
+.meta{display:flex;flex-wrap:wrap;gap:8px 20px;color:var(--muted);font-size:14px}
+.meta b{color:var(--fg);font-weight:600}
+section{display:grid;gap:20px}
+.sec-head{display:grid;gap:8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px;display:grid;gap:10px;align-content:start;min-width:0}
+.card .top{display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+.card a{color:var(--accent);font-weight:600;text-decoration:none;font-size:14px;white-space:nowrap}
+.card a:hover,.card a:focus-visible{text-decoration:underline}
+.card .why{font-size:14.5px;color:var(--muted)}
+.card .take{font-size:14.5px}
+.card .take b{font-weight:600}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-size:12px;font-weight:500;background:var(--chip);color:var(--fg);padding:3px 9px;border-radius:99px}
+.tag.top-pick{background:var(--spark);color:#0A1124}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:820px;font-size:14px}
+th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:600 12px/1.3 var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+tr:last-child td{border-bottom:0}
+td a{color:var(--accent);font-weight:600;text-decoration:none}
+td q{font-style:italic}
+td q::before,td q::after{content:'"'}
+.us td{background:var(--chip)}
+ol.plain,ul.plain{margin:0;padding-left:20px;display:grid;gap:10px;max-width:72ch}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.swatches{display:flex;flex-wrap:wrap;gap:10px}
+.sw{display:grid;gap:4px;font-size:12px;color:var(--muted)}
+.sw i{display:block;width:64px;height:40px;border-radius:8px;border:1px solid var(--line)}
+footer{color:var(--muted);font-size:13px;display:grid;gap:6px;border-top:1px solid var(--line);padding-top:20px}
+footer a{color:var(--accent)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
+
+<div class="wrap">
+
+<header>
+  <span class="label">Mehta Technologies · Website v3 planning</span>
+  <h1>Reference board for the new <span class="hl">mehtatechnologies.com</span></h1>
+  <p class="lede">Agency sites worth borrowing from, the Ahmedabad and Indian firms we compete with for international clients, and what our site needs to change. The brand kit is already applied to the current build.</p>
+  <div class="meta"><span><b>Prepared</b> 5 Nov 2026</span><span><b>Current site</b> company-web-rosy.vercel.app</span><span><b>Brand</b> Guidelines v1.0 (Nov 2026)</span></div>
+</header>
+
+<section>
+  <div class="sec-head"><span class="label">Step 1 · done</span><h2>Brand kit applied to the current site</h2></div>
+  <div class="two">
+    <div class="card">
+      <h3>What changed</h3>
+      <ul class="plain">
+        <li>The warm cream / forest green / coral palette is gone, replaced by Cloud, Midnight and Mehta Cobalt across every page.</li>
+        <li>Headings now use Montserrat (it was Sora). Inter stays for body text.</li>
+        <li>On dark sections, highlighted numbers and the active mobile-nav icon use Ice Blue, as the guideline asks. Cobalt text on Midnight doesn't have enough contrast.</li>
+        <li>Signal Lime is used once, as the footer email underline, which keeps it well under the 5% rule.</li>
+        <li>The logo files already matched the guideline mark, so they stay as they are.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Palette in use</h3>
+      <div class="swatches">
+        <span class="sw"><i style="background:#0A1124"></i>Midnight</span>
+        <span class="sw"><i style="background:#131C36"></i>Deep Navy</span>
+        <span class="sw"><i style="background:#F4F7FC"></i>Cloud</span>
+        <span class="sw"><i style="background:#1F4FFF"></i>Cobalt</span>
+        <span class="sw"><i style="background:#8DB8FF"></i>Ice Blue</span>
+        <span class="sw"><i style="background:#C8F560"></i>Lime</span>
+      </div>
+      <p class="why" style="font-size:14px;color:var(--muted)">The brand PDF and the kit overview image are saved in the project at <code>design-references/brand/</code>. The new build hasn't been deployed yet; it goes live once it's approved.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head">
+    <span class="label">Step 2 · design references</span>
+    <h2>Agency sites to learn from</h2>
+    <p class="lede">These are picked for craft and for how they sell to international buyers, not for size. Each card says what to take from the site. We borrow the principle, never the layout or the copy. The lime tag marks my top three.</p>
+  </div>
+  <div class="grid">
+    <article class="card"><div class="top"><h3>Composite</h3><a href="https://www.composite.global/">composite.global ↗</a></div>
+      <div class="tags"><span class="tag top-pick">Top pick</span><span class="tag">NYC web agency</span></div>
+      <p class="why">Our manager already chose this one. Its H1 reads <q>Performance-First Web Design and Development</q>.</p>
+      <p class="take"><b>Take:</b> lots of whitespace, big confident type, and work shown as large real screenshots. The v2 rebuild already follows this.</p></article>
+    <article class="card"><div class="top"><h3>Monterail</h3><a href="https://www.monterail.com/">monterail.com ↗</a></div>
+      <div class="tags"><span class="tag top-pick">Top pick</span><span class="tag">Poland → global</span><span class="tag">Web + mobile + AI</span></div>
+      <p class="why">This is the closest model for us: a company outside the US selling custom software to global clients. Its meta line is <q>Since 2010 … 400+ clients worldwide</q>.</p>
+      <p class="take"><b>Take:</b> case studies told as business outcomes, a clear service menu, and a process page that answers "how will working with you go?"</p></article>
+    <article class="card"><div class="top"><h3>Evil Martians</h3><a href="https://evilmartians.com/">evilmartians.com ↗</a></div>
+      <div class="tags"><span class="tag top-pick">Top pick</span><span class="tag">Product consultancy</span></div>
+      <p class="why">A small team with a very strong brand personality. It positions on a narrow niche (developer tools) instead of "we do everything".</p>
+      <p class="take"><b>Take:</b> a sharp niche statement, a blog and open-source work that prove expertise, and a distinctive visual voice.</p></article>
+    <article class="card"><div class="top"><h3>thoughtbot</h3><a href="https://thoughtbot.com/">thoughtbot.com ↗</a></div>
+      <div class="tags"><span class="tag">Design + dev agency</span></div>
+      <p class="why">Its H1 is <q>When the stakes are high, experience matters</q>. It's a plain, trustworthy layout with very little decoration.</p>
+      <p class="take"><b>Take:</b> copy written for the buyer's risk rather than for features, and a clean way to signal trust.</p></article>
+    <article class="card"><div class="top"><h3>STRV</h3><a href="https://www.strv.com/">strv.com ↗</a></div>
+      <div class="tags"><span class="tag">Product studio</span><span class="tag">Prague / US</span></div>
+      <p class="why">Its pitch is <q>design, build &amp; scale … all under one roof</q>, and its motion is premium but restrained.</p>
+      <p class="take"><b>Take:</b> the full-service story (design → build → scale) on one page, with a work grid as the hero.</p></article>
+    <article class="card"><div class="top"><h3>Netguru</h3><a href="https://www.netguru.com/">netguru.com ↗</a></div>
+      <div class="tags"><span class="tag">Software house</span><span class="tag">Europe</span></div>
+      <p class="why">A large firm that still reads clearly. It has industry pages, service pages and content hubs built for SEO.</p>
+      <p class="take"><b>Take:</b> the information architecture: services × industries pages that rank for buyer searches abroad.</p></article>
+    <article class="card"><div class="top"><h3>Clay</h3><a href="https://clay.global/">clay.global ↗</a></div>
+      <div class="tags"><span class="tag">UX + branding</span><span class="tag">Award-winning</span></div>
+      <p class="why">The benchmark for visual polish and interaction design among agency sites.</p>
+      <p class="take"><b>Take:</b> case-study page structure (challenge → approach → result) and the image quality bar.</p></article>
+    <article class="card"><div class="top"><h3>10up</h3><a href="https://10up.com/">10up.com ↗</a></div>
+      <div class="tags"><span class="tag">Websites + tools</span></div>
+      <p class="why">Its line is <q>finely crafted websites and tools</q>. It does websites first, like us, and lets the work show the craft.</p>
+      <p class="take"><b>Take:</b> calm, editorial presentation of website work, and accessibility and performance as selling points.</p></article>
+    <article class="card"><div class="top"><h3>Linear</h3><a href="https://linear.app/">linear.app ↗</a></div>
+      <div class="tags"><span class="tag">SaaS product</span><span class="tag">For Vibo ERP</span></div>
+      <p class="why">Not an agency. It's here as the reference for presenting our own product, Vibo ERP.</p>
+      <p class="take"><b>Take:</b> product UI shown up close, feature sections tied to real screens, and a dark Midnight-style product page.</p></article>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head">
+    <span class="label">Step 3 · competitors</span>
+    <h2>Who we compete with for international clients</h2>
+    <p class="lede">These are Indian firms, most of them Ahmedabad-based or with Ahmedabad delivery teams, that sell custom software, web and SaaS work to US, UK and EU buyers. The headlines and numbers come straight from each site's homepage or meta description (checked 5 Nov 2026). They are self-reported.</p>
+  </div>
+  <div class="tbl"><table>
+    <thead><tr><th>Company</th><th>Homepage headline / positioning</th><th>Strength to note</th><th>Where we can beat them</th></tr></thead>
+    <tbody>
+      <tr><td><a href="https://www.simform.com/">Simform</a></td><td><q>AI-Native Engineering For Digital Products &amp; Enterprise Solutions</q></td><td>Strong US presence, enterprise case studies, content marketing</td><td>Too big for SMB buyers; we can offer founder-level access and speed</td></tr>
+      <tr><td><a href="https://radixweb.com/">Radixweb</a></td><td>Custom software engineering, <q>25+ years … 650+ employees … 3000+ global customers</q> (their city pages)</td><td>Long track record; a landing page per US city</td><td>Generic look; we can win on design quality and fixed pricing</td></tr>
+      <tr><td><a href="https://www.tatvasoft.com/">TatvaSoft</a></td><td><q>AI-Accelerated Software Engineering</q></td><td>Enterprise and Microsoft-stack credibility</td><td>Corporate and dense; our site can feel more modern</td></tr>
+      <tr><td><a href="https://www.openxcell.com/">OpenXcell</a></td><td><q>The business apps your team needs, built and integrated for you.</q></td><td>Clear mid-market positioning, outcome-led copy</td><td>Closest message to our CRM/ERP offer. We have our own product, Vibo ERP, as proof</td></tr>
+      <tr><td><a href="https://www.spaceotechnologies.com/">Space-O</a></td><td><q>AI-Powered Software Development Company</q>, <q>500+ SaaS solutions delivered</q></td><td>Big volume numbers, SaaS focus</td><td>Volume numbers read as a factory; we can sell care and quality</td></tr>
+      <tr><td><a href="https://www.rapidops.com/">Rapidops</a></td><td><q>The GenAI Transformation Company</q> (US entity in Charlotte, NC)</td><td>A US address on the site builds trust</td><td>We need our own answer to "do you have US/UK presence?"</td></tr>
+      <tr><td><a href="https://www.intuz.com/">Intuz</a></td><td><q>We build what enterprises bet their operations on</q>, <q>16 years · 700+ products</q></td><td>Confident, specific headline</td><td>Enterprise-only tone leaves the growing-business segment open</td></tr>
+      <tr><td><a href="https://www.moontechnolabs.com/">Moon Technolabs</a></td><td><q>Transforming Businesses with AI-Powered Solutions</q></td><td>Wide service range, heavy SEO content</td><td>Vague headline; ours can be concrete</td></tr>
+      <tr><td><a href="https://www.elsner.com/">Elsner</a></td><td><q>AI-Driven eCommerce &amp; Digital Solutions That Deliver Measurable Growth</q></td><td>E-commerce depth (Shopify / Adobe)</td><td>Direct e-commerce rival; compete with our live store case studies</td></tr>
+      <tr><td><a href="https://zealousys.com/">Zealous System</a></td><td><q>Building Tomorrow, Together.</q>, <q>1000+ global clients</q></td><td>Free-quote funnel</td><td>A generic slogan; we can say exactly what we build</td></tr>
+      <tr><td>Bacancy</td><td>Large Ahmedabad dev company. Its site blocked our automated check, so its claims aren't quoted here.</td><td>Big talent pool, staff augmentation</td><td>We sell projects and products, not just hours</td></tr>
+      <tr class="us"><td><b>Mehta (current)</b></td><td><q>Websites That Turn Visitors Into Customers.</q> Meta: <q>…businesses in Ahmedabad and across India</q></td><td>Fixed public pricing, real live projects, own SaaS (Vibo ERP)</td><td>The current copy targets India only. It needs an international version</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="label">Step 4 · what this means for our plan</span><h2>Recommendations</h2></div>
+  <div class="two">
+    <div class="card">
+      <h3>Patterns across competitors</h3>
+      <ul class="plain">
+        <li>Almost every one now leads with "AI-native" or "AI-powered", so that alone no longer stands out.</li>
+        <li>They sell on scale (years, headcount, client counts). We can't win that, and shouldn't fake it.</li>
+        <li>Most sites are dense and corporate. A clean, branded site is a real edge with design-aware buyers abroad.</li>
+        <li>Very few show public pricing. Our fixed pricing is rare and worth keeping.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Changes I'd make for v3 (international)</h3>
+      <ol class="plain">
+        <li>Rewrite the homepage headline and meta for global buyers, using the brand line "Technology that grows your business".</li>
+        <li>Add USD pricing and state time-zone overlap (IST working hours vs US and UK).</li>
+        <li>Turn the 3–4 best projects into full case studies: challenge, approach, result with real metrics.</li>
+        <li>Give Vibo ERP its own product page (Linear-style), as proof that we build software and not only websites.</li>
+        <li>Add services × industries pages for SEO, following Netguru's structure. Only list industries we have actually worked in.</li>
+        <li>Get a Clutch / GoodFirms profile with real reviews. Buyers abroad check these.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="label">Need from you</span><h2>Decisions before we start v3</h2></div>
+  <ol class="plain">
+    <li>Which 2–3 references from Step 2 should set the direction? (My suggestion: Composite, Monterail and Evil Martians.)</li>
+    <li>Which countries do we target first: US, UK, UAE or Australia? This changes the pricing currency and the copy.</li>
+    <li>Can we publish client names, metrics and testimonials for the case studies? We need written OK from each client.</li>
+    <li>Do we have, or plan, a non-India address or phone number to show on the site?</li>
+  </ol>
+</section>
+
+<footer>
+  <span>Sources: each company's own homepage, checked 5 Nov 2026. Directories used for discovery: <a href="https://clutch.co/in/web-developers/ahmedabad">Clutch Ahmedabad</a>, <a href="https://www.goodfirms.co/companies/web-development-agency/gujarat">GoodFirms Gujarat</a>, <a href="https://colorlib.com/wp/wp-json/wp/v2/posts/368487">Colorlib agency examples 2026</a>, <a href="https://news.designrush.com/top-web-design-dev-agencies-hire-2026">DesignRush 2026</a>.</span>
+  <span>All competitor numbers are self-reported by the companies and haven't been independently verified.</span>
+</footer>
+</div>

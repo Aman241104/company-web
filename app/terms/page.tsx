@@ -14,7 +14,7 @@ export default function TermsPage() {
   return (
     <>
     <Navbar />
-    <main id="main-content" tabIndex={-1} className="home-light bg-bg relative overflow-x-hidden min-h-screen">
+    <main id="main-content" tabIndex={-1} className="home-light bg-bg relative overflow-x-clip min-h-screen">
 
       <div className="pt-32 pb-24 max-w-[900px] mx-auto px-6 md:px-8">
         <Link

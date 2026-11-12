@@ -1,13 +1,15 @@
 import type { Metadata, Viewport } from "next";
-import { Montserrat, Inter } from "next/font/google";
+import { Montserrat, Inter, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
+import "./site.css";
 import SmoothScroll from "@/components/SmoothScroll";
-import CustomCursor from "@/components/CustomCursor";
-import MobileDock from "@/components/MobileDock";
-import FloatingWhatsApp from "@/components/ui/FloatingWhatsApp";
 import MotionProvider from "@/components/MotionProvider";
-import ConsultModal from "@/components/home/ConsultModal";
+import ConsultModal from "@/components/site/ConsultModal";
+import FloatingContact from "@/components/site/FloatingContact";
+import Preloader from "@/components/site/Preloader";
+import ScrollProgress from "@/components/site/ScrollProgress";
+import Reveal from "@/components/site/Reveal";
 
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
 const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID;
@@ -16,6 +18,13 @@ const montserrat = Montserrat({
   variable: "--font-syne",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
   display: "swap",
 });
 
@@ -105,12 +114,14 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${montserrat.variable} ${inter.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${montserrat.variable} ${inter.variable} ${geistMono.variable}`} suppressHydrationWarning>
       <head>
+        <script dangerouslySetInnerHTML={{ __html: `var d=document.documentElement;d.setAttribute("data-js","");try{if(sessionStorage.getItem("pl-seen")||location.pathname!=="/"||matchMedia("(prefers-reduced-motion: reduce)").matches)d.setAttribute("data-preloaded","")}catch(e){d.setAttribute("data-preloaded","")}` }} />
         {/* Apply the saved theme before first paint. Light is the default. */}
         <script dangerouslySetInnerHTML={{ __html: `try{if(localStorage.getItem('theme')==='dark')document.documentElement.dataset.theme='dark'}catch(e){}` }} />
       </head>
-      <body className="bg-cream text-ink antialiased">
+      <body id="top" className="bg-bg text-ink antialiased">
+        <div className="noise-overlay" aria-hidden="true" />
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-5 focus:py-2.5 focus:rounded-full focus:bg-night focus:text-snow focus:text-sm focus:font-semibold"
@@ -154,11 +165,12 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
         />
         <MotionProvider>
-          <CustomCursor />
           <SmoothScroll>{children}</SmoothScroll>
-          <MobileDock />
-          <FloatingWhatsApp />
+          <FloatingContact />
           <ConsultModal />
+          <Preloader />
+          <ScrollProgress />
+          <Reveal />
         </MotionProvider>
       </body>
     </html>

@@ -50,10 +50,107 @@
   --color-border: var(--c-border);
   --color-border-hover: var(--c-border-hover);
 
+
+  /* ---- Benchmark design system (zanservices.com structure), Mehta colours ---- */
+  --color-surface: var(--c-surface);
+  --color-surface-2: var(--c-surface-2);
+  --color-paper: var(--c-paper);
+  --color-ink-2: var(--c-ink-2);
+  --color-muted: var(--c-muted);
+  --color-line: var(--c-line);
+  --color-line-strong: var(--c-line-strong);
+  --color-brand: var(--c-brand);
+  --color-brand-dark: var(--c-brand-dark);
+  --color-brand-ink: var(--c-brand-ink);
+  --color-brand-ink-2: var(--c-brand-ink-2);
+  --color-brand-soft: var(--c-brand-soft);
+  --color-brand-glow: var(--c-brand-glow);
+  --color-brand-from: var(--c-brand-from);
+  --color-brand-to: var(--c-brand-to);
+  --color-on-brand: #FFFFFF;
+  --color-whatsapp: #15803D;
+  --color-danger: #E5484D;
+
+  --font-hero: var(--font-syne), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SF Mono", Menlo, monospace;
+
+  --text-display: clamp(2.5rem, 1.05rem + 6.45vw, 5.25rem);
+  --text-display--line-height: .98;
+  --text-display--letter-spacing: -.012em;
+  --text-display--font-weight: 600;
+  --text-giant: clamp(2.75rem, 1.2rem + 7.4vw, 9rem);
+  --text-giant--line-height: .9;
+  --text-giant--letter-spacing: -.035em;
+  --text-giant--font-weight: 700;
+  --text-h1: clamp(2.125rem, 1.36rem + 3.4vw, 3.75rem);
+  --text-h1--line-height: 1.04;
+  --text-h1--letter-spacing: -.008em;
+  --text-h1--font-weight: 600;
+  --text-h2: clamp(1.625rem, 1.25rem + 1.67vw, 2.5rem);
+  --text-h2--line-height: 1.1;
+  --text-h2--letter-spacing: -.004em;
+  --text-h2--font-weight: 600;
+  --text-h3: clamp(1.1875rem, 1.04rem + .65vw, 1.5rem);
+  --text-h3--line-height: 1.25;
+  --text-h3--letter-spacing: -.018em;
+  --text-h3--font-weight: 500;
+  --text-lead: clamp(1.0625rem, .98rem + .37vw, 1.25rem);
+  --text-lead--line-height: 1.6;
+  --text-lead--letter-spacing: -.011em;
+  --text-body: 1rem;
+  --text-body--line-height: 1.65;
+  --text-small: .875rem;
+  --text-small--line-height: 1.55;
+  --text-eyebrow: .75rem;
+  --text-eyebrow--line-height: 1;
+  --text-eyebrow--letter-spacing: .16em;
+  --text-eyebrow--font-weight: 500;
+
+  --spacing-nav: 4.5rem;
+  --spacing-section: clamp(5rem, 3.5rem + 7vw, 10rem);
+
+  --ease-out-expo: cubic-bezier(.16, 1, .3, 1);
+  --ease-smooth: cubic-bezier(.4, 0, .2, 1);
+
+  --shadow-lift: 0 1px 2px rgb(10 17 36 / .04), 0 8px 24px -8px rgb(10 17 36 / .08);
+  --shadow-float: 0 2px 4px rgb(10 17 36 / .04), 0 24px 48px -12px rgb(10 17 36 / .14), 0 64px 120px -40px rgb(10 17 36 / .2);
+  --shadow-nav: 0 1px 0 rgb(10 17 36 / .04), 0 8px 32px -16px rgb(10 17 36 / .12);
+
   --animate-marquee: marquee 35s linear infinite;
   --animate-marquee-r: marquee-reverse 35s linear infinite;
 }
 
+
+/* ---- Benchmark utilities ---- */
+@utility container-site {
+  width: 100%;
+  max-width: 82.5rem;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, .6rem + 2.8vw, 3rem);
+}
+@utility bg-brand-gradient {
+  background-image: linear-gradient(115deg, var(--color-brand-from) 0%, var(--color-brand-to) 55%, var(--color-brand-from) 100%);
+  background-position: 0 0;
+  background-size: 200% 100%;
+  transition: background-position .6s var(--ease-smooth);
+  &:hover { background-position: 100% 0; }
+}
+@utility text-brand-gradient {
+  background-image: linear-gradient(135deg, var(--color-brand-ink-2) 0%, var(--color-brand-ink) 100%);
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+@utility bg-brand-wash {
+  background-image: linear-gradient(160deg, color-mix(in oklab, var(--color-brand-from) 7%, var(--color-bg)) 0%, color-mix(in oklab, var(--color-brand-to) 4%, var(--color-bg)) 100%);
+}
+@utility bg-brand-veil {
+  background-image: linear-gradient(160deg, color-mix(in oklab, var(--color-brand-from) 16%, var(--color-bg)) 0%, color-mix(in oklab, var(--color-brand-to) 9%, var(--color-bg)) 100%);
+}
+@utility border-brand-gradient-t {
+  border-top: 1px solid transparent;
+  border-image: linear-gradient(90deg, transparent 0%, var(--color-brand-from) 22%, var(--color-brand-to) 78%, transparent 100%) 1;
+}
 
 /* Theme tokens. Light is the default (brand v1.0: Cloud base, Midnight ink,
    Mehta Cobalt accent). Dark is opt-in via the navbar toggle, which sets
@@ -74,6 +171,21 @@
   --c-card: rgba(10, 17, 36, 0.03);
   --c-border: rgba(10, 17, 36, 0.1);
   --c-border-hover: rgba(10, 17, 36, 0.2);
+  --c-surface: #F4F7FC;
+  --c-surface-2: #EAF0FA;
+  --c-paper: #EEF2F9;
+  --c-ink-2: #4A5468;
+  --c-muted: #69728A;
+  --c-line: #E2E7F1;
+  --c-line-strong: #CCD4E3;
+  --c-brand: #1F4FFF;
+  --c-brand-dark: #1A3FD6;
+  --c-brand-ink: #1A3FD6;
+  --c-brand-ink-2: #4B74FF;
+  --c-brand-soft: #E6EDFF;
+  --c-brand-glow: #8DB8FF;
+  --c-brand-from: #3D6BFF;
+  --c-brand-to: #1A3FD6;
   color-scheme: light;
 }
 :root[data-theme="dark"] {
@@ -91,6 +203,21 @@
   --c-card: rgba(232, 237, 247, 0.04);
   --c-border: rgba(232, 237, 247, 0.12);
   --c-border-hover: rgba(232, 237, 247, 0.24);
+  --c-surface: #0E1528;
+  --c-surface-2: #131C33;
+  --c-paper: #111930;
+  --c-ink-2: #AEB7CA;
+  --c-muted: #8791A6;
+  --c-line: rgba(232, 237, 247, 0.1);
+  --c-line-strong: rgba(232, 237, 247, 0.2);
+  --c-brand: #3D6BFF;
+  --c-brand-dark: #2F5BF0;
+  --c-brand-ink: #8DB8FF;
+  --c-brand-ink-2: #B9D2FF;
+  --c-brand-soft: #16224A;
+  --c-brand-glow: #4B72FF;
+  --c-brand-from: #4B74FF;
+  --c-brand-to: #1F4FFF;
   color-scheme: dark;
 }
 
@@ -147,7 +274,7 @@
 
 html {
   scroll-behavior: smooth;
-  overflow-x: hidden;
+  overflow-x: clip;
   max-width: 100vw;
 }
 
@@ -155,24 +282,16 @@ html {
    app/layout.tsx. Unlayered, so it wins over utility classes on <body> —
    keep this and layout.tsx's `bg-cream text-ink` in agreement. */
 body {
-  background: var(--color-cream);
+  background: var(--color-bg);
   color: var(--color-ink);
   font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
+  overflow-x: clip;
   max-width: 100vw;
   min-height: 100vh;
 }
 
-/* Space for mobile dock nav. --mobile-dock-clearance is published by
-   MobileDock.jsx via ResizeObserver (its real rendered height + fixed
-   bottom offset + safety buffer); 76px is the pre-JS/no-JS fallback. */
-@media (max-width: 767px) {
-  body {
-    padding-bottom: var(--mobile-dock-clearance, 76px);
-  }
-}
 
 /* Every route's <main id="main-content"> carries a "home-light" class
    (see the app directory's page files) — there is only one theme now, so

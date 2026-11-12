@@ -30,7 +30,7 @@ export default function PrivacyPage() {
   return (
     <>
       <Navbar />
-      <main id="main-content" tabIndex={-1} className="home-light bg-bg relative overflow-x-hidden min-h-screen">
+      <main id="main-content" tabIndex={-1} className="home-light bg-bg relative overflow-x-clip min-h-screen">
         <header className="bg-cream pt-32 sm:pt-36 pb-12 sm:pb-16">
           <div className="max-w-[1360px] mx-auto px-5 sm:px-6 md:px-8">
             <nav aria-label="Breadcrumb" className="mb-10 sm:mb-14">

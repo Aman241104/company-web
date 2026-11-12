@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next'
 import { locations } from '@/lib/locations'
 import { caseStudiesData } from '@/lib/caseStudies'
-import { allDisciplines } from '@/lib/services'
+import { allDisciplines, chapters } from '@/lib/services'
 
 const base = 'https://mehtatechnologies.com'
 
@@ -15,10 +15,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }))
 
-  const serviceEntries: MetadataRoute.Sitemap = [
-    ...['/how-we-work', '/team'].map((p) => ({ url: `${base}${p}`, lastModified: '2026-11-12', changeFrequency: 'monthly' as const, priority: 0.7 })),
-    ...allDisciplines.map((d) => ({ url: `${base}/services/${d.slug}`, lastModified: '2026-11-12', changeFrequency: 'monthly' as const, priority: 0.8 })),
-  ]
+  const svcPath = (c: string, d: string) => (c === 'development' ? `/services/${d}` : c === 'blockchain-web3' ? '/services/blockchain-web3' : `/services/${c}/${d}`)
+  const servicePaths = new Set<string>([
+    '/how-we-work', '/team', '/vibo-erp', '/cookie-policy', '/disclaimer',
+    ...chapters.filter((c) => c.slug !== 'development').map((c) => `/services/${c.slug}`),
+    ...allDisciplines.map((d) => svcPath(d.chapter.slug, d.slug)),
+  ])
+  const serviceEntries: MetadataRoute.Sitemap = [...servicePaths].map((p) => ({ url: `${base}${p}`, lastModified: '2026-11-12', changeFrequency: 'monthly' as const, priority: 0.8 }))
 
   const locationEntries: MetadataRoute.Sitemap = locations.map((loc) => ({
     url: `${base}/locations/${loc.slug}`,

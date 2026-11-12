@@ -1,13 +1,15 @@
 import type { Metadata } from 'next'
-import Navbar from '@/components/sections/Navbar'
-import HomeHero from '@/components/home/HomeHero'
-import ServiceChapters, { ServicesIndex } from '@/components/home/ServiceChapters'
-import { WhyChoose, CaseStudies, AtAGlance, Clients, TechStack, HowWeWork, Industries, AboutHQ, TeamStrip, ContactSection } from '@/components/home/HomeSections'
+import Header from '@/components/site/Header'
+import Hero from '@/components/site/home/Hero'
+import Board from '@/components/site/home/Board'
+import { WhatWeDo, Deck } from '@/components/site/home/Chapters'
+import Expertise from '@/components/site/home/Expertise'
+import { Warp, WorkWall, CaseStudies } from '@/components/site/home/Work'
+import { Showreel, Metrics, Partners, Technology } from '@/components/site/home/Proof'
+import { Process, Industries, About, TeamRail, Faq, Contact } from '@/components/site/home/Story'
 import Pricing from '@/components/sections/Pricing'
 import Products from '@/components/sections/Products'
-import FAQ from '@/components/sections/FAQ'
-import Footer from '@/components/sections/Footer'
-import FastTrackDrawer from '@/components/ui/FastTrackDrawer'
+import Footer from '@/components/site/Footer'
 import { faqs } from '@/lib/faqs'
 
 export const metadata: Metadata = {
@@ -79,30 +81,29 @@ export default function Home() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-      <Navbar />
-      <main id="main-content" tabIndex={-1} className="bg-bg relative overflow-x-hidden w-full max-w-[100vw]">
-        {/* Section order mirrors the zanservices.com benchmark (2026-11-12);
-            content is ours (lib/site.ts, lib/services.ts, lib/caseStudies.ts,
-            lib/pricing.ts). Pricing + Vibo ERP are ours, kept where the
-            benchmark has no equivalent. */}
-        <HomeHero />
-        <ServicesIndex />
-        <ServiceChapters />
-        <WhyChoose />
+      <Header />
+      <main id="main" tabIndex={-1} className="relative">
+        <Hero />
+        <Board />
+        <WhatWeDo />
+        <Deck />
+        <Expertise />
+        <Warp />
+        <WorkWall />
         <CaseStudies />
-        <AtAGlance />
-        <Clients />
-        <TechStack />
-        <HowWeWork />
+        <Showreel />
+        <Metrics />
+        <Partners />
+        <Technology />
+        <Process />
         <Industries />
         <Pricing />
         <Products />
-        <AboutHQ />
-        <TeamStrip />
-        <FAQ />
-        <ContactSection />
+        <About />
+        <TeamRail />
+        <Faq />
+        <Contact />
         <Footer />
-        <FastTrackDrawer />
       </main>
     </>
   )

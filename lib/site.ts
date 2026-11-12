@@ -80,3 +80,17 @@ export const industries: { name: string; text: string; work: string[] }[] = [
   { name: 'Finance & Legal', text: 'Clear advisory sites and document workflows.', work: ['nexsphere-global', 'naam-transfer'] },
   { name: 'Networks & Media', text: 'Member portals and agency showcases.', work: ['ares-business-league', 'jukebox-media'] },
 ]
+
+export const timeline = [
+  { year: '2019', event: 'Founded in Ahmedabad as a web development studio, building websites for local businesses.' },
+  { year: '2021', event: 'Started building Vibo ERP — our own business management software — to run our own operations better.' },
+  { year: '2023', event: 'Grew to serve clients across India, and took on custom software and mobile app projects.' },
+  { year: '2024', event: 'Passed 150+ shipped websites, e-commerce stores and custom software projects.' },
+]
+
+export const values = [
+  { title: 'Outcomes over activity', desc: 'We measure success by enquiries, sales and speed — not by billable hours.' },
+  { title: 'Radical transparency', desc: 'Published prices, a live staging link and fixed-price milestones.' },
+  { title: 'Built to grow with you', desc: 'Modern, well-structured code that the next developer can pick up.' },
+  { title: 'Speed without cutting corners', desc: 'Small senior team, short feedback loops, proper QA before launch.' },
+]

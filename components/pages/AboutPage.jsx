@@ -84,13 +84,13 @@ function StatCard({ stat, index }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.08 }}
-      className="p-6 sm:p-8 rounded-2xl bg-white border border-[#0A1124]/10 shadow-sm text-center"
+      className="p-6 sm:p-8 rounded-2xl bg-bg border border-ink/10 shadow-sm text-center"
     >
-      <div className="text-4xl sm:text-5xl font-extrabold text-[#0A1124] tracking-tight mb-2">
+      <div className="text-4xl sm:text-5xl font-extrabold text-ink tracking-tight mb-2">
         {Number.isInteger(stat.value) ? count : (inView ? stat.value : 0)}{stat.suffix}
       </div>
-      <div className="text-sm font-bold text-[#0A1124] mb-1">{stat.label}</div>
-      <div className="text-xs text-[#0A1124]/50">{stat.desc}</div>
+      <div className="text-sm font-bold text-ink mb-1">{stat.label}</div>
+      <div className="text-xs text-ink/50">{stat.desc}</div>
     </motion.div>
   )
 }
@@ -103,28 +103,28 @@ export default function AboutPage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
 
           <div className="lg:col-span-7 space-y-6">
-            <div className="text-xs font-mono uppercase tracking-wider text-[#0A1124]/45">
+            <div className="text-xs font-mono uppercase tracking-wider text-ink/45">
               About Mehta Technologies
             </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#0A1124] tracking-tight leading-[1.08]">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-ink tracking-tight leading-[1.08]">
               Engineering digital products built for real impact.
             </h1>
 
-            <p className="text-base sm:text-lg text-[#0A1124]/60 leading-relaxed max-w-2xl font-normal">
+            <p className="text-base sm:text-lg text-ink/60 leading-relaxed max-w-2xl font-normal">
               Mehta Technologies was founded on a singular conviction: every business deserves a website that builds trust and actually brings in enquiries. We build fast, SEO-ready websites, e-commerce stores, and custom software for growing businesses.
             </p>
 
             <div className="flex flex-wrap gap-4 pt-4">
               <Link
                 href="/contact"
-                className="px-6 py-3.5 rounded-full text-xs sm:text-sm font-semibold bg-[#1F4FFF] text-white hover:bg-[#1A3FD6] shadow-lg shadow-[#1F4FFF]/20 transition-all flex items-center gap-2"
+                className="px-6 py-3.5 rounded-full text-xs sm:text-sm font-semibold bg-accent text-white hover:bg-accent-dim shadow-lg shadow-accent/20 transition-all flex items-center gap-2"
               >
                 Work With Us <ArrowRight size={14} />
               </Link>
               <Link
                 href="/work"
-                className="px-6 py-3.5 rounded-full text-xs sm:text-sm font-semibold bg-white hover:bg-[#0A1124]/[0.03] text-[#0A1124] border border-[#0A1124]/15 hover:border-[#0A1124]/25 transition-all"
+                className="px-6 py-3.5 rounded-full text-xs sm:text-sm font-semibold bg-bg hover:bg-ink/[0.03] text-ink border border-ink/15 hover:border-ink/25 transition-all"
               >
                 Explore Portfolio
               </Link>
@@ -135,21 +135,21 @@ export default function AboutPage() {
             {/* Hero opens with the company's actual journey, not a stat
                 tile — the fuller Timeline section further down the page
                 was folded into this one so the story isn't told twice. */}
-            <div className="rounded-3xl bg-white border border-[#0A1124]/10 p-5 sm:p-8 md:p-10 shadow-sm relative overflow-hidden">
-              <div className="text-xs font-mono uppercase tracking-wider text-[#0A1124]/45 mb-6">
+            <div className="rounded-3xl bg-bg border border-ink/10 p-5 sm:p-8 md:p-10 shadow-sm relative overflow-hidden">
+              <div className="text-xs font-mono uppercase tracking-wider text-ink/45 mb-6">
                 Our Journey So Far
               </div>
-              <div className="relative pl-5 space-y-5 before:content-[''] before:absolute before:left-[3px] before:top-1.5 before:bottom-1.5 before:w-px before:bg-[#0A1124]/10">
+              <div className="relative pl-5 space-y-5 before:content-[''] before:absolute before:left-[3px] before:top-1.5 before:bottom-1.5 before:w-px before:bg-ink/10">
                 {timeline.map((item) => (
                   <div key={item.year} className="relative">
-                    <span className="absolute -left-5 top-1 w-[7px] h-[7px] rounded-full bg-[#1F4FFF] ring-4 ring-[#1F4FFF]/10" />
-                    <div className="text-xs font-mono font-bold text-[#0A1124] mb-0.5">{item.year}</div>
-                    <p className="text-xs sm:text-[13px] text-[#0A1124]/60 leading-relaxed">{item.event}</p>
+                    <span className="absolute -left-5 top-1 w-[7px] h-[7px] rounded-full bg-accent ring-4 ring-accent/10" />
+                    <div className="text-xs font-mono font-bold text-ink mb-0.5">{item.year}</div>
+                    <p className="text-xs sm:text-[13px] text-ink/60 leading-relaxed">{item.event}</p>
                   </div>
                 ))}
               </div>
 
-              <div className="mt-7 pt-6 border-t border-[#0A1124]/10 flex items-center gap-2 text-xs text-emerald-600 font-medium">
+              <div className="mt-7 pt-6 border-t border-ink/10 flex items-center gap-2 text-xs text-emerald-600 font-medium">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                 <span>Currently onboarding Q1/Q2 partner projects</span>
               </div>
@@ -161,7 +161,7 @@ export default function AboutPage() {
 
       {/* Stats — cream band for section-rhythm alternation against the
           white hero/values sections around it. */}
-      <section className="bg-[#F4F7FC] border-y border-[#0A1124]/10 py-16 sm:py-20 mb-28">
+      <section className="bg-cream border-y border-ink/10 py-16 sm:py-20 mb-28">
         <div className="max-w-[1360px] mx-auto px-6 md:px-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {stats.map((s, i) => (
@@ -174,10 +174,10 @@ export default function AboutPage() {
       {/* Values Section */}
       <section className="max-w-[1360px] mx-auto px-6 md:px-8 mb-28">
         <div className="max-w-2xl mb-16">
-          <div className="text-xs font-mono uppercase tracking-wider text-[#0A1124]/45 mb-4">
+          <div className="text-xs font-mono uppercase tracking-wider text-ink/45 mb-4">
             Core Principles
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0A1124] tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-ink tracking-tight">
             How we engineer. How we deliver.
           </h2>
         </div>
@@ -190,16 +190,16 @@ export default function AboutPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.45, delay: i * 0.08 }}
-              className="p-7 rounded-2xl bg-white border border-[#0A1124]/10 shadow-sm hover:border-[#1F4FFF] hover:shadow-md transition-all flex flex-col justify-between"
+              className="p-7 rounded-2xl bg-bg border border-ink/10 shadow-sm hover:border-accent hover:shadow-md transition-all flex flex-col justify-between"
             >
               <div>
-                <div className="w-9 h-9 rounded-lg bg-[#0A1124]/[0.04] border border-[#0A1124]/10 text-[#0A1124] font-mono font-bold text-xs flex items-center justify-center mb-5">
+                <div className="w-9 h-9 rounded-lg bg-ink/[0.04] border border-ink/10 text-ink font-mono font-bold text-xs flex items-center justify-center mb-5">
                   {v.num}
                 </div>
-                <h3 className="text-base font-bold text-[#0A1124] tracking-tight mb-2">
+                <h3 className="text-base font-bold text-ink tracking-tight mb-2">
                   {v.title}
                 </h3>
-                <p className="text-xs sm:text-sm text-[#0A1124]/60 leading-relaxed font-normal">
+                <p className="text-xs sm:text-sm text-ink/60 leading-relaxed font-normal">
                   {v.desc}
                 </p>
               </div>
@@ -209,16 +209,16 @@ export default function AboutPage() {
       </section>
 
       {/* Interactive Project Showcase Loop */}
-      <section className="py-12 border-y border-[#0A1124]/10 mb-28 overflow-hidden bg-[#F4F7FC]">
+      <section className="py-12 border-y border-ink/10 mb-28 overflow-hidden bg-cream">
         <div className="max-w-[1360px] mx-auto px-6 md:px-8 mb-6">
-          <div className="text-xs font-mono uppercase tracking-wider text-[#0A1124]/45">
+          <div className="text-xs font-mono uppercase tracking-wider text-ink/45">
             A Sample of Real Websites We&apos;ve Built
           </div>
         </div>
         <LogoLoop
           logos={[...projectScreenshots, ...projectScreenshots].map(({ src, label }, i) => ({
             node: (
-              <div key={i} className="w-56 h-32 rounded-xl border border-[#0A1124]/10 overflow-hidden shrink-0 relative bg-white">
+              <div key={i} className="w-56 h-32 rounded-xl border border-ink/10 overflow-hidden shrink-0 relative bg-bg">
                 <Image
                   src={src}
                   alt={label}
@@ -244,7 +244,7 @@ export default function AboutPage() {
           green ink doing double duty as background rather than the old
           black/white default (see research/design-system-v2.md). */}
       <section className="max-w-[1360px] mx-auto px-6 md:px-8 mt-24 text-center">
-        <div className="max-w-2xl mx-auto rounded-3xl bg-[#0A1124] p-10 sm:p-14">
+        <div className="max-w-2xl mx-auto rounded-3xl bg-night p-10 sm:p-14">
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-4">
             Ready to build your next milestone?
           </h2>
@@ -253,7 +253,7 @@ export default function AboutPage() {
           </p>
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-xs sm:text-sm font-semibold bg-[#1F4FFF] text-white hover:bg-[#1A3FD6] shadow-lg shadow-[#1F4FFF]/25 transition-all"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-xs sm:text-sm font-semibold bg-accent text-white hover:bg-accent-dim shadow-lg shadow-accent/25 transition-all"
           >
             Start Your Conversation <ArrowRight size={14} />
           </Link>

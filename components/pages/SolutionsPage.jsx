@@ -94,7 +94,7 @@ function PairCard({ industry, index }) {
       variants={cardSpringItem}
       whileHover={{ y: -4 }}
       transition={{ type: 'spring', stiffness: 300, damping: 24 }}
-      className="scroll-mt-28 flex flex-col rounded-3xl bg-white border border-border overflow-hidden hover:shadow-lg hover:shadow-ink/5 transition-shadow duration-300"
+      className="scroll-mt-28 flex flex-col rounded-3xl bg-bg border border-border overflow-hidden hover:shadow-lg hover:shadow-ink/5 transition-shadow duration-300"
     >
       <header className="flex items-baseline gap-4 px-6 sm:px-8 pt-7 sm:pt-8 pb-5">
         <span className="text-xs font-mono text-ink/55">{String(index + 1).padStart(2, '0')}</span>
@@ -111,7 +111,7 @@ function PairCard({ industry, index }) {
 
       {/* Hinge */}
       <div aria-hidden="true" className="flex justify-center -my-3 relative z-10">
-        <span className="w-8 h-8 rounded-full bg-white border border-border flex items-center justify-center text-ink rotate-90">
+        <span className="w-8 h-8 rounded-full bg-bg border border-border flex items-center justify-center text-ink rotate-90">
           <ArrowRight size={14} />
         </span>
       </div>
@@ -149,7 +149,7 @@ function PairCard({ industry, index }) {
           <Link
             href={`/contact?service=${encodeURIComponent(industry.title)}`}
             aria-label={`Talk to us about ${industry.title}`}
-            className="self-start sm:self-auto w-11 h-11 shrink-0 rounded-full border border-ink/20 text-ink flex items-center justify-center hover:bg-ink hover:text-white hover:border-ink transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2"
+            className="self-start sm:self-auto w-11 h-11 shrink-0 rounded-full border border-ink/20 text-ink flex items-center justify-center hover:bg-night hover:text-white hover:border-ink transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2"
           >
             <ArrowRight size={16} aria-hidden="true" />
           </Link>
@@ -192,7 +192,7 @@ export default function SolutionsPage() {
                 <li key={ind.title}>
                   <a
                     href={`#${slugify(ind.title)}`}
-                    className="inline-block px-3.5 py-1.5 rounded-full border border-ink/15 bg-white/60 text-xs sm:text-[13px] font-medium text-ink hover:border-ink/40 hover:bg-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink"
+                    className="inline-block px-3.5 py-1.5 rounded-full border border-ink/15 bg-white/60 text-xs sm:text-[13px] font-medium text-ink hover:border-ink/40 hover:bg-bg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink"
                   >
                     {ind.title}
                   </a>
@@ -204,7 +204,7 @@ export default function SolutionsPage() {
       </section>
 
       {/* Problem → approach pairs — white */}
-      <section className="bg-white py-16 sm:py-24">
+      <section className="bg-bg py-16 sm:py-24">
         <motion.div
           variants={cardGridContainer}
           initial="hidden"

@@ -44,7 +44,7 @@ function FAQItem({ item, isOpen, onToggle, baseId, index }) {
             aria-hidden="true"
             className={`mt-0.5 w-8 h-8 rounded-full border flex items-center justify-center shrink-0 transition-[background-color,border-color,color,transform] duration-300 motion-reduce:transition-none ${
               isOpen
-                ? 'bg-ink border-ink text-cream rotate-45'
+                ? 'bg-night border-ink text-snow rotate-45'
                 : 'border-border-hover text-ink group-hover:border-ink'
             }`}
           >
@@ -89,7 +89,7 @@ export default function FAQ() {
             transition={{ duration: 0.45, ease: 'easeOut' }}
             className="lg:col-span-4 lg:sticky lg:top-28 self-start"
           >
-            <span className="text-xs font-mono font-semibold uppercase tracking-wider text-ink/70 mb-3 inline-block">
+            <span className="text-[11px] font-mono font-semibold uppercase tracking-[0.16em] text-accent mb-3 inline-block">
               FAQ
             </span>
             <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-ink tracking-tight leading-[1.08] mb-4">
@@ -100,7 +100,7 @@ export default function FAQ() {
             </p>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 min-h-11 px-5 py-2.5 rounded-full border border-ink text-sm font-semibold text-ink hover:bg-ink hover:text-cream transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+              className="inline-flex items-center gap-2 min-h-11 px-5 py-2.5 rounded-full border border-ink text-sm font-semibold text-ink hover:bg-night hover:text-snow transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
             >
               Ask us directly <ArrowRight size={14} aria-hidden="true" />
             </Link>

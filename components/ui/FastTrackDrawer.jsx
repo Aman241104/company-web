@@ -116,7 +116,7 @@ export default function FastTrackDrawer() {
           type="button"
           onClick={() => setIsOpen(true)}
           aria-haspopup="dialog"
-          className="inline-flex items-center gap-2.5 pl-4 pr-5 py-3 rounded-full bg-ink text-cream text-[13px] font-semibold shadow-lg shadow-ink/20 transition-[transform,background-color] duration-200 hover:-translate-y-0.5 hover:bg-ink-dim cursor-pointer"
+          className="inline-flex items-center gap-2.5 pl-4 pr-5 py-3 rounded-full bg-night text-snow text-[13px] font-semibold shadow-lg shadow-ink/20 transition-[transform,background-color] duration-200 hover:-translate-y-0.5 hover:bg-night cursor-pointer"
         >
           <span className="w-2 h-2 rounded-full bg-accent" aria-hidden="true" />
           Quick consult
@@ -164,7 +164,7 @@ export default function FastTrackDrawer() {
                     type="button"
                     onClick={() => setIsOpen(false)}
                     aria-label="Close dialog"
-                    className="w-10 h-10 shrink-0 inline-flex items-center justify-center rounded-full border border-ink/20 text-ink hover:bg-ink hover:text-cream transition-colors"
+                    className="w-10 h-10 shrink-0 inline-flex items-center justify-center rounded-full border border-ink/20 text-ink hover:bg-night hover:text-snow transition-colors"
                   >
                     <X size={18} aria-hidden="true" />
                   </button>
@@ -225,7 +225,7 @@ export default function FastTrackDrawer() {
                       />
                       <button
                         type="submit"
-                        className="inline-flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-full bg-accent text-ink text-sm font-semibold transition-colors hover:bg-ink hover:text-cream"
+                        className="inline-flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-full bg-accent text-ink text-sm font-semibold transition-colors hover:bg-night hover:text-snow"
                       >
                         Request NDA
                       </button>

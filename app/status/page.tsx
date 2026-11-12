@@ -31,7 +31,7 @@ export default function StatusPage() {
   return (
     <>
     <Navbar />
-    <main id="main-content" tabIndex={-1} className="home-light bg-white min-h-screen">
+    <main id="main-content" tabIndex={-1} className="home-light bg-bg min-h-screen">
 
       {/* Header — cream, plain */}
       <section className="bg-cream pt-32 sm:pt-40 pb-14 sm:pb-16">
@@ -57,7 +57,7 @@ export default function StatusPage() {
       </section>
 
       {/* Commitments table — white */}
-      <section className="bg-white py-14 sm:py-20">
+      <section className="bg-bg py-14 sm:py-20">
         <div className="max-w-[1200px] mx-auto px-5 sm:px-6 md:px-8">
           <table className="w-full text-left border-collapse">
             <caption className="text-left text-xs font-mono uppercase tracking-wider text-ink/55 pb-4">
@@ -113,7 +113,7 @@ export default function StatusPage() {
       </section>
 
       {/* Ongoing support — ink band */}
-      <section className="bg-ink text-white">
+      <section className="bg-night text-white">
         <div className="max-w-[1200px] mx-auto px-5 sm:px-6 md:px-8 py-14 sm:py-20 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
           <div>
             <h2 className="font-display text-2xl sm:text-3xl font-extrabold tracking-tight mb-2">
@@ -125,7 +125,7 @@ export default function StatusPage() {
           </div>
           <Link
             href="/contact"
-            className="self-start sm:self-auto inline-flex items-center justify-center gap-2 rounded-full bg-accent text-white font-semibold px-7 py-3.5 text-sm hover:bg-accent-dim transition-colors whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+            className="self-start sm:self-auto inline-flex items-center justify-center gap-2 rounded-full bg-accent text-white font-semibold px-7 py-3.5 text-sm hover:bg-accent-dim transition-colors whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-night"
           >
             Get in touch <ArrowRight size={15} aria-hidden="true" />
           </Link>

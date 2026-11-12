@@ -104,7 +104,7 @@ export default function MobileDock() {
           className="md:hidden fixed bottom-3 inset-x-0 z-50 flex justify-center px-3 pointer-events-none"
           style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}
         >
-          <div className="pointer-events-auto rounded-full bg-ink border border-cream/10 p-1.5 shadow-lg shadow-ink/25 flex items-center justify-between gap-0.5 max-w-[360px] w-full mx-auto">
+          <div className="pointer-events-auto rounded-full bg-night border border-snow/10 p-1.5 shadow-lg shadow-ink/25 flex items-center justify-between gap-0.5 max-w-[360px] w-full mx-auto">
             {dockNavItems.map((item) => {
               const isActive = isActivePath(pathname, item.href)
               const Icon = item.icon
@@ -115,7 +115,7 @@ export default function MobileDock() {
                   href={item.href}
                   aria-current={isActive ? 'page' : undefined}
                   className={`relative flex-1 flex flex-col items-center justify-center h-11 px-1 rounded-full transition-colors active:scale-95 ${
-                    isActive ? 'text-cream' : 'text-cream/70 hover:text-cream'
+                    isActive ? 'text-snow' : 'text-snow/70 hover:text-snow'
                   }`}
                 >
                   {isActive && (

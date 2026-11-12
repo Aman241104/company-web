@@ -60,7 +60,7 @@ export default function FloatingWhatsApp() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat with us on WhatsApp (opens in a new tab)"
-      className="fixed bottom-28 right-4 sm:bottom-24 sm:right-6 z-40 flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-ink border border-cream/15 shadow-lg shadow-ink/25 transition-transform duration-200 hover:-translate-y-0.5 active:scale-95"
+      className="fixed bottom-28 right-4 sm:bottom-24 sm:right-6 z-40 flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-night border border-snow/15 shadow-lg shadow-ink/25 transition-transform duration-200 hover:-translate-y-0.5 active:scale-95"
     >
       <svg
         viewBox="0 0 32 32"

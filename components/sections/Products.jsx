@@ -33,12 +33,12 @@ export default function Products() {
   })
 
   return (
-    <section id="products" className="relative bg-white py-16 sm:py-24 md:py-32">
+    <section id="products" className="relative bg-bg py-16 sm:py-24 md:py-32">
       <div className="max-w-[1360px] mx-auto px-5 sm:px-6 md:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           {/* Copy */}
           <motion.div {...rise()} className="lg:col-span-5">
-            <span className="text-xs font-mono font-semibold uppercase tracking-wider text-ink/70 mb-3 inline-block">
+            <span className="text-[11px] font-mono font-semibold uppercase tracking-[0.16em] text-accent mb-3 inline-block">
               Our own product
             </span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-ink tracking-tight leading-[1.08] mb-5">

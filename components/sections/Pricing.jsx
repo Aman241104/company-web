@@ -29,7 +29,7 @@ export default function Pricing() {
             className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-end mb-10 sm:mb-14 md:mb-16"
           >
             <div className="lg:col-span-7">
-              <span className="text-xs font-mono font-semibold uppercase tracking-wider text-ink/70 mb-3 inline-block">
+              <span className="text-[11px] font-mono font-semibold uppercase tracking-[0.16em] text-accent mb-3 inline-block">
                 Pricing
               </span>
               <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-ink tracking-tight leading-[1.08]">
@@ -58,12 +58,12 @@ export default function Pricing() {
                   whileHover={{ y: -4, transition: { type: 'spring', stiffness: 300, damping: 24 } }}
                   className={`group rounded-3xl flex flex-col p-6 sm:p-7 transition-colors duration-300 ${
                     featured
-                      ? 'bg-ink text-cream border border-ink'
-                      : 'bg-white text-ink border border-border hover:border-border-hover'
+                      ? 'bg-night text-snow border border-ink'
+                      : 'bg-bg text-ink border border-border hover:border-border-hover'
                   }`}
                 >
                   <div className="flex items-start justify-between gap-3 mb-6">
-                    <h3 className={`font-display text-lg font-semibold tracking-tight ${featured ? 'text-cream' : 'text-ink'}`}>
+                    <h3 className={`font-display text-lg font-semibold tracking-tight ${featured ? 'text-snow' : 'text-ink'}`}>
                       {plan.name}
                     </h3>
                     {plan.badge && (
@@ -78,33 +78,33 @@ export default function Pricing() {
                   </div>
 
                   <div className="flex items-baseline gap-2 mb-1">
-                    <span className={`font-display text-4xl sm:text-[2.75rem] font-bold tracking-tight leading-none ${featured ? 'text-cream' : 'text-ink'}`}>
+                    <span className={`font-display text-4xl sm:text-[2.75rem] font-bold tracking-tight leading-none ${featured ? 'text-snow' : 'text-ink'}`}>
                       {plan.priceLabel}
                     </span>
-                    <span className={`text-xs font-medium ${featured ? 'text-cream/70' : 'text-ink/70'}`}>
+                    <span className={`text-xs font-medium ${featured ? 'text-snow/70' : 'text-ink/70'}`}>
                       {plan.unit}
                     </span>
                   </div>
                   <div className="mb-5">
                     <span
                       className={`inline-block mt-3 text-[11px] font-medium px-2.5 py-1 rounded-full border ${
-                        featured ? 'border-cream/25 text-cream/80' : 'border-border-hover text-ink/75'
+                        featured ? 'border-snow/25 text-snow/80' : 'border-border-hover text-ink/75'
                       }`}
                     >
                       {plan.timeline}
                     </span>
                   </div>
 
-                  <p className={`text-sm leading-relaxed mb-6 ${featured ? 'text-cream/75' : 'text-ink/75'}`}>
+                  <p className={`text-sm leading-relaxed mb-6 ${featured ? 'text-snow/75' : 'text-ink/75'}`}>
                     {plan.desc}
                   </p>
 
                   <ul
                     role="list"
-                    className={`space-y-3 pt-5 mb-8 border-t flex-1 ${featured ? 'border-cream/15' : 'border-border'}`}
+                    className={`space-y-3 pt-5 mb-8 border-t flex-1 ${featured ? 'border-snow/15' : 'border-border'}`}
                   >
                     {plan.features.map((f) => (
-                      <li key={f} className={`flex items-start gap-2.5 text-[13px] leading-relaxed ${featured ? 'text-cream/85' : 'text-ink/80'}`}>
+                      <li key={f} className={`flex items-start gap-2.5 text-[13px] leading-relaxed ${featured ? 'text-snow/85' : 'text-ink/80'}`}>
                         <Check
                           size={14}
                           aria-hidden="true"
@@ -122,8 +122,8 @@ export default function Pricing() {
                     href={`/contact?service=${encodeURIComponent(plan.name)}&budget=${plan.price}`}
                     className={`w-full min-h-11 px-5 py-3 rounded-full text-sm font-semibold inline-flex items-center justify-center gap-2 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 ${
                       featured
-                        ? 'bg-accent text-ink hover:bg-accent-dim focus-visible:outline-cream'
-                        : 'border border-ink text-ink hover:bg-ink hover:text-cream focus-visible:outline-accent'
+                        ? 'bg-accent text-ink hover:bg-accent-dim focus-visible:outline-snow'
+                        : 'border border-ink text-ink hover:bg-night hover:text-snow focus-visible:outline-accent'
                     }`}
                   >
                     {plan.cta} <ArrowRight size={14} aria-hidden="true" />
@@ -158,7 +158,7 @@ export default function Pricing() {
               className="group/cta inline-flex items-center gap-3 self-start md:self-auto text-sm font-semibold text-ink shrink-0 rounded-full focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
             >
               Talk to our enterprise team
-              <span className="w-10 h-10 rounded-full border border-ink flex items-center justify-center transition-colors group-hover/cta:bg-ink group-hover/cta:text-cream">
+              <span className="w-10 h-10 rounded-full border border-ink flex items-center justify-center transition-colors group-hover/cta:bg-night group-hover/cta:text-snow">
                 <ArrowUpRight size={16} aria-hidden="true" />
               </span>
             </Link>

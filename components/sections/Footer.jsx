@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight } from 'lucide-react'
 import { locations } from '@/lib/locations'
+import { chapters } from '@/lib/services'
 
 // Footer = the site's closing ink-dark band (research/design-system-v2.md):
 // the same forest-green used for headline ink elsewhere, doing its second
@@ -11,36 +12,28 @@ import { locations } from '@/lib/locations'
 // (~5.9:1), coral text clears it too (~4.8:1), so small text here never
 // drops below /60.
 
+const disc = (slug) => chapters.find((c) => c.slug === slug).disciplines.map((d) => ({ label: d.title, href: `/services/${d.slug}` }))
+
 const cols = [
+  { title: 'Development', links: disc('development') },
+  { title: 'Marketing', links: disc('digital-marketing') },
+  {
+    title: 'Design & Web3',
+    links: [...disc('designing'), { label: 'Blockchain & Web3', href: '/services#chapter-blockchain-web3' }],
+  },
   {
     title: 'Company',
     links: [
-      { label: 'Home', href: '/' },
       { label: 'About Us', href: '/about' },
+      { label: 'Our Team', href: '/team' },
       { label: 'Our Work', href: '/work' },
+      { label: 'How We Work', href: '/how-we-work' },
       { label: 'Vibo ERP', href: '/#products' },
-      { label: 'Contact', href: '/contact' },
-    ],
-  },
-  {
-    title: 'Services',
-    links: [
-      { label: 'Website Development', href: '/services#service-01' },
-      { label: 'E-Commerce Development', href: '/services#service-02' },
-      { label: 'Custom Software Development', href: '/services#service-05' },
-      { label: 'Mobile App Development', href: '/services#service-04' },
-      { label: 'Performance Marketing', href: '/services#service-06' },
-      { label: 'Technical SEO', href: '/services#service-07' },
-    ],
-  },
-  {
-    title: 'More',
-    links: [
       { label: 'Industries & Solutions', href: '/solutions' },
-      { label: 'Leadership & Team', href: '/about#team' },
-      { label: 'Careers', href: 'mailto:careers@mehtatechnologies.com' },
       { label: 'Engineering Labs', href: '/labs' },
       { label: 'Support Standards', href: '/status' },
+      { label: 'Careers', href: 'mailto:careers@mehtatechnologies.com' },
+      { label: 'Contact', href: '/contact' },
     ],
   },
   {
@@ -70,21 +63,21 @@ const socials = [
 
 export default function Footer() {
   return (
-    <footer className="bg-ink text-cream">
+    <footer className="bg-night text-snow">
       <div className="max-w-[1360px] mx-auto px-5 sm:px-6 md:px-8">
         {/* Closing band: the address itself is the statement, set large —
             not a second "Start a project" button stacked under whatever CTA
             section the page above already ended on. The small circular
             arrow is the third button primitive. */}
-        <div className="py-16 sm:py-20 lg:py-24 border-b border-cream/15">
-          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-cream/60 mb-5">
+        <div className="py-16 sm:py-20 lg:py-24 border-b border-snow/15">
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-snow/60 mb-5">
             Start a conversation
           </p>
           <a
             href="mailto:hello@mehtatechnologies.com"
             className="group inline-flex flex-wrap items-center gap-x-5 gap-y-3 rounded-lg"
           >
-            <span className="font-display text-[26px] leading-[1.1] sm:text-5xl lg:text-[64px] font-semibold tracking-tight text-cream wrap-anywhere decoration-lime decoration-2 underline-offset-[10px] group-hover:underline">
+            <span className="font-display text-[26px] leading-[1.1] sm:text-5xl lg:text-[64px] font-semibold tracking-tight text-snow wrap-anywhere decoration-lime decoration-2 underline-offset-[10px] group-hover:underline">
               hello@mehtatechnologies.com
             </span>
             <span
@@ -104,22 +97,22 @@ export default function Footer() {
               <span className="w-9 h-9 rounded-lg overflow-hidden">
                 <Image src="/brand/mehta-logo-icon-light.png" alt="" width={36} height={36} className="w-full h-full object-cover" />
               </span>
-              <span className="font-display text-base font-semibold tracking-tight text-cream">Mehta Technologies</span>
+              <span className="font-display text-base font-semibold tracking-tight text-snow">Mehta Technologies</span>
             </Link>
 
-            <p className="text-sm text-cream/70 leading-relaxed max-w-sm">
+            <p className="text-sm text-snow/70 leading-relaxed max-w-sm">
               We build websites, e-commerce stores, and digital solutions that help businesses build their online presence and grow.
             </p>
 
-            <address className="not-italic space-y-1.5 text-sm text-cream/70">
+            <address className="not-italic space-y-1.5 text-sm text-snow/70">
               <p>Ahmedabad, Gujarat, India · Serving clients globally</p>
               <p>
-                <a href="mailto:hello@mehtatechnologies.com" className="underline-offset-4 hover:underline hover:text-cream transition-colors">
+                <a href="mailto:hello@mehtatechnologies.com" className="underline-offset-4 hover:underline hover:text-snow transition-colors">
                   hello@mehtatechnologies.com
                 </a>
               </p>
               <p>
-                <a href="tel:+919876543210" className="underline-offset-4 hover:underline hover:text-cream transition-colors">
+                <a href="tel:+919876543210" className="underline-offset-4 hover:underline hover:text-snow transition-colors">
                   +91 98765 43210
                 </a>
               </p>
@@ -134,7 +127,7 @@ export default function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`${s.label} (opens in a new tab)`}
-                    className="w-10 h-10 rounded-full border border-cream/25 flex items-center justify-center text-cream/80 hover:bg-cream hover:text-ink hover:border-cream transition-colors"
+                    className="w-10 h-10 rounded-full border border-snow/25 flex items-center justify-center text-snow/80 hover:bg-cream hover:text-ink hover:border-cream transition-colors"
                   >
                     <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
                       <path d={s.path} />
@@ -146,10 +139,10 @@ export default function Footer() {
           </div>
 
           {/* Navigation columns */}
-          <nav aria-label="Footer" className="lg:col-span-8 grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-10">
+          <nav aria-label="Footer" className="lg:col-span-8 grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-5 gap-x-6 gap-y-10">
             {cols.map((col) => (
               <div key={col.title}>
-                <h3 className="text-xs font-semibold uppercase tracking-[0.14em] text-cream/60 mb-4">
+                <h3 className="text-xs font-semibold uppercase tracking-[0.14em] text-snow/60 mb-4">
                   {col.title}
                 </h3>
                 <ul className="space-y-2.5">
@@ -157,7 +150,7 @@ export default function Footer() {
                     <li key={link.label}>
                       <Link
                         href={link.href}
-                        className="text-sm text-cream/80 hover:text-cream underline-offset-4 hover:underline transition-colors"
+                        className="text-sm text-snow/80 hover:text-snow underline-offset-4 hover:underline transition-colors"
                       >
                         {link.label}
                       </Link>
@@ -170,17 +163,17 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="py-7 border-t border-cream/15 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-cream/60">
+        <div className="py-7 border-t border-snow/15 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-snow/60">
           <p>© {new Date().getFullYear()} Mehta Technologies. All rights reserved.</p>
           <ul className="flex items-center gap-6">
             <li>
-              <Link href="/privacy" className="hover:text-cream transition-colors">Privacy Policy</Link>
+              <Link href="/privacy" className="hover:text-snow transition-colors">Privacy Policy</Link>
             </li>
             <li>
-              <Link href="/terms" className="hover:text-cream transition-colors">Terms of Service</Link>
+              <Link href="/terms" className="hover:text-snow transition-colors">Terms of Service</Link>
             </li>
             <li>
-              <Link href="/locations" className="hover:text-cream transition-colors">Locations</Link>
+              <Link href="/locations" className="hover:text-snow transition-colors">Locations</Link>
             </li>
           </ul>
         </div>

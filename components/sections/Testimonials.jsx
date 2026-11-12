@@ -55,7 +55,7 @@ export default function Testimonials() {
 
   return (
     <MotionConfig reducedMotion={reduced ? 'always' : 'never'}>
-      <section aria-labelledby="clients-heading" className="relative bg-white py-16 sm:py-24 md:py-28 overflow-hidden">
+      <section aria-labelledby="clients-heading" className="relative bg-bg py-16 sm:py-24 md:py-28 overflow-hidden">
         <div className="max-w-[1360px] mx-auto px-5 sm:px-6 md:px-8">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
@@ -65,7 +65,7 @@ export default function Testimonials() {
             className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10 sm:mb-14"
           >
             <div className="max-w-xl">
-              <span className="text-xs font-mono font-semibold uppercase tracking-wider text-ink/70 mb-3 inline-block">
+              <span className="text-[11px] font-mono font-semibold uppercase tracking-[0.16em] text-accent mb-3 inline-block">
                 Clients
               </span>
               <h2 id="clients-heading" className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-ink tracking-tight leading-[1.08]">
@@ -77,7 +77,7 @@ export default function Testimonials() {
               className="group/cta inline-flex items-center gap-3 self-start md:self-auto text-sm font-semibold text-ink rounded-full focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
             >
               See the work
-              <span className="w-10 h-10 rounded-full border border-ink flex items-center justify-center transition-colors group-hover/cta:bg-ink group-hover/cta:text-cream">
+              <span className="w-10 h-10 rounded-full border border-ink flex items-center justify-center transition-colors group-hover/cta:bg-night group-hover/cta:text-snow">
                 <ArrowUpRight size={16} aria-hidden="true" />
               </span>
             </Link>

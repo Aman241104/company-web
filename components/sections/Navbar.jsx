@@ -4,24 +4,26 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, ArrowUpRight, ChevronDown } from 'lucide-react'
+import { Menu, X, ArrowUpRight, ChevronDown, Phone } from 'lucide-react'
+import ThemeToggle from '@/components/ThemeToggle'
+import { openConsult } from '@/components/home/ui'
+import { chapters } from '@/lib/services'
+import { contact } from '@/lib/site'
 
 const links = [
-  { label: 'Home', href: '/' },
   {
     label: 'Services',
     href: '/services',
     dropdown: [
-      { label: 'Website Development', href: '/services#service-01' },
-      { label: 'E-Commerce Development', href: '/services#service-02' },
-      { label: 'Custom Software Development', href: '/services#service-05' },
-      { label: 'Mobile App Development', href: '/services#service-04' },
-      { label: 'Performance Marketing', href: '/services#service-06' },
+      ...chapters.map((c) => ({ label: c.name, href: `/services#chapter-${c.slug}` })),
+      { label: 'All services →', href: '/services' },
     ],
   },
   { label: 'Our Work', href: '/work' },
+  { label: 'How We Work', href: '/how-we-work' },
   { label: 'Vibo ERP', href: '/#products' },
-  { label: 'About Us', href: '/about' },
+  { label: 'About', href: '/about' },
+  { label: 'Team', href: '/team' },
 ]
 
 // Design system v2 primary button: solid coral pill. Ink (not white) text
@@ -29,7 +31,7 @@ const links = [
 // ink-on-coral is ~4.8:1. Hover flips to the ink fill rather than a darker
 // coral, which keeps the label legible in both states.
 const primaryPill =
-  'inline-flex items-center justify-center gap-1.5 rounded-full bg-accent text-ink font-semibold transition-colors hover:bg-ink hover:text-cream active:scale-[0.98]'
+  'inline-flex items-center justify-center gap-1.5 rounded-full bg-accent text-white font-semibold transition-colors hover:bg-accent-dim active:scale-[0.98]'
 
 function isActivePath(pathname, href) {
   if (href === '/') return pathname === '/'
@@ -67,7 +69,7 @@ function NavLink({ href, children, dropdown, active }) {
         aria-haspopup={dropdown ? 'true' : undefined}
         aria-expanded={dropdown ? open : undefined}
         aria-controls={dropdown ? menuId : undefined}
-        className={`relative inline-flex items-center gap-1.5 py-2 text-[14px] font-medium transition-colors after:absolute after:left-0 after:right-0 after:-bottom-0.5 after:h-px after:origin-left after:bg-ink after:transition-transform after:duration-300 ${
+        className={`relative inline-flex items-center gap-1.5 py-2 text-[14px] font-medium transition-colors after:absolute after:left-0 after:right-0 after:-bottom-0.5 after:h-px after:origin-left after:bg-night after:transition-transform after:duration-300 ${
           active ? 'text-ink after:scale-x-100' : 'text-ink/75 hover:text-ink after:scale-x-0 hover:after:scale-x-100'
         }`}
       >
@@ -198,7 +200,7 @@ export default function Navbar() {
             transition={{ duration: 0.2 }}
             onClick={() => setOpen(false)}
             aria-hidden="true"
-            className="md:hidden fixed inset-0 bg-ink/40 backdrop-blur-[2px] z-40"
+            className="lg:hidden fixed inset-0 bg-night/40 backdrop-blur-[2px] z-40"
           />
         )}
       </AnimatePresence>
@@ -220,9 +222,16 @@ export default function Navbar() {
                 alt=""
                 width={32}
                 height={32}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover dark:hidden"
                 loading="eager"
                 fetchPriority="high"
+              />
+              <Image
+                src="/brand/mehta-logo-icon-light.png"
+                alt=""
+                width={32}
+                height={32}
+                className="w-full h-full object-cover hidden dark:block"
               />
             </span>
             <span className="flex flex-col leading-none">
@@ -232,7 +241,7 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop links */}
-          <nav aria-label="Primary" className="hidden lg:flex items-center gap-8">
+          <nav aria-label="Primary" className="hidden lg:flex items-center gap-6 xl:gap-8">
             {links.map((l) => (
               <NavLink key={l.label} href={l.href} dropdown={l.dropdown} active={isActivePath(pathname, l.href)}>
                 {l.label}
@@ -241,22 +250,27 @@ export default function Navbar() {
           </nav>
 
           {/* Right CTA */}
-          <div className="hidden md:flex items-center gap-3">
-            <Link href="/contact" className={`${primaryPill} px-5 py-2.5 text-[13px]`}>
-              Get a Free Consultation <ArrowUpRight size={14} aria-hidden="true" />
-            </Link>
+          <div className="hidden lg:flex items-center gap-3">
+            <a href={contact.tel} className="hidden xl:inline-flex items-center gap-1.5 text-[13px] font-semibold text-ink hover:text-accent">
+              <Phone size={14} className="text-accent" aria-hidden="true" /> {contact.phone}
+            </a>
+            <ThemeToggle />
+            <button type="button" onClick={() => openConsult()} className={`${primaryPill} px-5 py-2.5 text-[13px]`}>
+              Contact Us <ArrowUpRight size={14} aria-hidden="true" />
+            </button>
           </div>
 
           {/* Mobile menu toggle — small circular icon button, the third
               primitive of the v2 button system. */}
-          <div className="flex md:hidden items-center">
+          <div className="flex lg:hidden items-center gap-2">
+            <ThemeToggle />
             <button
               ref={mobileToggleRef}
               onClick={() => setOpen(!open)}
               aria-label={open ? 'Close menu' : 'Open menu'}
               aria-expanded={open}
               aria-controls="mobile-menu"
-              className="w-10 h-10 inline-flex items-center justify-center rounded-full border border-ink/20 text-ink hover:bg-ink hover:text-cream transition-colors"
+              className="w-10 h-10 inline-flex items-center justify-center rounded-full border border-ink/20 text-ink hover:bg-night hover:text-snow transition-colors"
             >
               {open ? <X size={18} aria-hidden="true" /> : <Menu size={18} aria-hidden="true" />}
             </button>
@@ -276,7 +290,7 @@ export default function Navbar() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
-              className="md:hidden relative z-50 mx-4 mb-4 p-2 rounded-3xl bg-bg border border-border shadow-xl shadow-ink/10"
+              className="lg:hidden relative z-50 mx-4 mb-4 p-2 rounded-3xl bg-bg border border-border shadow-xl shadow-ink/10"
             >
               <ul>
                 {links.map((l) => {
@@ -298,13 +312,18 @@ export default function Navbar() {
                   )
                 })}
               </ul>
-              <Link
-                href="/contact"
-                onClick={() => setOpen(false)}
-                className={`${primaryPill} mt-2 w-full py-3 text-sm`}
-              >
-                Get a Free Consultation <ArrowUpRight size={14} aria-hidden="true" />
-              </Link>
+              <div className="grid grid-cols-2 gap-2 mt-2">
+                <a href={contact.tel} className="inline-flex items-center justify-center gap-1.5 rounded-full border border-ink/20 py-3 text-sm font-semibold text-ink">
+                  <Phone size={14} aria-hidden="true" /> Call
+                </a>
+                <button
+                  type="button"
+                  onClick={() => { setOpen(false); openConsult() }}
+                  className={`${primaryPill} py-3 text-sm`}
+                >
+                  Free quote <ArrowUpRight size={14} aria-hidden="true" />
+                </button>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>

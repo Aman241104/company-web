@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import { cardGridContainer, cardSpringItem } from '@/lib/motionVariants'
 
-const team = [
+export const team = [
   {
     name: 'Gaurav Mehta',
     role: 'Founder & CEO',
@@ -61,12 +61,12 @@ function TeamCard({ member }) {
   return (
     <motion.div
       variants={cardSpringItem}
-      className="rounded-2xl bg-white border border-[#0A1124]/10 hover:border-[#1F4FFF] hover:shadow-md hover:-translate-y-0.5 p-6 sm:p-7 flex flex-col justify-between shadow-sm transition-all duration-300 group"
+      className="rounded-2xl bg-bg border border-ink/10 hover:border-accent hover:shadow-md hover:-translate-y-0.5 p-6 sm:p-7 flex flex-col justify-between shadow-sm transition-all duration-300 group"
     >
       <div>
         {/* Avatar & Header */}
         <div className="flex items-center gap-4 mb-5">
-          <div className="relative w-14 h-14 rounded-full overflow-hidden border border-[#0A1124]/10 bg-[#F4F7FC] shrink-0">
+          <div className="relative w-14 h-14 rounded-full overflow-hidden border border-ink/10 bg-cream shrink-0">
             {member.image ? (
               <Image
                 src={member.image}
@@ -79,20 +79,20 @@ function TeamCard({ member }) {
               <div
                 role="img"
                 aria-label={member.name}
-                className="w-full h-full flex items-center justify-center font-bold text-base tracking-wide text-[#F4F7FC] bg-[#0A1124] group-hover:scale-105 transition-transform duration-300"
+                className="w-full h-full flex items-center justify-center font-bold text-base tracking-wide text-snow bg-night group-hover:scale-105 transition-transform duration-300"
               >
                 {member.init}
               </div>
             )}
           </div>
           <div>
-            <h3 className="text-base font-bold text-[#0A1124] tracking-tight">{member.name}</h3>
-            <p className="text-xs text-[#0A1124]/55 font-medium">{member.role}</p>
+            <h3 className="text-base font-bold text-ink tracking-tight">{member.name}</h3>
+            <p className="text-xs text-ink/55 font-medium">{member.role}</p>
           </div>
         </div>
 
         {/* Bio */}
-        <p className="text-xs sm:text-sm text-[#0A1124]/60 leading-relaxed mb-6 font-normal">
+        <p className="text-xs sm:text-sm text-ink/60 leading-relaxed mb-6 font-normal">
           {member.bio}
         </p>
 
@@ -101,7 +101,7 @@ function TeamCard({ member }) {
           {member.skills.map((s) => (
             <span
               key={s}
-              className="text-[11px] font-medium px-2.5 py-0.5 rounded-md bg-[#0A1124]/[0.03] text-[#0A1124]/70 border border-[#0A1124]/10"
+              className="text-[11px] font-medium px-2.5 py-0.5 rounded-md bg-ink/[0.03] text-ink/70 border border-ink/10"
             >
               {s}
             </span>
@@ -109,8 +109,8 @@ function TeamCard({ member }) {
         </div>
       </div>
 
-      <div className="pt-4 border-t border-[#0A1124]/[0.06]">
-        <span className="text-xs text-[#0A1124]/45 font-mono">Mehta Tech Core</span>
+      <div className="pt-4 border-t border-ink/[0.06]">
+        <span className="text-xs text-ink/45 font-mono">Mehta Tech Core</span>
       </div>
     </motion.div>
   )
@@ -118,7 +118,7 @@ function TeamCard({ member }) {
 
 export default function Team() {
   return (
-    <section id="team" className="py-24 md:py-32 max-w-[1360px] mx-auto px-6 md:px-8 border-t border-[#0A1124]/10">
+    <section id="team" className="py-24 md:py-32 max-w-[1360px] mx-auto px-6 md:px-8 border-t border-ink/10">
       {/* Section Header — plain kicker, single-color headline. No
           pill-badge-above-headline, no two-tone accent split: retired per
           research/design-system-v2.md. */}
@@ -129,13 +129,13 @@ export default function Team() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <div className="text-xs font-mono uppercase tracking-wider text-[#0A1124]/45 mb-4">
+          <div className="text-xs font-mono uppercase tracking-wider text-ink/45 mb-4">
             Leadership & Core Engineers
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0A1124] tracking-tight leading-tight mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-ink tracking-tight leading-tight mb-4">
             Meet the engineers behind your product.
           </h2>
-          <p className="text-base sm:text-lg text-[#0A1124]/60 leading-relaxed">
+          <p className="text-base sm:text-lg text-ink/60 leading-relaxed">
             A small, high-leverage team of senior specialists across architecture, UI/UX, cloud infrastructure, and growth.
           </p>
         </motion.div>
@@ -160,19 +160,19 @@ export default function Team() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
-        className="p-6 sm:p-8 rounded-2xl bg-[#F4F7FC] border border-[#0A1124]/10 flex flex-col sm:flex-row items-center justify-between gap-6"
+        className="p-6 sm:p-8 rounded-2xl bg-cream border border-ink/10 flex flex-col sm:flex-row items-center justify-between gap-6"
       >
         <div>
-          <h3 className="text-base sm:text-lg font-bold text-[#0A1124] tracking-tight mb-1">
+          <h3 className="text-base sm:text-lg font-bold text-ink tracking-tight mb-1">
             We are always looking for senior builders.
           </h3>
-          <p className="text-xs sm:text-sm text-[#0A1124]/60">
+          <p className="text-xs sm:text-sm text-ink/60">
             Open roles in Next.js, distributed backend systems, and performance marketing.
           </p>
         </div>
         <a
           href="mailto:careers@mehtatechnologies.com"
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold bg-white hover:bg-[#0A1124]/[0.03] text-[#0A1124] border border-[#0A1124]/15 hover:border-[#0A1124]/25 transition-all whitespace-nowrap"
+          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold bg-bg hover:bg-ink/[0.03] text-ink border border-ink/15 hover:border-ink/25 transition-all whitespace-nowrap"
         >
           Explore Careers <ArrowRight size={13} />
         </a>

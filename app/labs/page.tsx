@@ -14,7 +14,7 @@ export default function Page() {
   return (
     <>
       <Navbar />
-      <main id="main-content" tabIndex={-1} className="home-light bg-white min-h-screen">
+      <main id="main-content" tabIndex={-1} className="home-light bg-bg min-h-screen">
         <LabsPage />
         <Footer />
       </main>

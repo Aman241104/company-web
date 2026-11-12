@@ -253,11 +253,11 @@ const featuredProjects = projects.filter((p) => p.featured)
 // Three reused button primitives (design-system-v2.md's "button/affordance
 // system, reused consistently") instead of one-off classes per section.
 const btnPrimary =
-  'inline-flex items-center justify-center gap-1.5 rounded-full text-xs font-semibold bg-[#1F4FFF] text-white hover:bg-[#1A3FD6] transition-all'
+  'inline-flex items-center justify-center gap-1.5 rounded-full text-xs font-semibold bg-accent text-white hover:bg-accent-dim transition-all'
 const btnSecondary =
-  'inline-flex items-center justify-center gap-1.5 rounded-full text-xs font-semibold bg-white hover:bg-[#0A1124]/[0.03] text-[#0A1124] border border-[#0A1124]/15 hover:border-[#0A1124]/25 transition-all'
+  'inline-flex items-center justify-center gap-1.5 rounded-full text-xs font-semibold bg-bg hover:bg-ink/[0.03] text-ink border border-ink/15 hover:border-ink/25 transition-all'
 const btnIconCircle =
-  'w-10 h-10 sm:w-11 sm:h-11 rounded-full border border-[#0A1124]/15 bg-white hover:bg-[#0A1124]/[0.04] hover:border-[#0A1124]/30 text-[#0A1124] flex items-center justify-center transition-all disabled:opacity-30 disabled:pointer-events-none'
+  'w-10 h-10 sm:w-11 sm:h-11 rounded-full border border-ink/15 bg-bg hover:bg-ink/[0.04] hover:border-ink/30 text-ink flex items-center justify-center transition-all disabled:opacity-30 disabled:pointer-events-none'
 
 function ProjectTag({ label, accent }) {
   return (
@@ -280,7 +280,7 @@ function ProjectCard({ project, size = 'grid' }) {
   return (
     <motion.div
       variants={cardSpringItem}
-      className={`group rounded-3xl bg-white border border-[#0A1124]/10 overflow-hidden flex flex-col shadow-sm hover:shadow-lg transition-shadow duration-300 h-full ${
+      className={`group rounded-3xl bg-bg border border-ink/10 overflow-hidden flex flex-col shadow-sm hover:shadow-lg transition-shadow duration-300 h-full ${
         isRail ? 'w-[300px] sm:w-[360px] shrink-0 snap-start' : ''
       }`}
     >
@@ -341,7 +341,7 @@ function ProjectCard({ project, size = 'grid' }) {
       {/* Content Body */}
       <div className="p-6 sm:p-7 flex flex-col flex-1">
         <div className="flex items-start justify-between gap-2 mb-1.5">
-          <h3 className="text-lg sm:text-xl font-bold text-[#0A1124] tracking-tight">
+          <h3 className="text-lg sm:text-xl font-bold text-ink tracking-tight">
             {project.name}
           </h3>
         </div>
@@ -350,16 +350,16 @@ function ProjectCard({ project, size = 'grid' }) {
           {project.subtitle}
         </p>
 
-        <p className="text-xs sm:text-sm text-[#0A1124]/60 leading-relaxed font-normal mb-5">
+        <p className="text-xs sm:text-sm text-ink/60 leading-relaxed font-normal mb-5">
           {project.desc}
         </p>
 
         {/* Tech tags */}
-        <div className="flex flex-wrap gap-1.5 pt-4 mt-auto border-t border-[#0A1124]/[0.06] mb-5">
+        <div className="flex flex-wrap gap-1.5 pt-4 mt-auto border-t border-ink/[0.06] mb-5">
           {project.tags.map((t) => (
             <span
               key={t}
-              className="text-[11px] font-medium px-2 py-0.5 rounded-md bg-[#0A1124]/[0.03] text-[#0A1124]/65 border border-[#0A1124]/10"
+              className="text-[11px] font-medium px-2 py-0.5 rounded-md bg-ink/[0.03] text-ink/65 border border-ink/10"
             >
               {t}
             </span>
@@ -370,7 +370,7 @@ function ProjectCard({ project, size = 'grid' }) {
             proof-in-the-world action, outlined secondary for the deep-dive. */}
         <div className="space-y-2">
           {project.inProgress ? (
-            <div className="w-full py-2.5 rounded-full text-xs font-medium text-[#0A1124]/50 border border-[#0A1124]/15 text-center">
+            <div className="w-full py-2.5 rounded-full text-xs font-medium text-ink/50 border border-ink/15 text-center">
               Build In Progress
             </div>
           ) : project.url ? (
@@ -378,7 +378,7 @@ function ProjectCard({ project, size = 'grid' }) {
               Visit Live Project <ArrowUpRight size={13} />
             </a>
           ) : (
-            <div className="w-full py-2.5 rounded-full text-xs font-medium text-[#0A1124]/50 border border-[#0A1124]/15 text-center">
+            <div className="w-full py-2.5 rounded-full text-xs font-medium text-ink/50 border border-ink/15 text-center">
               Enterprise Client IP Protected
             </div>
           )}
@@ -413,10 +413,10 @@ function FeaturedRail() {
     <section className="mb-28">
       <div className="max-w-[1360px] mx-auto px-6 md:px-8 flex items-end justify-between gap-6 mb-8">
         <div>
-          <div className="text-xs font-mono uppercase tracking-wider text-[#0A1124]/45 mb-3">
+          <div className="text-xs font-mono uppercase tracking-wider text-ink/45 mb-3">
             Featured Case Studies
           </div>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0A1124] tracking-tight">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-ink tracking-tight">
             Real projects, art-directed one at a time.
           </h2>
         </div>
@@ -482,13 +482,13 @@ export default function WorkPage() {
             transition={{ duration: 0.5 }}
             className="lg:col-span-7"
           >
-            <div className="text-xs font-mono uppercase tracking-wider text-[#0A1124]/45 mb-4">
+            <div className="text-xs font-mono uppercase tracking-wider text-ink/45 mb-4">
               Portfolio & Case Studies
             </div>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#0A1124] tracking-tight leading-[1.08] mb-6">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-ink tracking-tight leading-[1.08] mb-6">
               Engineering that drives measurable outcomes.
             </h1>
-            <p className="text-base sm:text-lg text-[#0A1124]/60 leading-relaxed max-w-lg">
+            <p className="text-base sm:text-lg text-ink/60 leading-relaxed max-w-lg">
               150+ shipped production applications, luxury e-commerce storefronts, and cloud SaaS platforms.
             </p>
           </motion.div>
@@ -500,8 +500,8 @@ export default function WorkPage() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="lg:col-span-5"
           >
-            <div className="rounded-2xl bg-white border border-[#0A1124]/10 shadow-sm p-2 sm:p-2.5">
-              <div className="px-3.5 pt-2.5 pb-1.5 text-[11px] font-mono uppercase tracking-wider text-[#0A1124]/45">
+            <div className="rounded-2xl bg-bg border border-ink/10 shadow-sm p-2 sm:p-2.5">
+              <div className="px-3.5 pt-2.5 pb-1.5 text-[11px] font-mono uppercase tracking-wider text-ink/45">
                 Browse by category
               </div>
               {categories.map((cat) => {
@@ -517,12 +517,12 @@ export default function WorkPage() {
                     aria-pressed={isSelected}
                     className={`w-full flex items-center justify-between gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-all ${
                       isSelected
-                        ? 'bg-[#1F4FFF]/10 text-[#1F4FFF]'
-                        : 'text-[#0A1124]/65 hover:bg-[#0A1124]/[0.03] hover:text-[#0A1124]'
+                        ? 'bg-accent/10 text-accent'
+                        : 'text-ink/65 hover:bg-ink/[0.03] hover:text-ink'
                     }`}
                   >
                     <span>{cat}</span>
-                    <span className={`text-xs font-mono px-2 py-0.5 rounded-full ${isSelected ? 'bg-[#1F4FFF] text-white' : 'bg-[#0A1124]/[0.05] text-[#0A1124]/50'}`}>
+                    <span className={`text-xs font-mono px-2 py-0.5 rounded-full ${isSelected ? 'bg-accent text-white' : 'bg-ink/[0.05] text-ink/50'}`}>
                       {count}
                     </span>
                   </button>
@@ -538,7 +538,7 @@ export default function WorkPage() {
 
       {/* Full Portfolio Grid */}
       <section className="max-w-[1360px] mx-auto px-6 md:px-8 mb-28">
-        <div className="text-xs font-mono uppercase tracking-wider text-[#0A1124]/45 mb-6">
+        <div className="text-xs font-mono uppercase tracking-wider text-ink/45 mb-6">
           Full Portfolio
         </div>
         <motion.div
@@ -560,11 +560,11 @@ export default function WorkPage() {
           already carries the dark inverted-ink treatment; alternating which
           page does which keeps this a genuine rhythm, not a repeated tic). */}
       <section className="max-w-[1360px] mx-auto px-6 md:px-8 text-center">
-        <div className="max-w-2xl mx-auto rounded-3xl bg-[#F4F7FC] border border-[#0A1124]/10 p-10 sm:p-14">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0A1124] tracking-tight mb-4">
+        <div className="max-w-2xl mx-auto rounded-3xl bg-cream border border-ink/10 p-10 sm:p-14">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-ink tracking-tight mb-4">
             Have a project in mind?
           </h2>
-          <p className="text-sm sm:text-base text-[#0A1124]/60 mb-8 max-w-md mx-auto">
+          <p className="text-sm sm:text-base text-ink/60 mb-8 max-w-md mx-auto">
             Let us engineer a custom high-performance solution tailored to your roadmap.
           </p>
           <Link href="/contact" className={`px-8 py-4 ${btnPrimary}`}>

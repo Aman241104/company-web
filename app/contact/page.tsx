@@ -54,7 +54,7 @@ export default function Contact() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(contactSchema) }} />
       <Navbar />
-      <main id="main-content" tabIndex={-1} className="home-light bg-white relative overflow-x-hidden w-full max-w-[100vw]">
+      <main id="main-content" tabIndex={-1} className="home-light bg-bg relative overflow-x-hidden w-full max-w-[100vw]">
         <ContactPage />
         <Footer />
       </main>

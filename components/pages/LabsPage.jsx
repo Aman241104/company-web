@@ -49,7 +49,7 @@ function Field({ label, value, onChange }) {
         value={value}
         spellCheck={false}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-ink/20 text-ink font-mono text-xs focus:outline-none focus-visible:border-ink focus-visible:ring-2 focus-visible:ring-ink/20"
+        className="w-full px-3.5 py-2.5 rounded-xl bg-bg border border-ink/20 text-ink font-mono text-xs focus:outline-none focus-visible:border-ink focus-visible:ring-2 focus-visible:ring-ink/20"
       />
     </div>
   )
@@ -57,13 +57,13 @@ function Field({ label, value, onChange }) {
 
 function CodePanel({ filename, code, copyLabel, copied, onCopy }) {
   return (
-    <div className="rounded-2xl bg-ink-dim overflow-hidden min-w-0">
+    <div className="rounded-2xl bg-night overflow-hidden min-w-0">
       <div className="px-4 sm:px-5 py-3 border-b border-white/10 flex items-center justify-between gap-3">
         <span className="font-mono text-xs text-white/70 truncate">{filename}</span>
         <button
           type="button"
           onClick={onCopy}
-          className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-white/25 text-white text-xs font-semibold hover:bg-white hover:text-ink transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+          className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-white/25 text-white text-xs font-semibold hover:bg-bg hover:text-ink transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
         >
           {copied ? <Check size={12} aria-hidden="true" /> : <Copy size={12} aria-hidden="true" />}
           <span aria-live="polite">{copied ? 'Copied' : copyLabel}</span>
@@ -255,7 +255,7 @@ export async function POST(req: Request) {
       </section>
 
       {/* Experiments list — white */}
-      <section className="bg-white py-14 sm:py-20">
+      <section className="bg-bg py-14 sm:py-20">
         <div className="max-w-[1360px] mx-auto px-5 sm:px-6 md:px-8">
           <ol className="border-t border-border">
             {tools.map((t, i) => {
@@ -295,7 +295,7 @@ export async function POST(req: Request) {
                         aria-hidden="true"
                         className={`w-11 h-11 rounded-full border flex items-center justify-center transition-all duration-300 ${
                           isOpen
-                            ? 'bg-ink border-ink text-white rotate-45'
+                            ? 'bg-night border-ink text-white rotate-45'
                             : 'border-ink/20 text-ink group-hover:border-ink/50'
                         }`}
                       >
@@ -353,7 +353,7 @@ export async function POST(req: Request) {
       </section>
 
       {/* Closing — ink band */}
-      <section className="bg-ink text-white">
+      <section className="bg-night text-white">
         <div className="max-w-[1360px] mx-auto px-5 sm:px-6 md:px-8 py-16 sm:py-24 flex flex-col lg:flex-row lg:items-end justify-between gap-8">
           <div className="max-w-2xl">
             <h2 className="font-display text-3xl sm:text-4xl font-extrabold tracking-tight leading-[1.1] mb-4">
@@ -365,7 +365,7 @@ export async function POST(req: Request) {
           </div>
           <Link
             href="/contact"
-            className="self-start lg:self-auto inline-flex items-center justify-center gap-2 rounded-full bg-accent text-white font-semibold px-7 py-3.5 text-sm hover:bg-accent-dim transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+            className="self-start lg:self-auto inline-flex items-center justify-center gap-2 rounded-full bg-accent text-white font-semibold px-7 py-3.5 text-sm hover:bg-accent-dim transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-night"
           >
             Book architecture discovery <ArrowRight size={15} aria-hidden="true" />
           </Link>

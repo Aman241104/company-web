@@ -1,27 +1,11 @@
 import type { MetadataRoute } from 'next'
 import { locations } from '@/lib/locations'
+import { caseStudiesData } from '@/lib/caseStudies'
+import { allDisciplines } from '@/lib/services'
 
 const base = 'https://mehtatechnologies.com'
 
-const caseStudySlugs = [
-  'sv-space-designs',
-  'prihaan-spices',
-  'silver-spoon',
-  'vibo-erp',
-  'chahana-dental',
-  'destination-anywhere',
-  'zingbliss-events',
-  'ares-business-league',
-  'club-mj-events',
-  'naam-transfer',
-  'nexsphere-global',
-  'jukebox-media',
-  'rising-rechargeable',
-  'fgp-industries',
-  'aangan-boutique',
-  'si-decor',
-  'jade-travels',
-]
+const caseStudySlugs = Object.keys(caseStudiesData)
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const caseStudyEntries: MetadataRoute.Sitemap = caseStudySlugs.map((slug) => ({
@@ -30,6 +14,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: 'monthly',
     priority: 0.8,
   }))
+
+  const serviceEntries: MetadataRoute.Sitemap = [
+    ...['/how-we-work', '/team'].map((p) => ({ url: `${base}${p}`, lastModified: '2026-11-12', changeFrequency: 'monthly' as const, priority: 0.7 })),
+    ...allDisciplines.map((d) => ({ url: `${base}/services/${d.slug}`, lastModified: '2026-11-12', changeFrequency: 'monthly' as const, priority: 0.8 })),
+  ]
 
   const locationEntries: MetadataRoute.Sitemap = locations.map((loc) => ({
     url: `${base}/locations/${loc.slug}`,
@@ -43,6 +32,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/services`,              lastModified: '2026-08-25', changeFrequency: 'monthly', priority: 0.9 },
     { url: `${base}/solutions`,             lastModified: '2026-08-27', changeFrequency: 'monthly', priority: 0.9 },
     { url: `${base}/work`,                  lastModified: '2026-08-25', changeFrequency: 'weekly',  priority: 0.9 },
+    ...serviceEntries,
     ...caseStudyEntries,
     { url: `${base}/locations`,             lastModified: '2026-08-31', changeFrequency: 'monthly', priority: 0.8 },
     ...locationEntries,

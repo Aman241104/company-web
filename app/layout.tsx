@@ -7,6 +7,7 @@ import CustomCursor from "@/components/CustomCursor";
 import MobileDock from "@/components/MobileDock";
 import FloatingWhatsApp from "@/components/ui/FloatingWhatsApp";
 import MotionProvider from "@/components/MotionProvider";
+import ConsultModal from "@/components/home/ConsultModal";
 
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
 const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID;
@@ -73,8 +74,10 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#F4F7FC",
-  colorScheme: "light",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#F4F7FC" },
+    { media: "(prefers-color-scheme: dark)", color: "#070C1A" },
+  ],
 };
 
 const organizationSchema = {
@@ -103,10 +106,14 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${montserrat.variable} ${inter.variable}`} suppressHydrationWarning>
+      <head>
+        {/* Apply the saved theme before first paint. Light is the default. */}
+        <script dangerouslySetInnerHTML={{ __html: `try{if(localStorage.getItem('theme')==='dark')document.documentElement.dataset.theme='dark'}catch(e){}` }} />
+      </head>
       <body className="bg-cream text-ink antialiased">
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-5 focus:py-2.5 focus:rounded-full focus:bg-ink focus:text-cream focus:text-sm focus:font-semibold"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-5 focus:py-2.5 focus:rounded-full focus:bg-night focus:text-snow focus:text-sm focus:font-semibold"
         >
           Skip to main content
         </a>
@@ -151,6 +158,7 @@ export default function RootLayout({
           <SmoothScroll>{children}</SmoothScroll>
           <MobileDock />
           <FloatingWhatsApp />
+          <ConsultModal />
         </MotionProvider>
       </body>
     </html>

@@ -28,7 +28,7 @@ const caseStudyMedia = {
 const HQ_CITY = 'Ahmedabad'
 
 const primaryPill =
-  'inline-flex items-center justify-center gap-2 rounded-full bg-accent text-ink px-6 py-3.5 text-sm font-semibold transition-colors hover:bg-ink hover:text-cream'
+  'inline-flex items-center justify-center gap-2 rounded-full bg-accent text-ink px-6 py-3.5 text-sm font-semibold transition-colors hover:bg-night hover:text-snow'
 const secondaryPill =
   'inline-flex items-center justify-center gap-2 rounded-full border border-ink/25 text-ink px-6 py-3.5 text-sm font-semibold transition-colors hover:border-ink hover:bg-ink/5'
 

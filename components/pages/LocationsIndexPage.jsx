@@ -61,7 +61,7 @@ function LocationRow({ location, isOpen, onToggle, index }) {
             <span
               aria-hidden="true"
               className={`w-11 h-11 rounded-full inline-flex items-center justify-center shrink-0 transition-colors ${
-                isOpen ? 'bg-accent text-ink' : 'border border-ink/20 text-ink group-hover:bg-ink group-hover:text-cream group-hover:border-ink'
+                isOpen ? 'bg-accent text-ink' : 'border border-ink/20 text-ink group-hover:bg-night group-hover:text-snow group-hover:border-ink'
               }`}
             >
               {isOpen ? <Minus size={16} /> : <Plus size={16} />}
@@ -183,7 +183,7 @@ export default function LocationsIndexPage() {
           <div className="lg:col-span-4 lg:justify-self-end">
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-accent text-ink px-6 py-3.5 text-sm font-semibold transition-colors hover:bg-ink hover:text-cream"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-accent text-ink px-6 py-3.5 text-sm font-semibold transition-colors hover:bg-night hover:text-snow"
             >
               Book a free discovery call <ArrowRight size={15} aria-hidden="true" />
             </Link>

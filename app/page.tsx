@@ -1,14 +1,11 @@
 import type { Metadata } from 'next'
 import Navbar from '@/components/sections/Navbar'
-import Hero from '@/components/sections/Hero'
-import Stats from '@/components/sections/Stats'
-import Services from '@/components/sections/Services'
+import HomeHero from '@/components/home/HomeHero'
+import ServiceChapters, { ServicesIndex } from '@/components/home/ServiceChapters'
+import { WhyChoose, CaseStudies, AtAGlance, Clients, TechStack, HowWeWork, Industries, AboutHQ, TeamStrip, ContactSection } from '@/components/home/HomeSections'
 import Pricing from '@/components/sections/Pricing'
-import Portfolio from '@/components/sections/Portfolio'
-import WhyUs from '@/components/sections/WhyUs'
 import Products from '@/components/sections/Products'
 import FAQ from '@/components/sections/FAQ'
-import CTA from '@/components/sections/CTA'
 import Footer from '@/components/sections/Footer'
 import FastTrackDrawer from '@/components/ui/FastTrackDrawer'
 import { faqs } from '@/lib/faqs'
@@ -83,25 +80,27 @@ export default function Home() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <Navbar />
-      <main id="main-content" tabIndex={-1} className="home-light bg-white relative overflow-x-hidden w-full max-w-[100vw]">
-        {/* Section order + background rhythm (research/design-system-v2.md):
-            Hero cream -> Portfolio white (signature case-study rail, placed
-            right after the hero so "View Our Work" has proof directly below)
-            -> Services cream -> Stats ink (proof band) -> Products white ->
-            WhyUs cream-dim -> Pricing -> FAQ -> CTA -> Footer ink. Each
-            section owns its own background. */}
-        <Hero />
-        <Portfolio />
-        <Services />
-        <Stats />
-        <Products />
-        <WhyUs />
+      <main id="main-content" tabIndex={-1} className="bg-bg relative overflow-x-hidden w-full max-w-[100vw]">
+        {/* Section order mirrors the zanservices.com benchmark (2026-11-12);
+            content is ours (lib/site.ts, lib/services.ts, lib/caseStudies.ts,
+            lib/pricing.ts). Pricing + Vibo ERP are ours, kept where the
+            benchmark has no equivalent. */}
+        <HomeHero />
+        <ServicesIndex />
+        <ServiceChapters />
+        <WhyChoose />
+        <CaseStudies />
+        <AtAGlance />
+        <Clients />
+        <TechStack />
+        <HowWeWork />
+        <Industries />
         <Pricing />
-        {/* Testimonials (components/sections/Testimonials.jsx) is intentionally
-            not rendered: it only holds placeholder quotes. Wire it back in
-            once real client testimonials exist — never ship invented ones. */}
+        <Products />
+        <AboutHQ />
+        <TeamStrip />
         <FAQ />
-        <CTA />
+        <ContactSection />
         <Footer />
         <FastTrackDrawer />
       </main>

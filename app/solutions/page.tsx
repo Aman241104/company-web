@@ -31,7 +31,7 @@ export default function Solutions() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <Navbar />
-      <main id="main-content" tabIndex={-1} className="home-light bg-white">
+      <main id="main-content" tabIndex={-1} className="home-light bg-bg">
         <SolutionsPage />
         <Footer />
       </main>

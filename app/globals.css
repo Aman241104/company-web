@@ -4,7 +4,7 @@
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 @theme inline {
-  --font-display: var(--font-syne), var(--font-inter), sans-serif; /* --font-syne now carries Montserrat (app/layout.tsx) */
+  --font-display: var(--font-syne), var(--font-inter), sans-serif; /* --font-syne carries Bricolage Grotesque (app/layout.tsx) */
   --font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-syne: var(--font-syne), sans-serif;
   --font-outfit: var(--font-inter), sans-serif;
@@ -71,6 +71,7 @@
   --color-whatsapp: #15803D;
   --color-danger: #E5484D;
 
+  --font-logo: var(--font-brand), sans-serif;
   --font-hero: var(--font-syne), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, "SF Mono", Menlo, monospace;
 

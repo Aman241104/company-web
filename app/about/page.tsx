@@ -24,7 +24,7 @@ export default function About() {
           eyebrow="About Mehta Technologies"
           title={[`${contact.city} headquarters.`, 'Clients across India.']}
           lead="A web development studio founded in Ahmedabad in 2019. We build websites, e-commerce stores, custom software and apps — including our own ERP — and run the marketing for the businesses we build for. The people who scope your project are the people who build it."
-          side={<GlanceCard items={[['Headquarters', `${contact.city}, India`], ['Founded', '2019'], ['Engagements', 'Fixed price & retainer'], ['Support', '2 weeks – 12 months'], ['Projects', '150+'], ['Rating', '4.9 / 5']]} />}
+          side={<GlanceCard items={[['Headquarters', `${contact.city}, India`], ['Founded', '2019'], ['Engagements', 'Fixed price & retainer'], ['Support', '2 weeks – 12 months'], ['Projects', '150+'], ['On-time delivery', '99%']]} />}
         />
         <Section id="how-we-engage" eyebrow="At a glance" title="How we work with you">
           <StatCards items={stats} />

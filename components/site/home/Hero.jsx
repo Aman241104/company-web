@@ -81,7 +81,7 @@ export default function Hero() {
             <span className="hidden sm:inline">Websites, E-Commerce, Software &amp; Digital Marketing</span>
             <span className="sm:hidden">Web, Software &amp; Marketing</span>
           </p>
-          <h1 id="hero-title" className="mt-6 font-hero text-[clamp(2.25rem,0.6rem+4.3vw,4rem)] leading-[1] font-extrabold tracking-[-0.042em] text-ink sm:mt-7">
+          <h1 id="hero-title" className="mt-6 font-hero text-[clamp(2.25rem,0.8rem+5.4vw,5.25rem)] leading-[0.95] font-extrabold tracking-[-0.042em] text-ink [font-stretch:92%] sm:mt-7">
             <span className="block">
               <span className="mtx-hero-word" style={{ '--mtx-w': 0 }}>Websites</span> <span className="mtx-hero-word" style={{ '--mtx-w': 1 }}>That</span>
             </span>
@@ -126,7 +126,7 @@ export default function Hero() {
             {stats.slice(0, 3).map((s, i) => (
               <div key={s.label} className={`flex flex-col-reverse items-center justify-end gap-1 px-2 lg:items-start ${i ? 'border-l border-line lg:pl-5' : 'lg:pl-0'}`}>
                 <dt className="text-center text-[0.75rem] leading-snug text-muted lg:text-left">{s.label}</dt>
-                <dd className="font-hero text-[1.625rem] leading-none font-bold tracking-[-0.03em] text-ink tabular-nums sm:text-[1.875rem]">{s.value}</dd>
+                <dd className="font-hero text-[1.625rem] leading-none font-bold tracking-[-0.03em] text-ink tabular-nums [font-stretch:92%] sm:text-[1.875rem]">{s.value}</dd>
               </div>
             ))}
           </dl>

@@ -150,7 +150,11 @@ export function Metrics() {
           </div>
           <div className="flex flex-col gap-5">
             <Metric n="03" value="100+" title="Happy clients" note="Across India & abroad" tone="bg-brand-soft" />
-            <Metric n="04" value="7+" title="Years building" note="Founded in Ahmedabad, 2019" tone="bg-surface-2" />
+            <Metric n="04" value="99%" title="On-time delivery" note="Against agreed timelines" tone="bg-surface-2">
+              <span className="mt-6 block h-1.5 overflow-hidden rounded-full bg-line" aria-hidden="true">
+                <span className="block h-full w-[99%] rounded-full bg-brand-gradient" />
+              </span>
+            </Metric>
             <Metric n="05" value="24 hrs" title="Response time" note="To every new enquiry" tone="bg-bg" />
           </div>
         </div>

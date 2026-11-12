@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Montserrat, Inter, Geist_Mono } from "next/font/google";
+import { Montserrat, Inter, Geist_Mono, Bricolage_Grotesque } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import "./site.css";
@@ -14,8 +14,16 @@ import Reveal from "@/components/site/Reveal";
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
 const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID;
 
-const montserrat = Montserrat({
+// Headings use the benchmark's display face; Montserrat stays for the logo wordmark.
+const bricolage = Bricolage_Grotesque({
   variable: "--font-syne",
+  subsets: ["latin"],
+  axes: ["wdth"],
+  display: "swap",
+});
+
+const montserrat = Montserrat({
+  variable: "--font-brand",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
   display: "swap",
@@ -114,7 +122,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${montserrat.variable} ${inter.variable} ${geistMono.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${bricolage.variable} ${montserrat.variable} ${inter.variable} ${geistMono.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: `var d=document.documentElement;d.setAttribute("data-js","");try{if(sessionStorage.getItem("pl-seen")||location.pathname!=="/"||matchMedia("(prefers-reduced-motion: reduce)").matches)d.setAttribute("data-preloaded","")}catch(e){d.setAttribute("data-preloaded","")}` }} />
         {/* Apply the saved theme before first paint. Light is the default. */}

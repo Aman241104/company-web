@@ -37,8 +37,8 @@ export function Logo({ size = 30, className = '' }) {
       <Image src="/brand/mark-ink.png" alt="" width={345} height={256} priority className="h-full w-auto select-none dark:hidden" />
       <Image src="/brand/mark-white.png" alt="" width={345} height={256} priority className="hidden h-full w-auto select-none dark:block" />
       <span className="flex flex-col justify-center leading-none">
-        <span className="font-display font-bold tracking-[0.06em] text-ink" style={{ fontSize: '0.6em' }}>MEHTA</span>
-        <span className="mt-[0.18em] font-display font-medium tracking-[0.2em] text-ink-2" style={{ fontSize: '0.27em' }}>TECHNOLOGIES</span>
+        <span className="font-logo font-bold tracking-[0.06em] text-ink" style={{ fontSize: '0.6em' }}>MEHTA</span>
+        <span className="mt-[0.18em] font-logo font-medium tracking-[0.2em] text-ink-2" style={{ fontSize: '0.27em' }}>TECHNOLOGIES</span>
       </span>
       <span className="sr-only">Mehta Technologies</span>
     </span>

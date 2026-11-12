@@ -17,7 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const svcPath = (c: string, d: string) => (c === 'development' ? `/services/${d}` : c === 'blockchain-web3' ? '/services/blockchain-web3' : `/services/${c}/${d}`)
   const servicePaths = new Set<string>([
-    '/how-we-work', '/team', '/vibo-erp', '/cookie-policy', '/disclaimer',
+    '/how-we-work', '/team', '/vibo-erp', '/cookie-policy', '/disclaimer', '/refund-policy',
     ...chapters.filter((c) => c.slug !== 'development').map((c) => `/services/${c.slug}`),
     ...allDisciplines.map((d) => svcPath(d.chapter.slug, d.slug)),
   ])

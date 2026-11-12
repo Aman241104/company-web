@@ -176,6 +176,7 @@ export default function Footer() {
             {[
               ['Privacy Policy', '/privacy'],
               ['Terms of Service', '/terms'],
+              ['Refund Policy', '/refund-policy'],
               ['Cookie Policy', '/cookie-policy'],
               ['Disclaimer', '/disclaimer'],
               ['Locations', '/locations'],

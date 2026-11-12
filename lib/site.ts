@@ -18,7 +18,7 @@ export const stats = [
   { value: '150+', label: 'Projects delivered', note: 'Websites, stores & software' },
   { value: '100+', label: 'Happy clients', note: 'Across India & abroad' },
   { value: '4.9/5', label: 'Client rating', note: 'Rated by real clients' },
-  { value: '2019', label: 'Building since', note: 'Founded in Ahmedabad' },
+  { value: '99%', label: 'On-time delivery', note: 'Against agreed timelines' },
   { value: '24 hrs', label: 'Response time', note: 'To every new enquiry' },
 ]
 

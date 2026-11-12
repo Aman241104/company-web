@@ -118,7 +118,7 @@ export default function Board() {
                 </div>
                 <div className="flex min-h-0 flex-1">
                   <div className="hidden w-56 shrink-0 flex-col border-r border-line bg-bg px-3 py-5 @4xl:flex @6xl:w-60">
-                    <div className="px-2 font-display text-[15px] font-bold tracking-[0.06em] text-ink">MEHTA</div>
+                    <div className="px-2 font-logo text-[15px] font-bold tracking-[0.06em] text-ink">MEHTA</div>
                     <div className="mt-8 px-2 font-mono text-[10.5px] tracking-[0.14em] text-muted uppercase">Practices</div>
                     <div className="mt-2 space-y-0.5">
                       {chapters.map((c, i) => {
